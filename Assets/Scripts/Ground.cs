@@ -14,8 +14,7 @@ public class Ground : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _isPainted = false;
-        _material = GetComponent<Renderer>().material;
+        _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _levelManager = FindObjectOfType<LevelManager>();
 
@@ -37,7 +36,7 @@ public class Ground : MonoBehaviour
     
     public bool PaintSurface()
     {
-        if (_levelManager.HasEnoughPaint())
+        if (_levelManager.HasEnoughPaint() && !_isPainted)
         {
             _levelManager.DecreaseCurrentSelectedPaint();
             _isPainted = true;
