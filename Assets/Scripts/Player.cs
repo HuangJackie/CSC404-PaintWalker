@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 
         // Up
         isCollided = Physics.Raycast(transform.position - new Vector3(0.2f, 0.5f, 0f), dir, out hitInfo, 1);
-        Debug.Log(isCollided);
+        // Debug.Log(isCollided);
 
         if (!isCollided || (hitInfo.collider.gameObject.TryGetComponent(out ground) && !ground._isPainted))
         {
@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
         {
             if (isCollided && hitInfo.collider.gameObject.TryGetComponent(out ground) && ground.PaintSurface())
             {
+                Debug.Log("early return");
                 return;
             }
             velocity = new Vector3(velocity.x > 0 ? 0 : velocity.x, velocity.y, velocity.z);
