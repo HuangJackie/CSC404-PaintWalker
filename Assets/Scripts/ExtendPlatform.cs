@@ -10,14 +10,10 @@ public class ExtendPlatform : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameObject _spawnedBlock;
-    private Tilemap _tileMap;
-    //private Vector3 _spawnLocation = new Vector3(2, 0, -2);
-    private Vector3Int _spawnLocation = new Vector3Int(2, -3, 1);
+    private Vector3 _spawnLocation = new Vector3(2.5f, 0f, -2.5f);
     void Start()
     {
-        //_spawnedBlock = GameObject.Instantiate(Resources.Load(path: "GreenSpawn")) as GameObject;
-        //_spawnedBlock.transform.position = _spawnLocation;
-        // _tileMap.SetTile(_spawnLocation, Resources.Load(path: "GreenSpawn"));
+
     }
 
     // Update is called once per frame
@@ -28,6 +24,7 @@ public class ExtendPlatform : MonoBehaviour
 
     void spawn_tile()
     {
-        //Instantiate();
+        _spawnedBlock = GameObject.Instantiate(Resources.Load(path: "GreenSpawn")) as GameObject;
+        _spawnedBlock.transform.position = _spawnLocation;
     }
 }
