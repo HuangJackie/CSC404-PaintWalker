@@ -23,7 +23,8 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(GetCurrentlySelectedPaint());
+        Debug.Log(GetPaintQuantity());
     }
     
     public void IncreasePaint(String paintColour, int quantity)
@@ -31,9 +32,9 @@ public class LevelManager : MonoBehaviour
         paintQuantity[paintColour] += quantity;
     }
 
-    public void DecreaseCurrentSelectedPaint()
+    public void DecreaseCurrentSelectedPaint(int amount)
     {
-        paintQuantity[currentSelectedColour]--;
+        paintQuantity[currentSelectedColour] -= amount;
     }
 
     public string GetCurrentlySelectedPaint()
@@ -44,5 +45,11 @@ public class LevelManager : MonoBehaviour
     public bool HasEnoughPaint()
     {
         return paintQuantity[currentSelectedColour] > 0;
+    }
+
+    public int GetPaintQuantity()
+    {
+        string color = GetCurrentlySelectedPaint();
+        return paintQuantity[color];
     }
 }

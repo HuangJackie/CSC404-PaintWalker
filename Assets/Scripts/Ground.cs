@@ -39,7 +39,7 @@ public class Ground : MonoBehaviour
     {
         if (_levelManager.HasEnoughPaint())
         {
-            _levelManager.DecreaseCurrentSelectedPaint();
+            _levelManager.DecreaseCurrentSelectedPaint(1);
             _isPainted = true;
             string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
             switch (currentlySelectedPaint)
