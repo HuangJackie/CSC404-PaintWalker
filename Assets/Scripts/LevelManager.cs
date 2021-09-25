@@ -42,6 +42,11 @@ public class LevelManager : MonoBehaviour
         return currentSelectedColour;
     }
 
+    public void SetCurrentlySelectedPaint(string color)
+    {
+        currentSelectedColour = color;
+    }
+
     public bool HasEnoughPaint()
     {
         return paintQuantity[currentSelectedColour] > 0;
