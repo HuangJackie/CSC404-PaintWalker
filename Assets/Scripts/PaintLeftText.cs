@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PaintLeftTextUpdater : MonoBehaviour
+public class PaintLeftText : MonoBehaviour
 {
     private Text paintLeftText;
 
@@ -12,8 +13,8 @@ public class PaintLeftTextUpdater : MonoBehaviour
         paintLeftText = GetComponent<Text>();
     }
 
-    public void SetPaintLeft(int paintLeft)
+    public void SetPaint(int paintLeft, int maxPaint)
     {
-        paintLeftText.text = paintLeft.ToString();
+        paintLeftText.text = Math.Floor(paintLeft / maxPaint * 100f) + "%";
     }
 }
