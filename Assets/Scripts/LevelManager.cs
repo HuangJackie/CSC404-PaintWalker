@@ -14,8 +14,10 @@ public class LevelManager : MonoBehaviour
     {
         paintQuantity = new Dictionary<String, int>();
         paintQuantity.Add("Special", 2); // Goal
-        paintQuantity.Add("Green", 0);   // Growing Platform
-        paintQuantity.Add("Red", 0);     // Button
+        paintQuantity.Add("Green", 5);   // Growing Platform
+        paintQuantity.Add("Red", 10);     // Button
+
+        currentSelectedColour = "Red";
     }
 
     // Update is called once per frame

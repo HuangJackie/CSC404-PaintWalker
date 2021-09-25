@@ -17,6 +17,8 @@ public class Ground : MonoBehaviour
         _isPainted = false;
         _material = GetComponent<Renderer>().material;
         _originalColour = _material.color;
+        _levelManager = FindObjectOfType<LevelManager>();
+
     }
 
     // Update is called once per frame
@@ -42,8 +44,12 @@ public class Ground : MonoBehaviour
             string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
             switch (currentlySelectedPaint)
             {
-                case "Black":
-                    _material.color = Color.black;
+                case "Red":
+                    _material.color = Color.red;
+                    _originalColour = _material.color;
+                    break;
+                case "Green":
+                    _material.color = Color.green;
                     _originalColour = _material.color;
                     break;
                 case "Special":
