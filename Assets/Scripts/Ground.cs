@@ -35,7 +35,7 @@ public class Ground : MonoBehaviour
         }
     }
     
-    public void PaintSurface()
+    public bool PaintSurface()
     {
         if (_levelManager.HasEnoughPaint())
         {
@@ -57,6 +57,10 @@ public class Ground : MonoBehaviour
                     _originalColour = _material.color;
                     break;
             }
+
+            return true;
         }
+
+        return false;
     }
 }
