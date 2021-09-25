@@ -6,6 +6,7 @@ public class OnButtonTrigger : MonoBehaviour
 {
     public bool isTriggered = false;
     public MoveWall wall;
+    public LevelManager manager;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +26,7 @@ public class OnButtonTrigger : MonoBehaviour
     void TriggerButtton()
     {
         isTriggered = true;
+        gameObject.GetComponent<Renderer>().material.color = Color.red;
+        manager.DecreaseCurrentSelectedPaint(2);
     }
 }
