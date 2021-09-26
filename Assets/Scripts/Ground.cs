@@ -5,11 +5,13 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     public GameObject player;
+    public float speed;
 
     public bool _isPainted;
     private LevelManager _levelManager;
     private Material _material;
     private Color _originalColour;
+    private UpdateUI _updateUI;
     
     // Start is called before the first frame update
     void Start()
@@ -46,10 +48,17 @@ public class Ground : MonoBehaviour
                 case "Red":
                     _material.color = Color.red;
                     _originalColour = _material.color;
+
                     break;
                 case "Green":
                     _material.color = Color.green;
                     _originalColour = _material.color;
+                    GreenExtend();
+                    break;
+                case "Black":
+                    _material.color = Color.black;
+                    _originalColour = _material.color;
+                    BlackFall();
                     break;
                 case "Special":
                     _material.color = Color.cyan;
@@ -61,5 +70,28 @@ public class Ground : MonoBehaviour
         }
 
         return false;
+    }
+    
+    private void GreenExtend()
+    {
+
+        //extends platforms in wasd directions by 1 block
+        Debug.Log(transform.position);
+        var growth_block = Resources.Load(path: "Test");
+        Instantiate(growth_block, transform.position + Vector3.back,
+            Quaternion.identity);
+        Instantiate(growth_block, transform.position + Vector3.left,
+            Quaternion.identity);
+        Instantiate(growth_block, transform.position + Vector3.right,
+            Quaternion.identity);
+        Instantiate(growth_block, transform.position + Vector3.forward,
+            Quaternion.identity);
+        //_spawnedBlock.transform.position;
+
+    }
+
+    private void BlackFall()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, -1, 0), speed * Time.deltaTime);
     }
 }

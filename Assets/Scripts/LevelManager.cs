@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     private Dictionary<String, int> paintQuantity;
     private String currentSelectedColour;
     private bool _isColourSwitched;
+
+    private UpdateUI _updateUI;
     
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,8 @@ public class LevelManager : MonoBehaviour
         paintQuantity = new Dictionary<String, int>();
         paintQuantity.Add("Special", 2); // Goal
         paintQuantity.Add("Green", 5);   // Growing Platform
-        paintQuantity.Add("Red", 10);     // Button
+        paintQuantity.Add("Red", 15);     // Button
+        paintQuantity.Add("Black", 0);     // Weighted Platform
 
         currentSelectedColour = "Red";
     }
@@ -23,8 +26,27 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GetCurrentlySelectedPaint());
-        Debug.Log(GetPaintQuantity());
+        // Debug.Log(GetCurrentlySelectedPaint());
+        // Debug.Log(GetPaintQuantity());
+        
+        _isColourSwitched = Input.GetButtonDown("Fire2");
+        // Debug.Log(currentSelectedColour);
+        if (_isColourSwitched)
+        {
+            switch (currentSelectedColour)
+            {
+                case "Special":
+                    currentSelectedColour = "Red";
+                    break;
+                case "Red":
+                    currentSelectedColour = "Green";
+                    break;
+                case "Green":
+                    currentSelectedColour = "Special";
+                    break;
+            }
+            // ui.SelectColour(currentSelectedColour);
+        }
     }
     
     public void IncreasePaint(String paintColour, int quantity)
@@ -35,6 +57,8 @@ public class LevelManager : MonoBehaviour
     public void DecreaseCurrentSelectedPaint(int amount)
     {
         paintQuantity[currentSelectedColour] -= amount;
+        // _updateUI.SetPaint(paintQuantity[currentSelectedColour], 10);
+
     }
 
     public string GetCurrentlySelectedPaint()
