@@ -8,13 +8,13 @@ public class PaintLeftText : MonoBehaviour
 {
     private Text paintLeftText;
 
-    private void Start()
+    private void Awake()
     {
         paintLeftText = GetComponent<Text>();
     }
 
     public void SetPaint(int paintLeft, int maxPaint)
     {
-        paintLeftText.text = Math.Floor(paintLeft / maxPaint * 100f) + "%";
+        paintLeftText.text = Math.Floor((paintLeft + 0f) / maxPaint * 100f) + "%";
     }
 }

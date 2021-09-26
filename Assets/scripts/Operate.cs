@@ -17,7 +17,9 @@ public class Operate : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (manager.GetCurrentlySelectedPaint() == "Red" && manager.GetPaintQuantity() > 5) {
+            Debug.Log(manager.GetCurrentlySelectedPaint());
+            Debug.Log(manager.GetPaintQuantity());
+            if (manager.GetCurrentlySelectedPaint() == "Red" && manager.GetPaintQuantity() > 2) {
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
                 foreach (Collider hitCollider in hitColliders)
                 {

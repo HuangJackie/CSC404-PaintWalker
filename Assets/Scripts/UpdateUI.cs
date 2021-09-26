@@ -9,8 +9,12 @@ public class UpdateUI : MonoBehaviour
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
 
-    private void Start() {
-        ChangePaint(Paints.RED_PAINT, 0, 10);
+    private void Start()
+    {
+        paintIcon = FindObjectOfType<PaintBucketIcon>();
+        paintBar = FindObjectOfType<PaintLeftBar>();
+        paintText = FindObjectOfType<PaintLeftText>();
+        ChangePaint(Paints.ORANGE_PAINT, 3, 10);
     }
 
     public void SetPaint(int paintLeft, int maxPaint)
@@ -22,10 +26,22 @@ public class UpdateUI : MonoBehaviour
     public void ChangePaint(int paintType, int paintLeft, int maxPaint)
     {
         Color32 paintColor;
-        switch(paintType)
+        switch (paintType)
         {
             case Paints.GREEN_PAINT:
                 paintColor = Paints.green;
+                break;
+            case Paints.RED_PAINT:
+                paintColor = Paints.red;
+                break;
+            case Paints.ORANGE_PAINT:
+                paintColor = Paints.orange;
+                break;
+            case Paints.BLACK_PAINT:
+                paintColor = Paints.black;
+                break;
+            case Paints.SPECIAL_PAINT:
+                paintColor = Paints.special;
                 break;
             default:
                 paintColor = Paints.red;
