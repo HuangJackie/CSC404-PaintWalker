@@ -8,7 +8,7 @@ public class PaintLeftBar : MonoBehaviour
     private Slider slider;
     private Image fill;
 
-    private void Start()
+    private void Awake()
     {
         slider = GetComponent<Slider>();
         fill =  transform.Find("Fill").gameObject.GetComponent<Image>();

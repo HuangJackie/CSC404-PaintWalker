@@ -14,14 +14,14 @@ public class Player : MonoBehaviour
     private bool _isHorizontalMovementPressed;
     private bool _isVerticalMovementPressed;
     private Rigidbody _rigidbody;
-    
+
     // Rigid Grid Movement
     public float speed;
     private Vector3 _targetLocation;
 
     private UpdateUI _updateUI;
     private Transform _transform;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,10 +90,12 @@ public class Player : MonoBehaviour
     private bool ValidMove(string pressedButton, Vector3 currentTransformPosition)
     {
         RaycastHit hitInfo;
+        LayerMask mask = LayerMask.GetMask("Default");
         switch (pressedButton)
         {
             case "Up":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }
@@ -101,21 +103,27 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(hitInfo);
 
             case "Down":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }
 
                 return ValidateFloorMove(hitInfo);
             case "Left":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
+
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }
 
                 return ValidateFloorMove(hitInfo);
             case "Right":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
+                // Debug.Log(Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1,
+                    // mask));
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }

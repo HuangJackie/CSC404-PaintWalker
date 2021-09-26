@@ -20,7 +20,7 @@ public class SpecialCreature : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            if (_levelManager.GetCurrentlySelectedPaint() == "Red")
+            if (_levelManager.GetCurrentlySelectedPaint() == "Special")
             {
                 if (_levelManager.HasEnoughPaint())
                 {

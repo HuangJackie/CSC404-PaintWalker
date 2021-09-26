@@ -6,22 +6,10 @@ public class canlogic : MonoBehaviour
 {
     public string color;
     public LevelManager manager;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hi");
-        manager.SetCurrentlySelectedPaint(color);
+        manager.IncreasePaint(color, 10);
         Destroy(gameObject);
     }
 }
