@@ -59,7 +59,6 @@ public class LevelManager : MonoBehaviour
                     _updateUI.ChangePaint(Paints.SPECIAL_PAINT, paintQuantity[currentSelectedColour], 10);
                     break;
             }
-            // ui.SelectColour(currentSelectedColour);
         }
     }
 

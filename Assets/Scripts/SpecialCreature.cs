@@ -9,16 +9,17 @@ public class SpecialCreature : MonoBehaviour
     private LevelManager _levelManager;
     private Material _material;
     private Color _originalColour;
+
     void Start()
     {
         _levelManager = FindObjectOfType<LevelManager>();
-        _material = GetComponent<Renderer>().material;
+        _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
     }
-    
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.gameObject.GetComponent<Collider>().CompareTag("Player"))
         {
             if (_levelManager.GetCurrentlySelectedPaint() == "Special")
             {
@@ -26,7 +27,6 @@ public class SpecialCreature : MonoBehaviour
                 {
                     _material.color = Color.blue;
                     _originalColour = _material.color;
-
                 }
             }
         }
