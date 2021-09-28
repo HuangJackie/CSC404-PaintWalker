@@ -15,9 +15,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Special", 2); // Goal
-        paintQuantity.Add("Green", 5); // Growing Platform
-        paintQuantity.Add("Red", 15); // Button
+        paintQuantity.Add("Special", 0); // Goal
+        paintQuantity.Add("Green", 0); // Growing Platform
+        paintQuantity.Add("Red", 0); // Button
         paintQuantity.Add("Black", 0); // Weighted Platform
         paintQuantity.Add("Orange", 5); // Walking
 
@@ -64,6 +64,11 @@ public class LevelManager : MonoBehaviour
         if (paintColour == "Black")
         {
             amount = 5;
+        }
+
+        if (paintColour == "Orange")
+        {
+            amount = 20;
         }
         paintQuantity[paintColour] += amount;
         if (currentSelectedColour == paintColour)
