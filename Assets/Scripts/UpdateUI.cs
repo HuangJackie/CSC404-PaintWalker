@@ -15,6 +15,7 @@ public class UpdateUI : MonoBehaviour
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
         ChangePaint(Paints.ORANGE_PAINT, 3, 10);
+        SetPaint(3, 10);
     }
 
     public void SetPaint(int paintLeft, int maxPaint)

@@ -23,17 +23,13 @@ public class LevelManager : MonoBehaviour
 
         currentSelectedColour = "Orange";
         _updateUI = FindObjectOfType<UpdateUI>();
-        _updateUI.SetPaint(paintQuantity["Orange"], 10);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(GetCurrentlySelectedPaint());
-        // Debug.Log(GetPaintQuantity());
 
         _isColourSwitched = Input.GetButtonDown("Fire2");
-        // Debug.Log(currentSelectedColour);
         if (_isColourSwitched)
         {
             switch (currentSelectedColour)
