@@ -65,7 +65,12 @@ public class LevelManager : MonoBehaviour
 
     public void IncreasePaint(String paintColour, int quantity)
     {
-        paintQuantity[paintColour] += quantity;
+        int amount = quantity;
+        if (paintColour == "Black")
+        {
+            amount = 5;
+        }
+        paintQuantity[paintColour] += amount;
         if (currentSelectedColour == paintColour)
         {
             _updateUI.SetPaint(paintQuantity[paintColour], 10);
