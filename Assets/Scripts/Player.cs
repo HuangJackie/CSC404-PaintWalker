@@ -35,8 +35,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _horizontalMovement = Input.GetAxis("Horizontal");
-        _verticalMovement = Input.GetAxis("Vertical");
+        _horizontalMovement = Input.GetAxisRaw("Horizontal");
+        _verticalMovement = Input.GetAxisRaw("Vertical");
         _isHorizontalMovementPressed = Input.GetButton("Horizontal");
         _isVerticalMovementPressed = Input.GetButton("Vertical");
 
@@ -51,14 +51,18 @@ public class Player : MonoBehaviour
     private void RigidGridMove()
     {
         Vector3 newPosition = Vector3.MoveTowards(transform.position, _targetLocation, speed * Time.deltaTime);
-
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
-
         transform.position = newPosition;
+
+        if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
+        {
+            Vector3 movDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movDirection), 0.5f);
+        }
     }
 
     private void SetNewTargetLocation(Vector3 currentTransformPosition)
