@@ -22,13 +22,12 @@ public class LevelManager : MonoBehaviour
         paintQuantity.Add("Orange", 5); // Walking
 
         currentSelectedColour = "Orange";
-        _updateUI = FindObjectOfType<UpdateUI>();
+        _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
     }
 
     // Update is called once per frame
     void Update()
     {
-
         _isColourSwitched = Input.GetButtonDown("Fire2");
         if (_isColourSwitched)
         {
@@ -65,11 +64,11 @@ public class LevelManager : MonoBehaviour
         {
             amount = 5;
         }
-
         if (paintColour == "Orange")
         {
             amount = 20;
         }
+
         paintQuantity[paintColour] += amount;
         if (currentSelectedColour == paintColour)
         {
