@@ -10,6 +10,9 @@ public class PaintBucketIcon : MonoBehaviour
     [Header("Paint Sprites")]
     [SerializeField] private Sprite redPaintBucket;
     [SerializeField] private Sprite greenPaintBucket;
+    [SerializeField] private Sprite orangePaintBucket;
+    [SerializeField] private Sprite blackPaintBucket;
+    [SerializeField] private Sprite specialPaintBucket;
 
     private void Start()
     {
@@ -22,6 +25,18 @@ public class PaintBucketIcon : MonoBehaviour
         {
             case Paints.GREEN_PAINT:
                 paintBucketIcon.sprite = greenPaintBucket;
+                break;
+            case Paints.RED_PAINT:
+                paintBucketIcon.sprite = redPaintBucket;
+                break;
+            case Paints.ORANGE_PAINT:
+                paintBucketIcon.sprite = orangePaintBucket;
+                break;
+            case Paints.BLACK_PAINT:
+                paintBucketIcon.sprite = blackPaintBucket;
+                break;
+            case Paints.SPECIAL_PAINT:
+                paintBucketIcon.sprite = specialPaintBucket;
                 break;
             default:
                 paintBucketIcon.sprite = redPaintBucket;

@@ -4590,6 +4590,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redPaintBucket: {fileID: 21300000, guid: eb7c1d7be3df49a44bf4c6f580524208, type: 3}
   greenPaintBucket: {fileID: 21300000, guid: 7eeedf3c05556fa4189b71c2770ea803, type: 3}
+  orangePaintBucket: {fileID: 21300000, guid: 28dc30cc03856de44b3467731b39bf99, type: 3}
+  blackPaintBucket: {fileID: 21300000, guid: f55ced007b1e2c24e83b957a57606efb, type: 3}
+  specialPaintBucket: {fileID: 21300000, guid: 7b4c3726b6ea3904ba3214cf62a44c70, type: 3}
 --- !u!114 &1206534756
 MonoBehaviour:
   m_ObjectHideFlags: 0

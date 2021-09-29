@@ -22,13 +22,12 @@ public class LevelManager : MonoBehaviour
         paintQuantity.Add("Orange", 5); // Walking
 
         currentSelectedColour = "Orange";
-        _updateUI = FindObjectOfType<UpdateUI>();
+        _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
     }
 
     // Update is called once per frame
     void Update()
     {
-
         _isColourSwitched = Input.GetButtonDown("Fire2");
         if (_isColourSwitched)
         {
@@ -36,23 +35,23 @@ public class LevelManager : MonoBehaviour
             {
                 case "Special":
                     currentSelectedColour = "Red";
-                    _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour], 10);
+                    _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Red":
                     currentSelectedColour = "Green";
-                    _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour], 10);
+                    _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Green":
                     currentSelectedColour = "Black";
-                    _updateUI.ChangePaint(Paints.BLACK_PAINT, paintQuantity[currentSelectedColour], 10);
+                    _updateUI.ChangePaint(Paints.BLACK_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Black":
                     currentSelectedColour = "Orange";
-                    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour], 10);
+                    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Orange":
                     currentSelectedColour = "Special";
-                    _updateUI.ChangePaint(Paints.SPECIAL_PAINT, paintQuantity[currentSelectedColour], 10);
+                    _updateUI.ChangePaint(Paints.SPECIAL_PAINT, paintQuantity[currentSelectedColour]);
                     break;
             }
         }
@@ -65,22 +64,22 @@ public class LevelManager : MonoBehaviour
         {
             amount = 5;
         }
-
         if (paintColour == "Orange")
         {
             amount = 20;
         }
+
         paintQuantity[paintColour] += amount;
         if (currentSelectedColour == paintColour)
         {
-            _updateUI.SetPaint(paintQuantity[paintColour], 10);
+            _updateUI.SetPaint(paintQuantity[paintColour]);
         }
     }
 
     public void DecreaseCurrentSelectedPaint(int amount)
     {
         paintQuantity[currentSelectedColour] -= amount;
-        _updateUI.SetPaint(paintQuantity[currentSelectedColour], 10);
+        _updateUI.SetPaint(paintQuantity[currentSelectedColour]);
     }
 
     public string GetCurrentlySelectedPaint()

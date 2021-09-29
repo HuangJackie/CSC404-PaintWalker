@@ -13,8 +13,9 @@ public class PaintLeftText : MonoBehaviour
         paintLeftText = GetComponent<Text>();
     }
 
-    public void SetPaint(int paintLeft, int maxPaint)
+    public void SetPaint(int paintLeft)
     {
+        int maxPaint = 25;
         paintLeftText.text = Math.Floor((paintLeft + 0f) / maxPaint * 100f) + "%";
     }
 }
