@@ -19,10 +19,10 @@ public class PaintLeftBar : MonoBehaviour
         slider.value = paintLeft;
     }
 
-    public void ChangePaint(int currPaint, int maxPaint, Color32 paintColor)
+    public void ChangePaint(int currPaint, Color32 paintColor)
     {
         slider.value = currPaint;
-        slider.maxValue = maxPaint;
+        slider.maxValue = 25;
         fill.color = paintColor;
     }
 }

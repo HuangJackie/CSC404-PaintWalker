@@ -14,17 +14,16 @@ public class UpdateUI : MonoBehaviour
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
-        ChangePaint(Paints.ORANGE_PAINT, 3, 10);
-        SetPaint(3, 10);
+        ChangePaint(Paints.ORANGE_PAINT, 3);
     }
 
-    public void SetPaint(int paintLeft, int maxPaint)
+    public void SetPaint(int paintLeft)
     {
         paintBar.SetPaint(paintLeft);
-        paintText.SetPaint(paintLeft, maxPaint);
+        paintText.SetPaint(paintLeft);
     }
 
-    public void ChangePaint(int paintType, int paintLeft, int maxPaint)
+    public void ChangePaint(int paintType, int paintLeft)
     {
         Color32 paintColor;
         switch (paintType)
@@ -49,8 +48,8 @@ public class UpdateUI : MonoBehaviour
                 break;
         }
 
-        paintBar.ChangePaint(paintLeft, maxPaint, paintColor);
-        paintText.SetPaint(paintLeft, maxPaint);
+        paintBar.ChangePaint(paintLeft, paintColor);
+        paintText.SetPaint(paintLeft);
         paintIcon.SetIcon(paintType);
     }
 }
