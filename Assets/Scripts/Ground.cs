@@ -62,6 +62,22 @@ public class Ground : MonoBehaviour
         {
             PaintSurface();
         }
+        var dir = ReturnDirection(other.gameObject, this.gameObject);
+        if ((_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
+        {
+            if (dir != Vector3.negativeInfinity)
+            {
+                if (true)
+                {
+                    var pos   = transform.position + new Vector3(0, 0.5f, 0) ;
+                    if (!Physics.Raycast(pos, dir, maxDistance: 1))
+                    {
+                        Debug.Log("dir" + dir);
+                        gameObject.transform.Translate(dir); 
+                    }
+                }
+            }
+        }
     }
 
     public bool PaintSurface()
@@ -103,6 +119,27 @@ public class Ground : MonoBehaviour
 
         return false;
     }
+    // move platform code (ice)
+    private Vector3 ReturnDirection( GameObject Object, GameObject ObjectHit )
+    {
+
+        Vector3 hitDirection = Vector3.negativeInfinity;
+        RaycastHit RayHit;
+        Vector3 direction = ( Object.transform.position - ObjectHit.transform.position ).normalized;
+        Ray MyRay = new Ray( ObjectHit.transform.position, direction );
+         
+        if ( Physics.Raycast( MyRay, out RayHit ) ){
+                 
+            if ( RayHit.collider != null ){
+                 
+                Vector3 MyNormal = RayHit.normal;
+                hitDirection = MyNormal;
+            }    
+        }
+
+        return hitDirection;
+    }
+    // move platform code (ice)
 
     private void GreenExtend()
     {
@@ -164,6 +201,7 @@ public class Ground : MonoBehaviour
     {
         _isDroppingBlock = true;
     }
+    
 
     private void OnMouseOver()
     {
