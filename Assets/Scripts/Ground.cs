@@ -17,7 +17,11 @@ public class Ground : MonoBehaviour
     private bool _isMouseOver;
 
     private bool _isDroppingBlock;
-    private Vector3 _destination;
+    private bool _isRaisingBlock;
+    private bool _isMovingBlock;
+    private Vector3 _destination_drop;
+    private Vector3 _destination_raise;
+    private Vector3 _destination_move;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,11 @@ public class Ground : MonoBehaviour
         _isMouseOver = false;
 
         _isDroppingBlock = false;
-        _destination = transform.position + new Vector3(0, -1, 0);
+        _isRaisingBlock = false;
+        _isMovingBlock = false;
+        _destination_drop = transform.position + new Vector3(0, -1, 0);
+        _destination_raise = transform.position - new Vector3(0, -1, 0);
+        _destination_move = transform.position;
     }
 
     // Update is called once per frame
@@ -47,11 +55,29 @@ public class Ground : MonoBehaviour
 
         if (_isDroppingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destination, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _destination) <= 0.01f)
+            transform.position = Vector3.MoveTowards(transform.position, _destination_drop, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_drop) <= 0.01f)
             {
                 _isDroppingBlock = false;
-                transform.position = _destination;
+                transform.position = _destination_drop;
+            }
+        }
+        if (_isRaisingBlock)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _destination_raise, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_raise) <= 0.01f)
+            {
+                _isRaisingBlock = false;
+                transform.position = _destination_raise;
+            }
+        }
+        if (_isMovingBlock)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _destination_move, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_move) <= 0.01f)
+            {
+                _isMovingBlock = false;
+                transform.position = _destination_move;
             }
         }
     }
@@ -72,8 +98,10 @@ public class Ground : MonoBehaviour
                     var pos   = transform.position + new Vector3(0, 0.5f, 0) ;
                     if (!Physics.Raycast(pos, dir, maxDistance: 1))
                     {
-                        Debug.Log("dir" + dir);
-                        gameObject.transform.Translate(dir); 
+                        
+                        _destination_move += dir;
+                        _isMovingBlock = true;
+                        // gameObject.transform.Translate(dir);
                     }
                 }
             }
@@ -92,7 +120,7 @@ public class Ground : MonoBehaviour
                 case "Red":
                     _material.color = Color.red;
                     _originalColour = _material.color;
-
+                    RedRise();
                     break;
                 case "Green":
                     _material.color = Color.green;
@@ -202,6 +230,11 @@ public class Ground : MonoBehaviour
         _isDroppingBlock = true;
     }
     
+    private void RedRise()
+    {
+        _isRaisingBlock = true;
+    }
+
 
     private void OnMouseOver()
     {
