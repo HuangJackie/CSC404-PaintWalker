@@ -34,6 +34,7 @@ public class RammingSpecialCreature : MonoBehaviour
         _levelManager = FindObjectOfType<LevelManager>();
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
+        _updateUI = FindObjectOfType<UpdateUI>();
     }
 
     void Update()
@@ -108,6 +109,7 @@ public class RammingSpecialCreature : MonoBehaviour
         {
             if (!_isPainted)
             {
+                _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " + paintColour2);
                 _material.color = new Color(0.98f, 1f, 0.45f);
                 _isMouseOver = true;
             }
@@ -118,6 +120,7 @@ public class RammingSpecialCreature : MonoBehaviour
     {
         if (useMouseClick)
         {
+            _updateUI.SetPaintNeededText("");
             _material.color = _originalColour;
             _isMouseOver = false;
         }

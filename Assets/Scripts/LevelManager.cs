@@ -20,16 +20,16 @@ public class LevelManager : MonoBehaviour
         paintQuantity.Add("Green", 0); // Growing Platform
         paintQuantity.Add("Red", 0); // Drops Platform
         //paintQuantity.Add("Black", 30); 
-        paintQuantity.Add("Orange", 4); // Raises Platform
+        paintQuantity.Add("Yellow", 4); // Raises Platform
         if (dev_mode)
         {
             paintQuantity["Blue"] = 30;
             paintQuantity["Green"] = 30;
             paintQuantity["Red"] = 30;
-            paintQuantity["Orange"] = 30;
+            paintQuantity["Yellow"] = 30;
         }
 
-        currentSelectedColour = "Orange";
+        currentSelectedColour = "Yellow";
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
     }
 
@@ -50,14 +50,14 @@ public class LevelManager : MonoBehaviour
                     _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Green":
-                    currentSelectedColour = "Orange";
+                    currentSelectedColour = "Yellow";
                     _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 //case "Black":
-                //    currentSelectedColour = "Orange";
+                //    currentSelectedColour = "Yellow";
                 //    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                 //    break;
-                case "Orange":
+                case "Yellow":
                     currentSelectedColour = "Blue";
                     _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
                     break;

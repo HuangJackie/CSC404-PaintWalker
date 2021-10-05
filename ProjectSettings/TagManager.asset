@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - RammingCreature
   - PressurePlate
+  - PaintNeeded
   layers:
   - Default
   - TransparentFX

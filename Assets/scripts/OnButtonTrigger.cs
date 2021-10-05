@@ -7,8 +7,7 @@ public class OnButtonTrigger : MonoBehaviour
     public bool isTriggered = false;
     public MoveWall wall;
     public LevelManager manager;
-
-
+    
     public GameObject player;
     public float radius = 1.5f;
     public bool _isPainted;
@@ -31,6 +30,7 @@ public class OnButtonTrigger : MonoBehaviour
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _isMouseOver = false;
+        _updateUI = FindObjectOfType<UpdateUI>();
     }
 
     // Update is called once per frame
@@ -80,6 +80,7 @@ public class OnButtonTrigger : MonoBehaviour
     {
         if (!_isPainted)
         {
+            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " + paintColour2);
             _material.color = new Color(0.98f, 1f, 0.45f);
             _isMouseOver = true;
         }
@@ -87,6 +88,8 @@ public class OnButtonTrigger : MonoBehaviour
 
     private void OnMouseExit()
     {
+        _updateUI.SetPaintNeededText("");
+
         _material.color = _originalColour;
         _isMouseOver = false;
     }

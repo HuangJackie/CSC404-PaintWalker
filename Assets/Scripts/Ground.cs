@@ -178,7 +178,7 @@ public class Ground : MonoBehaviour
                 //    _originalColour = _material.color;
                 //    Black???effect();
                 //    break;
-                case "Orange":
+                case "Yellow":
                     _material.color = Color.yellow;
                     _originalColour = _material.color;
                     if (applyPaintEffect)

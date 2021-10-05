@@ -8,13 +8,20 @@ public class UpdateUI : MonoBehaviour
     private PaintBucketIcon paintIcon;
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
+    private PaintNeededText paintNeededText;
 
     private void Start()
     {
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
+        paintNeededText = FindObjectOfType<PaintNeededText>();
         ChangePaint(Paints.ORANGE_PAINT, 3);
+    }
+
+    public void SetPaintNeededText(string text)
+    {
+        paintNeededText.SetPaintText(text);
     }
 
     public void SetPaint(int paintLeft)
