@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public bool dev_mode;
 
     private UpdateUI _updateUI;
+    private bool _isExitActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -114,5 +115,15 @@ public class LevelManager : MonoBehaviour
     public int GetPaintQuantity(string colour)
     {
         return paintQuantity[colour];
+    }
+
+    public bool IsExitActive()
+    {
+        return _isExitActive;
+    }
+    
+    public void SetExitActive(bool isActive)
+    {
+        _isExitActive = isActive;
     }
 }

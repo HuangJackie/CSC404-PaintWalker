@@ -8,7 +8,7 @@ public class PressurePlate : MonoBehaviour
     private Renderer _exitRenderer;
 
     private Material _activeExitMaterial;
-    // private Color _originalColour;
+    public LevelManager manager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class PressurePlate : MonoBehaviour
             Debug.Log("Ground Pressure Plate Collision");
 
             _exitRenderer.material = _activeExitMaterial;
-            // _originalColour = _material.color;
+            manager.SetExitActive(true);
         }
     }
 }
