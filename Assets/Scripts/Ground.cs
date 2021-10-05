@@ -49,7 +49,7 @@ public class Ground : MonoBehaviour
             if (_isMouseOver && _isMouseClicked &&
                 Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
             {
-                PaintSurface();
+                PaintSurface(true);
             }
         }
 
@@ -86,7 +86,7 @@ public class Ground : MonoBehaviour
     {
         if (!_isPainted && other.gameObject.CompareTag("Player"))
         {
-            PaintSurface();
+            PaintSurface(false);
         }
         var dir = ReturnDirection(other.gameObject, this.gameObject);
         if ((_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
@@ -106,9 +106,14 @@ public class Ground : MonoBehaviour
                 }
             }
         }
+        if (other.gameObject.CompareTag("RammingCreature"))
+        {
+            Debug.Log("dsf");
+            Destroy(gameObject);
+        }
     }
 
-    public bool PaintSurface()
+    public bool PaintSurface(bool applyPaintEffect=false)
     {
         if (_levelManager.HasEnoughPaint() && !_isPainted)
         {
@@ -120,23 +125,33 @@ public class Ground : MonoBehaviour
                 case "Red":
                     _material.color = Color.red;
                     _originalColour = _material.color;
-                    RedRise();
+                    if (applyPaintEffect)
+                    {
+                        RedFall();
+                    }
                     break;
                 case "Green":
                     _material.color = Color.green;
                     _originalColour = _material.color;
-                    GreenExtend();
+                    if (applyPaintEffect)
+                    {
+                        GreenExtend();
+                    }
                     break;
-                case "Black":
-                    _material.color = Color.black;
-                    _originalColour = _material.color;
-                    BlackFall();
-                    break;
+                //case "Black":
+                //    _material.color = Color.black;
+                //    _originalColour = _material.color;
+                //    Black???effect();
+                //    break;
                 case "Orange":
                     _material.color = Color.yellow;
                     _originalColour = _material.color;
+                    if (applyPaintEffect)
+                    {
+                        YellowRise();
+                    }
                     break;
-                case "Special":
+                case "Blue":
                     _material.color = Color.cyan;
                     _originalColour = _material.color;
                     break;
@@ -225,12 +240,12 @@ public class Ground : MonoBehaviour
         return !Physics.Raycast(currentTransformPosition + new Vector3(1, 2, 0), Vector3.down, 3);
     }
 
-    private void BlackFall()
+    private void RedFall()
     {
         _isDroppingBlock = true;
     }
     
-    private void RedRise()
+    private void YellowRise()
     {
         _isRaisingBlock = true;
     }

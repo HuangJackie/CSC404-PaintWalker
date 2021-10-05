@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     private Dictionary<String, int> paintQuantity;
     private String currentSelectedColour;
     private bool _isColourSwitched;
+    public bool dev_mode;
 
     private UpdateUI _updateUI;
 
@@ -15,11 +16,18 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Special", 4); // Goal
-        paintQuantity.Add("Green", 0); // Growing Platform
-        paintQuantity.Add("Red", 3); // Button
-        paintQuantity.Add("Black", 0); // Weighted Platform
-        paintQuantity.Add("Orange", 5); // Walking
+        paintQuantity.Add("Blue", 4); // Freezes Platform
+        paintQuantity.Add("Green", 10); // Growing Platform
+        paintQuantity.Add("Red", 20); // Drops Platform
+        //paintQuantity.Add("Black", 30); 
+        paintQuantity.Add("Orange", 40); // Raises Platform
+        if (dev_mode)
+        {
+            paintQuantity["Blue"] = 30;
+            paintQuantity["Green"] = 30;
+            paintQuantity["Red"] = 30;
+            paintQuantity["Orange"] = 30;
+        }
 
         currentSelectedColour = "Orange";
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
@@ -33,7 +41,7 @@ public class LevelManager : MonoBehaviour
         {
             switch (currentSelectedColour)
             {
-                case "Special":
+                case "Blue":
                     currentSelectedColour = "Red";
                     _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour]);
                     break;
@@ -42,16 +50,16 @@ public class LevelManager : MonoBehaviour
                     _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Green":
-                    currentSelectedColour = "Black";
-                    _updateUI.ChangePaint(Paints.BLACK_PAINT, paintQuantity[currentSelectedColour]);
-                    break;
-                case "Black":
                     currentSelectedColour = "Orange";
                     _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
+                //case "Black":
+                //    currentSelectedColour = "Orange";
+                //    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
+                //    break;
                 case "Orange":
-                    currentSelectedColour = "Special";
-                    _updateUI.ChangePaint(Paints.SPECIAL_PAINT, paintQuantity[currentSelectedColour]);
+                    currentSelectedColour = "Blue";
+                    _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
             }
         }
@@ -60,10 +68,10 @@ public class LevelManager : MonoBehaviour
     public void IncreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;
-        if (paintColour == "Black")
-        {
-            amount = 5;
-        }
+        //if (paintColour == "Black")
+        //{
+        //    amount = 5;
+        //}
         if (paintColour == "Orange")
         {
             amount = 20;
