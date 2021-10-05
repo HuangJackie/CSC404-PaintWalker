@@ -32,10 +32,10 @@ public class PaintBucketIcon : MonoBehaviour
             case Paints.ORANGE_PAINT:
                 paintBucketIcon.sprite = orangePaintBucket;
                 break;
-            case Paints.BLACK_PAINT:
-                paintBucketIcon.sprite = blackPaintBucket;
-                break;
-            case Paints.SPECIAL_PAINT:
+            //case Paints.BLACK_PAINT:
+            //    paintBucketIcon.sprite = blackPaintBucket;
+            //    break;
+            case Paints.BLUE_PAINT:
                 paintBucketIcon.sprite = specialPaintBucket;
                 break;
             default:

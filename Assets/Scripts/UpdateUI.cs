@@ -37,11 +37,11 @@ public class UpdateUI : MonoBehaviour
             case Paints.ORANGE_PAINT:
                 paintColor = Paints.orange;
                 break;
-            case Paints.BLACK_PAINT:
-                paintColor = Paints.black;
-                break;
-            case Paints.SPECIAL_PAINT:
-                paintColor = Paints.special;
+            //case Paints.BLACK_PAINT:
+            //    paintColor = Paints.black;
+            //    break;
+            case Paints.BLUE_PAINT:
+                paintColor = Paints.blue;
                 break;
             default:
                 paintColor = Paints.red;
