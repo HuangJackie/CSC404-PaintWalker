@@ -15,9 +15,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Special", 0); // Goal
+        paintQuantity.Add("Special", 4); // Goal
         paintQuantity.Add("Green", 0); // Growing Platform
-        paintQuantity.Add("Red", 0); // Button
+        paintQuantity.Add("Red", 3); // Button
         paintQuantity.Add("Black", 0); // Weighted Platform
         paintQuantity.Add("Orange", 5); // Walking
 

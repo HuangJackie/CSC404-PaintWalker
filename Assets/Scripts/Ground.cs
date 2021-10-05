@@ -17,7 +17,11 @@ public class Ground : MonoBehaviour
     private bool _isMouseOver;
 
     private bool _isDroppingBlock;
-    private Vector3 _destination;
+    private bool _isRaisingBlock;
+    private bool _isMovingBlock;
+    private Vector3 _destination_drop;
+    private Vector3 _destination_raise;
+    private Vector3 _destination_move;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,11 @@ public class Ground : MonoBehaviour
         _isMouseOver = false;
 
         _isDroppingBlock = false;
-        _destination = transform.position + new Vector3(0, -1, 0);
+        _isRaisingBlock = false;
+        _isMovingBlock = false;
+        _destination_drop = transform.position + new Vector3(0, -1, 0);
+        _destination_raise = transform.position - new Vector3(0, -1, 0);
+        _destination_move = transform.position;
     }
 
     // Update is called once per frame
@@ -47,11 +55,29 @@ public class Ground : MonoBehaviour
 
         if (_isDroppingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destination, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _destination) <= 0.01f)
+            transform.position = Vector3.MoveTowards(transform.position, _destination_drop, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_drop) <= 0.01f)
             {
                 _isDroppingBlock = false;
-                transform.position = _destination;
+                transform.position = _destination_drop;
+            }
+        }
+        if (_isRaisingBlock)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _destination_raise, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_raise) <= 0.01f)
+            {
+                _isRaisingBlock = false;
+                transform.position = _destination_raise;
+            }
+        }
+        if (_isMovingBlock)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _destination_move, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destination_move) <= 0.01f)
+            {
+                _isMovingBlock = false;
+                transform.position = _destination_move;
             }
         }
     }
@@ -61,6 +87,24 @@ public class Ground : MonoBehaviour
         if (!_isPainted && other.gameObject.CompareTag("Player"))
         {
             PaintSurface();
+        }
+        var dir = ReturnDirection(other.gameObject, this.gameObject);
+        if ((_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
+        {
+            if (dir != Vector3.negativeInfinity)
+            {
+                if (true)
+                {
+                    var pos   = transform.position + new Vector3(0, 0.5f, 0) ;
+                    if (!Physics.Raycast(pos, dir, maxDistance: 1))
+                    {
+                        
+                        _destination_move += dir;
+                        _isMovingBlock = true;
+                        // gameObject.transform.Translate(dir);
+                    }
+                }
+            }
         }
     }
 
@@ -76,7 +120,7 @@ public class Ground : MonoBehaviour
                 case "Red":
                     _material.color = Color.red;
                     _originalColour = _material.color;
-
+                    RedRise();
                     break;
                 case "Green":
                     _material.color = Color.green;
@@ -103,6 +147,27 @@ public class Ground : MonoBehaviour
 
         return false;
     }
+    // move platform code (ice)
+    private Vector3 ReturnDirection( GameObject Object, GameObject ObjectHit )
+    {
+
+        Vector3 hitDirection = Vector3.negativeInfinity;
+        RaycastHit RayHit;
+        Vector3 direction = ( Object.transform.position - ObjectHit.transform.position ).normalized;
+        Ray MyRay = new Ray( ObjectHit.transform.position, direction );
+         
+        if ( Physics.Raycast( MyRay, out RayHit ) ){
+                 
+            if ( RayHit.collider != null ){
+                 
+                Vector3 MyNormal = RayHit.normal;
+                hitDirection = MyNormal;
+            }    
+        }
+
+        return hitDirection;
+    }
+    // move platform code (ice)
 
     private void GreenExtend()
     {
@@ -164,6 +229,12 @@ public class Ground : MonoBehaviour
     {
         _isDroppingBlock = true;
     }
+    
+    private void RedRise()
+    {
+        _isRaisingBlock = true;
+    }
+
 
     private void OnMouseOver()
     {
