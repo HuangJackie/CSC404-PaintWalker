@@ -5,11 +5,12 @@ using UnityEngine;
 public class canlogic : MonoBehaviour
 {
     public string color;
+    public int paintReplenished;
     public LevelManager manager;
 
     void OnTriggerEnter(Collider other)
     {
-        manager.IncreasePaint(color, 10);
+        manager.IncreasePaint(color, paintReplenished);
         Destroy(gameObject);
     }
 }

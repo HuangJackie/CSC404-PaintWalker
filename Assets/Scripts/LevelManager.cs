@@ -16,11 +16,11 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", 4); // Freezes Platform
-        paintQuantity.Add("Green", 10); // Growing Platform
-        paintQuantity.Add("Red", 20); // Drops Platform
+        paintQuantity.Add("Blue", 0); // Freezes Platform
+        paintQuantity.Add("Green", 0); // Growing Platform
+        paintQuantity.Add("Red", 0); // Drops Platform
         //paintQuantity.Add("Black", 30); 
-        paintQuantity.Add("Orange", 40); // Raises Platform
+        paintQuantity.Add("Orange", 4); // Raises Platform
         if (dev_mode)
         {
             paintQuantity["Blue"] = 30;
@@ -68,16 +68,16 @@ public class LevelManager : MonoBehaviour
     public void IncreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;
-        //if (paintColour == "Black")
-        //{
-        //    amount = 5;
-        //}
-        if (paintColour == "Orange")
-        {
-            amount = 20;
-        }
-
         paintQuantity[paintColour] += amount;
+        if (currentSelectedColour == paintColour)
+        {
+            _updateUI.SetPaint(paintQuantity[paintColour]);
+        }
+    }
+    public void DecreasePaint(String paintColour, int quantity)
+    {
+        int amount = quantity;
+        paintQuantity[paintColour] -= amount;
         if (currentSelectedColour == paintColour)
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
@@ -109,5 +109,10 @@ public class LevelManager : MonoBehaviour
     {
         string color = GetCurrentlySelectedPaint();
         return paintQuantity[color];
+    }
+    
+    public int GetPaintQuantity(string colour)
+    {
+        return paintQuantity[colour];
     }
 }

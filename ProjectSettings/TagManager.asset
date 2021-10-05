@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - RammingCreature
+  - PressurePlate
   layers:
   - Default
   - TransparentFX

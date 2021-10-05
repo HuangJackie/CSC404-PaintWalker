@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Object = UnityEngine.Object;
 
 public class Ground : MonoBehaviour
 {
@@ -19,6 +23,7 @@ public class Ground : MonoBehaviour
     private bool _isDroppingBlock;
     private bool _isRaisingBlock;
     private bool _isMovingBlock;
+    private bool _isIceBlockEffectEnabled;
     private Vector3 _destination_drop;
     private Vector3 _destination_raise;
     private Vector3 _destination_move;
@@ -35,6 +40,7 @@ public class Ground : MonoBehaviour
         _isDroppingBlock = false;
         _isRaisingBlock = false;
         _isMovingBlock = false;
+        _isIceBlockEffectEnabled = false;
         _destination_drop = transform.position + new Vector3(0, -1, 0);
         _destination_raise = transform.position - new Vector3(0, -1, 0);
         _destination_move = transform.position;
@@ -89,17 +95,18 @@ public class Ground : MonoBehaviour
             PaintSurface(false);
         }
         var dir = ReturnDirection(other.gameObject, this.gameObject);
-        if ((_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
+        if (_isIceBlockEffectEnabled && (_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
         {
             if (dir != Vector3.negativeInfinity)
             {
+                Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
                 if (true)
                 {
                     var pos   = transform.position + new Vector3(0, 0.5f, 0) ;
-                    if (!Physics.Raycast(pos, dir, maxDistance: 1))
+                    if (!Physics.Raycast(pos, directionToPush, maxDistance: 1,0))
                     {
                         
-                        _destination_move += dir;
+                        _destination_move += directionToPush;
                         _isMovingBlock = true;
                         // gameObject.transform.Translate(dir);
                     }
@@ -108,8 +115,36 @@ public class Ground : MonoBehaviour
         }
         if (other.gameObject.CompareTag("RammingCreature"))
         {
-            Debug.Log("dsf");
             Destroy(gameObject);
+        }
+    }
+
+    private Vector3 GetDirectionToMoveIceBlock(Vector3 dir)
+    {
+        string direction = "VERTICAL";
+        if (Math.Abs(dir.x) > Math.Abs(dir.z))
+        {
+            direction = "HORIZONTAL";
+        }
+
+        switch (direction)
+        {
+            case "HORIZONTAL":
+                if (dir.x < 0)
+                {
+                    return Vector3.left;
+                }
+
+                return Vector3.right;
+            case "VERTICAL":
+                if (dir.z > 0)
+                {
+                    return Vector3.forward;
+                }
+
+                return Vector3.back;
+            default:
+                return new Vector3(0, 0, 0);
         }
     }
 
@@ -154,6 +189,10 @@ public class Ground : MonoBehaviour
                 case "Blue":
                     _material.color = Color.cyan;
                     _originalColour = _material.color;
+                    if (applyPaintEffect)
+                    {
+                        _isIceBlockEffectEnabled = true;
+                    }
                     break;
             }
 
