@@ -54,6 +54,17 @@ public class Player : MonoBehaviour
 
     private void RigidGridMove()
     {
+        //stops player from stuck on wall. Left here in case needed in the future. 
+        //Debug.Log(transform.position);
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+        //{
+        //    Debug.Log(hit.distance);
+        //    if (hit.distance < 0.3f)
+        //    {
+        //        _targetLocation = transform.position;
+        //    }
+        //}
         Vector3 newPosition = Vector3.MoveTowards(transform.position, _targetLocation, speed * Time.deltaTime);
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
@@ -127,7 +138,6 @@ public class Player : MonoBehaviour
                 {
                     return false;
                 }
-
                 return ValidateFloorMove(hitInfo);
             case "Right":
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1,

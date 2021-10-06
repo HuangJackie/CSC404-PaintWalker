@@ -10,7 +10,10 @@ public class canlogic : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        manager.IncreasePaint(color, paintReplenished);
-        Destroy(gameObject);
+        if (other.gameObject.GetComponent<Player>())
+        {
+            manager.IncreasePaint(color, paintReplenished);
+            Destroy(gameObject);
+        }
     }
 }
