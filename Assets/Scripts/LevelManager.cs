@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
 
+    private bool _isPanning = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +68,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SetIsPanning(bool isPanning)
+    {
+        _isPanning = isPanning;
+    }
+
+    public bool IsPanning()
+    {
+        return _isPanning;
+    }
+    
     public void IncreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;

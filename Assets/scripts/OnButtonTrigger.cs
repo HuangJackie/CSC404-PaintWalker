@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class OnButtonTrigger : MonoBehaviour
@@ -7,7 +8,7 @@ public class OnButtonTrigger : MonoBehaviour
     public bool isTriggered = false;
     public MoveWall wall;
     public LevelManager manager;
-    
+
     public GameObject player;
     public float radius = 1.5f;
     public bool _isPainted;
@@ -36,29 +37,27 @@ public class OnButtonTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_isPainted)
+        if (SpecialCreatureUtil.ActivateSpecialCreature(
+            _isPainted,
+            _isMouseOver,
+            Input.GetButtonDown("Fire1"),
+            player.transform.position,
+            transform.position,
+            manager,
+            paintColour1,
+            paintColour2,
+            paintQuantity1,
+            paintQuantity2,
+            _material,
+            Color.magenta))
         {
-            _isMouseClicked = Input.GetButtonDown("Fire1");
-            if (_isMouseOver && _isMouseClicked &&
-                Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
+            _originalColour = _material.color;
+            _isPainted = true;
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+            foreach (Collider hitCollider in hitColliders)
             {
-                if (!_isPainted &&
-                    manager.GetPaintQuantity(paintColour1) >= paintQuantity1 &&
-                    manager.GetPaintQuantity(paintColour2) >= paintQuantity2)
-                {
-                    manager.DecreasePaint(paintColour1, paintQuantity1);
-                    manager.DecreasePaint(paintColour2, paintQuantity2);
-                    _isPainted = true;
-                    _material.color = Color.magenta;
-                    _originalColour = _material.color;
-
-                    Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
-                    foreach (Collider hitCollider in hitColliders)
-                    {
-                        hitCollider.SendMessage("TriggerButtton",
-                            SendMessageOptions.DontRequireReceiver);
-                    }
-                }
+                hitCollider.SendMessage("TriggerButtton",
+                    SendMessageOptions.DontRequireReceiver);
             }
         }
 
@@ -80,7 +79,8 @@ public class OnButtonTrigger : MonoBehaviour
     {
         if (!_isPainted)
         {
-            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " + paintColour2);
+            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " +
+                                         paintColour2);
             _material.color = new Color(0.98f, 1f, 0.45f);
             _isMouseOver = true;
         }

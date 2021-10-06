@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class RammingSpecialCreature : MonoBehaviour
@@ -39,28 +40,24 @@ public class RammingSpecialCreature : MonoBehaviour
 
     void Update()
     {
-        if (useMouseClick)
+        if (_isMouseOver &&
+            SpecialCreatureUtil.ActivateSpecialCreature(
+                _isPainted,
+                _isMouseOver,
+                Input.GetButtonDown("Fire1"),
+                player.transform.position,
+                transform.position,
+                _levelManager,
+                paintColour1,
+                paintColour2,
+                paintQuantity1,
+                paintQuantity2,
+                _material,
+                Color.green))
         {
-            if (!_isPainted)
-            {
-                _isMouseClicked = Input.GetButtonDown("Fire1");
-                if (_isMouseOver && _isMouseClicked &&
-                    Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
-                {
-                    if (!_isPainted &&
-                        _levelManager.GetPaintQuantity(paintColour1) >= paintQuantity1 &&
-                        _levelManager.GetPaintQuantity(paintColour2) >= paintQuantity2)
-                    {
-                        _levelManager.DecreasePaint(paintColour1, paintQuantity1);
-                        _levelManager.DecreasePaint(paintColour2, paintQuantity2);
-                        _isPainted = true;
-                        _material.color = Color.green;
-                        _originalColour = _material.color;
-
-                        is_moving = true;
-                    }
-                }
-            }
+            _originalColour = _material.color;
+            _isPainted = true;
+            is_moving = true;
         }
     }
 
@@ -79,21 +76,16 @@ public class RammingSpecialCreature : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (!useMouseClick)
+        bool shouldActivateSpecialCreature = !useMouseClick
+                                             && collision.gameObject.GetComponent<Collider>().CompareTag("Player")
+                                             && _levelManager.GetCurrentlySelectedPaint() == "Blue"
+                                             && _levelManager.HasEnoughPaint();
+        if (shouldActivateSpecialCreature)
         {
-            if (collision.gameObject.GetComponent<Collider>().CompareTag("Player"))
-            {
-                if (_levelManager.GetCurrentlySelectedPaint() == "Blue")
-                {
-                    if (_levelManager.HasEnoughPaint())
-                    {
-                        _material.color = Color.green;
-                        _originalColour = _material.color;
-                        _levelManager.DecreaseCurrentSelectedPaint(3);
-                        is_moving = true;
-                    }
-                }
-            }
+            _material.color = Color.green;
+            _originalColour = _material.color;
+            _levelManager.DecreaseCurrentSelectedPaint(3);
+            is_moving = true;
         }
 
         if (collision.gameObject.GetComponent<Ground>())
@@ -105,14 +97,13 @@ public class RammingSpecialCreature : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (useMouseClick)
+        if (useMouseClick && !_isPainted)
         {
-            if (!_isPainted)
-            {
-                _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " + paintColour2);
-                _material.color = new Color(0.98f, 1f, 0.45f);
-                _isMouseOver = true;
-            }
+            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " +
+                                         paintQuantity2 +
+                                         " " + paintColour2);
+            _material.color = new Color(0.98f, 1f, 0.45f);
+            _isMouseOver = true;
         }
     }
 
