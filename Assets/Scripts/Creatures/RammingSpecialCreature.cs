@@ -76,17 +76,17 @@ public class RammingSpecialCreature : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        bool shouldActivateSpecialCreature = !useMouseClick
-                                             && collision.gameObject.GetComponent<Collider>().CompareTag("Player")
-                                             && _levelManager.GetCurrentlySelectedPaint() == "Blue"
-                                             && _levelManager.HasEnoughPaint();
-        if (shouldActivateSpecialCreature)
-        {
-            _material.color = Color.green;
-            _originalColour = _material.color;
-            _levelManager.DecreaseCurrentSelectedPaint(3);
-            is_moving = true;
-        }
+        // bool shouldActivateSpecialCreature = !useMouseClick
+        //                                      && collision.gameObject.GetComponent<Collider>().CompareTag("Player")
+        //                                      && _levelManager.GetCurrentlySelectedPaint() == "Blue"
+        //                                      && _levelManager.HasEnoughPaint();
+        // if (shouldActivateSpecialCreature)
+        // {
+        //     _material.color = Color.green;
+        //     _originalColour = _material.color;
+        //     _levelManager.DecreaseCurrentSelectedPaint(3);
+        //     is_moving = true;
+        // }
 
         if (collision.gameObject.GetComponent<Ground>())
         {

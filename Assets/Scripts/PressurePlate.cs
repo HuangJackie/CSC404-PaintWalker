@@ -25,11 +25,8 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Entered Pressure Plate");
         if (collision.gameObject.GetComponent<Collider>().CompareTag("Ground"))
         {
-            Debug.Log("Ground Pressure Plate Collision");
-
             _exitRenderer.material = _activeExitMaterial;
             manager.SetExitActive(true);
         }

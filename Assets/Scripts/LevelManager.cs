@@ -95,18 +95,15 @@ public class LevelManager : MonoBehaviour
 
     public void DecreasePaint(String paintColour, int quantity)
     {
-        if (paintColour != GetCurrentlySelectedPaint())
+        int amount = quantity;
+        paintQuantity[paintColour] -= amount;
+        if (currentSelectedColour == paintColour)
         {
-            int amount = quantity;
-            paintQuantity[paintColour] -= amount;
-            if (currentSelectedColour == paintColour)
-            {
-                _updateUI.SetPaint(paintQuantity[paintColour]);
-            }
-
-            StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
-            StartCoroutine("CheckPaintQuantity");
+            _updateUI.SetPaint(paintQuantity[paintColour]);
         }
+
+        StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
+        StartCoroutine("CheckPaintQuantity");
     }
 
     private void ClearUIInfoText()
