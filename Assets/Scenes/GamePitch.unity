@@ -14325,6 +14325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Creature
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
+      propertyPath: m_TagString
+      value: SpecialCreature
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
 --- !u!1001 &1852512992
