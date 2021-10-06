@@ -56,15 +56,21 @@ public class LevelManager : MonoBehaviour
                     currentSelectedColour = "Yellow";
                     _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
-                //case "Black":
-                //    currentSelectedColour = "Yellow";
-                //    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
-                //    break;
                 case "Yellow":
                     currentSelectedColour = "Blue";
                     _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
             }
+        }
+        StartCoroutine("CheckPaintQuantity");
+    }
+
+    IEnumerator CheckPaintQuantity()
+    {
+        yield return new WaitForSeconds(3f); // Takes time to collect the paint and replenish
+        if (HasNoPaintLeft())
+        {
+            UpdateNoPaintLeftUI();
         }
     }
 
@@ -77,7 +83,7 @@ public class LevelManager : MonoBehaviour
     {
         return _isPanning;
     }
-    
+
     public void IncreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;
@@ -87,6 +93,7 @@ public class LevelManager : MonoBehaviour
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
     }
+
     public void DecreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;
@@ -97,10 +104,31 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void ClearUIInfoText()
+    {
+        _updateUI.ClearUIInfoText();
+    }
+
     public void DecreaseCurrentSelectedPaint(int amount)
     {
         paintQuantity[currentSelectedColour] -= amount;
         _updateUI.SetPaint(paintQuantity[currentSelectedColour]);
+    }
+
+    public bool HasNoPaintLeft()
+    {
+        bool noPaintLeft = true;
+        foreach (int paintQuantityValue in paintQuantity.Values)
+        {
+            noPaintLeft = paintQuantityValue == 0;
+        }
+
+        return noPaintLeft;
+    }
+
+    public void UpdateNoPaintLeftUI()
+    {
+        _updateUI.SetInfoText("No Paint Left :(", true);
     }
 
     public string GetCurrentlySelectedPaint()
@@ -123,7 +151,7 @@ public class LevelManager : MonoBehaviour
         string color = GetCurrentlySelectedPaint();
         return paintQuantity[color];
     }
-    
+
     public int GetPaintQuantity(string colour)
     {
         return paintQuantity[colour];
@@ -133,7 +161,7 @@ public class LevelManager : MonoBehaviour
     {
         return _isExitActive;
     }
-    
+
     public void SetExitActive(bool isActive)
     {
         _isExitActive = isActive;

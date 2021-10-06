@@ -53,7 +53,7 @@ public class RammingSpecialCreature : MonoBehaviour
                 paintQuantity1,
                 paintQuantity2,
                 _material,
-                Color.green))
+                Color.magenta))
         {
             _originalColour = _material.color;
             _isPainted = true;
@@ -99,7 +99,7 @@ public class RammingSpecialCreature : MonoBehaviour
     {
         if (useMouseClick && !_isPainted)
         {
-            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " +
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 + " " +
                                          paintQuantity2 +
                                          " " + paintColour2);
             _material.color = new Color(0.98f, 1f, 0.45f);
@@ -111,7 +111,7 @@ public class RammingSpecialCreature : MonoBehaviour
     {
         if (useMouseClick)
         {
-            _updateUI.SetPaintNeededText("");
+            _updateUI.SetInfoText("");
             _material.color = _originalColour;
             _isMouseOver = false;
         }

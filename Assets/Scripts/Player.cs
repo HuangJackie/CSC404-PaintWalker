@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     private UpdateUI _updateUI;
     private Transform _transform;
 
+    private bool _hasWaitedTurn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
+
         transform.position = newPosition;
 
         if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
