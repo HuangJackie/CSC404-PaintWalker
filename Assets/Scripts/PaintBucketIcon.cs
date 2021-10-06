@@ -11,7 +11,7 @@ public class PaintBucketIcon : MonoBehaviour
     [SerializeField] private Sprite redPaintBucket;
     [SerializeField] private Sprite greenPaintBucket;
     [SerializeField] private Sprite orangePaintBucket;
-    [SerializeField] private Sprite blackPaintBucket;
+    //[SerializeField] private Sprite blackPaintBucket;
     [SerializeField] private Sprite specialPaintBucket;
 
     private void Start()

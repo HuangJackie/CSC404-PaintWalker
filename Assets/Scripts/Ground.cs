@@ -16,6 +16,7 @@ public class Ground : MonoBehaviour
     private Material _material;
     private Color _originalColour;
     private UpdateUI _updateUI;
+    private Player _player;
 
     private bool _isMouseClicked;
     private bool _isMouseOver;
@@ -24,6 +25,7 @@ public class Ground : MonoBehaviour
     private bool _isRaisingBlock;
     private bool _isMovingBlock;
     private bool _isIceBlockEffectEnabled;
+    private bool _isOnSameLevelAsPlayer;
     private Vector3 _destinationDrop;
     private Vector3 _destinationRaise;
     private Vector3 _destinationMove;
@@ -34,9 +36,11 @@ public class Ground : MonoBehaviour
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _levelManager = FindObjectOfType<LevelManager>();
+        _player = FindObjectOfType<Player>();
 
         _isMouseOver = false;
 
+        _isOnSameLevelAsPlayer = false;
         _isDroppingBlock = false;
         _isRaisingBlock = false;
         _isMovingBlock = false;
@@ -49,6 +53,16 @@ public class Ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float playerBlockVertialDistance = Mathf.Abs(_player.gameObject.transform.position.y - gameObject.transform.position.y);
+        if (playerBlockVertialDistance < 1.5f)
+        {
+            _isOnSameLevelAsPlayer = true;
+        } else
+        {
+            _isOnSameLevelAsPlayer = false;
+        }
+
+
         if (!_isPainted)
         {
             _isMouseClicked = Input.GetButtonDown("Fire1");
@@ -108,6 +122,7 @@ public class Ground : MonoBehaviour
     {
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
         bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
+                                  _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
                                   dir != Vector3.negativeInfinity;
         if (shouldMoveIceBlock)
