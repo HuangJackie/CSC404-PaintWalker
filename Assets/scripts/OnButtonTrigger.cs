@@ -72,7 +72,6 @@ public class OnButtonTrigger : MonoBehaviour
     {
         isTriggered = true;
         gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
-        manager.DecreaseCurrentSelectedPaint(2);
     }
 
     private void OnMouseOver()
