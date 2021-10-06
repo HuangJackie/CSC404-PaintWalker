@@ -176,7 +176,7 @@ public class Ground : MonoBehaviour
             switch (currentlySelectedPaint)
             {
                 case "Red":
-                    _material.color = Color.red;
+                    _material.color = Paints.red;
                     _originalColour = _material.color;
                     if (applyPaintEffect)
                     {
@@ -185,7 +185,7 @@ public class Ground : MonoBehaviour
 
                     break;
                 case "Green":
-                    _material.color = Color.green;
+                    _material.color = Paints.green;
                     _originalColour = _material.color;
                     if (applyPaintEffect)
                     {
@@ -194,7 +194,7 @@ public class Ground : MonoBehaviour
 
                     break;
                 case "Yellow":
-                    _material.color = Color.yellow;
+                    _material.color = Paints.orange;
                     _originalColour = _material.color;
                     if (applyPaintEffect)
                     {
@@ -203,7 +203,7 @@ public class Ground : MonoBehaviour
 
                     break;
                 case "Blue":
-                    _material.color = Color.cyan;
+                    _material.color = Paints.blue;
                     _originalColour = _material.color;
                     if (applyPaintEffect)
                     {
