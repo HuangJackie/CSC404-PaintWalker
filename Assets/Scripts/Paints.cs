@@ -12,9 +12,9 @@ public class Paints : MonoBehaviour
     //public const int BLACK_PAINT = 4;
 
     // Paint colors
-    public static Color32 red = new Color32(200, 62, 85, 100);
-    public static Color32 green = new Color32(0, 255, 30, 235);
-    public static Color32 orange = new Color32(255, 221, 0, 100);
-    public static Color32 blue = new Color32(45, 255, 240, 100);
+    public static Color32 red = new Color32(250, 100, 82, 100);
+    public static Color32 green = new Color32(180, 250, 82, 100);
+    public static Color32 orange = new Color32(255, 243, 107, 100);
+    public static Color32 blue = new Color32(82, 250, 239, 100);
     public static Color32 black = new Color32(0, 0, 0, 100);
 }
