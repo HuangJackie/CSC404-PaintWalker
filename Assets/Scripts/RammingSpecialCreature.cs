@@ -90,7 +90,6 @@ public class RammingSpecialCreature : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Ground>())
         {
-            Debug.Log("ddddd");
             Destroy(collision.gameObject);
         }
     }

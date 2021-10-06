@@ -25,6 +25,7 @@ public class Exit : MonoBehaviour
         if (collision.gameObject.GetComponent<Collider>().CompareTag("Player") && manager.IsExitActive())
         {
             _updateUI.SetInfoText("You Win!", true);
+            Time.timeScale = 0.0f;
         }
     }
 }
