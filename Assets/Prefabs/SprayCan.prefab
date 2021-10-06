@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 
+  paintReplenished: 0
   manager: {fileID: 0}
 --- !u!136 &7513970122348307586
 CapsuleCollider:

@@ -49,7 +49,7 @@ public class OnButtonTrigger : MonoBehaviour
             paintQuantity1,
             paintQuantity2,
             _material,
-            Color.magenta))
+            Color.green))
         {
             _originalColour = _material.color;
             _isPainted = true;
@@ -79,7 +79,7 @@ public class OnButtonTrigger : MonoBehaviour
     {
         if (!_isPainted)
         {
-            _updateUI.SetPaintNeededText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " +
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " +
                                          paintColour2);
             _material.color = new Color(0.98f, 1f, 0.45f);
             _isMouseOver = true;
@@ -88,7 +88,7 @@ public class OnButtonTrigger : MonoBehaviour
 
     private void OnMouseExit()
     {
-        _updateUI.SetPaintNeededText("");
+        _updateUI.SetInfoText("");
 
         _material.color = _originalColour;
         _isMouseOver = false;
