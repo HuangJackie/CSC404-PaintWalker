@@ -112,7 +112,7 @@ public class Ground : MonoBehaviour
         }
 
         IceBlockMovement(other);
-        if (other.gameObject.CompareTag("RammingCreature"))
+        if (other.gameObject.CompareTag("SpecialCreature"))
         {
             Destroy(gameObject);
         }
