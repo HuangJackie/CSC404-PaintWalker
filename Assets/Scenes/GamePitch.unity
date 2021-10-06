@@ -9657,7 +9657,6 @@ MonoBehaviour:
   redPaintBucket: {fileID: 21300000, guid: f0db261b6fd5c0e46b769856d2736b35, type: 3}
   greenPaintBucket: {fileID: 21300000, guid: 17cba83c48d510a42b3b0db1ee3e18a9, type: 3}
   orangePaintBucket: {fileID: 21300000, guid: f1550bbbd11c32346ab311bc2b735459, type: 3}
-  blackPaintBucket: {fileID: 21300000, guid: f55ced007b1e2c24e83b957a57606efb, type: 3}
   specialPaintBucket: {fileID: 21300000, guid: c3552391188a3134d886083735ddaae9, type: 3}
 --- !u!114 &1206534756
 MonoBehaviour:
@@ -14867,9 +14866,9 @@ Transform:
   - {fileID: 914544959}
   - {fileID: 2058820236}
   - {fileID: 549052769}
-  - {fileID: 739890465}
-  - {fileID: 1602258080}
   - {fileID: 1034290172}
+  - {fileID: 1602258080}
+  - {fileID: 739890465}
   - {fileID: 871030024}
   - {fileID: 506507774}
   m_Father: {fileID: 280345454}
@@ -17422,7 +17421,7 @@ PrefabInstance:
       objectReference: {fileID: 1088049626}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
