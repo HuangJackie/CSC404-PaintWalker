@@ -62,12 +62,12 @@ public class LevelManager : MonoBehaviour
                     break;
             }
         }
-        StartCoroutine("CheckPaintQuantity");
     }
 
     IEnumerator CheckPaintQuantity()
     {
-        yield return new WaitForSeconds(3f); // Takes time to collect the paint and replenish
+        yield return new WaitForSeconds(0.5f); // Takes time to collect the paint and replenish
+        Debug.Log(HasNoPaintLeft());
         if (HasNoPaintLeft())
         {
             UpdateNoPaintLeftUI();
@@ -92,6 +92,8 @@ public class LevelManager : MonoBehaviour
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
+
+
     }
 
     public void DecreasePaint(String paintColour, int quantity)
@@ -102,6 +104,9 @@ public class LevelManager : MonoBehaviour
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
+
+        StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
+        StartCoroutine("CheckPaintQuantity");
     }
 
     private void ClearUIInfoText()
@@ -113,6 +118,8 @@ public class LevelManager : MonoBehaviour
     {
         paintQuantity[currentSelectedColour] -= amount;
         _updateUI.SetPaint(paintQuantity[currentSelectedColour]);
+        StopCoroutine("CheckPaintQuantity");  // Stop existing coroutine.
+        StartCoroutine("CheckPaintQuantity");
     }
 
     public bool HasNoPaintLeft()
