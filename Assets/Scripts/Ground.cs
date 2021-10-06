@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Object = UnityEngine.Object;
 
 public class Ground : MonoBehaviour
 {
@@ -19,9 +23,10 @@ public class Ground : MonoBehaviour
     private bool _isDroppingBlock;
     private bool _isRaisingBlock;
     private bool _isMovingBlock;
-    private Vector3 _destination_drop;
-    private Vector3 _destination_raise;
-    private Vector3 _destination_move;
+    private bool _isIceBlockEffectEnabled;
+    private Vector3 _destinationDrop;
+    private Vector3 _destinationRaise;
+    private Vector3 _destinationMove;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +40,10 @@ public class Ground : MonoBehaviour
         _isDroppingBlock = false;
         _isRaisingBlock = false;
         _isMovingBlock = false;
-        _destination_drop = transform.position + new Vector3(0, -1, 0);
-        _destination_raise = transform.position - new Vector3(0, -1, 0);
-        _destination_move = transform.position;
+        _isIceBlockEffectEnabled = false;
+        _destinationDrop = transform.position + new Vector3(0, -1, 0);
+        _destinationRaise = transform.position - new Vector3(0, -1, 0);
+        _destinationMove = transform.position;
     }
 
     // Update is called once per frame
@@ -55,29 +61,31 @@ public class Ground : MonoBehaviour
 
         if (_isDroppingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destination_drop, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _destination_drop) <= 0.01f)
+            transform.position = Vector3.MoveTowards(transform.position, _destinationDrop, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destinationDrop) <= 0.01f)
             {
                 _isDroppingBlock = false;
-                transform.position = _destination_drop;
+                transform.position = _destinationDrop;
             }
         }
+
         if (_isRaisingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destination_raise, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _destination_raise) <= 0.01f)
+            transform.position = Vector3.MoveTowards(transform.position, _destinationRaise, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destinationRaise) <= 0.01f)
             {
                 _isRaisingBlock = false;
-                transform.position = _destination_raise;
+                transform.position = _destinationRaise;
             }
         }
+
         if (_isMovingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destination_move, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _destination_move) <= 0.01f)
+            transform.position = Vector3.MoveTowards(transform.position, _destinationMove, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, _destinationMove) <= 0.01f)
             {
                 _isMovingBlock = false;
-                transform.position = _destination_move;
+                transform.position = _destinationMove;
             }
         }
     }
@@ -88,32 +96,62 @@ public class Ground : MonoBehaviour
         {
             PaintSurface(false);
         }
-        var dir = ReturnDirection(other.gameObject, this.gameObject);
-        if ((_originalColour == Color.cyan) && other.gameObject.CompareTag("Player"))
-        {
-            if (dir != Vector3.negativeInfinity)
-            {
-                if (true)
-                {
-                    var pos   = transform.position + new Vector3(0, 0.5f, 0) ;
-                    if (!Physics.Raycast(pos, dir, maxDistance: 1))
-                    {
-                        
-                        _destination_move += dir;
-                        _isMovingBlock = true;
-                        // gameObject.transform.Translate(dir);
-                    }
-                }
-            }
-        }
+
+        IceBlockMovement(other);
         if (other.gameObject.CompareTag("RammingCreature"))
         {
-            Debug.Log("dsf");
             Destroy(gameObject);
         }
     }
 
-    public bool PaintSurface(bool applyPaintEffect=false)
+    private void IceBlockMovement(Collision other)
+    {
+        Vector3 dir = ReturnDirection(other.gameObject, gameObject);
+        bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
+                                  other.gameObject.CompareTag("Player") &&
+                                  dir != Vector3.negativeInfinity;
+        if (shouldMoveIceBlock)
+        {
+            Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
+            Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
+            if (!Physics.Raycast(pos, directionToPush, maxDistance: 1, 0))
+            {
+                _destinationMove += directionToPush;
+                _isMovingBlock = true;
+            }
+        }
+    }
+
+    private Vector3 GetDirectionToMoveIceBlock(Vector3 dir)
+    {
+        string direction = "VERTICAL";
+        if (Math.Abs(dir.x) > Math.Abs(dir.z))
+        {
+            direction = "HORIZONTAL";
+        }
+
+        switch (direction)
+        {
+            case "HORIZONTAL":
+                if (dir.x < 0)
+                {
+                    return Vector3.left;
+                }
+
+                return Vector3.right;
+            case "VERTICAL":
+                if (dir.z > 0)
+                {
+                    return Vector3.forward;
+                }
+
+                return Vector3.back;
+            default:
+                return new Vector3(0, 0, 0);
+        }
+    }
+
+    public bool PaintSurface(bool applyPaintEffect = false)
     {
         if (_levelManager.HasEnoughPaint() && !_isPainted)
         {
@@ -129,6 +167,7 @@ public class Ground : MonoBehaviour
                     {
                         RedFall();
                     }
+
                     break;
                 case "Green":
                     _material.color = Color.green;
@@ -137,23 +176,25 @@ public class Ground : MonoBehaviour
                     {
                         GreenExtend();
                     }
+
                     break;
-                //case "Black":
-                //    _material.color = Color.black;
-                //    _originalColour = _material.color;
-                //    Black???effect();
-                //    break;
-                case "Orange":
+                case "Yellow":
                     _material.color = Color.yellow;
                     _originalColour = _material.color;
                     if (applyPaintEffect)
                     {
                         YellowRise();
                     }
+
                     break;
                 case "Blue":
                     _material.color = Color.cyan;
                     _originalColour = _material.color;
+                    if (applyPaintEffect)
+                    {
+                        _isIceBlockEffectEnabled = true;
+                    }
+
                     break;
             }
 
@@ -162,22 +203,22 @@ public class Ground : MonoBehaviour
 
         return false;
     }
-    // move platform code (ice)
-    private Vector3 ReturnDirection( GameObject Object, GameObject ObjectHit )
-    {
 
+    // move platform code (ice)
+    private Vector3 ReturnDirection(GameObject Object, GameObject ObjectHit)
+    {
         Vector3 hitDirection = Vector3.negativeInfinity;
         RaycastHit RayHit;
-        Vector3 direction = ( Object.transform.position - ObjectHit.transform.position ).normalized;
-        Ray MyRay = new Ray( ObjectHit.transform.position, direction );
-         
-        if ( Physics.Raycast( MyRay, out RayHit ) ){
-                 
-            if ( RayHit.collider != null ){
-                 
+        Vector3 direction = (Object.transform.position - ObjectHit.transform.position).normalized;
+        Ray MyRay = new Ray(ObjectHit.transform.position, direction);
+
+        if (Physics.Raycast(MyRay, out RayHit))
+        {
+            if (RayHit.collider != null)
+            {
                 Vector3 MyNormal = RayHit.normal;
                 hitDirection = MyNormal;
-            }    
+            }
         }
 
         return hitDirection;
@@ -244,12 +285,11 @@ public class Ground : MonoBehaviour
     {
         _isDroppingBlock = true;
     }
-    
+
     private void YellowRise()
     {
         _isRaisingBlock = true;
     }
-
 
     private void OnMouseOver()
     {

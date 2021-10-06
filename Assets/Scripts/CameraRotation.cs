@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour
 {
+    public float speed;
+    public LevelManager LevelManager;
+    
     private Transform Player;
     private Vector3 distFromPlayer;
+    private Vector3 _initialClickPosition;
 
     void Start()
     {
@@ -15,6 +19,24 @@ public class CameraRotation : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = Player.position - distFromPlayer;
+        if (Input.GetMouseButtonDown(0))
+        {
+            _initialClickPosition = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            LevelManager.SetIsPanning(true);
+            Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
+            // Debug.Log(transform.position + " " + transform.position + new Vector3(distanceMoved.x, 0, distanceMoved.y));
+
+            transform.position += new Vector3(-distanceMoved.x * speed, 0, -distanceMoved.y * speed);
+            _initialClickPosition = Input.mousePosition;
+            return;
+        }
+
+        if (!LevelManager.IsPanning())
+        {
+            transform.position = Player.position - distFromPlayer;
+        }
     }
 }

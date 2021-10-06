@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float velocityIncreaseDamper;
     public float velocityDecreaseDamper;
 
+    public LevelManager LevelManager;
+
     private float _horizontalMovement;
     private float _verticalMovement;
     private bool _isHorizontalMovementPressed;
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
 
         if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
         {
+            LevelManager.SetIsPanning(false);
             Vector3 movDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movDirection), 0.5f);
         }

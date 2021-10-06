@@ -11,25 +11,28 @@ public class LevelManager : MonoBehaviour
     public bool dev_mode;
 
     private UpdateUI _updateUI;
+    private bool _isExitActive = false;
+
+    private bool _isPanning = false;
 
     // Start is called before the first frame update
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", 4); // Freezes Platform
-        paintQuantity.Add("Green", 10); // Growing Platform
-        paintQuantity.Add("Red", 20); // Drops Platform
+        paintQuantity.Add("Blue", 0); // Freezes Platform
+        paintQuantity.Add("Green", 0); // Growing Platform
+        paintQuantity.Add("Red", 0); // Drops Platform
         //paintQuantity.Add("Black", 30); 
-        paintQuantity.Add("Orange", 40); // Raises Platform
+        paintQuantity.Add("Yellow", 4); // Raises Platform
         if (dev_mode)
         {
             paintQuantity["Blue"] = 30;
             paintQuantity["Green"] = 30;
             paintQuantity["Red"] = 30;
-            paintQuantity["Orange"] = 30;
+            paintQuantity["Yellow"] = 30;
         }
 
-        currentSelectedColour = "Orange";
+        currentSelectedColour = "Yellow";
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
     }
 
@@ -50,14 +53,14 @@ public class LevelManager : MonoBehaviour
                     _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Green":
-                    currentSelectedColour = "Orange";
+                    currentSelectedColour = "Yellow";
                     _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 //case "Black":
-                //    currentSelectedColour = "Orange";
+                //    currentSelectedColour = "Yellow";
                 //    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                 //    break;
-                case "Orange":
+                case "Yellow":
                     currentSelectedColour = "Blue";
                     _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
@@ -65,19 +68,29 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SetIsPanning(bool isPanning)
+    {
+        _isPanning = isPanning;
+    }
+
+    public bool IsPanning()
+    {
+        return _isPanning;
+    }
+    
     public void IncreasePaint(String paintColour, int quantity)
     {
         int amount = quantity;
-        //if (paintColour == "Black")
-        //{
-        //    amount = 5;
-        //}
-        if (paintColour == "Orange")
-        {
-            amount = 20;
-        }
-
         paintQuantity[paintColour] += amount;
+        if (currentSelectedColour == paintColour)
+        {
+            _updateUI.SetPaint(paintQuantity[paintColour]);
+        }
+    }
+    public void DecreasePaint(String paintColour, int quantity)
+    {
+        int amount = quantity;
+        paintQuantity[paintColour] -= amount;
         if (currentSelectedColour == paintColour)
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
@@ -109,5 +122,20 @@ public class LevelManager : MonoBehaviour
     {
         string color = GetCurrentlySelectedPaint();
         return paintQuantity[color];
+    }
+    
+    public int GetPaintQuantity(string colour)
+    {
+        return paintQuantity[colour];
+    }
+
+    public bool IsExitActive()
+    {
+        return _isExitActive;
+    }
+    
+    public void SetExitActive(bool isActive)
+    {
+        _isExitActive = isActive;
     }
 }
