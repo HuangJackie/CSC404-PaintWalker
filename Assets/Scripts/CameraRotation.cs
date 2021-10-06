@@ -27,8 +27,6 @@ public class CameraRotation : MonoBehaviour
         {
             LevelManager.SetIsPanning(true);
             Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
-            // Debug.Log(transform.position + " " + transform.position + new Vector3(distanceMoved.x, 0, distanceMoved.y));
-
             transform.position += new Vector3(-distanceMoved.x * speed, 0, -distanceMoved.y * speed);
             _initialClickPosition = Input.mousePosition;
             return;

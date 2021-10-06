@@ -113,7 +113,6 @@ public class LevelManager : MonoBehaviour
 
     public void DecreaseCurrentSelectedPaint(int amount)
     {
-        Debug.Log("DECREASED: " + amount);
         paintQuantity[currentSelectedColour] -= amount;
         _updateUI.SetPaint(paintQuantity[currentSelectedColour]);
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
