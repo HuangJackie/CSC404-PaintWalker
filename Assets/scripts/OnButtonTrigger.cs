@@ -25,7 +25,6 @@ public class OnButtonTrigger : MonoBehaviour
 
     private bool _isMouseOver;
 
-    // Start is called before the first frame update
     void Start()
     {
         _material = GetComponentInChildren<Renderer>().material;
@@ -34,7 +33,6 @@ public class OnButtonTrigger : MonoBehaviour
         _updateUI = FindObjectOfType<UpdateUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
@@ -54,6 +52,7 @@ public class OnButtonTrigger : MonoBehaviour
             _originalColour = _material.color;
             _isPainted = true;
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+
             foreach (Collider hitCollider in hitColliders)
             {
                 hitCollider.SendMessage("TriggerButtton",
@@ -78,8 +77,9 @@ public class OnButtonTrigger : MonoBehaviour
     {
         if (!_isPainted)
         {
-            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 + " " + paintQuantity2 + " " +
-                                         paintColour2);
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
+                                  " " + paintQuantity2 + " " + paintColour2
+            );
             _material.color = new Color(0.98f, 1f, 0.45f);
             _isMouseOver = true;
         }

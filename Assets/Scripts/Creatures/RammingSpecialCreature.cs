@@ -76,18 +76,6 @@ public class RammingSpecialCreature : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        // bool shouldActivateSpecialCreature = !useMouseClick
-        //                                      && collision.gameObject.GetComponent<Collider>().CompareTag("Player")
-        //                                      && _levelManager.GetCurrentlySelectedPaint() == "Blue"
-        //                                      && _levelManager.HasEnoughPaint();
-        // if (shouldActivateSpecialCreature)
-        // {
-        //     _material.color = Color.green;
-        //     _originalColour = _material.color;
-        //     _levelManager.DecreaseCurrentSelectedPaint(3);
-        //     is_moving = true;
-        // }
-
         if (collision.gameObject.GetComponent<Ground>())
         {
             Destroy(collision.gameObject);
@@ -98,9 +86,8 @@ public class RammingSpecialCreature : MonoBehaviour
     {
         if (useMouseClick && !_isPainted)
         {
-            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 + " " +
-                                         paintQuantity2 +
-                                         " " + paintColour2);
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
+                                   " " + paintQuantity2 + " " + paintColour2);
             _material.color = new Color(0.98f, 1f, 0.45f);
             _isMouseOver = true;
         }

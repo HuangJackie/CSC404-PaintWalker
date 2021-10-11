@@ -13,18 +13,16 @@ public class LevelManager : MonoBehaviour
 
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
-
     private bool _isPanning = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         paintQuantity = new Dictionary<String, int>();
         paintQuantity.Add("Blue", 0); // Freezes Platform
         paintQuantity.Add("Green", 0); // Growing Platform
         paintQuantity.Add("Red", 0); // Drops Platform
-        //paintQuantity.Add("Black", 30); 
         paintQuantity.Add("Yellow", 4); // Raises Platform
+        
         if (dev_mode)
         {
             paintQuantity["Blue"] = 30;

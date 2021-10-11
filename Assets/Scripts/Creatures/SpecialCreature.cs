@@ -21,14 +21,12 @@ public class SpecialCreature : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Collider>().CompareTag("Player"))
         {
-            if (_levelManager.GetCurrentlySelectedPaint() == "Blue")
+            bool bluePaintSelected = _levelManager.GetCurrentlySelectedPaint() == "Blue";
+            if (bluePaintSelected && _levelManager.HasEnoughPaint())
             {
-                if (_levelManager.HasEnoughPaint())
-                {
-                    _material.color = Color.blue;
-                    _originalColour = _material.color;
-                    _levelManager.DecreaseCurrentSelectedPaint(2);
-                }
+                _material.color = Color.blue;
+                _originalColour = _material.color;
+                _levelManager.DecreaseCurrentSelectedPaint(2);
             }
         }
     }
