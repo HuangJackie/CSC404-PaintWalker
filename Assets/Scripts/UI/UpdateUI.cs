@@ -21,7 +21,7 @@ public class UpdateUI : MonoBehaviour
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
 
-        ChangePaint(Paints.ORANGE_PAINT, 3);
+        ChangePaint(Paints.YELLOW_PAINT, 3);
     }
 
     public void SetInfoText(string text, bool preventOverride = false)
@@ -56,8 +56,8 @@ public class UpdateUI : MonoBehaviour
             case Paints.RED_PAINT:
                 paintColor = Paints.red;
                 break;
-            case Paints.ORANGE_PAINT:
-                paintColor = Paints.orange;
+            case Paints.YELLOW_PAINT:
+                paintColor = Paints.yellow;
                 break;
             case Paints.BLUE_PAINT:
                 paintColor = Paints.blue;

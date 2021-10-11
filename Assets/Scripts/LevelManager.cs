@@ -32,8 +32,8 @@ public class LevelManager : MonoBehaviour
         }
 
         currentSelectedColour = "Yellow";
-        currentSelectedColourClass = Paints.orange;
-        _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
+        currentSelectedColourClass = Paints.yellow;
+        _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
     }
 
     // Update is called once per frame
@@ -56,8 +56,8 @@ public class LevelManager : MonoBehaviour
                     break;
                 case "Green":
                     currentSelectedColour = "Yellow";
-                    currentSelectedColourClass = Paints.orange;
-                    _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
+                    currentSelectedColourClass = Paints.yellow;
+                    _updateUI.ChangePaint(Paints.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Yellow":
                     currentSelectedColour = "Blue";
