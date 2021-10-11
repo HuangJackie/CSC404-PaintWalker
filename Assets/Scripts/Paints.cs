@@ -16,5 +16,5 @@ public class Paints : MonoBehaviour
     public static Color32 green = new Color32(180, 250, 82, 100);
     public static Color32 orange = new Color32(255, 243, 107, 100);
     public static Color32 blue = new Color32(82, 250, 239, 100);
-    public static Color32 black = new Color32(0, 0, 0, 100);
+    //public static Color32 black = new Color32(0, 0, 0, 100);
 }

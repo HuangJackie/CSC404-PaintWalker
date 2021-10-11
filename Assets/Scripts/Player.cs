@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
         {
-            Debug.Log(hit.distance);
+            //Debug.Log(hit.distance);
             if (hit.transform.gameObject.tag == "SpecialCreature" && hit.distance < 0.5f)
             {
                 _targetLocation = transform.position;
@@ -162,14 +162,14 @@ public class Player : MonoBehaviour
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
-            if (ground._isPainted)
+            if (ground.isPaintedByBrush || ground.isPaintedByFeet)
             {
                 // Painted surface, can move.
                 return true;
             }
 
             // Try to paint.
-            return ground.PaintSurface(); // If false then the floor was not painted.
+            ground.PaintSurface(false); // If false then the floor was not painted.
         }
 
         return false;

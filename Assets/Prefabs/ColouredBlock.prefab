@@ -126,8 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 0
-  _isPainted: 1
+  speed: 1
+  isPaintedByFeet: 1
+  isPaintedByBrush: 0
 --- !u!54 &-612309733342692072
 Rigidbody:
   m_ObjectHideFlags: 0
