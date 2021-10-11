@@ -854,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanSpecial (1)
+      value: SprayCanBlueNearExit
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -3219,7 +3219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanRed
+      value: SprayCanRedBehindWall
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -6767,7 +6767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanSpecial
+      value: SprayCanRed
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -12930,7 +12930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanRed
+      value: SprayCanBlue
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
