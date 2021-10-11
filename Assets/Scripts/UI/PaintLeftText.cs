@@ -15,10 +15,6 @@ public class PaintLeftText : MonoBehaviour
 
     public void SetPaint(int paintLeft)
     {
-        int maxPaint = 25;
-        //Int display
-        paintLeftText.text = String.Format("{0} / {1}", paintLeft.ToString(), maxPaint.ToString());
-        //Percentage display
-        //paintLeftText.text = Math.Floor((paintLeft + 0f) / maxPaint * 100f) + "%";
+        paintLeftText.text = String.Format("{0}", paintLeft.ToString());
     }
 }

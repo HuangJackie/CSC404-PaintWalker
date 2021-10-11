@@ -249,7 +249,7 @@ public class Ground : MonoBehaviour
 
                     break;
                 case "Yellow":
-                    _material.color = Paints.orange;
+                    _material.color = Paints.yellow;
                     _paintedColour = _material.color;
                     if (paintWithBrush)
                     {
@@ -299,11 +299,11 @@ public class Ground : MonoBehaviour
             // Does nothing for now. Staying here in case we implement erase in the future.
             Debug.Log("reverting green");
         }
-        else if(colorToRevert == Paints.orange)
+        else if(colorToRevert == Paints.yellow)
         {
             _isRevertingBlock = true;
             StartCoroutine(moveBlockToDestination(_destinationNeutral));
-            Debug.Log("reverting orange");
+            Debug.Log("reverting yellow");
         }
         else if(colorToRevert == Paints.blue)
         {
