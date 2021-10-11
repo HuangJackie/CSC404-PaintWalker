@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     private Dictionary<String, int> paintQuantity;
     private String currentSelectedColour;
+    private Color currentSelectedColourClass;
     private bool _isColourSwitched;
     public bool dev_mode;
 
@@ -33,6 +34,7 @@ public class LevelManager : MonoBehaviour
         }
 
         currentSelectedColour = "Yellow";
+        currentSelectedColourClass = Paints.orange;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets orange to 3/10
     }
 
@@ -46,18 +48,22 @@ public class LevelManager : MonoBehaviour
             {
                 case "Blue":
                     currentSelectedColour = "Red";
+                    currentSelectedColourClass = Paints.red;
                     _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Red":
                     currentSelectedColour = "Green";
+                    currentSelectedColourClass = Paints.green;
                     _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Green":
                     currentSelectedColour = "Yellow";
+                    currentSelectedColourClass = Paints.orange;
                     _updateUI.ChangePaint(Paints.ORANGE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
                 case "Yellow":
                     currentSelectedColour = "Blue";
+                    currentSelectedColourClass = Paints.blue;
                     _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
                     break;
             }
@@ -140,6 +146,11 @@ public class LevelManager : MonoBehaviour
     public string GetCurrentlySelectedPaint()
     {
         return currentSelectedColour;
+    }
+
+    public Color GetCurrentlySelectedPaintClass()
+    {
+        return currentSelectedColourClass;
     }
 
     public void SetCurrentlySelectedPaint(string color)

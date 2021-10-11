@@ -140,9 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2061307567387535134, guid: 0832071387920494682722dba5351b20, type: 3}
-  speed: 0
-  _isPainted: 0
+  player: {fileID: 0}
+  speed: 1
+  isPaintedByFeet: 0
+  isPaintedByBrush: 0
 --- !u!54 &-7444473154385524511
 Rigidbody:
   m_ObjectHideFlags: 0
