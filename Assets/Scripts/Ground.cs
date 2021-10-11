@@ -34,10 +34,8 @@ public class Ground : MonoBehaviour
     private Vector3 _destinationRaise;
     private Vector3 _destinationMove;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _paintedColour = _originalColour;
@@ -58,10 +56,12 @@ public class Ground : MonoBehaviour
         _destinationMove = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float playerBlockVertialDistance = Mathf.Abs(_player.gameObject.transform.position.y - gameObject.transform.position.y);
+        float playerBlockVertialDistance = Mathf.Abs(
+            _player.gameObject.transform.position.y - gameObject.transform.position.y
+        );
+
         if (playerBlockVertialDistance < 1.5f)
         {
             _isOnSameLevelAsPlayer = true;
@@ -69,7 +69,6 @@ public class Ground : MonoBehaviour
         {
             _isOnSameLevelAsPlayer = false;
         }
-
 
         if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
         {
@@ -84,7 +83,9 @@ public class Ground : MonoBehaviour
         if (_isDroppingBlock)
         {
             Debug.Log("dropping");
-            transform.position = Vector3.MoveTowards(transform.position, _destinationDrop, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position, _destinationDrop, speed * Time.deltaTime
+            );
             if (Vector3.Distance(transform.position, _destinationDrop) <= 0.01f)
             {
                 _isDroppingBlock = false;
@@ -92,11 +93,12 @@ public class Ground : MonoBehaviour
             }
         }
 
-
         if (_isRaisingBlock)
         {
             Debug.Log("raising");
-            transform.position = Vector3.MoveTowards(transform.position, _destinationRaise, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position, _destinationRaise, speed * Time.deltaTime
+            );
             if (Vector3.Distance(transform.position, _destinationRaise) <= 0.01f)
             {
                 _isRaisingBlock = false;
@@ -106,7 +108,9 @@ public class Ground : MonoBehaviour
 
         if (_isMovingBlock)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _destinationMove, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(
+                transform.position, _destinationMove, speed * Time.deltaTime
+            );
             if (Vector3.Distance(transform.position, _destinationMove) <= 0.01f)
             {
                 _isMovingBlock = false;
@@ -121,18 +125,23 @@ public class Ground : MonoBehaviour
         {
             if (_destination == _destinationNeutral)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _destination, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(
+                    transform.position, _destination, speed * Time.deltaTime
+                );
                 if (Vector3.Distance(transform.position, _destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
                     yield break;
                 }
             }
+
             if (!_isRevertingBlock)
             {
-
-                transform.position = Vector3.Lerp(transform.position, _destination, speed * Time.deltaTime);
+                transform.position = Vector3.Lerp(
+                    transform.position, _destination, speed * Time.deltaTime
+                );
             }
+
             yield return null;
         }
     }
@@ -158,6 +167,7 @@ public class Ground : MonoBehaviour
                                   _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
                                   dir != Vector3.negativeInfinity;
+        
         if (shouldMoveIceBlock)
         {
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
@@ -185,15 +195,15 @@ public class Ground : MonoBehaviour
                 {
                     return Vector3.left;
                 }
-
                 return Vector3.right;
+
             case "VERTICAL":
                 if (dir.z > 0)
                 {
                     return Vector3.forward;
                 }
-
                 return Vector3.back;
+
             default:
                 return new Vector3(0, 0, 0);
         }
@@ -207,12 +217,15 @@ public class Ground : MonoBehaviour
             {
                 return false;
             }
+
             _levelManager.DecreaseCurrentSelectedPaint(1);
             string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
+
             if (_paintedColour != _originalColour && this.isPaintedByBrush)
             {
                 RevertEffect(this._paintedColour, currentlySelectedPaint);
             }
+
             switch (currentlySelectedPaint)
             {
                 case "Red":
@@ -257,6 +270,7 @@ public class Ground : MonoBehaviour
 
                     break;
             }
+
             if (!paintWithBrush)
             {
                 isPaintedByFeet = true;
@@ -282,8 +296,8 @@ public class Ground : MonoBehaviour
         }
         else if (colorToRevert == Paints.green)
         {
+            // Does nothing for now. Staying here in case we implement erase in the future.
             Debug.Log("reverting green");
-            //Does nothing for now. Staying here in case we implement erase in the future.
         }
         else if(colorToRevert == Paints.orange)
         {
@@ -300,33 +314,19 @@ public class Ground : MonoBehaviour
         {
             Debug.LogError("color to revert from is not recognized");
         }
-        //if (newColor == "Green")
-        //    StartCoroutine
-        //{
-        //    print("new");
-        //    while (true)
-        //    {
-        //        if (!_isRevertingBlock)
-        //        {
-        //            GreenExtend();
-        //            yield break;
-        //        }
-        //        yield return null;
-        //    }
-        //}
     }
 
     IEnumerator ExtendGreenAfterRevert()
     {
         while (true)
+        {
+            if (!_isRevertingBlock)
             {
-                if (!_isRevertingBlock)
-                {
-                    GreenExtend();
-                    yield break;
-                }
-                yield return null;
+                GreenExtend();
+                yield break;
             }
+            yield return null;
+        }
     }
 
     // move platform code (ice)
@@ -337,22 +337,18 @@ public class Ground : MonoBehaviour
         Vector3 direction = (Object.transform.position - ObjectHit.transform.position).normalized;
         Ray MyRay = new Ray(ObjectHit.transform.position, direction);
 
-        if (Physics.Raycast(MyRay, out RayHit))
+        if (Physics.Raycast(MyRay, out RayHit) && RayHit.collider != null)
         {
-            if (RayHit.collider != null)
-            {
-                Vector3 MyNormal = RayHit.normal;
-                hitDirection = MyNormal;
-            }
+            Vector3 MyNormal = RayHit.normal;
+            hitDirection = MyNormal;
         }
 
         return hitDirection;
     }
-    // move platform code (ice)
 
     private void GreenExtend()
     {
-        //extends platforms in wasd directions by 1 block
+        // Extends platforms in wasd directions by 1 block
         Vector3 position = transform.position;
         var growth_block = Resources.Load(path: "NonColouredBlock");
         if (CanDown(position))
@@ -409,8 +405,9 @@ public class Ground : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //Note: the tint should be the same color as the currently selected paint
-        // Also, when block is in transit (e.g. moving), the highlight should disappear as it is not selectable
+        // Note: the tint should be the same color as the currently selected paint
+        // Also, when block is in transit (e.g. moving), the highlight should disappear
+        // as it is not selectable
         _material.color = new Color(0.98f, 1f, 0.45f);
         _isMouseOver = true;
     }

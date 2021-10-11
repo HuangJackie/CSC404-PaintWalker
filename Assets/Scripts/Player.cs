@@ -26,17 +26,12 @@ public class Player : MonoBehaviour
 
     private bool _hasWaitedTurn;
 
-    // Start is called before the first frame update
     void Start()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody>();
-        // _updateUI = FindObjectOfType()<UpdateUI>();
-
         _targetLocation = transform.position;
-        // _isMoving = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         _horizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -45,11 +40,6 @@ public class Player : MonoBehaviour
         _isVerticalMovementPressed = Input.GetButton("Vertical");
 
         RigidGridMove();
-    }
-
-    private void FixedUpdate()
-    {
-        // FluidMove();
     }
 
     private void RigidGridMove()
@@ -64,7 +54,10 @@ public class Player : MonoBehaviour
                 _targetLocation = transform.position;
             }
         }
-        Vector3 newPosition = Vector3.MoveTowards(transform.position, _targetLocation, speed * Time.deltaTime);
+
+        Vector3 newPosition = Vector3.MoveTowards(
+            transform.position, _targetLocation, speed * Time.deltaTime
+        );
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
             newPosition = _targetLocation;
@@ -77,7 +70,9 @@ public class Player : MonoBehaviour
         {
             LevelManager.SetIsPanning(false);
             Vector3 movDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movDirection), 0.5f);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation, Quaternion.LookRotation(movDirection), 0.5f
+            );
         }
     }
 
@@ -111,36 +106,37 @@ public class Player : MonoBehaviour
     {
         RaycastHit hitInfo;
         LayerMask mask = LayerMask.GetMask("Default");
+
         switch (pressedButton)
         {
             case "Up":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1,
-                    mask))
+                if (!Physics.Raycast(currentTransformPosition +
+                    new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
-
                 return ValidateFloorMove(hitInfo);
 
             case "Down":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1,
-                    mask))
+                if (!Physics.Raycast(currentTransformPosition +
+                    new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
-
                 return ValidateFloorMove(hitInfo);
+
             case "Left":
 
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1,
-                    mask))
+                if (!Physics.Raycast(currentTransformPosition +
+                    new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
                 return ValidateFloorMove(hitInfo);
+
             case "Right":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1,
-                    mask))
+                if (!Physics.Raycast(currentTransformPosition +
+                    new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
@@ -153,9 +149,9 @@ public class Player : MonoBehaviour
 
     private bool ValidateFloorMove(RaycastHit hitInfo)
     {
+        // If going to hit a wall, don't move.
         if (hitInfo.transform.position.y > 1)
         {
-            // Going to hit a wall, don't move.
             return false;
         }
 

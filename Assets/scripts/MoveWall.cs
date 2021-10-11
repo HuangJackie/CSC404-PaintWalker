@@ -6,14 +6,7 @@ public class MoveWall : MonoBehaviour
 {
     public bool operate = false;
     private float end_y = -0.5f;
-    // Start is called before the first frame update
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (operate == true)

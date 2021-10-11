@@ -810,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4104c32bfa35e8d4e8b7f851f7c8d452, type: 2}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -854,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanSpecial (1)
+      value: SprayCanBlueNearExit
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -3175,7 +3175,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8f9041ca9797c4f4d962fbd2889cce2f, type: 2}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3219,7 +3219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanRed
+      value: SprayCanRedBehindWall
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -4243,100 +4243,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7678c006a710d5a44abab66cfff1a5fa, type: 3}
---- !u!1001 &618636540
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 931028512}
-    m_Modifications:
-    - target: {fileID: 1334181637083021242, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3196853145848014458, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4453572964775719162, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5d6cd76320321974eb3ec50316cf026c, type: 2}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8535535
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.35355338
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.35355338
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.1464466
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_Name
-      value: SprayCanBlack
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7513970122348307586, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: color
-      value: Black
-      objectReference: {fileID: 0}
-    - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 1088049626}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
---- !u!4 &618636541 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
-  m_PrefabInstance: {fileID: 618636540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &649026391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6617,7 +6523,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7144756849984555225}
-  - {fileID: 618636541}
   - {fileID: 1633119463}
   - {fileID: 1496498907}
   - {fileID: 941355103}
@@ -6818,7 +6723,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8f9041ca9797c4f4d962fbd2889cce2f, type: 2}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6862,7 +6767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanSpecial
+      value: SprayCanRed
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -12115,7 +12020,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4cf16215e03dcfb4ea2d2df8019f6bc2, type: 2}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12981,7 +12886,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4104c32bfa35e8d4e8b7f851f7c8d452, type: 2}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13025,7 +12930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: SprayCanRed
+      value: SprayCanBlue
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
