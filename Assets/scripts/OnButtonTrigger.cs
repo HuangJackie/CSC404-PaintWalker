@@ -27,6 +27,7 @@ public class OnButtonTrigger : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _isMouseOver = false;
