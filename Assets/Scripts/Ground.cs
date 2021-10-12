@@ -109,19 +109,6 @@ public class Ground : MonoBehaviour
                 transform.position = _destinationRaise;
             }
         }
-
-        // if (_isMovingBlock)
-        // {
-        //     transform.position = Vector3.MoveTowards(
-        //         transform.position, _destinationMove, speed * Time.deltaTime
-        //     );
-        //     if (Vector3.Distance(transform.position, _destinationMove) <= 0.01f)
-        //     {
-        //         _isMovingBlock = false;
-        //         transform.position = _destinationMove;
-        //         ReinitializeIceBlockMovement();
-        //     }
-        // }
     }
 
     private bool ReinitializeIceBlockMovement(bool isPushed)
