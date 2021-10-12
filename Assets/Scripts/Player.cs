@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     // Rigid Grid Movement
     public float speed;
     private Vector3 _targetLocation;
+    private Vector3 _prevLocation;
 
     private UpdateUI _updateUI;
     private Transform _transform;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     {
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _targetLocation = transform.position;
+        _prevLocation = _targetLocation;
     }
 
     void Update()
@@ -42,17 +44,16 @@ public class Player : MonoBehaviour
         RigidGridMove();
     }
 
+
     private void RigidGridMove()
     {
         //stops player from stuck on wall. Left here in case needed in the future.
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1)
+            && hit.distance < 0.5f
+            && hit.transform.gameObject.CompareTag("SpecialCreature"))
         {
-            //Debug.Log(hit.distance);
-            if (hit.transform.gameObject.tag == "SpecialCreature" && hit.distance < 0.5f)
-            {
-                _targetLocation = transform.position;
-            }
+            _targetLocation = transform.position;
         }
 
         Vector3 newPosition = Vector3.MoveTowards(
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
             return;
         }
 
+        _prevLocation = currentTransformPosition;
+
         switch (pressedButton)
         {
             case "Up":
@@ -111,51 +114,65 @@ public class Player : MonoBehaviour
         {
             case "Up":
                 if (!Physics.Raycast(currentTransformPosition +
-                    new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
+                                     new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
-                return ValidateFloorMove(hitInfo);
+
+                return ValidateFloorMove(hitInfo, Vector3.forward);
 
             case "Down":
                 if (!Physics.Raycast(currentTransformPosition +
-                    new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
+                                     new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
-                return ValidateFloorMove(hitInfo);
+
+                return ValidateFloorMove(hitInfo, Vector3.back);
 
             case "Left":
 
                 if (!Physics.Raycast(currentTransformPosition +
-                    new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
+                                     new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
-                return ValidateFloorMove(hitInfo);
+
+
+                return ValidateFloorMove(hitInfo, Vector3.left);
 
             case "Right":
                 if (!Physics.Raycast(currentTransformPosition +
-                    new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
+                                     new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
 
-                return ValidateFloorMove(hitInfo);
+                return ValidateFloorMove(hitInfo, Vector3.right);
         }
 
         return false;
     }
 
-    private bool ValidateFloorMove(RaycastHit hitInfo)
+    private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction)
     {
+        if (Physics.Raycast(transform.position, direction, out var hit, 1f)
+            && hit.transform.gameObject.CompareTag("Ground")
+            && hit.collider.gameObject.TryGetComponent(out Ground ground)
+            && ((ground.IsIceBlock() && !ground.CanIceBlockSlide(gameObject)) // There is an ice block that can't be moved, don't move.
+                || !ground.IsIceBlock()) // There is a wall in front, don't move.
+        )
+        {
+            return false;
+        }
+
         // If going to hit a wall, don't move.
         if (hitInfo.transform.position.y > 1)
         {
             return false;
         }
 
-        Ground ground;
+        // Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
             if (ground.isPaintedByBrush || ground.isPaintedByFeet)
@@ -167,6 +184,7 @@ public class Player : MonoBehaviour
             // Try to paint.
             ground.PaintSurface(false); // If false then the floor was not painted.
         }
+
 
         return false;
     }

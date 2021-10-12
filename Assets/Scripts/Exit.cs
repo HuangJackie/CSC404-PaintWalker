@@ -7,6 +7,12 @@ public class Exit : MonoBehaviour
     private UpdateUI _updateUI;
     public LevelManager manager;
     
+    // Start is called before the first frame update
+    void Start()
+    {
+        _updateUI = FindObjectOfType<UpdateUI>();
+    }
+    
     private void OnTriggerEnter(Collider collision)
     {
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
