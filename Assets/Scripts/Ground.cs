@@ -10,7 +10,7 @@ public class Ground : MonoBehaviour
 {
     public GameObject player;
     public float speed;
-    public string test;
+    public string test; // for debugging by giving a block a specific name
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
