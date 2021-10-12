@@ -132,13 +132,10 @@ public class Ground : MonoBehaviour
         {
             _destinationMove += Vector3.down;
             _isMovingBlock = true;
-            Debug.Log("Below");
         }
         // Check if there is a block in front.
         else if (!Physics.Raycast(pos, _directionToSlideTo, 0.7f))
         {
-            Debug.Log("Front");
-
             _destinationMove += _directionToSlideTo;
             _isMovingBlock = true;
         }

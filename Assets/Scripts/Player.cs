@@ -157,10 +157,7 @@ public class Player : MonoBehaviour
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction)
     {
         if (Physics.Raycast(transform.position, direction, out var hit, 1f)
-            && hit.transform.gameObject.CompareTag("Ground")
-            && hit.collider.gameObject.TryGetComponent(out Ground ground)
-            && ((ground.IsIceBlock() && !ground.CanIceBlockSlide(gameObject)) // There is an ice block that can't be moved, don't move.
-                || !ground.IsIceBlock()) // There is a wall in front, don't move.
+            && IsBlockInFrontPushable(hit)
         )
         {
             return false;
@@ -172,7 +169,7 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        // Ground ground;
+        Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
             if (ground.isPaintedByBrush || ground.isPaintedByFeet)
@@ -187,6 +184,15 @@ public class Player : MonoBehaviour
 
 
         return false;
+    }
+
+    private bool IsBlockInFrontPushable(RaycastHit hit)
+    {
+        return hit.transform.gameObject.CompareTag("Ground")
+               && hit.collider.gameObject.TryGetComponent(out Ground ground)
+               && ((ground.IsIceBlock() &&
+                    !ground.CanIceBlockSlide(gameObject)) // There is an ice block that can't be moved, don't move.
+                   || !ground.IsIceBlock()); // There is a wall in front, don't move.
     }
 
     private string GetCurrentlyPressedDirection()
