@@ -10,6 +10,7 @@ public class Ground : MonoBehaviour
 {
     public GameObject player;
     public float speed;
+    public string test; // for debugging by giving a block a specific name
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
@@ -29,6 +30,7 @@ public class Ground : MonoBehaviour
     private bool _isMovingBlock;
     private bool _isIceBlockEffectEnabled;
     private bool _isOnSameLevelAsPlayer;
+    private Vector3 _directionToSlideTo;
     private Vector3 _destinationDrop;
     private Vector3 _destinationNeutral;
     private Vector3 _destinationRaise;
@@ -51,9 +53,10 @@ public class Ground : MonoBehaviour
         _isMovingBlock = false;
         _isIceBlockEffectEnabled = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
-        _destinationNeutral = transform.position; 
+        _destinationNeutral = transform.position;
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
         _destinationMove = transform.position;
+        _directionToSlideTo = Vector3.zero;
     }
 
     void Update()
@@ -65,7 +68,8 @@ public class Ground : MonoBehaviour
         if (playerBlockVertialDistance < 1.5f)
         {
             _isOnSameLevelAsPlayer = true;
-        } else
+        }
+        else
         {
             _isOnSameLevelAsPlayer = false;
         }
@@ -115,7 +119,31 @@ public class Ground : MonoBehaviour
             {
                 _isMovingBlock = false;
                 transform.position = _destinationMove;
+                ReinitializeIceBlockMovement();
             }
+        }
+    }
+
+    private void ReinitializeIceBlockMovement()
+    {
+        // Check if there is a block below.
+        Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
+        if (!Physics.Raycast(pos, Vector3.down, 0.7f))
+        {
+            _destinationMove += Vector3.down;
+            _isMovingBlock = true;
+        }
+        // Check if there is a block in front.
+        else if (!Physics.Raycast(pos, _directionToSlideTo, 0.7f))
+        {
+            _destinationMove += _directionToSlideTo;
+            _isMovingBlock = true;
+        }
+
+        if (pos.y < -10 || pos.z > 30 || pos.z < -10 || pos.x > 20 || pos.x < -30)
+        {
+            // Block out of bounds so destroy.
+            Destroy(gameObject);
         }
     }
 
@@ -160,6 +188,17 @@ public class Ground : MonoBehaviour
         }
     }
 
+    public bool CanIceBlockSlide(GameObject player)
+    {
+        Vector3 dir = ReturnDirection(player, gameObject);
+        Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
+        Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
+        return _isIceBlockEffectEnabled &&
+               _isOnSameLevelAsPlayer &&
+               dir != Vector3.negativeInfinity &&
+               !Physics.Raycast(pos, directionToPush, 0.7f);
+    }
+
     private void IceBlockMovement(Collision other)
     {
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
@@ -167,14 +206,15 @@ public class Ground : MonoBehaviour
                                   _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
                                   dir != Vector3.negativeInfinity;
-        
+
         if (shouldMoveIceBlock)
         {
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
-            if (!Physics.Raycast(pos, directionToPush, maxDistance: 1, 0))
+            if (!Physics.Raycast(pos, directionToPush, 0.7f))
             {
                 _destinationMove += directionToPush;
+                _directionToSlideTo = directionToPush;
                 _isMovingBlock = true;
             }
         }
@@ -195,6 +235,7 @@ public class Ground : MonoBehaviour
                 {
                     return Vector3.left;
                 }
+
                 return Vector3.right;
 
             case "VERTICAL":
@@ -202,6 +243,7 @@ public class Ground : MonoBehaviour
                 {
                     return Vector3.forward;
                 }
+
                 return Vector3.back;
 
             default:
@@ -266,6 +308,7 @@ public class Ground : MonoBehaviour
                     {
                         Debug.Log("effect triggered");
                         _isIceBlockEffectEnabled = true;
+                        ReinitializeIceBlockMovement();
                     }
 
                     break;
@@ -288,7 +331,7 @@ public class Ground : MonoBehaviour
 
     private void RevertEffect(Color colorToRevert, String newColor)
     {
-        if (colorToRevert == Paints.red)
+        if (colorToRevert == Paints.red && newColor != "Blue")
         {
             _isRevertingBlock = true;
             StartCoroutine(moveBlockToDestination(_destinationNeutral));
@@ -299,16 +342,17 @@ public class Ground : MonoBehaviour
             // Does nothing for now. Staying here in case we implement erase in the future.
             Debug.Log("reverting green");
         }
-        else if(colorToRevert == Paints.yellow)
+        else if (colorToRevert == Paints.yellow && newColor != "Blue")
         {
             _isRevertingBlock = true;
             StartCoroutine(moveBlockToDestination(_destinationNeutral));
             Debug.Log("reverting yellow");
         }
-        else if(colorToRevert == Paints.blue)
+        else if (colorToRevert == Paints.blue)
         {
-            //Does nothing for now. Staying here in case we implement erase in the future.
+            //Make the block not pushable.
             Debug.Log("reverting blue");
+            _isIceBlockEffectEnabled = false;
         }
         else
         {
@@ -325,6 +369,7 @@ public class Ground : MonoBehaviour
                 GreenExtend();
                 yield break;
             }
+
             yield return null;
         }
     }
@@ -416,5 +461,10 @@ public class Ground : MonoBehaviour
     {
         _material.color = _paintedColour;
         _isMouseOver = false;
+    }
+
+    public bool IsIceBlock()
+    {
+        return _isIceBlockEffectEnabled;
     }
 }
