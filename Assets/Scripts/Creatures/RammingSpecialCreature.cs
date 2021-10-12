@@ -36,6 +36,7 @@ public class RammingSpecialCreature : MonoBehaviour
         _material = GetComponentInChildren<Renderer>().material;
         _originalColour = _material.color;
         _updateUI = FindObjectOfType<UpdateUI>();
+        player = GameObject.FindWithTag("Player");
     }
 
     void Update()

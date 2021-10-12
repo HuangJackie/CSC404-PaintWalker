@@ -42,7 +42,8 @@ public class Ground : MonoBehaviour
         _originalColour = _material.color;
         _paintedColour = _originalColour;
         _levelManager = FindObjectOfType<LevelManager>();
-        _player = FindObjectOfType<Player>();
+        player = GameObject.FindWithTag("Player");
+        _player = player.GetComponent<Player>();
 
         _isMouseOver = false;
 

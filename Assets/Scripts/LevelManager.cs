@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     private bool _isColourSwitched;
     public bool dev_mode;
 
+    private PaintBrush playerPaintBrush;
+    private PaintBottle playerPaintBottle;
+
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
     private bool _isPanning = false;
@@ -34,6 +37,9 @@ public class LevelManager : MonoBehaviour
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = Paints.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
+
+        playerPaintBrush = FindObjectOfType<PaintBrush>();
+        playerPaintBottle = FindObjectOfType<PaintBottle>();
     }
 
     // Update is called once per frame
@@ -47,22 +53,37 @@ public class LevelManager : MonoBehaviour
                 case "Blue":
                     currentSelectedColour = "Red";
                     currentSelectedColourClass = Paints.red;
+
                     _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(Paints.red);
+                    playerPaintBottle.SetColor(Paints.red);
                     break;
+
                 case "Red":
                     currentSelectedColour = "Green";
                     currentSelectedColourClass = Paints.green;
+
                     _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(Paints.green);
+                    playerPaintBottle.SetColor(Paints.green);
                     break;
+
                 case "Green":
                     currentSelectedColour = "Yellow";
                     currentSelectedColourClass = Paints.yellow;
+
                     _updateUI.ChangePaint(Paints.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(Paints.yellow);
+                    playerPaintBottle.SetColor(Paints.yellow);
                     break;
+
                 case "Yellow":
                     currentSelectedColour = "Blue";
                     currentSelectedColourClass = Paints.blue;
+
                     _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(Paints.blue);
+                    playerPaintBottle.SetColor(Paints.blue);
                     break;
             }
         }
@@ -138,7 +159,7 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateNoPaintLeftUI()
     {
-        _updateUI.SetInfoText("No Paint Left :(", true);
+        _updateUI.SetInfoText("No Paint Left", true);
     }
 
     public string GetCurrentlySelectedPaint()
