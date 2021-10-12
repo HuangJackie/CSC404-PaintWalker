@@ -110,53 +110,81 @@ public class Ground : MonoBehaviour
             }
         }
 
-        if (_isMovingBlock)
-        {
-            transform.position = Vector3.MoveTowards(
-                transform.position, _destinationMove, speed * Time.deltaTime
-            );
-            if (Vector3.Distance(transform.position, _destinationMove) <= 0.01f)
-            {
-                _isMovingBlock = false;
-                transform.position = _destinationMove;
-                ReinitializeIceBlockMovement();
-            }
-        }
+        // if (_isMovingBlock)
+        // {
+        //     transform.position = Vector3.MoveTowards(
+        //         transform.position, _destinationMove, speed * Time.deltaTime
+        //     );
+        //     if (Vector3.Distance(transform.position, _destinationMove) <= 0.01f)
+        //     {
+        //         _isMovingBlock = false;
+        //         transform.position = _destinationMove;
+        //         ReinitializeIceBlockMovement();
+        //     }
+        // }
     }
 
-    private void ReinitializeIceBlockMovement()
+    private bool ReinitializeIceBlockMovement(bool isPushed)
     {
+        bool canMove = false;
         // Check if there is a block below.
         Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
         if (!Physics.Raycast(pos, Vector3.down, 0.7f))
         {
             _destinationMove += Vector3.down;
-            _isMovingBlock = true;
+            canMove = true; // _isMovingBlock = true;
         }
         // Check if there is a block in front.
-        else if (!Physics.Raycast(pos, _directionToSlideTo, 0.7f))
+        else if (isPushed && !Physics.Raycast(pos, _directionToSlideTo, 0.7f))
         {
             _destinationMove += _directionToSlideTo;
-            _isMovingBlock = true;
+            canMove = true;
+            // _isMovingBlock = true;
         }
 
         if (pos.y < -10 || pos.z > 30 || pos.z < -10 || pos.x > 20 || pos.x < -30)
         {
-            // Block out of bounds so destroy.
-            Destroy(gameObject);
+            // Block out of bounds so set inactive.
+            canMove = false;
+            gameObject.SetActive(false);
         }
+
+        return canMove;
     }
 
-    IEnumerator moveBlockToDestination(Vector3 _destination)
+    IEnumerator MoveIceBlockToDestination(bool isPushed)
     {
-        while (Vector3.Distance(transform.position, _destination) > 0.01f)
+        bool stillMoving = true;
+        while (stillMoving)
         {
-            if (_destination == _destinationNeutral)
+            float distance = Vector3.Distance(transform.position, _destinationMove);
+            while (distance > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(
-                    transform.position, _destination, speed * Time.deltaTime
+                    transform.position, _destinationMove, speed * 2 * Time.deltaTime
                 );
-                if (Vector3.Distance(transform.position, _destination) <= 0.01f)
+                yield return null;
+
+                distance = Vector3.Distance(transform.position, _destinationMove);
+            }
+
+            stillMoving = ReinitializeIceBlockMovement(isPushed);
+            Debug.Log("stillMoving" + stillMoving);
+        }
+
+        Debug.Log("finished Running");
+    }
+
+    IEnumerator MoveBlockToDestination(Vector3 destination)
+    {
+        while (Vector3.Distance(transform.position, destination) > 0.01f)
+        {
+            if (destination == _destinationNeutral)
+            {
+                transform.position = Vector3.MoveTowards(
+                    transform.position, destination, speed * Time.deltaTime
+                );
+                if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
                     yield break;
@@ -166,7 +194,7 @@ public class Ground : MonoBehaviour
             if (!_isRevertingBlock)
             {
                 transform.position = Vector3.Lerp(
-                    transform.position, _destination, speed * Time.deltaTime
+                    transform.position, destination, speed * Time.deltaTime
                 );
             }
 
@@ -215,7 +243,9 @@ public class Ground : MonoBehaviour
             {
                 _destinationMove += directionToPush;
                 _directionToSlideTo = directionToPush;
-                _isMovingBlock = true;
+
+                _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(true); });
+                // _isMovingBlock = true;
             }
         }
     }
@@ -276,7 +306,7 @@ public class Ground : MonoBehaviour
                     if (paintWithBrush)
                     {
                         Debug.Log("effect triggered");
-                        StartCoroutine(moveBlockToDestination(_destinationDrop));
+                        _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationDrop); });
                     }
 
                     break;
@@ -295,9 +325,8 @@ public class Ground : MonoBehaviour
                     _paintedColour = _material.color;
                     if (paintWithBrush)
                     {
-                        print("here");
                         Debug.Log("effect triggered");
-                        StartCoroutine(moveBlockToDestination(_destinationRaise));
+                        _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationRaise); });
                     }
 
                     break;
@@ -308,7 +337,7 @@ public class Ground : MonoBehaviour
                     {
                         Debug.Log("effect triggered");
                         _isIceBlockEffectEnabled = true;
-                        ReinitializeIceBlockMovement();
+                        _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     }
 
                     break;
@@ -334,7 +363,7 @@ public class Ground : MonoBehaviour
         if (colorToRevert == Paints.red && newColor != "Blue")
         {
             _isRevertingBlock = true;
-            StartCoroutine(moveBlockToDestination(_destinationNeutral));
+            _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
             Debug.Log("reverting red");
         }
         else if (colorToRevert == Paints.green)
@@ -345,7 +374,7 @@ public class Ground : MonoBehaviour
         else if (colorToRevert == Paints.yellow && newColor != "Blue")
         {
             _isRevertingBlock = true;
-            StartCoroutine(moveBlockToDestination(_destinationNeutral));
+            _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == Paints.blue)

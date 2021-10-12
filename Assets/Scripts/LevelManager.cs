@@ -14,9 +14,13 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
     private bool _isPanning = false;
+    
+    private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>> ();
 
     void Start()
     {
+        StartCoroutine(ManageCoroutines());
+
         paintQuantity = new Dictionary<String, int>();
         paintQuantity.Add("Blue", 0); // Freezes Platform
         paintQuantity.Add("Green", 0); // Growing Platform
@@ -34,6 +38,23 @@ public class LevelManager : MonoBehaviour
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = Paints.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
+    }
+    
+    IEnumerator ManageCoroutines()
+    {
+        while (true)
+        {
+            while (actionQueue.Count > 0)
+            {
+                yield return StartCoroutine(actionQueue.Dequeue()());
+            }
+            yield return null;
+        }
+    }
+
+    public void EnqueueAction(Func<IEnumerator> action)
+    {
+        actionQueue.Enqueue(action);
     }
 
     // Update is called once per frame
