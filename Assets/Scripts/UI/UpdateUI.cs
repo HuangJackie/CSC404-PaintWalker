@@ -8,6 +8,7 @@ public class UpdateUI : MonoBehaviour
     private PaintBucketIcon paintIcon;
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
+    private PaintLeftBG paintLeftBG;
 
     [SerializeField] private GameObject infoTextBG;
     private PaintNeededText infoText;
@@ -18,6 +19,8 @@ public class UpdateUI : MonoBehaviour
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
+        paintLeftBG = FindObjectOfType<PaintLeftBG>();
+
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
 
@@ -70,6 +73,7 @@ public class UpdateUI : MonoBehaviour
         paintBar.ChangePaint(paintLeft, paintColor);
         paintText.SetPaint(paintLeft);
         paintIcon.SetIcon(paintType);
+        paintLeftBG.SetColor(paintColor);
     }
 
     public void ClearUIInfoText()
