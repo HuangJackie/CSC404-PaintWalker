@@ -14,7 +14,7 @@ public class Ground : MonoBehaviour
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
-    
+
     private LevelManager _levelManager;
     private Material _material;
     private Color _originalColour;
@@ -22,7 +22,7 @@ public class Ground : MonoBehaviour
     private UpdateUI _updateUI;
     private Player _player;
     private float _playerYPosition;
-    
+
     private bool _isMouseClicked;
     private bool _isMouseOver;
 
@@ -46,7 +46,7 @@ public class Ground : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
         _playerYPosition = player.transform.position.y;
-        
+
         _isMouseOver = false;
 
         _isOnSameLevelAsPlayer = false;
@@ -177,6 +177,7 @@ public class Ground : MonoBehaviour
                 {
                     MovePlayerWithBlock(transform.position);
                 }
+
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
@@ -334,10 +335,11 @@ public class Ground : MonoBehaviour
                 case "Green":
                     _material.color = Paints.green;
                     _paintedColour = _material.color;
-                    if (paintWithBrush && !this.isPaintedByBrush)
+                    if (paintWithBrush && !isPaintedByBrush && _paintedColour != _originalColour)
                     {
                         Debug.Log("effect triggered");
-                        GreenExtend();
+                        _levelManager.EnqueueAction(() => { return GreenExtend(); });
+
                     }
 
                     break;
@@ -385,10 +387,15 @@ public class Ground : MonoBehaviour
 
     private void RevertEffect(Color colorToRevert, String newColor)
     {
-        if (colorToRevert == Paints.red && newColor != "Blue")
+        if (colorToRevert == Paints.red && newColor != "Blue" && NoBlockAbove())
         {
             _isRevertingBlock = true;
-            _levelManager.EnqueueAction(() => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
+            _levelManager.EnqueueAction(
+                () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
+            if (newColor == "Green")
+            {
+                _levelManager.EnqueueAction(() => { return GreenExtend(); });
+            }
             Debug.Log("reverting red");
         }
         else if (colorToRevert == Paints.green)
@@ -396,15 +403,15 @@ public class Ground : MonoBehaviour
             // Does nothing for now. Staying here in case we implement erase in the future.
             Debug.Log("reverting green");
         }
-        else if (colorToRevert == Paints.yellow && newColor != "Blue")
+        else if (colorToRevert == Paints.yellow && newColor != "Blue" && NoBlockBelow())
         {
-            if (NoBlockBelow())
+            _isRevertingBlock = true;
+            _levelManager.EnqueueAction(
+                () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
+            if (newColor == "Green")
             {
-                _isRevertingBlock = true;
-                _levelManager.EnqueueAction(
-                    () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
+                _levelManager.EnqueueAction(() => { return GreenExtend(); });
             }
-
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == Paints.blue)
@@ -424,18 +431,9 @@ public class Ground : MonoBehaviour
         return !Physics.Raycast(transform.position, Vector3.down, 1);
     }
 
-    IEnumerator ExtendGreenAfterRevert()
+    private bool NoBlockAbove()
     {
-        while (true)
-        {
-            if (!_isRevertingBlock)
-            {
-                GreenExtend();
-                yield break;
-            }
-
-            yield return null;
-        }
+        return !Physics.Raycast(transform.position, Vector3.up, 1);
     }
 
     // move platform code (ice)
@@ -455,7 +453,7 @@ public class Ground : MonoBehaviour
         return hitDirection;
     }
 
-    private void GreenExtend()
+    private IEnumerator GreenExtend()
     {
         // Extends platforms in wasd directions by 1 block
         Vector3 position = transform.position;
@@ -480,6 +478,7 @@ public class Ground : MonoBehaviour
         {
             InstantiateNewBlock(growth_block, position, Vector3.right);
         }
+        yield return null;
     }
 
     private void InstantiateNewBlock(Object growth_block, Vector3 position, Vector3 direction)
