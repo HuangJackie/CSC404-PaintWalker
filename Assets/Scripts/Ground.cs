@@ -27,7 +27,6 @@ public class Ground : MonoBehaviour
     private bool _isDroppingBlock;
     private bool _isRevertingBlock;
     private bool _isRaisingBlock;
-    private bool _isMovingBlock;
     private bool _isIceBlockEffectEnabled;
     private bool _isOnSameLevelAsPlayer;
     private Vector3 _directionToSlideTo;
@@ -51,7 +50,6 @@ public class Ground : MonoBehaviour
         _isDroppingBlock = false;
         _isRevertingBlock = false;
         _isRaisingBlock = false;
-        _isMovingBlock = false;
         _isIceBlockEffectEnabled = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         _destinationNeutral = transform.position;
@@ -116,9 +114,11 @@ public class Ground : MonoBehaviour
     {
         bool canMove = false;
         // Check if there is a block below.
-        Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
+        _destinationMove = transform.position;
+        Vector3 pos = _destinationMove + new Vector3(0, 0.5f, 0);
         if (!Physics.Raycast(pos, Vector3.down, 0.7f))
         {
+            Debug.Log("Can move down");
             _destinationMove += Vector3.down;
             canMove = true; // _isMovingBlock = true;
         }
@@ -157,10 +157,7 @@ public class Ground : MonoBehaviour
             }
 
             stillMoving = ReinitializeIceBlockMovement(isPushed);
-            Debug.Log("stillMoving" + stillMoving);
         }
-
-        Debug.Log("finished Running");
     }
 
     IEnumerator MoveBlockToDestination(Vector3 destination)
@@ -188,6 +185,8 @@ public class Ground : MonoBehaviour
 
             yield return null;
         }
+
+        transform.position = destination;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -197,7 +196,7 @@ public class Ground : MonoBehaviour
             PaintSurface(false);
         }
 
-        IceBlockMovement(other);
+        IceBlockMovementWhenPushed(other);
         if (other.gameObject.CompareTag("SpecialCreature"))
         {
             Destroy(gameObject);
@@ -215,7 +214,7 @@ public class Ground : MonoBehaviour
                !Physics.Raycast(pos, directionToPush, 0.7f);
     }
 
-    private void IceBlockMovement(Collision other)
+    private void IceBlockMovementWhenPushed(Collision other)
     {
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
         bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
@@ -229,7 +228,7 @@ public class Ground : MonoBehaviour
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
             if (!Physics.Raycast(pos, directionToPush, 0.7f))
             {
-                _destinationMove += directionToPush;
+                _destinationMove = transform.position + directionToPush;
                 _directionToSlideTo = directionToPush;
 
                 _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(true); });
@@ -325,6 +324,7 @@ public class Ground : MonoBehaviour
                     {
                         Debug.Log("effect triggered");
                         _isIceBlockEffectEnabled = true;
+                        _destinationMove = transform.position;
                         _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     }
 
@@ -361,8 +361,11 @@ public class Ground : MonoBehaviour
         }
         else if (colorToRevert == Paints.yellow && newColor != "Blue")
         {
-            _isRevertingBlock = true;
-            _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
+            if (NoBlockBelow())
+            {
+                _isRevertingBlock = true;
+                _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
+            }
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == Paints.blue)
@@ -375,6 +378,11 @@ public class Ground : MonoBehaviour
         {
             Debug.LogError("color to revert from is not recognized");
         }
+    }
+
+    private bool NoBlockBelow()
+    {
+        return !Physics.Raycast(transform.position, Vector3.down, 1);
     }
 
     IEnumerator ExtendGreenAfterRevert()
@@ -412,23 +420,24 @@ public class Ground : MonoBehaviour
     {
         // Extends platforms in wasd directions by 1 block
         Vector3 position = transform.position;
+        Vector3 positionToCheck = position - new Vector3(0, 0.5f, 0);
         var growth_block = Resources.Load(path: "NonColouredBlock");
-        if (CanDown(position))
+        if (CanDown(positionToCheck))
         {
             InstantiateNewBlock(growth_block, position, Vector3.back);
         }
 
-        if (CanUp(position))
+        if (CanUp(positionToCheck))
         {
             InstantiateNewBlock(growth_block, position, Vector3.forward);
         }
 
-        if (CanLeft(position))
+        if (CanLeft(positionToCheck))
         {
             InstantiateNewBlock(growth_block, position, Vector3.left);
         }
 
-        if (CanRight(position))
+        if (CanRight(positionToCheck))
         {
             InstantiateNewBlock(growth_block, position, Vector3.right);
         }
