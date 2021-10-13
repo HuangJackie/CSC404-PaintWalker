@@ -6,11 +6,13 @@ public class Exit : MonoBehaviour
 {
     private UpdateUI _updateUI;
     public LevelManager manager;
+    private AudioSource _winAudioSource;
     
     // Start is called before the first frame update
     void Start()
     {
         _updateUI = FindObjectOfType<UpdateUI>();
+        _winAudioSource = FindObjectOfType<AudioSource>();
     }
     
     private void OnTriggerEnter(Collider collision)
@@ -20,6 +22,7 @@ public class Exit : MonoBehaviour
         {
             _updateUI.SetInfoText("You Win!", true);
             Time.timeScale = 0.0f;
+            _winAudioSource.Play();
         }
     }
 }
