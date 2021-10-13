@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,12 +27,14 @@ public class Player : MonoBehaviour
     private Transform _transform;
 
     private bool _hasWaitedTurn;
-
+    
     void Start()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _targetLocation = transform.position;
         _prevLocation = _targetLocation;
+        
+
     }
 
     void Update()

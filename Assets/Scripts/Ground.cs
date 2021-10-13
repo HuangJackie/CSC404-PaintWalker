@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
@@ -37,6 +38,16 @@ public class Ground : MonoBehaviour
     private Vector3 _destinationRaise;
     private Vector3 _destinationMove;
 
+    public GameObject YellowSounds;
+    public GameObject RedSounds;
+    public GameObject BlueSounds;
+    public GameObject GreenSounds;
+    private SoundManager _yellowSoundManager = new SoundManager();
+    private SoundManager _redSoundManager = new SoundManager();
+    private SoundManager _blueSoundManager = new SoundManager();
+    private SoundManager _greenSoundManager = new SoundManager();
+    private SoundManager _pushIceBlockSoundManager = new SoundManager();
+
     void Start()
     {
         _material = GetComponentInChildren<Renderer>().material;
@@ -59,6 +70,12 @@ public class Ground : MonoBehaviour
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
         _destinationMove = transform.position;
         _directionToSlideTo = Vector3.zero;
+        
+        _yellowSoundManager.SetAudioSources(YellowSounds.GetComponents<AudioSource>());
+        _redSoundManager.SetAudioSources(RedSounds.GetComponents<AudioSource>());
+        _blueSoundManager.SetAudioSources(BlueSounds.GetComponents<AudioSource>());
+        _greenSoundManager.SetAudioSources(GreenSounds.GetComponents<AudioSource>());
+        _pushIceBlockSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
 
     void Update()
@@ -256,6 +273,7 @@ public class Ground : MonoBehaviour
 
         if (shouldMoveIceBlock)
         {
+            _pushIceBlockSoundManager.PlayRandom();
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
             if (!Physics.Raycast(pos, directionToPush, 0.7f))
@@ -324,6 +342,7 @@ public class Ground : MonoBehaviour
                     _paintedColour = _material.color;
                     if (paintWithBrush)
                     {
+                        _redSoundManager.PlayRandom();
                         Debug.Log("effect triggered");
                         _levelManager.EnqueueAction(() =>
                         {
@@ -337,6 +356,7 @@ public class Ground : MonoBehaviour
                     _paintedColour = _material.color;
                     if (paintWithBrush && !isPaintedByBrush && _paintedColour != _originalColour)
                     {
+                        _greenSoundManager.PlayRandom();
                         Debug.Log("effect triggered");
                         _levelManager.EnqueueAction(() => { return GreenExtend(); });
 
@@ -348,6 +368,7 @@ public class Ground : MonoBehaviour
                     _paintedColour = _material.color;
                     if (paintWithBrush)
                     {
+                        _yellowSoundManager.PlayRandom();
                         Debug.Log("effect triggered");
                         _levelManager.EnqueueAction(() =>
                         {
@@ -361,6 +382,7 @@ public class Ground : MonoBehaviour
                     _paintedColour = _material.color;
                     if (paintWithBrush)
                     {
+                        _blueSoundManager.PlayRandom();
                         Debug.Log("effect triggered");
                         _isIceBlockEffectEnabled = true;
                         _destinationMove = transform.position;

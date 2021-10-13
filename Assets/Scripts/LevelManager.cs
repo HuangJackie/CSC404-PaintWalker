@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
     private bool _isPanning = false;
+
+    private SoundManager _colourChangeSoundManager = new SoundManager();
     
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>> ();
 
@@ -44,6 +47,8 @@ public class LevelManager : MonoBehaviour
 
         playerPaintBrush = FindObjectOfType<PaintBrush>();
         playerPaintBottle = FindObjectOfType<PaintBottle>();
+        
+        _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
     
     IEnumerator ManageCoroutines()
@@ -69,6 +74,7 @@ public class LevelManager : MonoBehaviour
         _isColourSwitched = Input.GetButtonDown("Fire2");
         if (_isColourSwitched)
         {
+            _colourChangeSoundManager.PlayRandom();
             switch (currentSelectedColour)
             {
                 case "Blue":
