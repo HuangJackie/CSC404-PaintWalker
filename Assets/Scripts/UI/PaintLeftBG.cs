@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PaintLeftBG : MonoBehaviour
 {
-    private Image bg;
+    public Image bg;
 
     private void Start()
     {

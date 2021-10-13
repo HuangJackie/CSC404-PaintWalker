@@ -71,6 +71,13 @@ public class Ground : MonoBehaviour
         _destinationMove = transform.position;
         _directionToSlideTo = Vector3.zero;
         
+        // Sounds
+
+        YellowSounds = GameObject.Find("PaintingYellow");
+        RedSounds = GameObject.Find("PaintingRed");
+        BlueSounds = GameObject.Find("PaintingBlue");
+        GreenSounds = GameObject.Find("PaintingGreen");
+
         _yellowSoundManager.SetAudioSources(YellowSounds.GetComponents<AudioSource>());
         _redSoundManager.SetAudioSources(RedSounds.GetComponents<AudioSource>());
         _blueSoundManager.SetAudioSources(BlueSounds.GetComponents<AudioSource>());

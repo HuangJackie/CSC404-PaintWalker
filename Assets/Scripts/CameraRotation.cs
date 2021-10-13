@@ -6,15 +6,15 @@ public class CameraRotation : MonoBehaviour
 {
     public float speed;
     public LevelManager LevelManager;
+    public Vector3 distFromPlayer;
     
     private Transform Player;
-    private Vector3 distFromPlayer;
     private Vector3 _initialClickPosition;
 
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        distFromPlayer = new Vector3(-0.75f, -4f, 3f);
+        distFromPlayer = new Vector3(-2.1f, -3.7f, 5.24f);
     }
 
     void LateUpdate()
