@@ -43,8 +43,7 @@ public class Player : MonoBehaviour
 
         RigidGridMove();
     }
-
-
+    
     private void RigidGridMove()
     {
         //stops player from stuck on wall. Left here in case needed in the future.
@@ -75,6 +74,11 @@ public class Player : MonoBehaviour
                 transform.rotation, Quaternion.LookRotation(movDirection), 0.5f
             );
         }
+    }
+
+    public void UpdateTargetLocation(Vector3 newTargetLocation)
+    {
+        _targetLocation = newTargetLocation;
     }
 
     private void SetNewTargetLocation(Vector3 currentTransformPosition)

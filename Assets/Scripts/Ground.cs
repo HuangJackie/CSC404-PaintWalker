@@ -14,13 +14,15 @@ public class Ground : MonoBehaviour
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
+    
     private LevelManager _levelManager;
     private Material _material;
     private Color _originalColour;
     private Color _paintedColour;
     private UpdateUI _updateUI;
     private Player _player;
-
+    private float _playerYPosition;
+    
     private bool _isMouseClicked;
     private bool _isMouseOver;
 
@@ -43,7 +45,8 @@ public class Ground : MonoBehaviour
         _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
-
+        _playerYPosition = player.transform.position.y;
+        
         _isMouseOver = false;
 
         _isOnSameLevelAsPlayer = false;
@@ -160,8 +163,9 @@ public class Ground : MonoBehaviour
         }
     }
 
-    IEnumerator MoveBlockToDestination(Vector3 destination)
+    IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination)
     {
+        bool isPlayerStandingOnTop = IsPlayerStandingOnTop();
         while (Vector3.Distance(transform.position, destination) > 0.01f)
         {
             if (destination == _destinationNeutral)
@@ -169,6 +173,10 @@ public class Ground : MonoBehaviour
                 transform.position = Vector3.MoveTowards(
                     transform.position, destination, speed * Time.deltaTime
                 );
+                if (isPlayerStandingOnTop)
+                {
+                    MovePlayerWithBlock(transform.position);
+                }
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
@@ -181,12 +189,35 @@ public class Ground : MonoBehaviour
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * Time.deltaTime
                 );
+                if (isPlayerStandingOnTop)
+                {
+                    MovePlayerWithBlock(transform.position);
+                }
             }
 
             yield return null;
         }
 
         transform.position = destination;
+        if (isPlayerStandingOnTop)
+        {
+            MovePlayerWithBlock(destination);
+        }
+    }
+
+    private void MovePlayerWithBlock(Vector3 newBlockPosition)
+    {
+        player.transform.position = newBlockPosition + new Vector3(0, _playerYPosition + 0.01f, 0);
+        _player.UpdateTargetLocation(player.transform.position);
+    }
+
+    private bool IsPlayerStandingOnTop()
+    {
+        Vector3 blockLocation = transform.position;
+        Vector3 playerLocation = player.transform.position;
+        return Math.Abs(blockLocation.x - playerLocation.x) < 0.1f &&
+               Math.Abs(blockLocation.z - playerLocation.z) < 0.1f &&
+               Math.Abs(playerLocation.y - blockLocation.y) < 2f;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -293,7 +324,10 @@ public class Ground : MonoBehaviour
                     if (paintWithBrush)
                     {
                         Debug.Log("effect triggered");
-                        _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationDrop); });
+                        _levelManager.EnqueueAction(() =>
+                        {
+                            return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
+                        });
                     }
 
                     break;
@@ -313,7 +347,10 @@ public class Ground : MonoBehaviour
                     if (paintWithBrush)
                     {
                         Debug.Log("effect triggered");
-                        _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationRaise); });
+                        _levelManager.EnqueueAction(() =>
+                        {
+                            return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
+                        });
                     }
 
                     break;
@@ -351,7 +388,7 @@ public class Ground : MonoBehaviour
         if (colorToRevert == Paints.red && newColor != "Blue")
         {
             _isRevertingBlock = true;
-            _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
+            _levelManager.EnqueueAction(() => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
             Debug.Log("reverting red");
         }
         else if (colorToRevert == Paints.green)
@@ -364,8 +401,10 @@ public class Ground : MonoBehaviour
             if (NoBlockBelow())
             {
                 _isRevertingBlock = true;
-                _levelManager.EnqueueAction(() => { return MoveBlockToDestination(_destinationNeutral); });
+                _levelManager.EnqueueAction(
+                    () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
             }
+
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == Paints.blue)
