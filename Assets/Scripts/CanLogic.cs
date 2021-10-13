@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class CanLogic : MonoBehaviour
 {
+    public LevelManager manager;
     public string color;
     public int paintReplenished;
-    public LevelManager manager;
 
     private ParticleSystem.MainModule particleSettings;
     private Light lightSettings;
+    private Renderer[] meshRenderers;
 
     private void Start()
     {
         particleSettings = GetComponentInChildren<ParticleSystem>().main;
         lightSettings = GetComponentInChildren<Light>();
+        meshRenderers = GetComponentsInChildren<Renderer>();
 
         Color newColor;
         switch (color)
@@ -38,11 +40,15 @@ public class CanLogic : MonoBehaviour
 
         particleSettings.startColor = newColor;
         lightSettings.color = newColor;
+        foreach (Renderer mesh in meshRenderers)
+        {
+            mesh.material.color = newColor;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Player>())
+        if (other.tag == "Player")
         {
             manager.IncreasePaint(color, paintReplenished);
             Destroy(gameObject);
