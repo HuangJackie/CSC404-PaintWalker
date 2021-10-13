@@ -48,7 +48,7 @@ public class OnButtonTrigger : MonoBehaviour
             paintQuantity1,
             paintQuantity2,
             _material,
-            Color.green))
+            Paints.green))
         {
             _originalColour = _material.color;
             _isPainted = true;
@@ -71,7 +71,7 @@ public class OnButtonTrigger : MonoBehaviour
     void TriggerButtton()
     {
         isTriggered = true;
-        gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
+        gameObject.GetComponentInChildren<Renderer>().material.color = Paints.red;
     }
 
     private void OnMouseOver()

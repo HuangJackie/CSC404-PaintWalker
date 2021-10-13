@@ -108,3 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 0
+  test: 
+  isPaintedByFeet: 0
+  isPaintedByBrush: 0

@@ -24,7 +24,7 @@ public class SpecialCreature : MonoBehaviour
             bool bluePaintSelected = _levelManager.GetCurrentlySelectedPaint() == "Blue";
             if (bluePaintSelected && _levelManager.HasEnoughPaint())
             {
-                _material.color = Color.blue;
+                _material.color = Paints.blue;
                 _originalColour = _material.color;
                 _levelManager.DecreaseCurrentSelectedPaint(2);
             }
