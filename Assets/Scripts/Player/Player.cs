@@ -210,7 +210,6 @@ public class Player : MonoBehaviour
             && !IsBlockInFrontPushable(hit)
             )
         {
-            Debug.Log("block in front static");
             return false;
         }
 

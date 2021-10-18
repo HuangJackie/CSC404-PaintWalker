@@ -200,7 +200,7 @@ public class Ground : MonoBehaviour
         {
             if (destination == _destinationNeutral)
             {
-                print("neutrual destination. Moving block");
+                //print("neutrual destination. Moving block");
                 transform.position = Vector3.MoveTowards(
                     transform.position, destination, speed * Time.deltaTime
                 );
@@ -212,7 +212,7 @@ public class Ground : MonoBehaviour
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
-                    print("reached neutral dest");
+                    //print("reached neutral dest");
                     yield break;
                 }
             }
@@ -221,7 +221,7 @@ public class Ground : MonoBehaviour
             {
                 if (blockPathIsBlocked && destination != _destinationNeutral)
                 {
-                    print("changing to neutral dest since path blocked");
+                    //print("changing to neutral dest since path blocked");
                     destination = _destinationNeutral;
                     blockPathIsBlocked = false;
                 }
@@ -252,7 +252,6 @@ public class Ground : MonoBehaviour
             _player.UpdateTargetLocation(player.transform.position);
         } else
         {
-            print("halling ass");
             otherObject.transform.position = newBlockPosition + new Vector3(0, _moveableObjYPosition + 0.01f, 0);
         }
     }
@@ -449,13 +448,13 @@ public class Ground : MonoBehaviour
         {
             if (NoBlockAbove() && _destinationNeutral != transform.position)
             {
-                print("top empty");
+                //print("top empty");
                 _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
             } else if (_destinationNeutral != transform.position)
             {
-                print("top not empty, setting new destinations");
+                //print("top not empty, setting new destinations");
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
@@ -474,13 +473,13 @@ public class Ground : MonoBehaviour
         {
             if (NoBlockBelow() && _destinationNeutral != transform.position)
             {
-                print("bottom empty");
+                //print("bottom empty");
                 _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
             } else if (_destinationNeutral != transform.position)
             {
-                print("bottom not empty, setting new destinations");
+               // print("bottom not empty, setting new destinations");
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
@@ -512,13 +511,8 @@ public class Ground : MonoBehaviour
 
     private bool NoBlockAbove()
     {
-        //RaycastHit hit;
         LayerMask mask = LayerMask.GetMask("Default");
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, Color.red, 120f);
-        //if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1))
-        //{
-        //    print(hit.transform.gameObject);
-        //}
         return !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, 1, mask);
     }
 
@@ -541,7 +535,6 @@ public class Ground : MonoBehaviour
 
     private IEnumerator GreenExtend()
     {
-        print("extending");
         // Extends platforms in wasd directions by 1 block
         Vector3 position = transform.position;
         Vector3 positionToCheck = position - new Vector3(0, 0.5f, 0);
