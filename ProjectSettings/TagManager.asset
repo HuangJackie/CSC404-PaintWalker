@@ -8,6 +8,8 @@ TagManager:
   - PressurePlate
   - PaintNeeded
   - SpecialCreature
+  - TpCreature
+  - TpCreature2
   layers:
   - Default
   - TransparentFX
