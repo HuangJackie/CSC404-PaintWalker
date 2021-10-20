@@ -32,7 +32,6 @@ public class Ground : MonoBehaviour
     private bool _isRevertingBlock;
     private bool _isRaisingBlock;
     private bool _isIceBlockEffectEnabled;
-    private bool _isOnSameLevelAsPlayer;
     private Vector3 _directionToSlideTo;
     private Vector3 _destinationDrop;
     private Vector3 _destinationNeutral;
@@ -61,7 +60,6 @@ public class Ground : MonoBehaviour
 
         _isMouseOver = false;
 
-        _isOnSameLevelAsPlayer = false;
         _isDroppingBlock = false;
         _isRevertingBlock = false;
         _isRaisingBlock = false;
@@ -71,7 +69,7 @@ public class Ground : MonoBehaviour
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
         _destinationMove = transform.position;
         _directionToSlideTo = Vector3.zero;
-        
+
         // Sounds
 
         YellowSounds = GameObject.Find("PaintingYellow");
@@ -91,18 +89,6 @@ public class Ground : MonoBehaviour
         if (_levelManager.freeze_player)
         {
             return;
-        }
-        float playerBlockVertialDistance = Mathf.Abs(
-            _player.gameObject.transform.position.y - gameObject.transform.position.y
-        );
-
-        if (playerBlockVertialDistance < 1.5f)
-        {
-            _isOnSameLevelAsPlayer = true;
-        }
-        else
-        {
-            _isOnSameLevelAsPlayer = false;
         }
 
         if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
@@ -195,12 +181,9 @@ public class Ground : MonoBehaviour
     IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination)
     {
         GameObject movableObjectOnTop = IsMovableObjectOnTop();
-        bool blockPathIsBlocked = false;
-        if ((destination == _destinationDrop && !NoBlockBelow()) || (destination == _destinationRaise && !NoBlockAbove()))
-        {
-            blockPathIsBlocked = true;
-        }
-        while (Vector3.Distance(transform.position, destination) > 0.01f)
+        bool blockPathIsBlocked = (destination == _destinationDrop && !NoBlockBelow()) ||
+                                  (destination == _destinationRaise && !NoUnmovableBlockAbove());
+        while (this && Vector3.Distance(transform.position, destination) > 0.01f)
         {
             if (destination == _destinationNeutral)
             {
@@ -229,6 +212,7 @@ public class Ground : MonoBehaviour
                     destination = _destinationNeutral;
                     blockPathIsBlocked = false;
                 }
+
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * Time.deltaTime
                 );
@@ -241,10 +225,13 @@ public class Ground : MonoBehaviour
             yield return null;
         }
 
-        transform.position = destination;
-        if (movableObjectOnTop)
+        if (this)
         {
-            MoveObjectWithBlock(destination, movableObjectOnTop);
+            transform.position = destination;
+            if (movableObjectOnTop)
+            {
+                MoveObjectWithBlock(destination, movableObjectOnTop);
+            }
         }
     }
 
@@ -254,9 +241,10 @@ public class Ground : MonoBehaviour
         {
             player.transform.position = newBlockPosition + new Vector3(0, _playerYPosition + 0.01f, 0);
             _player.UpdateTargetLocation(player.transform.position);
-        } else
+        }
+        else
         {
-            otherObject.transform.position = newBlockPosition + new Vector3(0, _moveableObjYPosition + 0.01f, 0);
+            otherObject.transform.position = newBlockPosition + new Vector3(0, 1, 0);
         }
     }
 
@@ -266,15 +254,13 @@ public class Ground : MonoBehaviour
         Vector3 blockLocation = transform.position;
         GameObject otherObject = null;
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, Color.blue, 120f);
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1)) {
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1))
+        {
             otherObject = hit.transform.gameObject;
-            this._moveableObjYPosition = hit.transform.position.y;
+            _moveableObjYPosition = hit.transform.position.y;
         }
+
         return otherObject;
-        //Vector3 playerLocation = player.transform.position;
-        //return Math.Abs(blockLocation.x - playerLocation.x) < 0.1f &&
-        //       Math.Abs(blockLocation.z - playerLocation.z) < 0.1f &&
-        //       Math.Abs(playerLocation.y - blockLocation.y) < 2f;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -297,7 +283,7 @@ public class Ground : MonoBehaviour
         Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
         Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
         return _isIceBlockEffectEnabled &&
-               _isOnSameLevelAsPlayer &&
+               // _isOnSameLevelAsPlayer &&
                dir != Vector3.negativeInfinity &&
                !Physics.Raycast(pos, directionToPush, 0.7f);
     }
@@ -306,7 +292,7 @@ public class Ground : MonoBehaviour
     {
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
         bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
-                                  _isOnSameLevelAsPlayer &&
+                                  // _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
                                   dir != Vector3.negativeInfinity;
         if (shouldMoveIceBlock)
@@ -397,14 +383,13 @@ public class Ground : MonoBehaviour
                         _greenSoundManager.PlayRandom();
                         Debug.Log("green effect triggered");
                         _levelManager.EnqueueAction(() => { return GreenExtend(); });
-
                     }
 
                     break;
                 case "Yellow":
                     _material.color = Paints.yellow;
                     _paintedColour = _material.color;
-                    if (paintWithBrush && NoBlockAbove())
+                    if (paintWithBrush && NoUnmovableBlockAbove())
                     {
                         _yellowSoundManager.PlayRandom();
                         Debug.Log("yellow effect triggered");
@@ -450,19 +435,21 @@ public class Ground : MonoBehaviour
     {
         if (colorToRevert == Paints.red && newColor != "Blue")
         {
-            if (NoBlockAbove() && _destinationNeutral != transform.position)
+            if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
             {
                 //print("top empty");
                 _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
-            } else if (_destinationNeutral != transform.position)
+            }
+            else if (_destinationNeutral != transform.position)
             {
                 //print("top not empty, setting new destinations");
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             }
+
             Debug.Log("reverting red");
         }
         else if (colorToRevert == Paints.green)
@@ -481,13 +468,15 @@ public class Ground : MonoBehaviour
                 _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral); });
-            } else if (_destinationNeutral != transform.position)
+            }
+            else if (_destinationNeutral != transform.position)
             {
-               // print("bottom not empty, setting new destinations");
+                // print("bottom not empty, setting new destinations");
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             }
+
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == Paints.blue)
@@ -513,11 +502,13 @@ public class Ground : MonoBehaviour
         return !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.down, 1, mask);
     }
 
-    private bool NoBlockAbove()
+    private bool NoUnmovableBlockAbove()
     {
         LayerMask mask = LayerMask.GetMask("Default");
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, Color.red, 120f);
-        return !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, 1, mask);
+        bool noBlockAbove =
+            !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out var hit, 1, mask);
+        return noBlockAbove || (hit.collider.gameObject.TryGetComponent(out Ground ground) && ground.IsIceBlock());
     }
 
     // move platform code (ice)
@@ -562,6 +553,7 @@ public class Ground : MonoBehaviour
         {
             InstantiateNewBlock(growth_block, position, Vector3.right);
         }
+
         yield return null;
     }
 
