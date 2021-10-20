@@ -11,10 +11,16 @@ public class CameraRotation : MonoBehaviour
     private Transform Player;
     private Vector3 _initialClickPosition;
 
+    Vector3 forward, right;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        distFromPlayer = new Vector3(-2.1f, -3.7f, 5.24f);
+        distFromPlayer = new Vector3(-4.93f, -4.09f, 4.28f);
+        forward = Camera.main.transform.forward;
+        forward.y = 0;
+        forward = Vector3.Normalize(forward);
+        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
     }
 
     void LateUpdate()
@@ -27,14 +33,19 @@ public class CameraRotation : MonoBehaviour
         {
             LevelManager.SetIsPanning(true);
             Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
-            transform.position += new Vector3(-distanceMoved.x * speed, 0, -distanceMoved.y * speed);
+            Vector3 rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
+            Vector3 upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
+            print(upMovement);
+
+            transform.position += rightMovement;
+            transform.position += upMovement;
             _initialClickPosition = Input.mousePosition;
             return;
         }
 
         if (!LevelManager.IsPanning())
         {
-            transform.position = Player.position - distFromPlayer;
+            Camera.main.transform.position = Player.position - distFromPlayer;
         }
     }
 }
