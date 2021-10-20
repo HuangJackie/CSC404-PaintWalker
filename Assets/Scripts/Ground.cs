@@ -88,6 +88,10 @@ public class Ground : MonoBehaviour
 
     void Update()
     {
+        if (_levelManager.freeze_player)
+        {
+            return;
+        }
         float playerBlockVertialDistance = Mathf.Abs(
             _player.gameObject.transform.position.y - gameObject.transform.position.y
         );

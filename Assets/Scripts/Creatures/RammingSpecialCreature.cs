@@ -66,11 +66,13 @@ public class RammingSpecialCreature : MonoBehaviour
     {
         if (is_moving)
         {
+            _levelManager.freeze_player = true;
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             if (Vector3.Distance(transform.position, target.position) < 0.01f)
             {
                 is_moving = false;
+                _levelManager.freeze_player = false;
             }
         }
     }

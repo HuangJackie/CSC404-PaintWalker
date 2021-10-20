@@ -40,6 +40,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.freeze_player)
+        {
+            return;
+        }
         Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0), Vector3.up * _capsuleCollider.height, Color.green);
         _horizontalMovement = Input.GetAxisRaw("Horizontal");
         _verticalMovement = Input.GetAxisRaw("Vertical");
