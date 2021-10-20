@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private Color currentSelectedColourClass;
     private bool _isColourSwitched;
     public bool dev_mode;
+    public bool freeze_player;
 
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
@@ -41,6 +42,7 @@ public class LevelManager : MonoBehaviour
             paintQuantity["Yellow"] = 30;
         }
 
+        freeze_player = false;
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = Paints.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
@@ -71,6 +73,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (freeze_player)
+        {
+            return;
+        }
         _isColourSwitched = Input.GetButtonDown("Fire2");
         if (_isColourSwitched)
         {
