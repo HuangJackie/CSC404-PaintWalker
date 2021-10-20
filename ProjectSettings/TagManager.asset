@@ -10,6 +10,10 @@ TagManager:
   - SpecialCreature
   - TpCreature
   - TpCreature2
+  - PaintRefill
+  - RammingCreature
+  - HowlingCreature
+  - Wall
   layers:
   - Default
   - TransparentFX

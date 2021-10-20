@@ -11,12 +11,14 @@ public class CanLogic : MonoBehaviour
     private ParticleSystem.MainModule particleSettings;
     private Light lightSettings;
     private Renderer[] meshRenderers;
+    private UpdateUI _updateUI;
 
     private void Start()
     {
         particleSettings = GetComponentInChildren<ParticleSystem>().main;
         lightSettings = GetComponentInChildren<Light>();
         meshRenderers = GetComponentsInChildren<Renderer>();
+        _updateUI = FindObjectOfType<UpdateUI>();
 
         Color newColor;
         switch (color)
@@ -52,6 +54,22 @@ public class CanLogic : MonoBehaviour
         {
             manager.IncreasePaint(color, paintReplenished);
             Destroy(gameObject);
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (this)
+        {
+            _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (this)
+        {
+            _updateUI.SetInfoText("");
         }
     }
 }

@@ -117,9 +117,11 @@ public class TpCreature : MonoBehaviour
         {
             if (Vector3.Distance(player.transform.position, transform.position) < 3)
             {
-                
-                player.transform.position = tp_creature2.transform.position + Vector3.right ;
-                _playerx.UpdateTargetLocation(tp_creature2.transform.position + new Vector3(1.5f, 0f, 0f) );
+                Vector3 tpCreaturePosition = tp_creature2.transform.position;
+                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y + 0.2f,
+                    tpCreaturePosition.z);
+                player.transform.position = newPlayerPosition;
+                _playerx.UpdateTargetLocation(newPlayerPosition);
                 // Destroy(gameObject);
             } 
         }
