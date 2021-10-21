@@ -16,7 +16,7 @@ public class CameraRotation : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        distFromPlayer = new Vector3(-4.93f, -4.09f, 4.28f);
+        distFromPlayer = new Vector3(-2.62f, -5.03f, 5.24f);
         forward = Camera.main.transform.forward;
         forward.y = 0;
         forward = Vector3.Normalize(forward);
