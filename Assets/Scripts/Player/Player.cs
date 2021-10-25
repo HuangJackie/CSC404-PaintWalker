@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Fluid Movement
-    public float velocityIncreaseDamper;
-    public float velocityDecreaseDamper;
 
     public LevelManager LevelManager;
 
@@ -44,27 +41,22 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
-            Vector3.up * _capsuleCollider.height, Color.green);
+        //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
+        //    Vector3.up * _capsuleCollider.height, Color.green);
         _horizontalMovement = Input.GetAxisRaw("Horizontal");
         _verticalMovement = Input.GetAxisRaw("Vertical");
         _isHorizontalMovementPressed = Input.GetButton("Horizontal");
         _isVerticalMovementPressed = Input.GetButton("Vertical");
 
-        RigidGridMove();
+        if (this.CheckGrounded())
+        {
+            _targetLocation.y = transform.position.y;
+            RigidGridMove();
+        }
     }
 
     private void RigidGridMove()
     {
-        //stops player from stuck on wall. Left here in case needed in the future.
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.up, out hit, 1)
-            && hit.distance < 0.5f
-            && hit.transform.gameObject.CompareTag("SpecialCreature"))
-        {
-            _targetLocation = transform.position;
-        }
-
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
@@ -235,6 +227,7 @@ public class Player : MonoBehaviour
 
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)
     {
+        //Debug.DrawRay(transform.position, Vector3.Normalize(direction), Color.black, 120f);
         if (Physics.Raycast(transform.position, direction, out var hit, 1f)
             && (!IsBlockInFrontPushable(hit) || IsObjectInFrontSpecialCreature(hit))
         )
@@ -256,12 +249,17 @@ public class Player : MonoBehaviour
                 // Painted surface, can move.
                 return true;
             }
-
             // Try to paint.
             return ground.PaintSurface(false); // If false then the floor was not painted.
         }
 
         return true;
+    }
+
+    private bool CheckGrounded()
+    {
+        //Debug.DrawRay(transform.position, Vector3.down * (_capsuleCollider.height / 2 + +0.1f), Color.black, 120f);
+        return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height / 2 + 0.1f);
     }
 
     private bool IsObjectInFrontSpecialCreature(RaycastHit hit)
