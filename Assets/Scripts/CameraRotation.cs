@@ -35,7 +35,6 @@ public class CameraRotation : MonoBehaviour
             Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
             Vector3 rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
             Vector3 upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
-            print(upMovement);
 
             transform.position += rightMovement;
             transform.position += upMovement;

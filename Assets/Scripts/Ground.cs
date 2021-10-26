@@ -136,7 +136,6 @@ public class Ground : MonoBehaviour
         Vector3 pos = _destinationMove + new Vector3(0, 0.5f, 0);
         if (!Physics.Raycast(pos, Vector3.down, 0.7f))
         {
-            Debug.Log("Can move down");
             _destinationMove += Vector3.down;
             canMove = true; // _isMovingBlock = true;
         }
@@ -199,6 +198,7 @@ public class Ground : MonoBehaviour
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isRevertingBlock = false;
+                    transform.position = destination;
                     //print("reached neutral dest");
                     yield break;
                 }
@@ -212,10 +212,15 @@ public class Ground : MonoBehaviour
                     destination = _destinationNeutral;
                     blockPathIsBlocked = false;
                 }
-
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * Time.deltaTime
                 );
+                if (Vector3.Distance(transform.position, destination) <= 0.01f)
+                {
+                    transform.position = destination;
+                    //print("reached effect dest");
+                    yield break;
+                }
                 if (movableObjectOnTop)
                 {
                     MoveObjectWithBlock(transform.position, movableObjectOnTop);
@@ -235,16 +240,15 @@ public class Ground : MonoBehaviour
         }
     }
 
-    private void MoveObjectWithBlock(Vector3 newBlockPosition, GameObject otherObject)
+    private void MoveObjectWithBlock(Vector3 curBlockPosition, GameObject otherObject)
     {
-        if (otherObject.GetComponent<Player>())
+        //if (otherObject.GetComponent<Player>())
+        //{
+        //    _player.UpdateTargetLocation(curBlockPosition + new Vector3(0, _playerYPosition + 0.01f, 0));
+        //}
+        if (otherObject.gameObject.layer == LayerMask.NameToLayer("IceCube"))
         {
-            player.transform.position = newBlockPosition + new Vector3(0, _playerYPosition + 0.01f, 0);
-            _player.UpdateTargetLocation(player.transform.position);
-        }
-        else
-        {
-            otherObject.transform.position = newBlockPosition + new Vector3(0, 1, 0);
+            otherObject.transform.position = curBlockPosition + new Vector3(0, 1, 0);
         }
     }
 
@@ -483,15 +487,11 @@ public class Ground : MonoBehaviour
         {
             //Make the block not pushable.
             Debug.Log("reverting blue");
-            this.gameObject.layer = LayerMask.NameToLayer("IceCube");
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
             _destinationNeutral = transform.position;
             _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             _isIceBlockEffectEnabled = false;
-        }
-        else
-        {
-            Debug.LogError("color to revert from is not recognized");
         }
     }
 
