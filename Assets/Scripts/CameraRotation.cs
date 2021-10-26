@@ -6,45 +6,74 @@ public class CameraRotation : MonoBehaviour
 {
     public float speed;
     public LevelManager LevelManager;
-    public Vector3 distFromPlayer;
-    
-    private Transform Player;
+    public ChangePerspective isoCamera;
+    public Vector3 _gameplayPos;
+
+    private bool _wasPanning;
+    private bool _transitioning_back;
+    private Vector3 _panningPos;
     private Vector3 _initialClickPosition;
 
     Vector3 forward, right;
 
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
-        distFromPlayer = new Vector3(-2.62f, -5.03f, 5.24f);
         forward = Camera.main.transform.forward;
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        _wasPanning = false;
+        _transitioning_back = false;
     }
 
     void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_wasPanning && !LevelManager.IsPanning())
         {
-            _initialClickPosition = Input.mousePosition;
+            print("reseting");
+            transform.parent.parent.position = Vector3.Lerp(
+            transform.parent.parent.position, _gameplayPos, speed * Time.deltaTime
+            );
+            if (Vector3.Distance(transform.parent.parent.position, _gameplayPos) >= 0.01f)
+            {
+                _transitioning_back = true;
+            }
+            else
+            {
+                transform.parent.parent.position = _gameplayPos;
+                _transitioning_back = false;
+                _wasPanning = false;
+            }
         }
-        if (Input.GetMouseButton(0))
+        if (!_transitioning_back)
         {
-            LevelManager.SetIsPanning(true);
-            Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
-            Vector3 rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
-            Vector3 upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
+            if (!LevelManager.IsPanning())
+            {
+                _gameplayPos = transform.parent.parent.position;
+            }
+            if (Input.GetMouseButtonDown(2))
+            {
+                _initialClickPosition = Input.mousePosition;
+            }
+            else if (Input.GetMouseButton(2))
+            {
+                //Note: because panning is detected alongside clicking thus causes jittering when reset, 
+                //      I changed the panning to a separate button as this will reflect our final product
+                // remove this comment once controller support is realized
+                LevelManager.SetIsPanning(true);
+                _wasPanning = true;
+                _panningPos = transform.parent.parent.position;
+                Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
+                Vector3 rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
+                Vector3 upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
+                rightMovement = isoCamera.isIntervteredControl ? -rightMovement : rightMovement;
+                upMovement = isoCamera.isIntervteredControl ? -upMovement : upMovement;
 
-            transform.position += rightMovement;
-            transform.position += upMovement;
-            _initialClickPosition = Input.mousePosition;
-            return;
-        }
-
-        if (!LevelManager.IsPanning())
-        {
-            Camera.main.transform.position = Player.position - distFromPlayer;
+                transform.transform.parent.parent.position += rightMovement;
+                transform.transform.parent.parent.position += upMovement;
+                _initialClickPosition = Input.mousePosition;
+                return;
+            }
         }
     }
 }

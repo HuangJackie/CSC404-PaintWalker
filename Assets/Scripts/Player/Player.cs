@@ -7,7 +7,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public Transform cameraWorldAxis;
+    public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
+    public ChangePerspective isoCamera;
 
     private float _horizontalMovement;
     private float _verticalMovement;
@@ -19,7 +22,8 @@ public class Player : MonoBehaviour
     // Rigid Grid Movement
     public float speed;
     private Vector3 _targetLocation;
-    private Vector3 _prevLocation;
+    private Vector3 _curposition;
+    private Vector3 _prevPosition;
 
     private UpdateUI _updateUI;
     private Transform _transform;
@@ -31,11 +35,16 @@ public class Player : MonoBehaviour
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
         _targetLocation = transform.position;
-        _prevLocation = _targetLocation;
+        _prevPosition = _targetLocation;
     }
 
     void Update()
     {
+        _curposition = transform.position;
+        Vector3 distMoved = _curposition - _prevPosition;
+        cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
+        cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
+
         if (LevelManager.freeze_player)
         {
             return;
@@ -43,8 +52,8 @@ public class Player : MonoBehaviour
 
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
-        _horizontalMovement = Input.GetAxisRaw("Horizontal");
-        _verticalMovement = Input.GetAxisRaw("Vertical");
+        _horizontalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Horizontal");
+        _verticalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Vertical");
         _isHorizontalMovementPressed = Input.GetButton("Horizontal");
         _isVerticalMovementPressed = Input.GetButton("Vertical");
 
@@ -53,6 +62,11 @@ public class Player : MonoBehaviour
             _targetLocation.y = transform.position.y;
             RigidGridMove();
         }
+        _prevPosition = _curposition;
+    }
+
+    private void FixedUpdate()
+    {
     }
 
     private void RigidGridMove()
@@ -65,6 +79,9 @@ public class Player : MonoBehaviour
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
+        Vector3 horDistMoved = newPosition - transform.position;
+        cameraWorldAxis.position = cameraWorldAxis.position + horDistMoved;
+        cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + horDistMoved;
 
         transform.position = newPosition;
 
@@ -96,8 +113,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
-        _prevLocation = currentTransformPosition;
 
         switch (pressedButton)
         {
@@ -288,22 +303,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            return "Up";
+            return isoCamera.isIntervteredControl ? "Down" : "Up";
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            return "Down";
+            return isoCamera.isIntervteredControl ? "Up" : "Down";
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            return "Left";
+            return isoCamera.isIntervteredControl ? "Right" : "Left";
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            return "Right";
+            return isoCamera.isIntervteredControl ? "Left" : "Right";
         }
 
         return "";

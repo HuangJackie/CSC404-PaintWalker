@@ -7376,13 +7376,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599639707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.6600966}
+  m_LocalRotation: {x: 0.29357782, y: -0.20642203, z: 0.0650846, w: 0.9311101}
+  m_LocalPosition: {x: 1.94, y: 3.62, z: -4.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1510057399}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: -25, z: 0}
 --- !u!82 &599639709
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7491,9 +7491,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc0cb634e7ca9f48b2c90bb087a6f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 3
   LevelManager: {fileID: 1704174257}
-  distFromPlayer: {x: -2.1, y: -3.7, z: 5.24}
+  isoCamera: {fileID: 1510057400}
+  _gameplayPos: {x: 0, y: 0, z: 0}
 --- !u!82 &599639711
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7621,7 +7622,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -5
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -10580,9 +10581,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: isoCamera
+      value: 
+      objectReference: {fileID: 1510057400}
+    - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
       propertyPath: LevelManager
       value: 
       objectReference: {fileID: 1704174257}
+    - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1510057399}
+    - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: cameraWorldAxis
+      value: 
+      objectReference: {fileID: 1847892864}
+    - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: isoCameraTransform
+      value: 
+      objectReference: {fileID: 1510057399}
+    - target: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: cameraPanningRevertTarget
+      value: 
+      objectReference: {fileID: 599639710}
     - target: {fileID: 5616881381544338442, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17523,6 +17544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1510057399}
+  - component: {fileID: 1510057400}
   m_Layer: 0
   m_Name: Isometric Camera
   m_TagString: Untagged
@@ -17537,14 +17559,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510057398}
-  m_LocalRotation: {x: 0.29357782, y: -0.20642203, z: 0.0650846, w: 0.9311101}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 599639708}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 35, y: -25, z: 0}
+  m_Father: {fileID: 1847892864}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510057400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510057398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe4a5cdb09a5a3499b432a31cf38372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1
+  isIntervteredControl: 0
+  LevelManager: {fileID: 1704174257}
 --- !u!1001 &1513166303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21862,6 +21899,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: 7678c006a710d5a44abab66cfff1a5fa, type: 3}
   m_PrefabInstance: {fileID: 1847001675}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1847892863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847892864}
+  m_Layer: 0
+  m_Name: WorldPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1847892864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847892863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1510057399}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854442277
 GameObject:
   m_ObjectHideFlags: 0
