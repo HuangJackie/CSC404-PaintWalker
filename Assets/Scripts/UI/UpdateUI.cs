@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +9,7 @@ public class UpdateUI : MonoBehaviour
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
     private PaintLeftBG paintLeftBG;
-    
-    private CrosshairUI crosshairUI;
-    private bool _isCrosshairActive;
-    private Camera _camera;
-    private TooltipObject _tooltipObject;
-    
+
     [SerializeField] private GameObject infoTextBG;
     private PaintNeededText infoText;
     private bool _alreadyOverriden;
@@ -27,40 +20,11 @@ public class UpdateUI : MonoBehaviour
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
         paintLeftBG = FindObjectOfType<PaintLeftBG>();
-        
-        crosshairUI = FindObjectOfType<CrosshairUI>();
-        _isCrosshairActive = false;
-        _camera = FindObjectOfType<Camera>();
-        _tooltipObject = null;
-        
+
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
 
         ChangePaint(Paints.YELLOW_PAINT, 3);
-    }
-
-    private void Update()
-    {
-        if (_isCrosshairActive)
-        {
-            Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-            RaycastHit hitInfo;
-            TooltipObject newTooltipObject;
-            if (Physics.Raycast(ray, out hitInfo) && hitInfo.collider.gameObject.TryGetComponent(out newTooltipObject))
-            {
-                // print("I'm looking at " + hitInfo.transform.name);
-                if (_tooltipObject != null && newTooltipObject != _tooltipObject)
-                {
-                    _tooltipObject.OnExitTooltip();
-                }
-                _tooltipObject = newTooltipObject;
-                _tooltipObject.OnDisplayTooltip();
-            }
-            else if (_tooltipObject != null)
-            {
-                _tooltipObject.OnExitTooltip();
-            }
-        }
     }
 
     public void SetInfoText(string text, bool preventOverride = false)
@@ -117,11 +81,5 @@ public class UpdateUI : MonoBehaviour
         infoTextBG.SetActive(false);
         _alreadyOverriden = false;
         infoText.SetPaintText("");
-    }
-
-    public void EnableCrosshairUI(bool isEnabled)
-    {
-        _isCrosshairActive = isEnabled;
-        crosshairUI.EnableCrossHair(isEnabled);
     }
 }

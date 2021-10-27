@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraRotation : MonoBehaviour
 {
     public float speed;
-    public float controllerPanningSpeed;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
     public Vector3 _gameplayPos;
@@ -14,7 +13,6 @@ public class CameraRotation : MonoBehaviour
     private bool _transitioning_back;
     private Vector3 _panningPos;
     private Vector3 _initialClickPosition;
-    
 
     Vector3 forward, right;
 
@@ -39,7 +37,7 @@ public class CameraRotation : MonoBehaviour
         {
             print("reseting");
             transform.parent.parent.position = Vector3.Lerp(
-                transform.parent.parent.position, _gameplayPos, speed * Time.deltaTime
+            transform.parent.parent.position, _gameplayPos, speed * Time.deltaTime
             );
             if (Vector3.Distance(transform.parent.parent.position, _gameplayPos) >= 0.01f)
             {
@@ -52,14 +50,12 @@ public class CameraRotation : MonoBehaviour
                 _wasPanning = false;
             }
         }
-
         if (!_transitioning_back)
         {
             if (!LevelManager.IsPanning())
             {
                 _gameplayPos = transform.parent.parent.position;
             }
-
             if (Input.GetMouseButtonDown(2))
             {
                 _initialClickPosition = Input.mousePosition;
@@ -83,18 +79,6 @@ public class CameraRotation : MonoBehaviour
                 _initialClickPosition = Input.mousePosition;
                 return;
             }
-
-            float horizontalPanning = Input.GetAxis("HorizontalPanning") * controllerPanningSpeed;
-            float verticalPanning = Input.GetAxis("VerticalPanning") * controllerPanningSpeed;
-            if (horizontalPanning != 0 || verticalPanning != 0)
-            {
-                _panningPos = transform.parent.parent.position;
-                _wasPanning = true;
-                LevelManager.SetIsPanning(true);
-                
-            }
-
-            transform.transform.parent.parent.position += new Vector3(verticalPanning, 0, horizontalPanning);
         }
     }
 }
