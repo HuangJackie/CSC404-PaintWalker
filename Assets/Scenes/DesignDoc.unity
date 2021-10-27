@@ -3787,7 +3787,6 @@ MonoBehaviour:
   paintColour2: Yellow
   paintQuantity1: 2
   paintQuantity2: 2
-  useMouseClick: 0
   isPainted: 0
   isTriggered: 0
   wall: {fileID: 1472471005}
@@ -19478,7 +19477,6 @@ MonoBehaviour:
   paintColour2: Red
   paintQuantity1: 2
   paintQuantity2: 2
-  useMouseClick: 1
   isPainted: 0
   speed: 3
   target: {fileID: 1415597695}
