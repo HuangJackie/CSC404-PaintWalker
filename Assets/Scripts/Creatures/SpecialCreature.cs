@@ -1,73 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
-public class SpecialCreature : MonoBehaviour, TooltipObject
+public class SpecialCreature : MonoBehaviour
 {
-    public string paintColour1;
-    public string paintColour2;
-    public int paintQuantity1;
-    public int paintQuantity2;
+    // Start is called before the first frame update
+    private LevelManager _levelManager;
+    private Material _material;
+    private Color _originalColour;
 
-    public bool useMouseClick;
-
-    private UpdateUI _updateUI;
-    // private bool _isMouseClicked;
-
-    protected bool IsMouseOver;
-
-    protected Material Material;
-    protected Color OriginalColour;
-    public bool isPainted;
-
-    protected void Start()
+    void Start()
     {
-        _updateUI = FindObjectOfType<UpdateUI>();
-        Material = GetComponentInChildren<Renderer>().material;
-        OriginalColour = Material.color;
+        _levelManager = FindObjectOfType<LevelManager>();
+        _material = GetComponentInChildren<Renderer>().material;
+        _originalColour = _material.color;
     }
 
-    void OnMouseOver()
+    private void OnTriggerEnter(Collider collision)
     {
-        if (useMouseClick)
+        if (collision.gameObject.GetComponent<Collider>().CompareTag("Player"))
         {
-            OnDisplayTooltip();
-        }
-    }
-
-    void OnMouseExit()
-    {
-        if (isPainted)
-        {
-            return;
-        }
-
-        if (useMouseClick)
-        {
-            OnExitTooltip();
-        }
-    }
-
-    public void OnDisplayTooltip()
-    {
-        if (!isPainted)
-        {
-            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
-                                  " " + paintQuantity2 + " " + paintColour2);
-            Material.color = new Color(0.98f, 1f, 0.45f);
-            IsMouseOver = true;
-        }
-    }
-
-    public void OnExitTooltip()
-    {
-        if (!isPainted)
-        {
-            _updateUI.SetInfoText("");
-            Material.color = OriginalColour;
-            IsMouseOver = false;
+            bool bluePaintSelected = _levelManager.GetCurrentlySelectedPaint() == "Blue";
+            if (bluePaintSelected && _levelManager.HasEnoughPaint())
+            {
+                _material.color = Paints.blue;
+                _originalColour = _material.color;
+                _levelManager.DecreaseCurrentSelectedPaint(2);
+            }
         }
     }
 }

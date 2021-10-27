@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
+
         _horizontalMovement = isoCamera.isIntervteredControl
             ? -_controllerUtil.GetHorizontalAxisRaw()
             : _controllerUtil.GetHorizontalAxisRaw();
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
             //);
         }
 
-        if (_moveDirection != Vector3.zero && _isRotating)
+        if (_isRotating)
         {
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f

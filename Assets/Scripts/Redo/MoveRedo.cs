@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveRedo : ScriptableObject, IRedoCommand
 {
     public LevelManager leveManager;
+    private string colorSpent;
+    private int amountSpent;
     private Vector3 direction = Vector3.zero;
     private float distance = 0;
     private GameObject player;
@@ -45,6 +47,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
 
     public void Undo()
     {
+        leveManager = FindObjectOfType<LevelManager>();
         if (player)
         {
             RevertPlayerAndCameraState();
@@ -56,23 +59,31 @@ public class MoveRedo : ScriptableObject, IRedoCommand
             int ground_index = 0;
             foreach (GameObject obj in objects)
             {
-                obj.transform.position = _objectsOriginPosition[index];
-                if (obj.gameObject.CompareTag("Ground"))
+                if (obj != null)
                 {
-                    Ground groundScript = obj.gameObject.GetComponent<Ground>();
-                    groundScript.isPaintedByFeet = blockMetadata[ground_index].Item1;
-                    groundScript.isPaintedByBrush = blockMetadata[ground_index].Item2;
-                    groundScript._paintedColour = blockMetadata[ground_index].Item3;
-                    if (blockMetadata[ground_index].Item3 == new Color(0.98f, 1f, 0.45f))
+                    obj.transform.position = _objectsOriginPosition[index];
+                    if (obj.gameObject.CompareTag("Ground"))
                     {
-                        obj.gameObject.GetComponentInChildren<Renderer>().material.color = new Color(1.000f, 0.993f, 0.816f);
-                    } else
-                    {
-                        obj.gameObject.GetComponentInChildren<Renderer>().material.color = blockMetadata[ground_index].Item3;
+                        Ground groundScript = obj.gameObject.GetComponent<Ground>();
+                        groundScript.isPaintedByFeet = blockMetadata[ground_index].Item1;
+                        groundScript.isPaintedByBrush = blockMetadata[ground_index].Item2;
+                        groundScript._paintedColour = blockMetadata[ground_index].Item3;
+                        if (blockMetadata[ground_index].Item3 == new Color(0.98f, 1f, 0.45f))
+                        {
+                            obj.gameObject.GetComponentInChildren<Renderer>().material.color = new Color(1.000f, 0.993f, 0.816f);
+                        }
+                        else
+                        {
+                            obj.gameObject.GetComponentInChildren<Renderer>().material.color = blockMetadata[ground_index].Item3;
+                        }
+                        ground_index++;
                     }
-                    ground_index++;
+                    else if (obj.gameObject.CompareTag("PaintRefill"))
+                    {
+                        obj.SetActive(true);
+                    }
+                    index++;
                 }
-                index++;
             }
         }
         if (greenBlocksToRevert != null)
@@ -82,7 +93,18 @@ public class MoveRedo : ScriptableObject, IRedoCommand
                 Destroy(obj);
             }
         }
+        if (this.colorSpent != null)
+        {
+            Debug.Log("increasing paint");
+            leveManager.IncreasePaint(this.colorSpent, this.amountSpent);
+        }
         
+    }
+
+    public void RecordPaintSpent(string color, int amount)
+    {
+        this.amountSpent = amount;
+        this.colorSpent = color;
     }
 
     public void UpdatePlayerY(float y_pos)
@@ -111,6 +133,20 @@ public class MoveRedo : ScriptableObject, IRedoCommand
         Debug.Log(obj.transform.position);
         this._objectsOriginPosition.Add(obj.transform.position);
         this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, groundScript._originalColour, groundScript._paintedColour));
+    }
+
+    public void InjectPaintPickup(GameObject obj)
+    {
+        if (objects == null)
+        {
+            this.objects = new List<GameObject>();
+        }
+        if (this._objectsOriginPosition == null)
+        {
+            this._objectsOriginPosition = new List<Vector3>();
+        }
+        objects.Add(obj);
+        this._objectsOriginPosition.Add(obj.transform.position);
     }
 
     public void AddGreenBlocksToRevert(GameObject obj)

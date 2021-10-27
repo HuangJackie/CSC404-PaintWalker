@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
-public class CanLogic : MonoBehaviour, TooltipObject
+public class CanLogic : MonoBehaviour
 {
     public LevelManager manager;
     public string color;
@@ -54,7 +53,12 @@ public class CanLogic : MonoBehaviour, TooltipObject
         if (other.tag == "Player")
         {
             manager.IncreasePaint(color, paintReplenished);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            MoveRedo lastCommand = manager.redoCommandHandler.LatestCommand() as MoveRedo;
+            if (lastCommand)
+            {
+                lastCommand.InjectPaintPickup(this.gameObject);
+            }
         }
     }
 
@@ -62,7 +66,7 @@ public class CanLogic : MonoBehaviour, TooltipObject
     {
         if (this)
         {
-            OnDisplayTooltip();
+            _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
         }
     }
 
@@ -70,17 +74,7 @@ public class CanLogic : MonoBehaviour, TooltipObject
     {
         if (this)
         {
-            OnExitTooltip();
+            _updateUI.SetInfoText("");
         }
-    }
-
-    public void OnDisplayTooltip()
-    {
-        _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
-    }
-
-    public void OnExitTooltip()
-    {
-        _updateUI.SetInfoText("");
     }
 }
