@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
     {
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
-            //print("tracking starts");
+            print("tracking starts when player starts moving");
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
             // print("trigger first");
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
-            //print("tracking ends");
+            print("tracking ends when player reaches dest");
         }
 
         Vector3 newPosition = Vector3.MoveTowards(

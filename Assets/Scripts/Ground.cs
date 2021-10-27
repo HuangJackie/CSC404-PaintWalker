@@ -16,6 +16,7 @@ public class Ground : Interactable, Paintable
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
+    public Color _paintedColour;
     // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
 
     private MoveRedo latestState;
@@ -26,6 +27,7 @@ public class Ground : Interactable, Paintable
     private float _moveableObjYPosition;
 
     private bool _isMouseClicked;
+    private bool _isMouseOver;
 
     private bool _isRevertingBlock;
     private bool _isIceBlockEffectEnabled;
@@ -50,10 +52,13 @@ public class Ground : Interactable, Paintable
         Material = GetComponentInChildren<Renderer>().material;
         base.originalColour = Material.color;
         originalColour = base.originalColour;
+        _paintedColour = originalColour;
         _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
         _playerYPosition = player.transform.position.y;
+
+        _isMouseOver = false;
 
         _isRevertingBlock = false;
         _isIceBlockEffectEnabled = false;
@@ -85,10 +90,10 @@ public class Ground : Interactable, Paintable
             return;
         }
 
-        if (_levelManager.GetCurrentlySelectedPaintClass() != originalColour || !isPaintedByBrush)
+        if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
         {
             _isMouseClicked = Input.GetButtonDown("Fire1");
-            if (IsMouseOver && _isMouseClicked &&
+            if (_isMouseOver && _isMouseClicked &&
                 Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
             {
                 Paint(true);
@@ -361,9 +366,9 @@ public class Ground : Interactable, Paintable
 
             string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
 
-            if (isPaintedByBrush)
+            if (_paintedColour != originalColour && isPaintedByBrush)
             {
-                RevertEffect(originalColour, currentlySelectedPaint);
+                RevertEffect(_paintedColour, currentlySelectedPaint);
             }
             if (!paintWithBrush && _player.GameState != null)
             {
@@ -373,7 +378,7 @@ public class Ground : Interactable, Paintable
             {
                 case "Red":
                     Material.color = GameConstants.red;
-                    originalColour = Material.color;
+                    _paintedColour = Material.color;
                     _levelManager.DecreasePaint("Red", 1);
                     if (paintWithBrush && NoBlockBelow())
                     {
@@ -389,7 +394,7 @@ public class Ground : Interactable, Paintable
                     break;
                 case "Green":
                     Material.color = GameConstants.green;
-                    originalColour = Material.color;
+                    _paintedColour = Material.color;
                     _levelManager.DecreasePaint("Green", 1);
                     if (paintWithBrush)
                     {
@@ -405,7 +410,7 @@ public class Ground : Interactable, Paintable
                     break;
                 case "Yellow":
                     Material.color = GameConstants.yellow;
-                    originalColour = Material.color;
+                    _paintedColour = Material.color;
                     _levelManager.DecreasePaint("Yellow", 1);
                     if (paintWithBrush && NoUnmovableBlockAbove())
                     {
@@ -420,7 +425,7 @@ public class Ground : Interactable, Paintable
                     break;
                 case "Blue":
                     Material.color = GameConstants.blue;
-                    originalColour = Material.color;
+                    _paintedColour = Material.color;
                     _levelManager.DecreasePaint("Blue", 1);
                     if (paintWithBrush)
                     {
@@ -612,18 +617,17 @@ public class Ground : Interactable, Paintable
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.right, 1);
     }
 
-    private new void OnMouseOver()
+    private void OnMouseEnter()
     {
-        base.OnMouseOver();
-        // TODO: the tint should be the same color as the currently selected paint
-        // TODO: Also, when block is in transit (e.g. moving), the highlight should disappear as it is not selectable
-        HighlightForHoverover(); 
+        originalColour = Material.color;
+        Material.color = new Color(0.98f, 1f, 0.45f);
+        _isMouseOver = true;
     }
 
     private new void OnMouseExit()
     {
-        base.OnMouseExit();
-        UndoHighlight();
+        Material.color = _paintedColour;
+        _isMouseOver = false;
     }
 
     public bool IsIceBlock()
