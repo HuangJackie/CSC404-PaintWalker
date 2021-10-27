@@ -4,30 +4,47 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class RammingSpecialCreature : SpecialCreature
+public class RammingSpecialCreature : MonoBehaviour
 {
     // Start is called before the first frame update
     private LevelManager _levelManager;
+    private Material _material;
+    private Color _originalColour;
     private bool is_moving = false;
     public int speed = 3;
     public Transform target;
-    
+
+    public bool useMouseClick;
+
     // For clicking
     public GameObject player;
+    public bool _isPainted;
 
-    new void Start()
+    public string paintColour1;
+    public string paintColour2;
+    public int paintQuantity1;
+    public int paintQuantity2;
+
+    private UpdateUI _updateUI;
+    private bool _isMouseClicked;
+
+    private bool _isMouseOver;
+
+    void Start()
     {
-        base.Start();
         _levelManager = FindObjectOfType<LevelManager>();
+        _material = GetComponentInChildren<Renderer>().material;
+        _originalColour = _material.color;
+        _updateUI = FindObjectOfType<UpdateUI>();
         player = GameObject.FindWithTag("Player");
     }
 
     void Update()
     {
-        if (IsMouseOver &&
+        if (_isMouseOver &&
             SpecialCreatureUtil.ActivateSpecialCreature(
-                isPainted,
-                IsMouseOver,
+                _isPainted,
+                _isMouseOver,
                 Input.GetButtonDown("Fire1"),
                 player.transform.position,
                 transform.position,
@@ -36,11 +53,11 @@ public class RammingSpecialCreature : SpecialCreature
                 paintColour2,
                 paintQuantity1,
                 paintQuantity2,
-                Material,
+                _material,
                 Color.magenta))
         {
-            OriginalColour = Material.color;
-            isPainted = true;
+            _originalColour = _material.color;
+            _isPainted = true;
             is_moving = true;
         }
     }
@@ -65,6 +82,27 @@ public class RammingSpecialCreature : SpecialCreature
         if (collision.gameObject.GetComponent<Ground>())
         {
             Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (useMouseClick && !_isPainted)
+        {
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
+                                   " " + paintQuantity2 + " " + paintColour2);
+            _material.color = new Color(0.98f, 1f, 0.45f);
+            _isMouseOver = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (useMouseClick)
+        {
+            _updateUI.SetInfoText("");
+            _material.color = _originalColour;
+            _isMouseOver = false;
         }
     }
 }
