@@ -213,6 +213,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4972428139563952114, guid: fb3cbfb3ef0798e4d9168331818d003d, type: 3}
   m_PrefabInstance: {fileID: 4705347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &15028088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15028090}
+  - component: {fileID: 15028089}
+  m_Layer: 0
+  m_Name: ControllerSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &15028089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15028088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abac952cda5744a09998a09e365141ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBetweenMovementsInSeconds: 0.05
+--- !u!4 &15028090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15028088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5318924, y: -0.10972524, z: 1.4260956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &52029665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3739,16 +3783,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b05af4ff0d35ac418c23371f2747c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paintColour1: Blue
+  paintColour2: Yellow
+  paintQuantity1: 2
+  paintQuantity2: 2
+  useMouseClick: 0
+  isPainted: 0
   isTriggered: 0
   wall: {fileID: 1472471005}
   manager: {fileID: 1704174257}
   player: {fileID: 859007761}
   radius: 1.5
-  _isPainted: 0
-  paintColour1: Blue
-  paintColour2: Yellow
-  paintQuantity1: 2
-  paintQuantity2: 2
 --- !u!65 &370820981
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10698,17 +10743,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
   m_PrefabInstance: {fileID: 859007759}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &859007763 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
-  m_PrefabInstance: {fileID: 859007759}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859007761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &867989191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19436,15 +19470,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20957bf8a7536c640b541c57d04503b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  target: {fileID: 1415597695}
-  useMouseClick: 1
-  player: {fileID: 859007761}
-  _isPainted: 0
   paintColour1: Blue
   paintColour2: Red
   paintQuantity1: 2
   paintQuantity2: 2
+  useMouseClick: 1
+  isPainted: 0
+  speed: 3
+  target: {fileID: 1415597695}
+  player: {fileID: 859007761}
 --- !u!23 &1579958083
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20236,7 +20270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 1
   freeze_player: 0
-  player_script: {fileID: 859007763}
+  player_script: {fileID: 0}
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0

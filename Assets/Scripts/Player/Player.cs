@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public Transform cameraWorldAxis;
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
@@ -34,6 +33,7 @@ public class Player : MonoBehaviour
     private UpdateUI _updateUI;
 
     private bool _hasWaitedTurn;
+    private ControllerUtil _controllerUtil;
 
     void Start()
     {
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         _targetLocation = transform.position;
         _prevPosition = _targetLocation;
         _isNotTrackingMovement = true;
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
 
     void Update()
@@ -49,7 +50,8 @@ public class Player : MonoBehaviour
         _curposition = transform.position;
         Vector3 distMoved = _curposition - _prevPosition;
         cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
-        cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
+        cameraPanningRevertTarget._gameplayPos =
+            cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
         if (LevelManager.freeze_player)
         {
@@ -58,22 +60,23 @@ public class Player : MonoBehaviour
 
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
-        _horizontalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Horizontal");
-        _verticalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Vertical");
+        _horizontalMovement = isoCamera.isIntervteredControl
+            ? -_controllerUtil.GetHorizontalAxisRaw()
+            : _controllerUtil.GetHorizontalAxisRaw();
+        _verticalMovement = isoCamera.isIntervteredControl
+            ? -_controllerUtil.GetVerticalAxisRaw()
+            : _controllerUtil.GetVerticalAxisRaw();
 
-        _isHorizontalMovementPressed = Input.GetAxis("Horizontal") != 0;
-        _isVerticalMovementPressed = Input.GetAxis("Vertical") != 0;
+        _isHorizontalMovementPressed = _horizontalMovement != 0;
+        _isVerticalMovementPressed = _verticalMovement != 0;
 
         if (this.CheckGrounded())
         {
             _targetLocation.y = transform.position.y;
             RigidGridMove();
         }
-        _prevPosition = _curposition;
-    }
 
-    private void FixedUpdate()
-    {
+        _prevPosition = _curposition;
     }
 
     public void CreateCopyOfCurrentState(bool up)
@@ -82,10 +85,12 @@ public class Player : MonoBehaviour
         if (up)
         {
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.up, transform.rotation);
-        } else
+        }
+        else
         {
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.down, transform.rotation);
         }
+
         LevelManager.redoCommandHandler.AddCommand(GameState);
         LevelManager.redoCommandHandler.TransitionToNewGameState();
     }
@@ -99,15 +104,18 @@ public class Player : MonoBehaviour
             _isNotTrackingMovement = false;
             print("trigger first");
         }
+
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo, _previsouRotationForRedo);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
+                _previsouRotationForRedo);
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
             //print("tracking ends");
         }
+
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
@@ -119,7 +127,7 @@ public class Player : MonoBehaviour
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
-        
+
         Vector3 horDistMoved = newPosition - transform.position;
         cameraWorldAxis.position = cameraWorldAxis.position + horDistMoved;
         cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + horDistMoved;
@@ -144,7 +152,9 @@ public class Player : MonoBehaviour
                 transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
             );
         }
-        if (_moveDirection != Vector3.zero && Quaternion.Angle(transform.rotation,Quaternion.LookRotation(_moveDirection)) < 0.1f )
+
+        if (_moveDirection != Vector3.zero &&
+            Quaternion.Angle(transform.rotation, Quaternion.LookRotation(_moveDirection)) < 0.1f)
         {
             transform.rotation = Quaternion.LookRotation(_moveDirection);
             _isRotating = false;
@@ -320,6 +330,7 @@ public class Player : MonoBehaviour
                 // Painted surface, can move.
                 return true;
             }
+
             // Try to paint.
             return ground.PaintSurface(false); // If false then the floor was not painted.
         }
@@ -357,22 +368,22 @@ public class Player : MonoBehaviour
 
     private string GetCurrentlyPressedDirection()
     {
-        if ( Input.GetAxis("Vertical") > 0)
+        if (_verticalMovement > 0)
         {
             return isoCamera.isIntervteredControl ? "Down" : "Up";
         }
 
-        if (Input.GetAxis("Vertical") < 0)
+        if (_verticalMovement < 0)
         {
             return isoCamera.isIntervteredControl ? "Up" : "Down";
         }
 
-        if (Input.GetAxis("Horizontal") < 0)
+        if (_horizontalMovement < 0)
         {
             return isoCamera.isIntervteredControl ? "Right" : "Left";
         }
 
-        if (Input.GetAxis("Horizontal") > 0)
+        if (_horizontalMovement > 0)
         {
             return isoCamera.isIntervteredControl ? "Left" : "Right";
         }
