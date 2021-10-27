@@ -147,13 +147,13 @@ public class Player : MonoBehaviour
             //);
         }
 
-        if (_isRotating)
+        if (_moveDirection != Vector3.zero && _isRotating)
         {
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
             );
         }
-
+        
         if (_moveDirection != Vector3.zero &&
             Quaternion.Angle(transform.rotation, Quaternion.LookRotation(_moveDirection)) < 0.1f)
         {

@@ -1,33 +1,65 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class SpecialCreature : MonoBehaviour
+public class SpecialCreature : MonoBehaviour, TooltipObject
 {
-    // Start is called before the first frame update
-    private LevelManager _levelManager;
-    private Material _material;
-    private Color _originalColour;
+    public string paintColour1;
+    public string paintColour2;
+    public int paintQuantity1;
+    public int paintQuantity2;
 
-    void Start()
+    private UpdateUI _updateUI;
+    // private bool _isMouseClicked;
+
+    protected bool IsMouseOver;
+
+    protected Material Material;
+    protected Color OriginalColour;
+    public bool isPainted;
+
+    protected void Start()
     {
-        _levelManager = FindObjectOfType<LevelManager>();
-        _material = GetComponentInChildren<Renderer>().material;
-        _originalColour = _material.color;
+        _updateUI = FindObjectOfType<UpdateUI>();
+        Material = GetComponentInChildren<Renderer>().material;
+        OriginalColour = Material.color;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    void OnMouseOver()
     {
-        if (collision.gameObject.GetComponent<Collider>().CompareTag("Player"))
+        print("mouse over");
+
+        OnDisplayTooltip();
+    }
+
+    void OnMouseExit()
+    {
+        if (isPainted)
         {
-            bool bluePaintSelected = _levelManager.GetCurrentlySelectedPaint() == "Blue";
-            if (bluePaintSelected && _levelManager.HasEnoughPaint())
-            {
-                _material.color = Paints.blue;
-                _originalColour = _material.color;
-                _levelManager.DecreaseCurrentSelectedPaint(2);
-            }
+            return;
+        }
+
+        OnExitTooltip();
+    }
+
+    public void OnDisplayTooltip()
+    {
+        if (!isPainted)
+        {
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
+                                  " " + paintQuantity2 + " " + paintColour2);
+            Material.color = new Color(0.98f, 1f, 0.45f);
+        }
+    }
+
+    public void OnExitTooltip()
+    {
+        if (!isPainted)
+        {
+            _updateUI.SetInfoText("");
+            Material.color = OriginalColour;
         }
     }
 }
