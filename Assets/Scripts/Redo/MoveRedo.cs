@@ -8,7 +8,6 @@ public class MoveRedo : ScriptableObject, IRedoCommand
     private string colorSpent;
     private int amountSpent;
     private Vector3 direction = Vector3.zero;
-    private float distance = 0;
     private GameObject player;
     private List<GameObject> objects;
     private List<GameObject> greenBlocksToRevert;
@@ -40,7 +39,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
             if (i.gameObject.CompareTag("Ground"))
             {
                 Ground groundScript = i.gameObject.GetComponent<Ground>();
-                this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, groundScript._originalColour, groundScript._paintedColour));
+                this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript.originalColour));
             }
         }
     }
@@ -67,7 +66,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
                         Ground groundScript = obj.gameObject.GetComponent<Ground>();
                         groundScript.isPaintedByFeet = blockMetadata[ground_index].Item1;
                         groundScript.isPaintedByBrush = blockMetadata[ground_index].Item2;
-                        groundScript._paintedColour = blockMetadata[ground_index].Item3;
+                        groundScript.originalColour = blockMetadata[ground_index].Item3;
                         if (blockMetadata[ground_index].Item3 == new Color(0.98f, 1f, 0.45f))
                         {
                             obj.gameObject.GetComponentInChildren<Renderer>().material.color = new Color(1.000f, 0.993f, 0.816f);
@@ -130,9 +129,9 @@ public class MoveRedo : ScriptableObject, IRedoCommand
             this._objectsOriginPosition = new List<Vector3>();
         }
         objects.Add(obj);
-        Debug.Log(obj.transform.position);
+        // Debug.Log(obj.transform.position);
         this._objectsOriginPosition.Add(obj.transform.position);
-        this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, groundScript._originalColour, groundScript._paintedColour));
+        this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript.originalColour));
     }
 
     public void InjectPaintPickup(GameObject obj)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class CanLogic : MonoBehaviour, TooltipObject
+public class PaintOrb : Interactable, TooltipObject
 {
     public LevelManager manager;
     public string color;
@@ -14,8 +14,9 @@ public class CanLogic : MonoBehaviour, TooltipObject
     private Renderer[] meshRenderers;
     private UpdateUI _updateUI;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         particleSettings = GetComponentInChildren<ParticleSystem>().main;
         lightSettings = GetComponentInChildren<Light>();
         meshRenderers = GetComponentsInChildren<Renderer>();
@@ -25,19 +26,19 @@ public class CanLogic : MonoBehaviour, TooltipObject
         switch (color)
         {
             case "Yellow":
-                newColor = Paints.yellow;
+                newColor = GameConstants.yellow;
                 break;
             case "Blue":
-                newColor = Paints.blue;
+                newColor = GameConstants.blue;
                 break;
             case "Green":
-                newColor = Paints.green;
+                newColor = GameConstants.green;
                 break;
             case "Red":
-                newColor = Paints.red;
+                newColor = GameConstants.red;
                 break;
             default:
-                newColor = Paints.yellow;
+                newColor = GameConstants.yellow;
                 break;
         }
 
@@ -63,16 +64,18 @@ public class CanLogic : MonoBehaviour, TooltipObject
         }
     }
 
-    private void OnMouseOver()
+    private new void OnMouseOver()
     {
+        base.OnMouseOver();
         if (this)
         {
             OnDisplayTooltip();
         }
     }
 
-    private void OnMouseExit()
+    private new void OnMouseExit()
     {
+        base.OnMouseExit();
         if (this)
         {
             OnExitTooltip();
@@ -82,10 +85,13 @@ public class CanLogic : MonoBehaviour, TooltipObject
     public void OnDisplayTooltip()
     {
         _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
+        HighlightForHoverover();
+
     }
 
     public void OnExitTooltip()
     {
-        _updateUI.SetInfoText("");
+        _updateUI.WipeInfoText();
+        UndoHighlight();
     }
 }

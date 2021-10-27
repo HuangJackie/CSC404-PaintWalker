@@ -9,7 +9,7 @@ public class RedoCommandHandler
 
     public void AddCommand(IRedoCommand command)
     {
-        Debug.Log(commandList.Count);
+        // Debug.Log(commandList.Count);
         commandList.Add(command);
     }
 

@@ -41,41 +41,11 @@ public class TpCreature : SpecialCreature
     // Update is called once per frame
     void Update()
     {
-        if (isPainted)
-        {
-            //already painted
-            return;
-        }
-
-        if (IsMouseOver &&
-            SpecialCreatureUtil.ActivateSpecialCreature(
-                isPainted,
-                IsMouseOver,
-                Input.GetButtonDown("Fire1"),
-                player.transform.position,
-                transform.position,
-                _levelManager,
-                paintColour1,
-                paintColour2,
-                paintQuantity1,
-                paintQuantity2,
-                Material,
-                _tpCreatureColor))
-        {
-            OriginalColour = Material.color;
-            isPainted = true;
-            // color other creature:
-            _material2.color = _tpCreatureColor;
-            _originalColour2 = _material2.color;
-            for (int i = 0; i < tp_creaturesx.Length; i++)
-            {
-                tp_creaturesx[i].isPainted = true;
-            }
-        }
     }
 
-    void OnMouseDown()
+    new void OnMouseDown()
     {
+        base.OnMouseDown();
         if (isPainted)
         {
             if (Vector3.Distance(player.transform.position, transform.position) < 3)
@@ -93,5 +63,35 @@ public class TpCreature : SpecialCreature
                 // Destroy(gameObject);
             }
         }
+    }
+    
+    public override bool Paint(bool paintWithBrush)
+    {
+        if (SpecialCreatureUtil.ActivateSpecialCreature(
+                isPainted,
+                IsMouseOver,
+                player.transform.position,
+                transform.position,
+                _levelManager,
+                paintColour1,
+                paintColour2,
+                paintQuantity1,
+                paintQuantity2,
+                Material,
+                _tpCreatureColor))
+        {
+            originalColour = Material.color;
+            isPainted = true;
+            // color other creature:
+            _material2.color = _tpCreatureColor;
+            _originalColour2 = _material2.color;
+            for (int i = 0; i < tp_creaturesx.Length; i++)
+            {
+                tp_creaturesx[i].isPainted = true;
+            }
+
+            return true;
+        }
+        return false;
     }
 }

@@ -19,9 +19,9 @@ public class LevelManager : MonoBehaviour
     private PaintBottle playerPaintBottle;
 
     private UpdateUI _updateUI;
-    private bool _isExitActive = false;
-    private bool _isPanning = false;
-    private bool _isRunningCoroutine = true;
+    private bool _isExitActive;
+    private bool _isPanning;
+    private bool _canMove;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
 
@@ -47,13 +47,15 @@ public class LevelManager : MonoBehaviour
 
         freeze_player = false;
         currentSelectedColour = "Yellow";
-        currentSelectedColourClass = Paints.yellow;
+        currentSelectedColourClass = GameConstants.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
 
         playerPaintBrush = FindObjectOfType<PaintBrush>();
         playerPaintBottle = FindObjectOfType<PaintBottle>();
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
+
+        _canMove = true;
     }
 
     IEnumerator ManageCoroutines()
@@ -92,38 +94,38 @@ public class LevelManager : MonoBehaviour
             {
                 case "Blue":
                     currentSelectedColour = "Red";
-                    currentSelectedColourClass = Paints.red;
+                    currentSelectedColourClass = GameConstants.red;
 
-                    _updateUI.ChangePaint(Paints.RED_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(Paints.red);
-                    playerPaintBottle.SetColor(Paints.red);
+                    _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.red);
+                    playerPaintBottle.SetColor(GameConstants.red);
                     break;
 
                 case "Red":
                     currentSelectedColour = "Green";
-                    currentSelectedColourClass = Paints.green;
+                    currentSelectedColourClass = GameConstants.green;
 
-                    _updateUI.ChangePaint(Paints.GREEN_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(Paints.green);
-                    playerPaintBottle.SetColor(Paints.green);
+                    _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.green);
+                    playerPaintBottle.SetColor(GameConstants.green);
                     break;
 
                 case "Green":
                     currentSelectedColour = "Yellow";
-                    currentSelectedColourClass = Paints.yellow;
+                    currentSelectedColourClass = GameConstants.yellow;
 
-                    _updateUI.ChangePaint(Paints.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(Paints.yellow);
-                    playerPaintBottle.SetColor(Paints.yellow);
+                    _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.yellow);
+                    playerPaintBottle.SetColor(GameConstants.yellow);
                     break;
 
                 case "Yellow":
                     currentSelectedColour = "Blue";
-                    currentSelectedColourClass = Paints.blue;
+                    currentSelectedColourClass = GameConstants.blue;
 
-                    _updateUI.ChangePaint(Paints.BLUE_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(Paints.blue);
-                    playerPaintBottle.SetColor(Paints.blue);
+                    _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.blue);
+                    playerPaintBottle.SetColor(GameConstants.blue);
                     break;
             }
         }
@@ -270,5 +272,15 @@ public class LevelManager : MonoBehaviour
     public void SetExitActive(bool isActive)
     {
         _isExitActive = isActive;
+    }
+
+    public void setCanMove(bool canMove)
+    {
+        _canMove = canMove;
+    }
+
+    public bool CanMove()
+    {
+        return _canMove;
     }
 }

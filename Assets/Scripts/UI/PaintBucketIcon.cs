@@ -22,16 +22,16 @@ public class PaintBucketIcon : MonoBehaviour
     {
         switch(paintType)
         {
-            case Paints.GREEN_PAINT:
+            case GameConstants.GREEN_PAINT:
                 paintBucketIcon.sprite = greenPaintBucket;
                 break;
-            case Paints.RED_PAINT:
+            case GameConstants.RED_PAINT:
                 paintBucketIcon.sprite = redPaintBucket;
                 break;
-            case Paints.YELLOW_PAINT:
+            case GameConstants.YELLOW_PAINT:
                 paintBucketIcon.sprite = yellowPaintBucket;
                 break;
-            case Paints.BLUE_PAINT:
+            case GameConstants.BLUE_PAINT:
                 paintBucketIcon.sprite = specialPaintBucket;
                 break;
             default:

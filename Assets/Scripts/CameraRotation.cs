@@ -86,7 +86,7 @@ public class CameraRotation : MonoBehaviour
 
             float horizontalPanning = Input.GetAxis("HorizontalPanning") * controllerPanningSpeed;
             float verticalPanning = Input.GetAxis("VerticalPanning") * controllerPanningSpeed;
-            print(horizontalPanning);
+
             if (horizontalPanning != 0 || verticalPanning != 0)
             {
                 _panningPos = transform.parent.parent.position;

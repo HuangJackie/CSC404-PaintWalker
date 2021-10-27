@@ -13,7 +13,7 @@ public class PaintBottle : MonoBehaviour
     {
         particleSettings = GetComponentInChildren<ParticleSystem>().main;
         lightSettings = GetComponentInChildren<Light>();
-        SetColor(Paints.yellow);
+        SetColor(GameConstants.yellow);
     }
 
     public void SetColor(Color32 color)

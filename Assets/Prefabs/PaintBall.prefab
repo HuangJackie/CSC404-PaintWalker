@@ -4814,8 +4814,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5137538040173277411}
-  - component: {fileID: 8874131879167790671}
   - component: {fileID: 3748543724197547219}
+  - component: {fileID: 8579858294870208396}
   m_Layer: 0
   m_Name: PaintBall
   m_TagString: Untagged
@@ -4840,21 +4840,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
---- !u!114 &8874131879167790671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5478597113105738329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 776f2c5b488decb49985d5ab36dd5dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  color: 
-  paintReplenished: 0
 --- !u!135 &3748543724197547219
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4868,6 +4853,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.07849658
   m_Center: {x: -0.0065685613, y: 0.08676738, z: -0.00000093690034}
+--- !u!114 &8579858294870208396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478597113105738329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a84f292be51104983cc8c49cc7b8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  manager: {fileID: 0}
+  color: 
+  paintReplenished: 0
 --- !u!1 &6308788112189960203
 GameObject:
   m_ObjectHideFlags: 0
