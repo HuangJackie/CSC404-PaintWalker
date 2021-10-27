@@ -39,7 +39,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
             if (i.gameObject.CompareTag("Ground"))
             {
                 Ground groundScript = i.gameObject.GetComponent<Ground>();
-                this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript.originalColour));
+                this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript._paintedColour));
             }
         }
     }
@@ -66,7 +66,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
                         Ground groundScript = obj.gameObject.GetComponent<Ground>();
                         groundScript.isPaintedByFeet = blockMetadata[ground_index].Item1;
                         groundScript.isPaintedByBrush = blockMetadata[ground_index].Item2;
-                        groundScript.originalColour = blockMetadata[ground_index].Item3;
+                        groundScript._paintedColour = blockMetadata[ground_index].Item3;
                         if (blockMetadata[ground_index].Item3 == new Color(0.98f, 1f, 0.45f))
                         {
                             obj.gameObject.GetComponentInChildren<Renderer>().material.color = new Color(1.000f, 0.993f, 0.816f);
@@ -131,7 +131,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
         objects.Add(obj);
         // Debug.Log(obj.transform.position);
         this._objectsOriginPosition.Add(obj.transform.position);
-        this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript.originalColour));
+        this.blockMetadata.Add((groundScript.isPaintedByFeet, groundScript.isPaintedByBrush, ((Interactable) groundScript).originalColour, groundScript._paintedColour));
     }
 
     public void InjectPaintPickup(GameObject obj)
@@ -164,6 +164,7 @@ public class MoveRedo : ScriptableObject, IRedoCommand
     public void RevertPlayerAndCameraState()
     {
         player.transform.position -= player_destination;
+        player.GetComponent<Player>().UpdateTargetLocation(player.transform.position);
         player.transform.rotation = player_rotation;
         if (cameraToMove._wasPanning)
         {
