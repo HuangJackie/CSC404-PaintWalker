@@ -13,12 +13,15 @@ public class LevelManager : MonoBehaviour
     public bool dev_mode;
     public bool freeze_player;
 
+    public RedoCommandHandler redoCommandHandler = new RedoCommandHandler();
+    public Player player_script;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
 
     private UpdateUI _updateUI;
     private bool _isExitActive = false;
     private bool _isPanning = false;
+    private bool _isRunningCoroutine = true;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
     
@@ -59,6 +62,8 @@ public class LevelManager : MonoBehaviour
         {
             while (actionQueue.Count > 0)
             {
+                //Func<IEnumerator> next_co = actionQueue.Dequeue();
+                //Coroutine co = StartCoroutine(next_co());
                 yield return StartCoroutine(actionQueue.Dequeue()());
             }
             yield return null;
@@ -129,6 +134,20 @@ public class LevelManager : MonoBehaviour
         {
             UpdateNoPaintLeftUI();
         }
+    }
+
+    public MoveRedo GetLasestGameState()
+    {
+        return redoCommandHandler.LatestCommand() as MoveRedo;
+    }
+
+    public void Undo()
+    {
+        actionQueue.Clear();
+        StopAllCoroutines();
+        StartCoroutine(ManageCoroutines());
+        redoCommandHandler.Undo();
+        player_script.UpdateTargetLocation(player_script.gameObject.transform.position);
     }
 
     public void SetIsPanning(bool isPanning)

@@ -9,13 +9,18 @@ public class CameraRotation : MonoBehaviour
     public ChangePerspective isoCamera;
     public Vector3 _gameplayPos;
 
-    private bool _wasPanning;
+    public bool _wasPanning;
     private bool _transitioning_back;
     private Vector3 _panningPos;
     private Vector3 _initialClickPosition;
 
     Vector3 forward, right;
 
+
+    public bool IsPanning()
+    {
+        return LevelManager.IsPanning();
+    }
     void Start()
     {
         forward = Camera.main.transform.forward;

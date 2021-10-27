@@ -11,22 +11,27 @@ public class Player : MonoBehaviour
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
+    public MoveRedo GameState;
 
     private float _horizontalMovement;
     private float _verticalMovement;
+    private bool _isNotTrackingMovement;
     private bool _isHorizontalMovementPressed;
     private bool _isVerticalMovementPressed;
+    private bool _isRotating;
+    private Vector3 _previousPosForRedo;
+    private Quaternion _previsouRotationForRedo;
     private CapsuleCollider _capsuleCollider;
     private Rigidbody _rigidbody;
 
     // Rigid Grid Movement
     public float speed;
+    private Vector3 _moveDirection;
     private Vector3 _targetLocation;
     private Vector3 _curposition;
     private Vector3 _prevPosition;
 
     private UpdateUI _updateUI;
-    private Transform _transform;
 
     private bool _hasWaitedTurn;
 
@@ -36,6 +41,7 @@ public class Player : MonoBehaviour
         _capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
         _targetLocation = transform.position;
         _prevPosition = _targetLocation;
+        _isNotTrackingMovement = true;
     }
 
     void Update()
@@ -54,8 +60,8 @@ public class Player : MonoBehaviour
         //    Vector3.up * _capsuleCollider.height, Color.green);
         _horizontalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Horizontal");
         _verticalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Vertical");
-        _isHorizontalMovementPressed = Input.GetButton("Horizontal");
-        _isVerticalMovementPressed = Input.GetButton("Vertical");
+        _isHorizontalMovementPressed = Input.GetButtonDown("Horizontal");
+        _isVerticalMovementPressed = Input.GetButtonDown("Vertical");
 
         if (this.CheckGrounded())
         {
@@ -69,16 +75,50 @@ public class Player : MonoBehaviour
     {
     }
 
+    public void CreateCopyOfCurrentState(bool up)
+    {
+        GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+        if (up)
+        {
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.up, transform.rotation);
+        } else
+        {
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.down, transform.rotation);
+        }
+        LevelManager.redoCommandHandler.AddCommand(GameState);
+        LevelManager.redoCommandHandler.TransitionToNewGameState();
+    }
+
     private void RigidGridMove()
     {
+        if (_targetLocation != transform.position && _isNotTrackingMovement)
+        {
+            //print("tracking starts");
+            _previousPosForRedo = transform.position;
+            _isNotTrackingMovement = false;
+            print("trigger first");
+        }
+        if (_targetLocation == transform.position && !_isNotTrackingMovement)
+        {
+            GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo, _previsouRotationForRedo);
+            LevelManager.redoCommandHandler.AddCommand(GameState);
+            LevelManager.redoCommandHandler.TransitionToNewGameState();
+            _isNotTrackingMovement = true;
+            //print("tracking ends");
+        }
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
+        //print(_targetLocation);
+        //print("obj location");
+        //print(transform.position); 
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
+        
         Vector3 horDistMoved = newPosition - transform.position;
         cameraWorldAxis.position = cameraWorldAxis.position + horDistMoved;
         cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + horDistMoved;
@@ -88,10 +128,25 @@ public class Player : MonoBehaviour
         if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
         {
             LevelManager.SetIsPanning(false);
-            Vector3 movDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
+            _moveDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
+            _previsouRotationForRedo = transform.rotation;
+            _isRotating = true;
+            //print("recording");
+            //transform.rotation = Quaternion.Slerp(
+            //    transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
+            //);
+        }
+
+        if (_isRotating)
+        {
             transform.rotation = Quaternion.Slerp(
-                transform.rotation, Quaternion.LookRotation(movDirection), 0.5f
+                transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
             );
+        }
+        if (Quaternion.Angle(transform.rotation,Quaternion.LookRotation(_moveDirection)) < 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(_moveDirection);
+            _isRotating = false;
         }
     }
 
