@@ -13,7 +13,7 @@ public class PaintBrush : MonoBehaviour
     {
         particleSettings = GetComponentInChildren<ParticleSystem>().main;
         lightSettings = GetComponentsInChildren<Light>()[0];
-        SetColor(Paints.yellow);
+        SetColor(GameConstants.yellow);
     }
 
     public void SetColor(Color32 color)

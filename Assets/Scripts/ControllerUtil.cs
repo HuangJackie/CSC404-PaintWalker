@@ -6,30 +6,28 @@ namespace DefaultNamespace
 {
     public class ControllerUtil : MonoBehaviour
     {
-        public float DelayBetweenMovementsInSeconds;
-        private float _horizontalAxis;
-        private float _verticalAxis;
+        public float delayBetweenMovementsInSeconds;
         private float _lastTimePressed;
 
         private void Start()
         {
             _lastTimePressed = Time.time;
         }
-
-        private void FixedUpdate()
-        {
-            _horizontalAxis = Input.GetAxisRaw("Horizontal");
-            _verticalAxis = Input.GetAxisRaw("Vertical");
-        }
-
         public float GetHorizontalAxisRaw()
         {
-            return FinishedMovementDelay(_horizontalAxis) ? _horizontalAxis : 0;
+            float horizontalAxis = Input.GetAxisRaw("Horizontal");
+            return FinishedMovementDelay(horizontalAxis) ? horizontalAxis : 0;
         }
 
         public float GetVerticalAxisRaw()
         {
-            return FinishedMovementDelay(_verticalAxis) ? _verticalAxis : 0;
+            float verticalAxis = Input.GetAxisRaw("Vertical");
+            return FinishedMovementDelay(verticalAxis) ? verticalAxis : 0;
+        }
+
+        public bool PaintSelectionUIToggled()
+        {
+            return Input.GetButtonDown("PaintSelectionUI");
         }
 
         /**
@@ -37,16 +35,12 @@ namespace DefaultNamespace
          */
         private bool FinishedMovementDelay(float movement)
         {
-            // print(Time.time );
-            if (movement != 0 && Time.time - _lastTimePressed > DelayBetweenMovementsInSeconds)
+            if (movement != 0 && Time.time - _lastTimePressed > delayBetweenMovementsInSeconds)
             {
-                print("yup");
-
                 _lastTimePressed = Time.time;
                 return true;
             }
 
-            // print("not yet: " + Time.fixedDeltaTime + " " + _lastTimePressed);
             return false;
         }
     }

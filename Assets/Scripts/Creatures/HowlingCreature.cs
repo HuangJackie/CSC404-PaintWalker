@@ -20,10 +20,18 @@ public class HowlingCreature : SpecialCreature
 
     void Update()
     {
+        if (isTriggered)
+        {
+            wall.operate = true;
+            isTriggered = false;
+        }
+    }
+    
+    public override bool Paint(bool paintWithBrush)
+    {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
             isPainted,
             IsMouseOver,
-            Input.GetButtonDown("Fire1"),
             player.transform.position,
             transform.position,
             manager,
@@ -32,9 +40,9 @@ public class HowlingCreature : SpecialCreature
             paintQuantity1,
             paintQuantity2,
             Material,
-            Paints.green))
+            GameConstants.green))
         {
-            OriginalColour = Material.color;
+            originalColour = Material.color;
             isPainted = true;
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
 
@@ -43,18 +51,19 @@ public class HowlingCreature : SpecialCreature
                 hitCollider.SendMessage("TriggerButtton",
                     SendMessageOptions.DontRequireReceiver);
             }
+
+            return true;
         }
 
-        if (isTriggered)
-        {
-            wall.operate = true;
-            isTriggered = false;
-        }
+        return false;
     }
 
+    /**
+     * Do not delete, it is called by the SendMessage function above.
+     */
     void TriggerButtton()
     {
         isTriggered = true;
-        gameObject.GetComponentInChildren<Renderer>().material.color = Paints.red;
+        gameObject.GetComponentInChildren<Renderer>().material.color = GameConstants.red;
     }
 }

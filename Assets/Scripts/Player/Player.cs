@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player)
+        if (LevelManager.freeze_player || !LevelManager.CanMove())
         {
             return;
         }
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
             //print("tracking starts");
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
-            print("trigger first");
+            // print("trigger first");
         }
 
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
@@ -333,7 +333,7 @@ public class Player : MonoBehaviour
             }
 
             // Try to paint.
-            return ground.PaintSurface(false); // If false then the floor was not painted.
+            return ground.Paint(false); // If false then the floor was not painted.
         }
 
         return true;

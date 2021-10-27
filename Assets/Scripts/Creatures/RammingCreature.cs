@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class RammingSpecialCreature : SpecialCreature
+public class RammingCreature : SpecialCreature
 {
     // Start is called before the first frame update
     private LevelManager _levelManager;
@@ -24,25 +24,7 @@ public class RammingSpecialCreature : SpecialCreature
 
     void Update()
     {
-        if (IsMouseOver &&
-            SpecialCreatureUtil.ActivateSpecialCreature(
-                isPainted,
-                IsMouseOver,
-                Input.GetButtonDown("Fire1"),
-                player.transform.position,
-                transform.position,
-                _levelManager,
-                paintColour1,
-                paintColour2,
-                paintQuantity1,
-                paintQuantity2,
-                Material,
-                Color.magenta))
-        {
-            OriginalColour = Material.color;
-            isPainted = true;
-            is_moving = true;
-        }
+
     }
 
     private void FixedUpdate()
@@ -66,5 +48,28 @@ public class RammingSpecialCreature : SpecialCreature
         {
             Destroy(collision.gameObject);
         }
+    }
+    
+    public override bool Paint(bool paintWithBrush)
+    {
+        if (SpecialCreatureUtil.ActivateSpecialCreature(
+                isPainted,
+                IsMouseOver,
+                player.transform.position,
+                transform.position,
+                _levelManager,
+                paintColour1,
+                paintColour2,
+                paintQuantity1,
+                paintQuantity2,
+                Material,
+                Color.magenta))
+        {
+            originalColour = Material.color;
+            isPainted = true;
+            is_moving = true;
+            return true;
+        }
+        return false;
     }
 }

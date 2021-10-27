@@ -11,12 +11,12 @@ public class UpdateUI : MonoBehaviour
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
     private PaintLeftBG paintLeftBG;
-    
+
     private CrosshairUI crosshairUI;
     private bool _isCrosshairActive;
     private Camera _camera;
     private TooltipObject _tooltipObject;
-    
+
     [SerializeField] private GameObject infoTextBG;
     private PaintNeededText infoText;
     private bool _alreadyOverriden;
@@ -27,16 +27,16 @@ public class UpdateUI : MonoBehaviour
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
         paintLeftBG = FindObjectOfType<PaintLeftBG>();
-        
+
         crosshairUI = FindObjectOfType<CrosshairUI>();
         _isCrosshairActive = false;
         _camera = FindObjectOfType<Camera>();
         _tooltipObject = null;
-        
+
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
 
-        ChangePaint(Paints.YELLOW_PAINT, 3);
+        ChangePaint(GameConstants.YELLOW_PAINT, 3);
     }
 
     private void Update()
@@ -53,12 +53,16 @@ public class UpdateUI : MonoBehaviour
                 {
                     _tooltipObject.OnExitTooltip();
                 }
+
                 _tooltipObject = newTooltipObject;
                 _tooltipObject.OnDisplayTooltip();
             }
             else if (_tooltipObject != null)
             {
                 _tooltipObject.OnExitTooltip();
+                // Must set null otherwise UI won't appear onMouseOver, and can't activate special creature on click.
+                // Since it causes the UI to keep being wiped.
+                _tooltipObject = null;
             }
         }
     }
@@ -78,6 +82,13 @@ public class UpdateUI : MonoBehaviour
         }
     }
 
+    public void WipeInfoText()
+    {
+        // If resetting the text with "", then remove the BG as well
+        infoText.SetPaintText("");
+        infoTextBG.SetActive(false);
+    }
+
     public void SetPaint(int paintLeft)
     {
         paintBar.SetPaint(paintLeft);
@@ -89,20 +100,20 @@ public class UpdateUI : MonoBehaviour
         Color32 paintColor;
         switch (paintType)
         {
-            case Paints.GREEN_PAINT:
-                paintColor = Paints.green;
+            case GameConstants.GREEN_PAINT:
+                paintColor = GameConstants.green;
                 break;
-            case Paints.RED_PAINT:
-                paintColor = Paints.red;
+            case GameConstants.RED_PAINT:
+                paintColor = GameConstants.red;
                 break;
-            case Paints.YELLOW_PAINT:
-                paintColor = Paints.yellow;
+            case GameConstants.YELLOW_PAINT:
+                paintColor = GameConstants.yellow;
                 break;
-            case Paints.BLUE_PAINT:
-                paintColor = Paints.blue;
+            case GameConstants.BLUE_PAINT:
+                paintColor = GameConstants.blue;
                 break;
             default:
-                paintColor = Paints.red;
+                paintColor = GameConstants.red;
                 break;
         }
 

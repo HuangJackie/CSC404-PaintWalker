@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abac952cda5744a09998a09e365141ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DelayBetweenMovementsInSeconds: 0.05
+  delayBetweenMovementsInSeconds: 0
 --- !u!4 &15028090
 Transform:
   m_ObjectHideFlags: 0
@@ -24224,6 +24224,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: 7678c006a710d5a44abab66cfff1a5fa, type: 3}
   m_PrefabInstance: {fileID: 2056440350}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2059858758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059858759}
+  - component: {fileID: 2059858760}
+  m_Layer: 0
+  m_Name: PaintSelectionUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2059858759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059858758}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.0887, y: -539.9149, z: 1.7183706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1050199760}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059858760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059858758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fc7d1d76544665a8fcd85f12c8adfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2070631039
 PrefabInstance:
   m_ObjectHideFlags: 0

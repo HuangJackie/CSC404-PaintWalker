@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class SpecialCreature : MonoBehaviour, TooltipObject
+public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
 {
     public string paintColour1;
     public string paintColour2;
@@ -12,30 +12,31 @@ public class SpecialCreature : MonoBehaviour, TooltipObject
     public int paintQuantity2;
 
     private UpdateUI _updateUI;
-    // private bool _isMouseClicked;
-
-    protected bool IsMouseOver;
-
-    protected Material Material;
-    protected Color OriginalColour;
     public bool isPainted;
+    
 
-    protected void Start()
+    protected new void Start()
     {
+        base.Start();
         _updateUI = FindObjectOfType<UpdateUI>();
-        Material = GetComponentInChildren<Renderer>().material;
-        OriginalColour = Material.color;
     }
 
-    void OnMouseOver()
+    protected void OnMouseDown()
     {
-        print("mouse over");
+        Paint(true);
+    }
 
+    new void OnMouseOver()
+    {
+        base.OnMouseOver();
+        IsMouseOver = true;
         OnDisplayTooltip();
     }
 
-    void OnMouseExit()
+    new void OnMouseExit()
     {
+        base.OnMouseExit();
+        IsMouseOver = false;
         if (isPainted)
         {
             return;
@@ -50,7 +51,7 @@ public class SpecialCreature : MonoBehaviour, TooltipObject
         {
             _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
                                   " " + paintQuantity2 + " " + paintColour2);
-            Material.color = new Color(0.98f, 1f, 0.45f);
+            HighlightForHoverover();
         }
     }
 
@@ -58,8 +59,9 @@ public class SpecialCreature : MonoBehaviour, TooltipObject
     {
         if (!isPainted)
         {
-            _updateUI.SetInfoText("");
-            Material.color = OriginalColour;
+            _updateUI.WipeInfoText();
+            UndoHighlight();
         }
     }
+    public abstract bool Paint(bool paintWithBrush);
 }
