@@ -17,6 +17,7 @@ public class TpCreature : MonoBehaviour
     public bool useMouseClick;
 
     // For clicking
+    public CameraRotation cameraPanningRevertTarget;
     public GameObject player;
     private Player _playerx;
     public GameObject tp_creature2;
@@ -120,7 +121,12 @@ public class TpCreature : MonoBehaviour
                 Vector3 tpCreaturePosition = tp_creature2.transform.position;
                 Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y + 0.2f,
                     tpCreaturePosition.z);
+                MoveRedo GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+                GameState.PlayerInit(player.gameObject, cameraPanningRevertTarget, newPlayerPosition - player.transform.position, player.transform.rotation);
+                _levelManager.redoCommandHandler.AddCommand(GameState);
+                _levelManager.redoCommandHandler.TransitionToNewGameState();
                 player.transform.position = newPlayerPosition;
+                Camera.main.transform.transform.parent.parent.position = newPlayerPosition;
                 _playerx.UpdateTargetLocation(newPlayerPosition);
                 // Destroy(gameObject);
             } 

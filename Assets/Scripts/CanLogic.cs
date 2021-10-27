@@ -53,7 +53,12 @@ public class CanLogic : MonoBehaviour
         if (other.tag == "Player")
         {
             manager.IncreasePaint(color, paintReplenished);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            MoveRedo lastCommand = manager.redoCommandHandler.LatestCommand() as MoveRedo;
+            if (lastCommand)
+            {
+                lastCommand.InjectPaintPickup(this.gameObject);
+            }
         }
     }
 

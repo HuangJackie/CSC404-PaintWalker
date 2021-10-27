@@ -363,7 +363,6 @@ public class Ground : MonoBehaviour
                 return false;
             }
 
-            _levelManager.DecreaseCurrentSelectedPaint(1);
             string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
 
             if (_paintedColour != _originalColour && this.isPaintedByBrush)
@@ -379,6 +378,7 @@ public class Ground : MonoBehaviour
                 case "Red":
                     _material.color = Paints.red;
                     _paintedColour = _material.color;
+                    _levelManager.DecreasePaint("Red", 1);
                     if (paintWithBrush && NoBlockBelow())
                     {
                         _redSoundManager.PlayRandom();
@@ -394,6 +394,7 @@ public class Ground : MonoBehaviour
                 case "Green":
                     _material.color = Paints.green;
                     _paintedColour = _material.color;
+                    _levelManager.DecreasePaint("Green", 1);
                     if (paintWithBrush)
                     {
                         _greenSoundManager.PlayRandom();
@@ -409,6 +410,7 @@ public class Ground : MonoBehaviour
                 case "Yellow":
                     _material.color = Paints.yellow;
                     _paintedColour = _material.color;
+                    _levelManager.DecreasePaint("Yellow", 1);
                     if (paintWithBrush && NoUnmovableBlockAbove())
                     {
                         _yellowSoundManager.PlayRandom();
@@ -423,6 +425,7 @@ public class Ground : MonoBehaviour
                 case "Blue":
                     _material.color = Paints.blue;
                     _paintedColour = _material.color;
+                    _levelManager.DecreasePaint("Blue", 1);
                     if (paintWithBrush)
                     {
                         this.gameObject.layer = LayerMask.NameToLayer("IceCube");
