@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class CanLogic : MonoBehaviour
+public class CanLogic : MonoBehaviour, TooltipObject
 {
     public LevelManager manager;
     public string color;
@@ -61,7 +62,7 @@ public class CanLogic : MonoBehaviour
     {
         if (this)
         {
-            _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
+            OnDisplayTooltip();
         }
     }
 
@@ -69,7 +70,17 @@ public class CanLogic : MonoBehaviour
     {
         if (this)
         {
-            _updateUI.SetInfoText("");
+            OnExitTooltip();
         }
+    }
+
+    public void OnDisplayTooltip()
+    {
+        _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
+    }
+
+    public void OnExitTooltip()
+    {
+        _updateUI.SetInfoText("");
     }
 }

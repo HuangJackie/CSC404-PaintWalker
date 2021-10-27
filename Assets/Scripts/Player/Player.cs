@@ -60,8 +60,9 @@ public class Player : MonoBehaviour
         //    Vector3.up * _capsuleCollider.height, Color.green);
         _horizontalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Horizontal");
         _verticalMovement = isoCamera.isIntervteredControl ? -Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("Vertical");
-        _isHorizontalMovementPressed = Input.GetButtonDown("Horizontal");
-        _isVerticalMovementPressed = Input.GetButtonDown("Vertical");
+
+        _isHorizontalMovementPressed = Input.GetAxis("Horizontal") != 0;
+        _isVerticalMovementPressed = Input.GetAxis("Vertical") != 0;
 
         if (this.CheckGrounded())
         {
@@ -137,13 +138,13 @@ public class Player : MonoBehaviour
             //);
         }
 
-        if (_isRotating)
+        if (_moveDirection != Vector3.zero && _isRotating)
         {
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
             );
         }
-        if (Quaternion.Angle(transform.rotation,Quaternion.LookRotation(_moveDirection)) < 0.1f)
+        if (_moveDirection != Vector3.zero && Quaternion.Angle(transform.rotation,Quaternion.LookRotation(_moveDirection)) < 0.1f )
         {
             transform.rotation = Quaternion.LookRotation(_moveDirection);
             _isRotating = false;
@@ -356,22 +357,22 @@ public class Player : MonoBehaviour
 
     private string GetCurrentlyPressedDirection()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if ( Input.GetAxis("Vertical") > 0)
         {
             return isoCamera.isIntervteredControl ? "Down" : "Up";
         }
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetAxis("Vertical") < 0)
         {
             return isoCamera.isIntervteredControl ? "Up" : "Down";
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetAxis("Horizontal") < 0)
         {
             return isoCamera.isIntervteredControl ? "Right" : "Left";
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetAxis("Horizontal") > 0)
         {
             return isoCamera.isIntervteredControl ? "Left" : "Right";
         }
