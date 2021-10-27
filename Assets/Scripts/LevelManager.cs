@@ -24,8 +24,8 @@ public class LevelManager : MonoBehaviour
     private bool _isRunningCoroutine = true;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
-    
-    private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>> ();
+
+    private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         paintQuantity.Add("Green", 0); // Growing Platform
         paintQuantity.Add("Red", 0); // Drops Platform
         paintQuantity.Add("Yellow", 4); // Raises Platform
-        
+
         if (dev_mode)
         {
             paintQuantity["Blue"] = 30;
@@ -52,10 +52,10 @@ public class LevelManager : MonoBehaviour
 
         playerPaintBrush = FindObjectOfType<PaintBrush>();
         playerPaintBottle = FindObjectOfType<PaintBottle>();
-        
+
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
-    
+
     IEnumerator ManageCoroutines()
     {
         while (true)
@@ -66,6 +66,7 @@ public class LevelManager : MonoBehaviour
                 //Coroutine co = StartCoroutine(next_co());
                 yield return StartCoroutine(actionQueue.Dequeue()());
             }
+
             yield return null;
         }
     }
@@ -82,6 +83,7 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
+
         _isColourSwitched = Input.GetButtonDown("Fire2");
         if (_isColourSwitched)
         {
@@ -147,11 +149,15 @@ public class LevelManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ManageCoroutines());
         redoCommandHandler.Undo();
-        player_script.UpdateTargetLocation(player_script.gameObject.transform.position);
+        if (player_script != null)
+        {
+            player_script.UpdateTargetLocation(player_script.gameObject.transform.position);
+        }
     }
 
     public void SetIsPanning(bool isPanning)
     {
+        _updateUI.EnableCrosshairUI(isPanning);
         _isPanning = isPanning;
     }
 
