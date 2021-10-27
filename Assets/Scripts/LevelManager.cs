@@ -168,6 +168,11 @@ public class LevelManager : MonoBehaviour
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
+        MoveRedo lastCommand = redoCommandHandler.LatestCommand() as MoveRedo;
+        if (lastCommand)
+        {
+            lastCommand.RecordPaintSpent(paintColour, -quantity);
+        }
     }
 
     public void DecreasePaint(String paintColour, int quantity)
@@ -178,6 +183,12 @@ public class LevelManager : MonoBehaviour
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
+        MoveRedo lastCommand = redoCommandHandler.LatestCommand() as MoveRedo;
+        if (lastCommand)
+        {
+            lastCommand.RecordPaintSpent(paintColour, quantity);
+        }
+        
 
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
         StartCoroutine("CheckPaintQuantity");

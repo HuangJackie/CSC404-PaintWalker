@@ -14059,6 +14059,10 @@ PrefabInstance:
       propertyPath: _isPainted
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: cameraPanningRevertTarget
+      value: 
+      objectReference: {fileID: 599639710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
 --- !u!1001 &1195776467
@@ -24930,5 +24934,9 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 859007761}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: cameraPanningRevertTarget
+      value: 
+      objectReference: {fileID: 599639710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
