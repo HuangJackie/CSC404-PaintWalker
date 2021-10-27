@@ -1031,6 +1031,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Green
@@ -2466,6 +2478,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Blue
@@ -3317,6 +3341,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Red
@@ -3783,6 +3819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b05af4ff0d35ac418c23371f2747c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -4242,13 +4279,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -6645,13 +6681,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -6934,6 +6969,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7513970122348307586, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
@@ -10126,6 +10173,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Red
@@ -11975,13 +12034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -14835,13 +14893,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -19407,8 +19464,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1579958078}
   - component: {fileID: 1579958084}
-  - component: {fileID: 1579958083}
   - component: {fileID: 1579958081}
+  - component: {fileID: 1579958083}
   - component: {fileID: 1579958080}
   - component: {fileID: 1579958079}
   m_Layer: 0
@@ -19470,9 +19527,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1579958077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20957bf8a7536c640b541c57d04503b6, type: 3}
+  m_Script: {fileID: 11500000, guid: c5d20e718f9667348866a67b11c46586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintColour1: Blue
   paintColour2: Red
   paintQuantity1: 2
@@ -21314,13 +21372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -22760,13 +22817,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
-  _originalColour: {r: 0, g: 0, b: 0, a: 0}
-  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -24029,6 +24085,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Yellow
@@ -24919,6 +24987,18 @@ PrefabInstance:
     - target: {fileID: 7513970122348307586, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: color
+      value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paintReplenished
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
