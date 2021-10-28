@@ -20338,7 +20338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev_mode: 1
+  dev_mode: 0
   freeze_player: 0
   player_script: {fileID: 0}
 --- !u!4 &1704174258

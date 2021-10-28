@@ -157,7 +157,6 @@ public class PaintSelectionUI : MonoBehaviour
             : startingPos2;
 
 
-        
         print("minAxisPos1,  maxAxisPos1: " + minAxisPos1 + " to " + maxAxisPos1);
         print("minAxisPos2,  maxAxisPos2: " + minAxisPos2 + " to " + maxAxisPos2);
         int infiniteLoopCheck = 0;
@@ -272,6 +271,12 @@ public class PaintSelectionUI : MonoBehaviour
             if (collider.TryGetComponent(out Paintable _))
             {
                 Vector3 colliderPosition = collider.transform.position;
+                if (_positionToCollider.ContainsKey(colliderPosition.ToString()))
+                {
+                    Debug.LogError("There shouldn't be duplicate keys found. Something may have gone wrong.");
+                    continue;
+                }
+
                 _positionToCollider.Add(colliderPosition.ToString(), collider);
 
                 float xPosition = colliderPosition.x;
@@ -345,7 +350,7 @@ public class PaintSelectionUI : MonoBehaviour
             {
                 continue;
             }
-            
+
             Interactable collidedInteractable;
             positionColliderPair.Value.TryGetComponent(out collidedInteractable);
             if (collidedInteractable != null)
