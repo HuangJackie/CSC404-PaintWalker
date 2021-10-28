@@ -10,4 +10,9 @@ public class startbutton : MonoBehaviour
     {
         SceneManager.LoadScene("DesignDoc");
     }
+
+    public void StartTutorial()
+    {
+        SceneManager.LoadScene("TutorialColors");
+    }
 }
