@@ -21,11 +21,12 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive;
     private bool _isPanning;
-    private bool _canMove;
+    private bool _paintSelectionUIDisplayed;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
 
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
+    private PaintSelectionUI _paintSelectionUI;
 
     void Start()
     {
@@ -55,7 +56,8 @@ public class LevelManager : MonoBehaviour
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
 
-        _canMove = true;
+        _paintSelectionUIDisplayed = false;
+        _paintSelectionUI = FindObjectOfType<PaintSelectionUI>();
     }
 
     IEnumerator ManageCoroutines()
@@ -128,6 +130,11 @@ public class LevelManager : MonoBehaviour
                     playerPaintBottle.SetColor(GameConstants.blue);
                     break;
             }
+        }
+
+        if (Input.GetButtonDown("Undo"))
+        {
+            Undo();
         }
     }
 
@@ -274,13 +281,22 @@ public class LevelManager : MonoBehaviour
         _isExitActive = isActive;
     }
 
-    public void setCanMove(bool canMove)
+    public void SetPaintSelectionUIDisplayed(bool isDisplayed)
     {
-        _canMove = canMove;
+        _paintSelectionUIDisplayed = isDisplayed;
     }
 
-    public bool CanMove()
+    public bool IsPaintSelectionUIDisplayed()
     {
-        return _canMove;
+        return _paintSelectionUIDisplayed;
+    }
+
+    public void RefreshPaintSelectionUI()
+    {
+        if (_paintSelectionUIDisplayed)
+        {
+            _paintSelectionUI.ClosePaintSelectionUI();
+            _paintSelectionUI.DisplayPaintSelectionUI();
+        }
     }
 }

@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abac952cda5744a09998a09e365141ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenMovementsInSeconds: 0
+  buttonPressDelayInSeconds: 0.2
 --- !u!4 &15028090
 Transform:
   m_ObjectHideFlags: 0
@@ -3745,15 +3745,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.44635487
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5518004
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.829163
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aac252c9c12d7284988059bc41c3720a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3820,6 +3820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -4280,11 +4281,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -6682,11 +6685,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -10183,7 +10188,7 @@ PrefabInstance:
       objectReference: {fileID: 1704174257}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
@@ -12035,11 +12040,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -14106,7 +14113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.566
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14894,11 +14901,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -19483,8 +19492,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579958077}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 1.68, z: 4.96}
-  m_LocalScale: {x: 1, y: 0.3, z: 0.5888928}
+  m_LocalPosition: {x: -4.5, y: 2, z: 5.5}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 0.5888928}
   m_Children: []
   m_Father: {fileID: 1704174258}
   m_RootOrder: 6
@@ -19531,7 +19540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintColour1: Blue
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  paintColour1: Green
   paintColour2: Red
   paintQuantity1: 2
   paintQuantity2: 2
@@ -21373,11 +21383,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -22818,11 +22830,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
@@ -23871,16 +23885,44 @@ PrefabInstance:
       value: UNDO
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1704174257}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Undo
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398089, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_Pivot.y
@@ -24095,7 +24137,7 @@ PrefabInstance:
       objectReference: {fileID: 1704174257}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 55
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
@@ -24998,7 +25040,7 @@ PrefabInstance:
       objectReference: {fileID: 1704174257}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
@@ -25134,7 +25176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.566
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.z

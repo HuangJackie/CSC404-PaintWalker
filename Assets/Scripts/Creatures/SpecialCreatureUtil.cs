@@ -18,7 +18,7 @@ namespace DefaultNamespace
             Color color)
         {
             bool shouldActivateSpecialCreature = !isPainted
-                                                 && isMouseOver
+                                                 && (isMouseOver || Input.GetButtonDown("Paint"))
                                                  && Vector3.Distance(playerPosition,
                                                      creaturePosition) < 3
                                                  && manager.GetPaintQuantity(paintColour1) >= paintQuantity1

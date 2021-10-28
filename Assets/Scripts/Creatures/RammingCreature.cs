@@ -52,6 +52,8 @@ public class RammingCreature : SpecialCreature
     
     public override bool Paint(bool paintWithBrush)
     {
+        print("Painting Special Creature");
+
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
                 IsMouseOver,
@@ -66,6 +68,7 @@ public class RammingCreature : SpecialCreature
                 Color.magenta))
         {
             originalColour = Material.color;
+            paintedColour = Material.color;
             isPainted = true;
             is_moving = true;
             return true;

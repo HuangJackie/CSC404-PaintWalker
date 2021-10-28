@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player || !LevelManager.CanMove())
+        if (LevelManager.freeze_player)
         {
             return;
         }
@@ -61,12 +61,14 @@ public class Player : MonoBehaviour
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
 
-        _horizontalMovement = isoCamera.isIntervteredControl
-            ? -_controllerUtil.GetHorizontalAxisRaw()
-            : _controllerUtil.GetHorizontalAxisRaw();
-        _verticalMovement = isoCamera.isIntervteredControl
-            ? -_controllerUtil.GetVerticalAxisRaw()
-            : _controllerUtil.GetVerticalAxisRaw();
+        if (!LevelManager.IsPaintSelectionUIDisplayed()){
+            _horizontalMovement = isoCamera.isIntervteredControl
+                ? -_controllerUtil.GetHorizontalAxisRaw()
+                : _controllerUtil.GetHorizontalAxisRaw();
+            _verticalMovement = isoCamera.isIntervteredControl
+                ? -_controllerUtil.GetVerticalAxisRaw()
+                : _controllerUtil.GetVerticalAxisRaw();
+        }
 
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
@@ -390,5 +392,10 @@ public class Player : MonoBehaviour
         }
 
         return "";
+    }
+
+    public double GetYLevel()
+    {
+        return Math.Floor(transform.position.y);
     }
 }

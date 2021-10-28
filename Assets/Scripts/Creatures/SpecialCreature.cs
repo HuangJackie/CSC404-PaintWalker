@@ -26,9 +26,9 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
         Paint(true);
     }
 
-    new void OnMouseOver()
+    new void OnMouseEnter()
     {
-        base.OnMouseOver();
+        base.OnMouseEnter();
         IsMouseOver = true;
         OnDisplayTooltip();
     }

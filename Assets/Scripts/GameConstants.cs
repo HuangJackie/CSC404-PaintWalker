@@ -17,13 +17,13 @@ public class GameConstants : MonoBehaviour
     public static readonly Color32 blue = new Color32(140, 210, 205, 255);
 
     // Highlight interactable object colours
-    public const float HOVEROVER_R = 0.98f;
+    public const float HOVEROVER_R = 1f;
     public const float HOVEROVER_G = 1f;
-    public const float HOVEROVER_B = 0.45f;
+    public const float HOVEROVER_B = 0f;
     
     public const float SELECTION_R = 0.87f;
     public const float SELECTION_G = 0.45f;
     public const float SELECTION_B = 1f;
-    // public static readonly Color32 TOOLTIP_HIGHLIGHT_COLOUR = new Color(0.98f, 1f, 0.45f, 0.03f);
+    // public static readonly Color32 TOOLTIP_HIGHLIGHT_COLOUR = new Color(1f, 0.99f, 0f);
     // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.87f, 0.45f, 1f, 0.03f);
 }

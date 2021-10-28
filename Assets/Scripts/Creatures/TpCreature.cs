@@ -46,25 +46,9 @@ public class TpCreature : SpecialCreature
     new void OnMouseDown()
     {
         base.OnMouseDown();
-        if (isPainted)
-        {
-            if (Vector3.Distance(player.transform.position, transform.position) < 3)
-            {
-                Vector3 tpCreaturePosition = tp_creature2.transform.position;
-                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y + 0.2f,
-                    tpCreaturePosition.z);
-                MoveRedo GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-                GameState.PlayerInit(player.gameObject, cameraPanningRevertTarget, newPlayerPosition - player.transform.position, player.transform.rotation);
-                _levelManager.redoCommandHandler.AddCommand(GameState);
-                _levelManager.redoCommandHandler.TransitionToNewGameState();
-                player.transform.position = newPlayerPosition;
-                Camera.main.transform.transform.parent.parent.position = newPlayerPosition;
-                _playerx.UpdateTargetLocation(newPlayerPosition);
-                // Destroy(gameObject);
-            }
-        }
+        Interact();
     }
-    
+
     public override bool Paint(bool paintWithBrush)
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
@@ -81,6 +65,7 @@ public class TpCreature : SpecialCreature
                 _tpCreatureColor))
         {
             originalColour = Material.color;
+            paintedColour = Material.color;
             isPainted = true;
             // color other creature:
             _material2.color = _tpCreatureColor;
@@ -93,5 +78,26 @@ public class TpCreature : SpecialCreature
             return true;
         }
         return false;
+    }
+
+    public void Interact()
+    {
+        if (isPainted)
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < 3)
+            {
+                Vector3 tpCreaturePosition = tp_creature2.transform.position;
+                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y - 0.7f,
+                    tpCreaturePosition.z);
+                MoveRedo GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+                GameState.PlayerInit(player.gameObject, cameraPanningRevertTarget, newPlayerPosition - player.transform.position, player.transform.rotation);
+                _levelManager.redoCommandHandler.AddCommand(GameState);
+                _levelManager.redoCommandHandler.TransitionToNewGameState();
+                player.transform.position = newPlayerPosition;
+                Camera.main.transform.transform.parent.parent.position = newPlayerPosition;
+                _playerx.UpdateTargetLocation(newPlayerPosition);
+                // Destroy(gameObject);
+            }
+        }
     }
 }
