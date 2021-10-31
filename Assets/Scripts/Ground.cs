@@ -29,7 +29,6 @@ public class Ground : Interactable, Paintable
     private bool _isMouseClicked;
     private bool _isMouseOver;
 
-    private bool _isRevertingBlock;
     private bool _isIceBlockEffectEnabled;
     private Vector3 _directionToSlideTo;
     private Vector3 _destinationDrop;
@@ -60,7 +59,6 @@ public class Ground : Interactable, Paintable
 
         _isMouseOver = false;
 
-        _isRevertingBlock = false;
         _isIceBlockEffectEnabled = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         _destinationNeutral = transform.position;
@@ -179,11 +177,11 @@ public class Ground : Interactable, Paintable
                                   (destination == _destinationRaise && !NoUnmovableBlockAbove());
         while (this && Vector3.Distance(transform.position, destination) > 0.01f)
         {
-            if (destination == _destinationNeutral)
+            if (reverting)
             {
-                //print("neutrual destination. Moving block");
+                //print("neutrual destination. Moving block to revert");
                 transform.position = Vector3.MoveTowards(
-                    transform.position, destination, speed * Time.deltaTime
+                    transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
                 if (movableObjectOnTop)
                 {
@@ -192,20 +190,18 @@ public class Ground : Interactable, Paintable
 
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
-                    _isRevertingBlock = false;
                     transform.position = destination;
-                    if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
-                    {
+                    //if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
+                    //{
                         //_player.GameState.UpdatePlayerY(player.transform.position.y);
-                    }
+                    //}
                     //print("reached neutral dest");
                     _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
-            }
-
-            if (!_isRevertingBlock)
+            } else
             {
+                //print("moving by effect");
                 if (blockPathIsBlocked && destination != _destinationNeutral)
                 {
                     //print("changing to neutral dest since path blocked");
@@ -213,7 +209,7 @@ public class Ground : Interactable, Paintable
                     blockPathIsBlocked = false;
                 }
                 transform.position = Vector3.Lerp(
-                    transform.position, destination, speed * Time.deltaTime
+                    transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
@@ -469,7 +465,6 @@ public class Ground : Interactable, Paintable
             if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
             {
                 //print("top empty");
-                _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
             }
@@ -495,8 +490,7 @@ public class Ground : Interactable, Paintable
         {
             if (NoBlockBelow() && _destinationNeutral != transform.position)
             {
-                //print("bottom empty");
-                _isRevertingBlock = true;
+                print("bottom empty");
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
             }
