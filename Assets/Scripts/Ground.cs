@@ -50,9 +50,9 @@ public class Ground : Interactable, Paintable
     private new void Start()
     {
         Material = GetComponentInChildren<Renderer>().material;
-        base.originalColour = Material.color;
-        originalColour = base.originalColour;
-        _paintedColour = originalColour;
+        originalColour = Material.color;
+        _paintedColour = originalColour; // TODO: Replace _paintedColour with paintedColour
+        paintedColour = Material.color;
         _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
@@ -199,6 +199,7 @@ public class Ground : Interactable, Paintable
                         //_player.GameState.UpdatePlayerY(player.transform.position.y);
                     }
                     //print("reached neutral dest");
+                    _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
             }
@@ -222,6 +223,7 @@ public class Ground : Interactable, Paintable
                     {
                        //_player.GameState.UpdatePlayerY(player.transform.position.y);
                     }
+                    _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
                 if (movableObjectOnTop)
@@ -229,7 +231,6 @@ public class Ground : Interactable, Paintable
                     MoveObjectWithBlock(transform.position, movableObjectOnTop);
                 }
             }
-
             yield return null;
         }
 
@@ -241,7 +242,6 @@ public class Ground : Interactable, Paintable
                 MoveObjectWithBlock(destination, movableObjectOnTop);
             }
         }
-        isPaintedByBrush = true;
     }
 
     private void MoveObjectWithBlock(Vector3 curBlockPosition, GameObject otherObject)
@@ -379,6 +379,7 @@ public class Ground : Interactable, Paintable
                 case "Red":
                     Material.color = GameConstants.red;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Red", 1);
                     if (paintWithBrush && NoBlockBelow())
                     {
@@ -388,6 +389,7 @@ public class Ground : Interactable, Paintable
                         {
                             return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                         });
+                        isPaintedByBrush = true;
 
                     }
 
@@ -395,6 +397,7 @@ public class Ground : Interactable, Paintable
                 case "Green":
                     Material.color = GameConstants.green;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Green", 1);
                     if (paintWithBrush)
                     {
@@ -411,6 +414,7 @@ public class Ground : Interactable, Paintable
                 case "Yellow":
                     Material.color = GameConstants.yellow;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Yellow", 1);
                     if (paintWithBrush && NoUnmovableBlockAbove())
                     {
@@ -420,12 +424,15 @@ public class Ground : Interactable, Paintable
                         {
                             return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
                         });
+                        isPaintedByBrush = true;
+
                     }
 
                     break;
                 case "Blue":
                     Material.color = GameConstants.blue;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Blue", 1);
                     if (paintWithBrush)
                     {
@@ -617,16 +624,18 @@ public class Ground : Interactable, Paintable
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.right, 1);
     }
 
-    private void OnMouseEnter()
+    private new void OnMouseEnter()
     {
-        originalColour = Material.color;
-        Material.color = new Color(0.98f, 1f, 0.45f);
+        // originalColour = Material.color;
+        // Material.color = new Color(0.98f, 1f, 0.45f);
+        HighlightForHoverover();
         _isMouseOver = true;
     }
 
     private new void OnMouseExit()
     {
-        Material.color = _paintedColour;
+        // Material.color = _paintedColour;
+        UndoHighlight();
         _isMouseOver = false;
     }
 
