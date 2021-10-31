@@ -12,6 +12,7 @@ public class TutorialToolTips : Interactable, TooltipObject
     private LevelManager _levelManager;
 
     public GameObject ToolTipWalking;
+    public GameObject ToolTiPainting;
     public GameObject ToolTipDoor;
     public GameObject ToolTipYellow;
     public GameObject ToolTipRed;
@@ -54,14 +55,24 @@ public class TutorialToolTips : Interactable, TooltipObject
                 ToolTipUI = ToolTipWalking;
                 HoverText = "About Walking, press f";
                 break;
+            case "Painting":
+                ToolTipUI = ToolTiPainting;
+                HoverText = "About Painting";
+                break;
         }
         // ToolTipUI = ToolTipYellow;
     }
 
     void Update()
     {
-        
-        if (Vector3.Distance(player.transform.position, transform.position) < 3)
+        Vector3 playerpos = player.transform.position;
+        Vector3 signpos = transform.position;
+        if ((Vector3.Distance(playerpos, signpos) < 2) && (Vector3.Normalize(playerpos- signpos).z < 0) 
+                                                       && (Vector3.Normalize(playerpos- signpos).x < 0) 
+                                                       && (Vector3.Normalize(playerpos- signpos).x > -0.5))
+            
+        // if (Vector3.Distance(player.transform.position, transform.position) < 2)
+        // if (Vector3.Normalize(player.transform.position - transform.position).z < 0) 
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -82,6 +93,7 @@ public class TutorialToolTips : Interactable, TooltipObject
     {
         ToolTipUI.SetActive(false);
         ToolTipOpened = false;
+        Time.timeScale = 1f;
         _levelManager.freeze_player = false;
     }
 
@@ -89,6 +101,7 @@ public class TutorialToolTips : Interactable, TooltipObject
     {
      ToolTipUI.SetActive(true);
      ToolTipOpened = true;
+     Time.timeScale = 0f;
      _levelManager.freeze_player = true;
     }
     
