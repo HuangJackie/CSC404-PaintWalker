@@ -89,13 +89,16 @@ public class TpCreature : SpecialCreature
                 Vector3 tpCreaturePosition = tp_creature2.transform.position;
                 Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y - 0.7f,
                     tpCreaturePosition.z);
+                float tpCreatureYDiff = tp_creature2.transform.position.y - this.transform.position.y;
+                Vector3 newCameraPosition = new Vector3(newPlayerPosition.x, newPlayerPosition.y - tpCreatureYDiff, newPlayerPosition.z);
                 MoveRedo GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
                 GameState.PlayerInit(player.gameObject, cameraPanningRevertTarget, newPlayerPosition - player.transform.position, player.transform.rotation);
                 _levelManager.redoCommandHandler.AddCommand(GameState);
                 _levelManager.redoCommandHandler.TransitionToNewGameState();
                 player.transform.position = newPlayerPosition;
-                Camera.main.transform.transform.parent.parent.position = newPlayerPosition;
-                _playerx.UpdateTargetLocation(newPlayerPosition);
+                Camera.main.transform.transform.parent.parent.position = newCameraPosition;
+                Camera.main.GetComponent<CameraRotation>()._gameplayPos = newCameraPosition;
+                _playerx.UpdateTargetLocation(newCameraPosition);
                 // Destroy(gameObject);
             }
         }

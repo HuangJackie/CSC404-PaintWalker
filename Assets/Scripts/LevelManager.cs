@@ -77,6 +77,12 @@ public class LevelManager : MonoBehaviour
 
     public void EnqueueAction(Func<IEnumerator> action)
     {
+        //For debugging actions getting stuck
+        //print(actionQueue.Count);
+        //foreach (Func<IEnumerator> i in actionQueue)
+        //{
+        //    print(i.Method.Name);
+        //}
         actionQueue.Enqueue(action);
     }
 
