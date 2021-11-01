@@ -94,53 +94,52 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        _isColourSwitched = Input.GetButtonDown("Fire2");
-        if (_isColourSwitched)
-        {
-            _colourChangeSoundManager.PlayRandom();
-            switch (currentSelectedColour)
-            {
-                case "Blue":
-                    currentSelectedColour = "Red";
-                    currentSelectedColourClass = GameConstants.red;
-
-                    _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(GameConstants.red);
-                    playerPaintBottle.SetColor(GameConstants.red);
-                    break;
-
-                case "Red":
-                    currentSelectedColour = "Green";
-                    currentSelectedColourClass = GameConstants.green;
-
-                    _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(GameConstants.green);
-                    playerPaintBottle.SetColor(GameConstants.green);
-                    break;
-
-                case "Green":
-                    currentSelectedColour = "Yellow";
-                    currentSelectedColourClass = GameConstants.yellow;
-
-                    _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(GameConstants.yellow);
-                    playerPaintBottle.SetColor(GameConstants.yellow);
-                    break;
-
-                case "Yellow":
-                    currentSelectedColour = "Blue";
-                    currentSelectedColourClass = GameConstants.blue;
-
-                    _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
-                    playerPaintBrush.SetColor(GameConstants.blue);
-                    playerPaintBottle.SetColor(GameConstants.blue);
-                    break;
-            }
-        }
-
         if (Input.GetButtonDown("Undo"))
         {
             Undo();
+        }
+    }
+
+    public void ChangePaint(string paintType)
+    {
+        _colourChangeSoundManager.PlayRandom();
+        switch (paintType)
+        {
+            case "Red":
+                currentSelectedColour = "Red";
+                currentSelectedColourClass = GameConstants.red;
+
+                _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
+                playerPaintBrush.SetColor(GameConstants.red);
+                playerPaintBottle.SetColor(GameConstants.red);
+                break;
+
+            case "Green":
+                currentSelectedColour = "Green";
+                currentSelectedColourClass = GameConstants.green;
+
+                _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
+                playerPaintBrush.SetColor(GameConstants.green);
+                playerPaintBottle.SetColor(GameConstants.green);
+                break;
+
+            case "Yellow":
+                currentSelectedColour = "Yellow";
+                currentSelectedColourClass = GameConstants.yellow;
+
+                _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
+                playerPaintBrush.SetColor(GameConstants.yellow);
+                playerPaintBottle.SetColor(GameConstants.yellow);
+                break;
+
+            case "Blue":
+                currentSelectedColour = "Blue";
+                currentSelectedColourClass = GameConstants.blue;
+
+                _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
+                playerPaintBrush.SetColor(GameConstants.blue);
+                playerPaintBottle.SetColor(GameConstants.blue);
+                break;
         }
     }
 
