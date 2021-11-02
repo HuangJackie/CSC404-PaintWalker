@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     {
         _curposition = transform.position;
         Vector3 distMoved = _curposition - _prevPosition;
+        _prevPosition = _curposition;
+
         cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
@@ -79,7 +81,7 @@ public class Player : MonoBehaviour
             RigidGridMove();
         }
 
-        _prevPosition = _curposition;
+        
     }
 
     public void CreateCopyOfCurrentState(bool up)
@@ -203,11 +205,18 @@ public class Player : MonoBehaviour
     private bool ValidMove(string pressedButton, Vector3 currentTransformPosition)
     {
         RaycastHit hitInfo;
+        RaycastHit ground_hitInfo;
         LayerMask mask = LayerMask.GetMask("Default");
 
         switch (pressedButton)
         {
             case "Up":
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
+                {
+                    //Debug.Log("Up bottom is empty");
+                    return false;
+                }
+                ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -223,15 +232,15 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1))
-                {
-                    //Debug.Log("Up bottom is empty");
-                    return false;
-                }
-
-                return ValidateFloorMove(hitInfo, Vector3.forward, mask);
+                return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case "Down":
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
+                {
+                    //Debug.Log("down bottom is empty");
+                    return false;
+                }
+                ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, -1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -247,16 +256,17 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
-                {
-                    //Debug.Log("down bottom is empty");
-                    return false;
-                }
+                
 
-                return ValidateFloorMove(hitInfo, Vector3.back, mask);
+                return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
 
             case "Left":
-
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
+                {
+                    // Debug.Log("left bottom is empty ");
+                    return false;
+                }
+                ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(-1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -273,15 +283,17 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
-                {
-                    // Debug.Log("left bottom is empty ");
-                    return false;
-                }
+                
 
-                return ValidateFloorMove(hitInfo, Vector3.left, mask);
+                return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
 
             case "Right":
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
+                {
+                    //Debug.Log("right bottom is empty");
+                    return false;
+                }
+                ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -294,16 +306,11 @@ public class Player : MonoBehaviour
                                     new Vector3(1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
+                    //Debug.Log("Just right is not empty");
                     return false;
                 }
 
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
-                {
-                    //Debug.Log("right bottom is empty");
-                    return false;
-                }
-
-                return ValidateFloorMove(hitInfo, Vector3.right, mask);
+                return ValidateFloorMove(ground_hitInfo, Vector3.right, mask);
         }
 
         return false;
