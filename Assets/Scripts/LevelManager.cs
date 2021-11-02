@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = GameConstants.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
+        _updateUI.SetPaint(paintQuantity["Yellow"]);
 
         playerPaintBrush = FindObjectOfType<PaintBrush>();
         playerPaintBottle = FindObjectOfType<PaintBottle>();
@@ -278,7 +279,8 @@ public class LevelManager : MonoBehaviour
 
     public bool IsExitActive()
     {
-        return _isExitActive;
+        //return _isExitActive;
+        return true;
     }
 
     public void SetExitActive(bool isActive)
