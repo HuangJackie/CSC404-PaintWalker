@@ -91,13 +91,14 @@ public class Ground : Interactable, Paintable
         if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
         {
             _isMouseClicked = Input.GetButtonDown("Fire1");
-            if (_isMouseOver && _isMouseClicked &&
+            bool clickedUI = EventSystem.current.IsPointerOverGameObject();
+
+            if (_isMouseOver && _isMouseClicked && !clickedUI &&
                 Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
             {
                 Paint(true);
             }
         }
-
     }
 
     private bool ReinitializeIceBlockMovement(bool isPushed)

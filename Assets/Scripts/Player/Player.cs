@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private Quaternion _previsouRotationForRedo;
     private CapsuleCollider _capsuleCollider;
     private Rigidbody _rigidbody;
+    private GameObject _colorWheelHUD;
 
     // Rigid Grid Movement
     public float speed;
@@ -43,6 +44,8 @@ public class Player : MonoBehaviour
         _prevPosition = _targetLocation;
         _isNotTrackingMovement = true;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
+        _colorWheelHUD = GameObject.Find("ColorWheelHUD");
+        _colorWheelHUD.SetActive(false);
     }
 
     void Update()
@@ -80,8 +83,18 @@ public class Player : MonoBehaviour
             _targetLocation.y = transform.position.y;
             RigidGridMove();
         }
-
         
+        // Color Wheel HUD
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            _colorWheelHUD.SetActive(true);
+        }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            _colorWheelHUD.SetActive(false);
+        }
+
+        _prevPosition = _curposition;
     }
 
     public void CreateCopyOfCurrentState(bool up)
