@@ -96,6 +96,7 @@ public class PauseMenu : MonoBehaviour
         if (_selectedMenuOption == -1)
         {
             _selectedMenuOption = TotalNumberOfMenuOptions - 1;
+        }
     }
 
     private void IncrementMenuOption()
