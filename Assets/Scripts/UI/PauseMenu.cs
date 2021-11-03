@@ -19,19 +19,21 @@ public class PauseMenu : MonoBehaviour
     private Button[] _menuOptions;
     private GameObject[] _gameObjects;
     private int _selectedMenuOption;
-    private const int TotalNumberOfMenuOptions = 2;
+    private const int TotalNumberOfMenuOptions = 3;
 
     public GameObject resume;
     public GameObject menu;
+    public GameObject control;
 
     private void Start()
     {
         _controllerUtil = FindObjectOfType<ControllerUtil>();
 
-        _menuOptions = new Button[2];
+        _menuOptions = new Button[TotalNumberOfMenuOptions];
         _menuOptions[0] = resume.GetComponentInChildren<Button>();
         _menuOptions[1] = menu.GetComponentInChildren<Button>();
-        _selectedMenuOption = 1;
+        _menuOptions[2] = control.GetComponentInChildren<Button>();
+        _selectedMenuOption = 0;
     }
 
     
@@ -54,7 +56,7 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
-        if (controlUIActive && Input.anyKey)
+        if (controlUIActive && (_controllerUtil.GetConfirmButtonPressed() || Input.GetKeyDown(KeyCode.RightShift)))
         {
             HideControl();
         }
@@ -126,14 +128,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowControl()
     {
-        pauseMenuUI.SetActive(false);
+        // pauseMenuUI.SetActive(false);
         controlMenuUI.SetActive(true);
         controlUIActive = true;
     }
 
     void HideControl()
     {
-        pauseMenuUI.SetActive(true);
+        // pauseMenuUI.SetActive(true);
         controlMenuUI.SetActive(false);
         controlUIActive = false;
     }
