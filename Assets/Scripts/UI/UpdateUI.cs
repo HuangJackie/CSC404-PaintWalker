@@ -48,7 +48,6 @@ public class UpdateUI : MonoBehaviour
             TooltipObject newTooltipObject;
             if (Physics.Raycast(ray, out hitInfo) && hitInfo.collider.gameObject.TryGetComponent(out newTooltipObject))
             {
-                // print("I'm looking at " + hitInfo.transform.name);
                 if (_tooltipObject != null && newTooltipObject != _tooltipObject)
                 {
                     _tooltipObject.OnExitTooltip();

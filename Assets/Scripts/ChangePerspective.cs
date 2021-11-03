@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class ChangePerspective : MonoBehaviour
@@ -11,6 +12,8 @@ public class ChangePerspective : MonoBehaviour
     private float _rot_dest;
     private GameObject _player;
     private bool _changingPersective;
+    private ControllerUtil _controllerUtil;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +22,13 @@ public class ChangePerspective : MonoBehaviour
         _rot_dest = 180f;
         _player = GameObject.FindWithTag("Player");
         _changingPersective = false;
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetAxisRaw("RotateCamera") > 0)
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || _controllerUtil.GetRotationChangePressed())
         {
             Debug.Log("changing persepctive");
             _changingPersective = true;

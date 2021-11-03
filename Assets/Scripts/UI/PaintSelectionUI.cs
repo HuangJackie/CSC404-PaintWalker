@@ -43,7 +43,7 @@ public class PaintSelectionUI : MonoBehaviour
         if (_controllerUtil.PaintSelectionUIToggled())
         {
             _isActive = !_isActive;
-            _levelManager.SetPaintSelectionUIDisplayed(_isActive);
+            // _levelManager.SetPaintSelectionUIDisplayed(_isActive);
 
             if (_isActive)
             {
@@ -61,14 +61,14 @@ public class PaintSelectionUI : MonoBehaviour
             {
                 Debug.LogError("Something went wrong could not select the block under the player.");
                 _isActive = false;
-                _levelManager.SetPaintSelectionUIDisplayed(_isActive);
+                // _levelManager.SetPaintSelectionUIDisplayed(_isActive);
                 ClosePaintSelectionUI();
                 return;
             }
 
             Vector3 currentPosition = _selectedPaintable.transform.position;
 
-            if (_controllerUtil.GetXAxisPaintSelectAxis(out float xSelect))
+            if (_controllerUtil.GetXAxisPaintSelectAxis(out int xSelect))
             {
                 bool successfulUpdate =
                     UpdateNextSelectedPaintable(currentPosition, xSelect, Vector3.left, Vector3.right);
@@ -84,7 +84,7 @@ public class PaintSelectionUI : MonoBehaviour
                     );
                 }
             }
-            else if (_controllerUtil.GetZAxisPaintSelectAxis(out float zSelect))
+            else if (_controllerUtil.GetZAxisPaintSelectAxis(out int zSelect))
             {
                 bool successfulUpdate =
                     UpdateNextSelectedPaintable(currentPosition, zSelect, Vector3.back, Vector3.forward);
@@ -99,7 +99,7 @@ public class PaintSelectionUI : MonoBehaviour
                         _minXValue, _maxXValue);
                 }
             }
-            else if (_controllerUtil.GetYAxisPaintSelectAxis(out float ySelect))
+            else if (_controllerUtil.GetYAxisPaintSelectAxis(out int ySelect))
             {
                 bool successfulUpdate = UpdateNextSelectedPaintable(currentPosition, ySelect, Vector3.up, Vector3.down);
                 if (!successfulUpdate)

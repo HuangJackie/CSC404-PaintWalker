@@ -13,9 +13,10 @@ public class TpCreature : SpecialCreature
     private Color _originalColour2;
 
 
-    // For clicking
+    // For painting
     public CameraRotation cameraPanningRevertTarget;
     public GameObject player;
+    private ControllerUtil _controllerUtil;
     private Player _playerx;
     public GameObject tp_creature2;
     public TpCreature[] tp_creaturesx;
@@ -36,6 +37,7 @@ public class TpCreature : SpecialCreature
 
         _material2 = tp_creature2.GetComponentInChildren<Renderer>().material;
         _originalColour2 = _material2.color;
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
 
     // Update is called once per frame
@@ -53,7 +55,7 @@ public class TpCreature : SpecialCreature
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
-                IsMouseOver,
+                IsMouseOver || _controllerUtil.GetPaintButtonDown(),
                 player.transform.position,
                 transform.position,
                 _levelManager,

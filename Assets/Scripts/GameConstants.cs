@@ -21,9 +21,18 @@ public class GameConstants : MonoBehaviour
     public const float HOVEROVER_G = 1f;
     public const float HOVEROVER_B = 0f;
     
-    public const float SELECTION_R = 0.87f;
-    public const float SELECTION_G = 0.45f;
-    public const float SELECTION_B = 1f;
+    public const float SELECTION_R = 0.1f;
+    public const float SELECTION_G = 0.1f;
+    public const float SELECTION_B = 0.1f;
     // public static readonly Color32 TOOLTIP_HIGHLIGHT_COLOUR = new Color(1f, 0.99f, 0f);
-    // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.87f, 0.45f, 1f, 0.03f);
+    // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.26f, 0.26f, 0.26f);
+
+    /*
+     * Note this is for the switch paint UI but they're not pointing in the right direction.
+     * Everything seems to be rotated, but still works. Just need to rename later.
+     */
+    public const string NorthwestQuadrant = "NW";
+    public const string NortheastQuadrant = "NE";
+    public const string SouthwestQuadrant = "SW";
+    public const string SoutheastQuadrant = "SE";
 }

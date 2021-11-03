@@ -30,10 +30,13 @@ public class Interactable : MonoBehaviour
 
     public void HighlightForPaintSelectionUI()
     {
-        Material.color = new Color(
-            tintColour(Material.color.r, GameConstants.SELECTION_R),
-            tintColour(Material.color.g, GameConstants.SELECTION_G),
-            tintColour(Material.color.b, GameConstants.SELECTION_B));
+        if (Material != null)
+        {
+            Material.color = new Color(
+                tintColour(Material.color.r, GameConstants.SELECTION_R),
+                tintColour(Material.color.g, GameConstants.SELECTION_G),
+                tintColour(Material.color.b, GameConstants.SELECTION_B));
+        }
     }
 
     private float tintColour(float colourToTint, float tint)
