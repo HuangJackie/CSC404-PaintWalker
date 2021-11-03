@@ -24,6 +24,8 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
     protected void OnMouseDown()
     {
         Paint(true);
+        _updateUI.WipeInfoText();
+        UndoHighlight();
     }
 
     new void OnMouseEnter()
