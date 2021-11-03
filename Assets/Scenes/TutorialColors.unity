@@ -8012,6 +8012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+--- !u!1 &222737430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+  m_PrefabInstance: {fileID: 859007759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &222971230
 GameObject:
   m_ObjectHideFlags: 0
@@ -8221,6 +8226,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &232347987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31784,6 +31799,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &947385198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36527,6 +36552,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &1031287997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37068,6 +37103,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &1059745568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44079,6 +44124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 222737430}
+  ToolTipWalking: {fileID: 1781583770}
+  ToolTiPainting: {fileID: 770569232}
+  ToolTipDoor: {fileID: 654240513}
+  ToolTipYellow: {fileID: 1408360782}
+  ToolTipRed: {fileID: 95370251}
+  ToolTipGreen: {fileID: 1381394436}
+  ToolTipBlue: {fileID: 1704565419}
 --- !u!65 &1320414980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50610,6 +50665,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &1457201380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61598,7 +61663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1704565420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -73465,6 +73530,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041df990c46737e4ab0747a824b7c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  player: {fileID: 0}
+  ToolTipWalking: {fileID: 0}
+  ToolTiPainting: {fileID: 0}
+  ToolTipDoor: {fileID: 0}
+  ToolTipYellow: {fileID: 0}
+  ToolTipRed: {fileID: 0}
+  ToolTipGreen: {fileID: 0}
+  ToolTipBlue: {fileID: 0}
 --- !u!65 &2087730817
 BoxCollider:
   m_ObjectHideFlags: 0
