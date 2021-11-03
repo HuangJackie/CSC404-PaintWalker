@@ -12,12 +12,15 @@ public class TutorialToolTips : Interactable, TooltipObject
     private LevelManager _levelManager;
 
     public GameObject ToolTipWalking;
-    public GameObject ToolTiPainting;
+    public GameObject ToolTipPainting;
     public GameObject ToolTipDoor;
     public GameObject ToolTipYellow;
     public GameObject ToolTipRed;
     public GameObject ToolTipGreen;
     public GameObject ToolTipBlue;
+    public GameObject ToolTipUlala;
+    public GameObject ToolTipArie;
+    public GameObject ToolTipGemi;
     private String HoverText;
     
     private UpdateUI _updateUI;
@@ -56,11 +59,23 @@ public class TutorialToolTips : Interactable, TooltipObject
                 HoverText = "About Walking, press f";
                 break;
             case "Painting":
-                ToolTipUI = ToolTiPainting;
+                ToolTipUI = ToolTipPainting;
                 HoverText = "About Painting";
                 break;
+            case "Ulala":
+                ToolTipUI = ToolTipUlala;
+                HoverText = "About Ulala";
+                break;
+            case "Arie":
+                ToolTipUI = ToolTipArie;
+                HoverText = "About Arie";
+                break;
+            case "Gemi":
+                ToolTipUI = ToolTipGemi;
+                HoverText = "About Gemi";
+                break;
+            
         }
-        // ToolTipUI = ToolTipYellow;
     }
 
     void Update()
@@ -68,7 +83,7 @@ public class TutorialToolTips : Interactable, TooltipObject
         Vector3 playerpos = player.transform.position;
         Vector3 signpos = transform.position;
         Debug.Log("X: " + Vector3.Normalize(playerpos- signpos).x + " Z: " + Vector3.Normalize(playerpos- signpos).z);
-        if ((Vector3.Distance(playerpos, signpos) < 2) && (Vector3.Normalize(playerpos- signpos).z < 0) 
+        if ((Vector3.Distance(playerpos, signpos) < 2) && (Vector3.Normalize(playerpos- signpos).z < 0.3) 
                                                        && (Vector3.Normalize(playerpos- signpos).x > 0) 
                                                        && (Vector3.Normalize(playerpos- signpos).x < 0.5))
             
