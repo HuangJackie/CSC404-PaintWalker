@@ -43,7 +43,7 @@ public class ChangePerspective : MonoBehaviour
             //     _target_y_angle = 0;
             // }
         }
-        else if (Input.GetKeyDown(KeyCode.E) || Input.GetAxisRaw("RotateCamera") < 0)
+        else if (Input.GetKeyDown(KeyCode.E) || _controllerUtil.GetRotationChange() < 0)
         {
             _changingPersective = true;
             _rot_dest = -180f;
