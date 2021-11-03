@@ -12,14 +12,16 @@ public class RammingCreature : SpecialCreature
     public int speed = 3;
     public Transform target;
     
-    // For clicking
+    // For painting
     public GameObject player;
-
+    private ControllerUtil _controllerUtil;
+    
     new void Start()
     {
         base.Start();
         _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
 
     void Update()
@@ -66,11 +68,9 @@ public class RammingCreature : SpecialCreature
     
     public override bool Paint(bool paintWithBrush)
     {
-        print("Painting Special Creature");
-
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
-                IsMouseOver,
+                IsMouseOver || _controllerUtil.GetPaintButtonDown(),
                 player.transform.position,
                 transform.position,
                 _levelManager,

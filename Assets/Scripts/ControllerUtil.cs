@@ -7,6 +7,9 @@ namespace DefaultNamespace
     {
         public float buttonPressDelayInSeconds;
         private float _lastTimeButtonPressed;
+        private bool _isMenuOpen;
+        public ChangePerspective isoCamera;
+
 
         private void Start()
         {
@@ -15,19 +18,44 @@ namespace DefaultNamespace
 
         public float GetHorizontalAxisRaw()
         {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return 0;
+            }
+
             float horizontalAxis = Input.GetAxisRaw("Horizontal");
             return FinishedMovementDelay(horizontalAxis) ? horizontalAxis : 0;
         }
 
         public float GetVerticalAxisRaw()
         {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return 0;
+            }
+
             float verticalAxis = Input.GetAxisRaw("Vertical");
             return FinishedMovementDelay(verticalAxis) ? verticalAxis : 0;
         }
 
-        public bool PaintSelectionUIToggled()
+        public float GetHorizontalPanningAxis()
         {
-            return Input.GetButtonDown("PaintSelectionUI");
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return 0;
+            }
+
+            return Input.GetAxis("HorizontalPanning");
+        }
+
+        public float GetVerticalPanningAxis()
+        {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return 0;
+            }
+
+            return Input.GetAxis("VerticalPanning");
         }
 
         /**
@@ -44,32 +72,138 @@ namespace DefaultNamespace
             return false;
         }
 
-        public bool GetXAxisPaintSelectAxis(out float axis)
+        public bool GetXAxisPaintSelectAxis(out int axis)
         {
-            axis = Input.GetAxisRaw("XAxisPaintSelect");
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                axis = 0;
+                return false;
+            }
+
+            axis = Input.GetAxisRaw("XAxisPaintSelect") > 0
+                ? 1
+                : (Input.GetAxisRaw("XAxisPaintSelect") < 0
+                    ? -1
+                    : 0);
+            
+            if (isoCamera.isIntervteredControl)
+            {
+                axis = -axis;
+            }
+            
             return FinishedMovementDelay(axis);
         }
 
-        public bool GetZAxisPaintSelectAxis(out float axis)
+        public bool GetZAxisPaintSelectAxis(out int axis)
         {
-            axis = Input.GetAxisRaw("ZAxisPaintSelect");
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                axis = 0;
+                return false;
+            }
+
+            axis = Input.GetAxisRaw("ZAxisPaintSelect") > 0
+                ? 1
+                : (Input.GetAxisRaw("ZAxisPaintSelect") < 0
+                    ? -1
+                    : 0);
+            
+            if (isoCamera.isIntervteredControl)
+            {
+                axis = -axis;
+            }
             return FinishedMovementDelay(axis);
         }
-        
-        public bool GetYAxisPaintSelectAxis(out float axis)
+
+        public bool GetColourWheelPressed()
         {
-            axis = Input.GetAxisRaw("YAxisPaintSelect");
-            return FinishedMovementDelay(axis);
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+
+            return Input.GetAxisRaw("PaintHUD") < 0 || Input.GetKeyDown(KeyCode.Tab);
+        }
+
+        public bool GetColourWheelNotPressed()
+        {
+            return Input.GetAxisRaw("PaintHUD") == 0 || Input.GetKeyUp(KeyCode.Tab);
+        }
+
+        public float GetColourWheelSelectXAxis()
+        {
+            return Input.GetAxis("ColourWheelSelectXAxis");
+        }
+
+        public float GetColourWheelSelectYAxis()
+        {
+            return Input.GetAxis("ColourWheelSelectYAxis");
         }
 
         public bool GetPaintButtonDown()
         {
-            return Input.GetButtonDown("Paint");
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return false;
+            }
+
+            return Input.GetAxisRaw("Paint") > 0;
         }
 
         public bool GetInteractButtonDown()
         {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return false;
+            }
+
             return Input.GetButtonDown("Interact");
+        }
+
+
+        public bool GetRotationChangePressed()
+        {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return false;
+            }
+
+            return Input.GetAxisRaw("RotateCamera") != 0;
+        }
+
+        public bool GetMenuButtonPressed()
+        {
+            bool isPressed = Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Menu");
+            if (isPressed)
+            {
+                print("changed");
+                _isMenuOpen = !_isMenuOpen;
+            }
+
+            return isPressed;
+        }
+
+        public bool GetConfirmButtonPressed()
+        {
+            return Input.GetButtonDown("ConfirmMenu");
+        }
+
+        public bool GetGameMenuSelectAxis(out int axis)
+        {
+            axis = Input.GetAxis("GameMenuSelectAxis") > 0
+                ? 1
+                : (Input.GetAxis("GameMenuSelectAxis") < 0
+                    ? -1
+                    : 0);
+            // print("Test " + (FinishedMovementDelay(axis) && axis != 0) + " " + axis);
+            
+            return FinishedMovementDelay(axis) && axis != 0 ;
+        }
+
+        public void CloseMenu()
+        {
+            print("MENU CLOSED");
+            _isMenuOpen = false;
         }
     }
 }

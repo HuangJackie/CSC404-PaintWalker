@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
     private bool _hasWaitedTurn;
     private ControllerUtil _controllerUtil;
+    private PaintingSystem _paintingSystem;
 
     void Start()
     {
@@ -44,6 +45,8 @@ public class Player : MonoBehaviour
         _prevPosition = _targetLocation;
         _isNotTrackingMovement = true;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
+        _paintingSystem = FindObjectOfType<PaintingSystem>();
+        _paintingSystem.ResetSelectedObject();
         _colorWheelHUD = GameObject.Find("ColorWheelHUD");
         _colorWheelHUD.SetActive(false);
     }
@@ -66,14 +69,8 @@ public class Player : MonoBehaviour
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
 
-        if (!LevelManager.IsPaintSelectionUIDisplayed()){
-            _horizontalMovement = isoCamera.isIntervteredControl
-                ? -_controllerUtil.GetHorizontalAxisRaw()
-                : _controllerUtil.GetHorizontalAxisRaw();
-            _verticalMovement = isoCamera.isIntervteredControl
-                ? -_controllerUtil.GetVerticalAxisRaw()
-                : _controllerUtil.GetVerticalAxisRaw();
-        }
+        _horizontalMovement = _controllerUtil.GetHorizontalAxisRaw();
+        _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
 
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
@@ -83,13 +80,14 @@ public class Player : MonoBehaviour
             _targetLocation.y = transform.position.y;
             RigidGridMove();
         }
-        
+
         // Color Wheel HUD
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (_controllerUtil.GetColourWheelPressed())
         {
             _colorWheelHUD.SetActive(true);
         }
-        if (Input.GetKeyUp(KeyCode.Tab))
+
+        if (_controllerUtil.GetColourWheelNotPressed())
         {
             _colorWheelHUD.SetActive(false);
         }
@@ -132,14 +130,17 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
             //print("tracking ends when player reaches dest");
+            
+            // To reset the selected object to the block under the player. If removing the redo code above,
+            // leave this line here.
+            _paintingSystem.ResetSelectedObject();
         }
 
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
-        //print(_targetLocation);
-        //print("obj location");
-        //print(transform.position); 
+
+        // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
             newPosition = _targetLocation;
@@ -164,17 +165,18 @@ public class Player : MonoBehaviour
             //);
         }
 
-        if (_moveDirection != Vector3.zero && _isRotating)
+        Vector3 lookDirection = isoCamera.isIntervteredControl ? -_moveDirection : _moveDirection;
+        if (lookDirection != Vector3.zero && _isRotating)
         {
             transform.rotation = Quaternion.Slerp(
-                transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
+                transform.rotation, Quaternion.LookRotation(lookDirection), 0.5f
             );
         }
-        
-        if (_moveDirection != Vector3.zero &&
-            Quaternion.Angle(transform.rotation, Quaternion.LookRotation(_moveDirection)) < 0.1f)
+
+        if (lookDirection != Vector3.zero &&
+            Quaternion.Angle(transform.rotation, Quaternion.LookRotation(lookDirection)) < 0.1f)
         {
-            transform.rotation = Quaternion.LookRotation(_moveDirection);
+            transform.rotation = Quaternion.LookRotation(lookDirection);
             _isRotating = false;
         }
     }
@@ -224,11 +226,13 @@ public class Player : MonoBehaviour
         switch (pressedButton)
         {
             case "Up":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     //Debug.Log("Up bottom is empty");
                     return false;
                 }
+
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
@@ -253,6 +257,7 @@ public class Player : MonoBehaviour
                     //Debug.Log("down bottom is empty");
                     return false;
                 }
+
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, -1), Vector3.down, out hitInfo,
@@ -269,7 +274,6 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                
 
                 return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
 
@@ -279,6 +283,7 @@ public class Player : MonoBehaviour
                     // Debug.Log("left bottom is empty ");
                     return false;
                 }
+
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(-1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
@@ -296,7 +301,6 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                
 
                 return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
 
@@ -306,6 +310,7 @@ public class Player : MonoBehaviour
                     //Debug.Log("right bottom is empty");
                     return false;
                 }
+
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,

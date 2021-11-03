@@ -127,11 +127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalColour: {r: 0, g: 0, b: 0, a: 0}
+  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 0}
   speed: 1
   test: 
   isPaintedByFeet: 1
   isPaintedByBrush: 0
+  _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}

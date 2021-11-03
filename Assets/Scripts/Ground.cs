@@ -16,6 +16,7 @@ public class Ground : Interactable, Paintable
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
+
     public Color _paintedColour;
     // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
 
@@ -88,7 +89,7 @@ public class Ground : Interactable, Paintable
             return;
         }
 
-        if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
+        if (_levelManager.GetCurrentlySelectedPaintClass().ToString() != _paintedColour.ToString() || !isPaintedByBrush)
         {
             _isMouseClicked = Input.GetButtonDown("Fire1");
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
@@ -153,7 +154,7 @@ public class Ground : Interactable, Paintable
         }
     }
 
-    IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination, bool reverting=false)
+    IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination, bool reverting = false)
     {
         GameObject movableObjectOnTop = IsMovableObjectOnTop();
         if (!movableObjectOnTop && !reverting)
@@ -163,20 +164,24 @@ public class Ground : Interactable, Paintable
             NewState.ObjectInit(gameObject);
             _levelManager.redoCommandHandler.AddCommand(NewState);
             _levelManager.redoCommandHandler.TransitionToNewGameState();
-        } else if (movableObjectOnTop && !reverting)
+        }
+        else if (movableObjectOnTop && !reverting)
         {
             print("object on top");
             bool up;
             if (destination.y > transform.position.y)
             {
                 up = true;
-            } else
+            }
+            else
             {
                 up = false;
             }
+
             _player.CreateCopyOfCurrentState(up);
             _player.GameState.InjectBlockState(gameObject);
         }
+
         bool blockPathIsBlocked = (destination == _destinationDrop && !NoBlockBelow()) ||
                                   (destination == _destinationRaise && !NoUnmovableBlockAbove());
         while (this && Vector3.Distance(transform.position, destination) > 0.01f)
@@ -197,13 +202,13 @@ public class Ground : Interactable, Paintable
                     transform.position = destination;
                     //if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
                     //{
-                        //_player.GameState.UpdatePlayerY(player.transform.position.y);
+                    //_player.GameState.UpdatePlayerY(player.transform.position.y);
                     //}
                     //print("reached neutral dest");
-                    _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
-            } else
+            }
+            else
             {
                 //print("moving by effect");
                 if (blockPathIsBlocked && destination != _destinationNeutral)
@@ -212,6 +217,7 @@ public class Ground : Interactable, Paintable
                     destination = _destinationNeutral;
                     blockPathIsBlocked = false;
                 }
+
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
@@ -221,16 +227,18 @@ public class Ground : Interactable, Paintable
                     //print("reached effect dest");
                     if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
                     {
-                       //_player.GameState.UpdatePlayerY(player.transform.position.y);
+                        //_player.GameState.UpdatePlayerY(player.transform.position.y);
                     }
-                    _levelManager.RefreshPaintSelectionUI();
+
                     yield break;
                 }
+
                 if (movableObjectOnTop)
                 {
                     MoveObjectWithBlock(transform.position, movableObjectOnTop);
                 }
             }
+
             yield return null;
         }
 
@@ -322,9 +330,9 @@ public class Ground : Interactable, Paintable
                 print("pushing");
                 if (_player.GameState != null)
                 {
-                    print(transform.position);
                     _player.GameState.InjectBlockState(gameObject);
                 }
+
                 _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(true); });
                 // _isMovingBlock = true;
             }
@@ -364,109 +372,117 @@ public class Ground : Interactable, Paintable
 
     public bool Paint(bool paintWithBrush = false)
     {
-        if (_levelManager.HasEnoughPaint())
+        // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
+        if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
         {
-            if ((isPaintedByBrush || isPaintedByFeet) && !paintWithBrush)
-            {
-                return false;
-            }
-
-            string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
-
-            if (_paintedColour != originalColour && isPaintedByBrush)
-            {
-                RevertEffect(_paintedColour, currentlySelectedPaint);
-            }
-            if (!paintWithBrush && _player.GameState != null)
-            {
-                _player.GameState.InjectBlockState(gameObject);
-            }
-            switch (currentlySelectedPaint)
-            {
-                case "Red":
-                    Material.color = GameConstants.red;
-                    _paintedColour = Material.color;
-                    paintedColour = Material.color;
-                    _levelManager.DecreasePaint("Red", 1);
-                    if (paintWithBrush && NoBlockBelow())
-                    {
-                        _redSoundManager.PlayRandom();
-                        Debug.Log("red effect triggered");
-                        _levelManager.EnqueueAction(() =>
-                        {
-                            return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
-                        });
-                        isPaintedByBrush = true;
-
-                    }
-
-                    break;
-                case "Green":
-                    Material.color = GameConstants.green;
-                    _paintedColour = Material.color;
-                    paintedColour = Material.color;
-                    _levelManager.DecreasePaint("Green", 1);
-                    if (paintWithBrush)
-                    {
-                        _greenSoundManager.PlayRandom();
-                        Debug.Log("green effect triggered");
-                        MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-                        NewState.ObjectInit(gameObject);
-                        _levelManager.redoCommandHandler.AddCommand(NewState);
-                        _levelManager.redoCommandHandler.TransitionToNewGameState();
-                        _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
-                    }
-
-                    break;
-                case "Yellow":
-                    Material.color = GameConstants.yellow;
-                    _paintedColour = Material.color;
-                    paintedColour = Material.color;
-                    _levelManager.DecreasePaint("Yellow", 1);
-                    if (paintWithBrush && NoUnmovableBlockAbove())
-                    {
-                        _yellowSoundManager.PlayRandom();
-                        Debug.Log("yellow effect triggered");
-                        _levelManager.EnqueueAction(() =>
-                        {
-                            return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
-                        });
-                        isPaintedByBrush = true;
-
-                    }
-
-                    break;
-                case "Blue":
-                    Material.color = GameConstants.blue;
-                    _paintedColour = Material.color;
-                    paintedColour = Material.color;
-                    _levelManager.DecreasePaint("Blue", 1);
-                    if (paintWithBrush)
-                    {
-                        gameObject.layer = LayerMask.NameToLayer("IceCube");
-                        _blueSoundManager.PlayRandom();
-                        Debug.Log("blue effect triggered");
-                        _isIceBlockEffectEnabled = true;
-                        _destinationMove = transform.position;
-                        MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-                        NewState.ObjectInit(gameObject);
-                        _levelManager.redoCommandHandler.AddCommand(NewState);
-                        _levelManager.redoCommandHandler.TransitionToNewGameState();
-                        _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
-                    }
-
-                    break;
-            }
-
-            if (!paintWithBrush)
-            {
-                isPaintedByFeet = true;
-            }
-
-            return true;
+            return false;
+        }
+        
+        if (!_levelManager.HasEnoughPaint())
+        {
+            return false;
         }
 
-        return false;
+        if ((isPaintedByBrush || isPaintedByFeet) && !paintWithBrush)
+        {
+            return false;
+        }
+
+        string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
+
+        if (_paintedColour != originalColour && isPaintedByBrush)
+        {
+            RevertEffect(_paintedColour, currentlySelectedPaint);
+        }
+
+        if (!paintWithBrush && _player.GameState != null)
+        {
+            _player.GameState.InjectBlockState(gameObject);
+        }
+
+        switch (currentlySelectedPaint)
+        {
+            case "Red":
+                Material.color = GameConstants.red;
+                _paintedColour = Material.color;
+                paintedColour = Material.color;
+                _levelManager.DecreasePaint("Red", 1);
+                if (paintWithBrush && NoBlockBelow())
+                {
+                    _redSoundManager.PlayRandom();
+                    Debug.Log("red effect triggered");
+                    _levelManager.EnqueueAction(() =>
+                    {
+                        return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
+                    });
+                    isPaintedByBrush = true;
+                }
+
+                break;
+            case "Green":
+                Material.color = GameConstants.green;
+                _paintedColour = Material.color;
+                paintedColour = Material.color;
+                _levelManager.DecreasePaint("Green", 1);
+                if (paintWithBrush)
+                {
+                    _greenSoundManager.PlayRandom();
+                    Debug.Log("green effect triggered");
+                    MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+                    NewState.ObjectInit(gameObject);
+                    _levelManager.redoCommandHandler.AddCommand(NewState);
+                    _levelManager.redoCommandHandler.TransitionToNewGameState();
+                    _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
+                    isPaintedByBrush = true;
+                }
+
+                break;
+            case "Yellow":
+                Material.color = GameConstants.yellow;
+                _paintedColour = Material.color;
+                paintedColour = Material.color;
+                _levelManager.DecreasePaint("Yellow", 1);
+                if (paintWithBrush && NoUnmovableBlockAbove())
+                {
+                    _yellowSoundManager.PlayRandom();
+                    Debug.Log("yellow effect triggered");
+                    _levelManager.EnqueueAction(() =>
+                    {
+                        return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
+                    });
+                    isPaintedByBrush = true;
+                }
+
+                break;
+            case "Blue":
+                Material.color = GameConstants.blue;
+                _paintedColour = Material.color;
+                paintedColour = Material.color;
+                _levelManager.DecreasePaint("Blue", 1);
+                if (paintWithBrush)
+                {
+                    gameObject.layer = LayerMask.NameToLayer("IceCube");
+                    _blueSoundManager.PlayRandom();
+                    Debug.Log("blue effect triggered");
+                    _isIceBlockEffectEnabled = true;
+                    _destinationMove = transform.position;
+                    MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
+                    NewState.ObjectInit(gameObject);
+                    _levelManager.redoCommandHandler.AddCommand(NewState);
+                    _levelManager.redoCommandHandler.TransitionToNewGameState();
+                    _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
+                    isPaintedByBrush = true;
+                }
+
+                break;
+        }
+
+        if (!paintWithBrush)
+        {
+            isPaintedByFeet = true;
+        }
+
+        return true;
     }
 
     private void RevertEffect(Color colorToRevert, String newColor)

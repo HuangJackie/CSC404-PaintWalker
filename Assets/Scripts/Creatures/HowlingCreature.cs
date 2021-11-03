@@ -11,13 +11,16 @@ public class HowlingCreature : SpecialCreature
     public MoveWall wall3;
     public LevelManager manager;
 
+    // For painting
     public GameObject player;
+    private ControllerUtil _controllerUtil;
     public float radius = 1.5f;
 
     new void Start()
     {
         base.Start();
         player = GameObject.FindWithTag("Player");
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
 
     void Update()
@@ -41,7 +44,7 @@ public class HowlingCreature : SpecialCreature
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
             isPainted,
-            IsMouseOver,
+            IsMouseOver || _controllerUtil.GetPaintButtonDown(),
             player.transform.position,
             transform.position,
             manager,

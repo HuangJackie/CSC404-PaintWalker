@@ -30,12 +30,10 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive;
     private bool _isPanning;
-    private bool _paintSelectionUIDisplayed;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
 
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
-    private PaintSelectionUI _paintSelectionUI;
 
     //private void Awake()
     //{
@@ -83,9 +81,6 @@ public class LevelManager : MonoBehaviour
         playerPaintBottle = FindObjectOfType<PaintBottle>();
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
-
-        _paintSelectionUIDisplayed = false;
-        _paintSelectionUI = FindObjectOfType<PaintSelectionUI>();
     }
 
     IEnumerator ManageCoroutines()
@@ -120,11 +115,6 @@ public class LevelManager : MonoBehaviour
         if (freeze_player)
         {
             return;
-        }
-
-        if (Input.GetButtonDown("Undo"))
-        {
-            Undo();
         }
     }
 
@@ -328,24 +318,5 @@ public class LevelManager : MonoBehaviour
     public void SetExitActive(bool isActive)
     {
         _isExitActive = isActive;
-    }
-
-    public void SetPaintSelectionUIDisplayed(bool isDisplayed)
-    {
-        _paintSelectionUIDisplayed = isDisplayed;
-    }
-
-    public bool IsPaintSelectionUIDisplayed()
-    {
-        return _paintSelectionUIDisplayed;
-    }
-
-    public void RefreshPaintSelectionUI()
-    {
-        if (_paintSelectionUIDisplayed)
-        {
-            _paintSelectionUI.ClosePaintSelectionUI();
-            _paintSelectionUI.DisplayPaintSelectionUI();
-        }
     }
 }
