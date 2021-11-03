@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
@@ -17,12 +18,27 @@ public class Exit : MonoBehaviour
     
     private void OnTriggerEnter(Collider collision)
     {
+        Scene scene = SceneManager.GetActiveScene();
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision && manager.IsExitActive())
         {
-            _updateUI.SetInfoText("You Win!", true);
-            Time.timeScale = 0.0f;
-            _winAudioSource.Play();
+            if (scene.name == "TutorialColors")
+            {
+                _updateUI.SetInfoText("Tutorial Complete!", true);
+            }
+            else
+            {
+                _updateUI.SetInfoText("You Win!", true);
+                Time.timeScale = 0.0f;
+                _winAudioSource.Play();
+            }
+            StartCoroutine(ReturnToMenu());
         }
+    }
+
+    private IEnumerator ReturnToMenu()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
