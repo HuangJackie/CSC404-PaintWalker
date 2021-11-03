@@ -87,7 +87,7 @@ public class TpCreature : SpecialCreature
             if (Vector3.Distance(player.transform.position, transform.position) < 3)
             {
                 Vector3 tpCreaturePosition = tp_creature2.transform.position;
-                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y - 0.7f,
+                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y,
                     tpCreaturePosition.z);
                 float tpCreatureYDiff = tp_creature2.transform.position.y - this.transform.position.y;
                 Vector3 newCameraPosition = new Vector3(newPlayerPosition.x, newPlayerPosition.y - tpCreatureYDiff, newPlayerPosition.z);

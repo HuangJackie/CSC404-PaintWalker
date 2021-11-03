@@ -7226,6 +7226,116 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb3cbfb3ef0798e4d9168331818d003d, type: 3}
+--- !u!1 &568711190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568711195}
+  - component: {fileID: 568711194}
+  - component: {fileID: 568711193}
+  - component: {fileID: 568711192}
+  - component: {fileID: 568711191}
+  m_Layer: 9
+  m_Name: CheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &568711191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568711190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0b474231721d4fb60311f256c8b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelManager: {fileID: 0}
+--- !u!64 &568711192
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568711190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &568711193
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568711190}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &568711194
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568711190}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &568711195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568711190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 1.002, z: 1}
+  m_LocalScale: {x: 0.2143548, y: 0.198, z: 0.198}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569661523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4630231336095935056, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
@@ -11092,6 +11202,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
   m_PrefabInstance: {fileID: 859007759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &859007763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+  m_PrefabInstance: {fileID: 859007759}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859007761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &867989191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14532,7 +14653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.802
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426700, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20856,7 +20977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 1
   freeze_player: 0
-  player_script: {fileID: 0}
+  player_script: {fileID: 859007763}
+  player: {fileID: 859007761}
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0
@@ -24535,7 +24657,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336211086034, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_text
-      value: UNDO
+      value: Load Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -24559,7 +24685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Undo
+      value: RestartAtLastCheckpoint
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398088, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -24598,8 +24724,12 @@ PrefabInstance:
       value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336861398198, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
+      propertyPath: m_Name
+      value: RestartAtCheckpoint Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630231336861398198, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336922373532, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_LocalScale.x
@@ -24730,7 +24860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_LocalPosition.z
