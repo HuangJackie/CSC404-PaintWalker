@@ -22,6 +22,10 @@ public class LevelManager : MonoBehaviour
     public static List<Vector3> pastCheckPoints;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
+    public int init_yellow;
+    public int init_red;
+    public int init_green;
+    public int init_blue;
 
     private UpdateUI _updateUI;
     private bool _isExitActive;
@@ -55,10 +59,10 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ManageCoroutines());
 
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", 0); // Freezes Platform
-        paintQuantity.Add("Green", 0); // Growing Platform
-        paintQuantity.Add("Red", 0); // Drops Platform
-        paintQuantity.Add("Yellow", 4); // Raises Platform
+        paintQuantity.Add("Blue", init_blue); // Freezes Platform
+        paintQuantity.Add("Green", init_green); // Growing Platform
+        paintQuantity.Add("Red", init_red); // Drops Platform
+        paintQuantity.Add("Yellow", init_yellow); // Raises Platform
 
         if (dev_mode)
         {
