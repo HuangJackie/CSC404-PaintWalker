@@ -6146,6 +6146,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintColour1
+      value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintColour2
+      value: Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: tp_creature2
       value: 
       objectReference: {fileID: 1166336597}
@@ -51520,8 +51528,8 @@ MonoBehaviour:
   freeze_player: 0
   player_script: {fileID: 222737432}
   player: {fileID: 222737430}
-  init_yellow: 10
-  init_red: 10
+  init_yellow: 20
+  init_red: 20
   init_green: 1
   init_blue: 1
 --- !u!4 &1704174258
