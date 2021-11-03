@@ -23,6 +23,7 @@ public class MainMenuController : MonoBehaviour
         _menuOptions[0] = start.GetComponentInChildren<Button>();
         _menuOptions[1] = tutorial.GetComponentInChildren<Button>();
         _selectedMenuOption = 0;
+        _menuOptions[_selectedMenuOption].OnPointerEnter(null);
     }
 
     // Update is called once per frame
