@@ -7951,7 +7951,7 @@ PrefabInstance:
       objectReference: {fileID: 1704174257}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
@@ -51519,8 +51519,8 @@ MonoBehaviour:
   freeze_player: 0
   player_script: {fileID: 222737432}
   player: {fileID: 222737430}
-  init_yellow: 10
-  init_red: 10
+  init_yellow: 20
+  init_red: 20
   init_green: 1
   init_blue: 1
 --- !u!4 &1704174258
