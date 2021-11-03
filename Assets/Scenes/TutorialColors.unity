@@ -68271,11 +68271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a65e4dee6792e47924cef38e4defd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 0}
-  controlMenuUI: {fileID: 0}
-  resume: {fileID: 0}
-  menu: {fileID: 0}
-  control: {fileID: 0}
+  pauseMenuUI: {fileID: 716212585}
+  controlMenuUI: {fileID: 1542211282}
+  resume: {fileID: 1587983634}
+  menu: {fileID: 1574865072}
+  control: {fileID: 401150949}
 --- !u!1 &1704521596
 GameObject:
   m_ObjectHideFlags: 0
