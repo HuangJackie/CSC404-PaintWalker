@@ -1354,6 +1354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPressDelayInSeconds: 0.2
+  isoCamera: {fileID: 1510057400}
 --- !u!4 &15028090
 Transform:
   m_ObjectHideFlags: 0
@@ -22909,6 +22910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   controllerPanningSpeed: 0.3
+  transitionBackSpeed: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1510057400}
   _gameplayPos: {x: 0, y: 0, z: 0}
@@ -58599,7 +58601,7 @@ GameObject:
   - component: {fileID: 1510057400}
   m_Layer: 0
   m_Name: Isometric Camera
-  m_TagString: Untagged
+  m_TagString: ISOCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58631,9 +58633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe4a5cdb09a5a3499b432a31cf38372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelManager: {fileID: 1704174257}
   rotationSpeed: 1
   isIntervteredControl: 0
-  LevelManager: {fileID: 1704174257}
 --- !u!1 &1513370455
 GameObject:
   m_ObjectHideFlags: 0
@@ -68269,6 +68271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 0}
   controlMenuUI: {fileID: 0}
+  resume: {fileID: 0}
+  menu: {fileID: 0}
 --- !u!1 &1704521596
 GameObject:
   m_ObjectHideFlags: 0
@@ -68786,6 +68790,63 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!1001 &1708582179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300918, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027774230117300920, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
+      propertyPath: m_Name
+      value: PaintingSystem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17e910d45d26ed14c877bd85a6491f3d, type: 3}
 --- !u!1 &1713689636
 GameObject:
   m_ObjectHideFlags: 0
@@ -82197,6 +82258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 716212585}
   controlMenuUI: {fileID: 1542211282}
+  resume: {fileID: 1587983634}
+  menu: {fileID: 1574865072}
 --- !u!1 &2120598042
 GameObject:
   m_ObjectHideFlags: 0
