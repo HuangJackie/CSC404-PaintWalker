@@ -25,8 +25,14 @@ public class HowlingCreature : SpecialCreature
         if (isTriggered)
         {
             wall.operate = true;
-            wall2.operate = true;
-            wall3.operate = true;
+            if (wall2)
+            {
+                wall2.operate = true;
+            }
+            if (wall3)
+            {
+                wall3.operate = true;
+            }
             isTriggered = false;
         }
     }
