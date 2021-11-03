@@ -27,8 +27,8 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         _controllerUtil = FindObjectOfType<ControllerUtil>();
-
         _menuOptions = new Button[TotalNumberOfMenuOptions];
+
         _menuOptions[0] = resume.GetComponentInChildren<Button>();
         _menuOptions[1] = menu.GetComponentInChildren<Button>();
         _menuOptions[2] = control.GetComponentInChildren<Button>();
