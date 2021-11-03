@@ -65405,7 +65405,7 @@ PrefabInstance:
       objectReference: {fileID: 1704174257}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: paintReplenished
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8874131879167790671, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
