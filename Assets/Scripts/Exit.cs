@@ -29,7 +29,6 @@ public class Exit : MonoBehaviour
             else
             {
                 _updateUI.SetInfoText("You Win!", true);
-                Time.timeScale = 0.0f;
                 _winAudioSource.Play();
             }
             StartCoroutine(ReturnToMenu());
