@@ -27,10 +27,13 @@ public class TutorialToolTips : Interactable, TooltipObject
     
     private UpdateUI _updateUI;
 
+    private ControllerUtil _controllerUtil;
+
     private GameObject ToolTipUI;
     // Update is called once per frame
     private void Start()
     {
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
         Material = GetComponentInChildren<Renderer>().material;
         _updateUI = FindObjectOfType<UpdateUI>();
         _levelManager = FindObjectOfType<LevelManager>();
@@ -103,7 +106,7 @@ public class TutorialToolTips : Interactable, TooltipObject
                 HoverTextActive = true;
                 HighlightForHoverover();
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) || _controllerUtil.GetInteractButtonDown())
             {
                 if (ToolTipOpened)
                 {
