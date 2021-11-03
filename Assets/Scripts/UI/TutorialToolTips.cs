@@ -67,9 +67,10 @@ public class TutorialToolTips : Interactable, TooltipObject
     {
         Vector3 playerpos = player.transform.position;
         Vector3 signpos = transform.position;
+        Debug.Log("X: " + Vector3.Normalize(playerpos- signpos).x + " Z: " + Vector3.Normalize(playerpos- signpos).z);
         if ((Vector3.Distance(playerpos, signpos) < 2) && (Vector3.Normalize(playerpos- signpos).z < 0) 
-                                                       && (Vector3.Normalize(playerpos- signpos).x < 0) 
-                                                       && (Vector3.Normalize(playerpos- signpos).x > -0.5))
+                                                       && (Vector3.Normalize(playerpos- signpos).x > 0) 
+                                                       && (Vector3.Normalize(playerpos- signpos).x < 0.5))
             
         // if (Vector3.Distance(player.transform.position, transform.position) < 2)
         // if (Vector3.Normalize(player.transform.position - transform.position).z < 0) 
