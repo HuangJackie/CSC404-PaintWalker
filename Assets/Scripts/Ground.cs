@@ -145,7 +145,10 @@ public class Ground : Interactable, Paintable
 
                 distance = Vector3.Distance(transform.position, _destinationMove);
             }
-
+            if (distance < 0.01f)
+            {
+                transform.position = _destinationMove;
+            }
             stillMoving = ReinitializeIceBlockMovement(isPushed);
         }
     }
@@ -288,7 +291,7 @@ public class Ground : Interactable, Paintable
         Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
         Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
         return _isIceBlockEffectEnabled &&
-               // _isOnSameLevelAsPlayer &&
+               //_isOnSameLevelAsPlayer &&
                dir != Vector3.negativeInfinity &&
                !Physics.Raycast(pos, directionToPush, 0.7f);
     }
@@ -296,10 +299,17 @@ public class Ground : Interactable, Paintable
     private void IceBlockMovementWhenPushed(Collision other)
     {
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
+        RaycastHit RayHit;
+        bool _isOnSameLevelAsPlayer = false;
+        if (Physics.Raycast(other.gameObject.transform.position, other.gameObject.transform.forward, out RayHit) && RayHit.collider.gameObject == this.gameObject)
+        {
+            _isOnSameLevelAsPlayer = true;
+        }
         bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
-                                  // _isOnSameLevelAsPlayer &&
+                                  _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
                                   dir != Vector3.negativeInfinity;
+
         if (shouldMoveIceBlock)
         {
             _pushIceBlockSoundManager.PlayRandom();
