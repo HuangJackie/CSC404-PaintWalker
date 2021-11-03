@@ -18315,9 +18315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc0cb634e7ca9f48b2c90bb087a6f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 0.5
   controllerPanningSpeed: 0.3
-  transitionBackSpeed: 2
+  transitionBackSpeed: 10
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1510057400}
   _gameplayPos: {x: 0, y: 0, z: 0}
@@ -42448,7 +42448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e1e71d0b71c0d41bd571341982180c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 1704174257}
 --- !u!65 &1366806979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51887,7 +51887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev_mode: 0
+  dev_mode: 1
   freeze_player: 0
   player_script: {fileID: 222737432}
   player: {fileID: 222737430}
