@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
     private SoundManager _colourChangeSoundManager = new SoundManager();
 
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
-    private PaintingSystem _paintingSystem;
 
     void Start()
     {
@@ -55,8 +54,6 @@ public class LevelManager : MonoBehaviour
         playerPaintBottle = FindObjectOfType<PaintBottle>();
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
-
-        _paintingSystem = FindObjectOfType<PaintingSystem>();
     }
 
     IEnumerator ManageCoroutines()
@@ -280,23 +277,4 @@ public class LevelManager : MonoBehaviour
     {
         _isExitActive = isActive;
     }
-
-    // public void SetPaintSelectionUIDisplayed(bool isDisplayed)
-    // {
-    //     _paintSelectionUIDisplayed = isDisplayed;
-    // }
-
-    // public bool IsPaintSelectionUIDisplayed()
-    // {
-    //     return _paintSelectionUIDisplayed;
-    // }
-
-    // public void RefreshPaintSelectionUI()
-    // {
-    //     if (_paintSelectionUIDisplayed)
-    //     {
-    //         _paintSelectionUI.ClosePaintSelectionUI();
-    //         _paintSelectionUI.DisplayPaintSelectionUI();
-    //     }
-    // }
 }

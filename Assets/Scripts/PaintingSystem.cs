@@ -112,7 +112,6 @@ public class PaintingSystem : MonoBehaviour
      */
     public void ResetSelectedObject()
     {
-        print("Resetting selected block back to player.");
         UnhighlightSelectedInteractable();
         UpdateGroundBlockBelowPlayer();
         _currentlySelectedToPaint = _groundBlockBelowPlayer;

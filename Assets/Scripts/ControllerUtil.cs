@@ -8,6 +8,8 @@ namespace DefaultNamespace
         public float buttonPressDelayInSeconds;
         private float _lastTimeButtonPressed;
         private bool _isMenuOpen;
+        public ChangePerspective isoCamera;
+
 
         private void Start()
         {
@@ -57,14 +59,6 @@ namespace DefaultNamespace
         }
 
         /**
-         * This is Deprecated.
-         */
-        public bool PaintSelectionUIToggled()
-        {
-            return Input.GetButtonDown("PaintSelectionUI");
-        }
-
-        /**
          * This is so that a single movement press doesn't trigger two blocks of movement.
          */
         private bool FinishedMovementDelay(float movement)
@@ -91,6 +85,12 @@ namespace DefaultNamespace
                 : (Input.GetAxisRaw("XAxisPaintSelect") < 0
                     ? -1
                     : 0);
+            
+            if (isoCamera.isIntervteredControl)
+            {
+                axis = -axis;
+            }
+            
             return FinishedMovementDelay(axis);
         }
 
@@ -107,19 +107,11 @@ namespace DefaultNamespace
                 : (Input.GetAxisRaw("ZAxisPaintSelect") < 0
                     ? -1
                     : 0);
-            return FinishedMovementDelay(axis);
-        }
-
-        /**
-         * This should be deprecated.
-         */
-        public bool GetYAxisPaintSelectAxis(out int axis)
-        {
-            axis = Input.GetAxisRaw("YAxisPaintSelect") > 0
-                ? 1
-                : (Input.GetAxisRaw("YAxisPaintSelect") < 0
-                    ? -1
-                    : 0);
+            
+            if (isoCamera.isIntervteredControl)
+            {
+                axis = -axis;
+            }
             return FinishedMovementDelay(axis);
         }
 
@@ -184,10 +176,34 @@ namespace DefaultNamespace
             bool isPressed = Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Menu");
             if (isPressed)
             {
+                print("changed");
                 _isMenuOpen = !_isMenuOpen;
             }
 
             return isPressed;
+        }
+
+        public bool GetConfirmButtonPressed()
+        {
+            return Input.GetButtonDown("ConfirmMenu");
+        }
+
+        public bool GetGameMenuSelectAxis(out int axis)
+        {
+            axis = Input.GetAxis("GameMenuSelectAxis") > 0
+                ? 1
+                : (Input.GetAxis("GameMenuSelectAxis") < 0
+                    ? -1
+                    : 0);
+            // print("Test " + (FinishedMovementDelay(axis) && axis != 0) + " " + axis);
+            
+            return FinishedMovementDelay(axis) && axis != 0 ;
+        }
+
+        public void CloseMenu()
+        {
+            print("MENU CLOSED");
+            _isMenuOpen = false;
         }
     }
 }
