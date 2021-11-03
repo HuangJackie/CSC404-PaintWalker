@@ -10,7 +10,7 @@ public class ChangePerspective : MonoBehaviour
     private ControllerUtil _controllerUtil;
 
     public float rotationSpeed;
-    private float _target_y_angle = 0f;
+    private float _target_y_angle = 180f;
     private float _rot_dest = 0f;
     
     public bool isIntervteredControl;
@@ -30,29 +30,34 @@ public class ChangePerspective : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) || _controllerUtil.GetRotationChange() > 0)
         {
             _changingPersective = true;
-            _rot_dest = 90;
-            if (_target_y_angle < 250f)
-            {
-                _target_y_angle = _target_y_angle + 90f;
-            }
-            else
-            {
-                _target_y_angle = 0;
-            }
+            _rot_dest = 180f;
+
+            // TODO: Uncomment when 90 degree control works
+            // _rot_dest = 90;
+            // if (_target_y_angle < 250f)
+            // {
+            //     _target_y_angle = _target_y_angle + 90f;
+            // }
+            // else
+            // {
+            //     _target_y_angle = 0;
+            // }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) || Input.GetAxisRaw("RotateCamera") < 0)
         {
             _changingPersective = true;
-            _rot_dest = -90;
+            _rot_dest = -180f;
 
-            if (_target_y_angle == 0f)
-            {
-                _target_y_angle = 270f;
-            }
-            else
-            {
-                _target_y_angle = _target_y_angle - 90f;
-            }
+            // TODO: Uncomment when 90 degree control works
+            // _rot_dest = -90;
+            // if (_target_y_angle == 0f)
+            // {
+            //     _target_y_angle = 270f;
+            // }
+            // else
+            // {
+            //     _target_y_angle = _target_y_angle - 90f;
+            // }
         }
     }
 
@@ -79,15 +84,16 @@ public class ChangePerspective : MonoBehaviour
                     );
                 }
 
-                // Change player movement if camera facing opposite way
-                if (_target_y_angle > 160 && _target_y_angle < 200)
+                // TODO: Remove when 90-degree control is implemented
+                if (_target_y_angle == 0)
                 {
-                    print("inverting controls");
-                    isIntervteredControl = true;
+                    isIntervteredControl = false;
+                    _target_y_angle = 180f;
                 }
                 else
                 {
-                    isIntervteredControl = false;
+                    isIntervteredControl = true;
+                    _target_y_angle = 0f;
                 }
             }
         }
