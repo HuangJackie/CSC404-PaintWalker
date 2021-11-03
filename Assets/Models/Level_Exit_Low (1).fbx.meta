@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 79354ab7a1f47ee47bfe2c70f5be964d
+guid: b77f6a22122b5fd41896bd29b827ce45
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,10 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Sign
-    second: {fileID: 2100000, guid: 5c16e5eaed31a974189a4a10936a5ccc, type: 2}
+      name: M_Exit_Portal
+    second: {fileID: 2100000, guid: e02e309cdcd7a2142a723efe0f171afd, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
