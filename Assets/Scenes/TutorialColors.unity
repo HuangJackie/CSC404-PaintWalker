@@ -22911,7 +22911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   controllerPanningSpeed: 0.3
-  transitionBackSpeed: 0
+  transitionBackSpeed: 2
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1510057400}
   _gameplayPos: {x: 0, y: 0, z: 0}
