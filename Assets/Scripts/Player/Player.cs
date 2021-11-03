@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private Quaternion _previsouRotationForRedo;
     private CapsuleCollider _capsuleCollider;
     private Rigidbody _rigidbody;
-    private GameObject _colorWheelHUD;
 
     // Rigid Grid Movement
     public float speed;
@@ -44,21 +43,17 @@ public class Player : MonoBehaviour
         _prevPosition = _targetLocation;
         _isNotTrackingMovement = true;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
-        _colorWheelHUD = GameObject.Find("ColorWheelHUD");
-        _colorWheelHUD.SetActive(false);
     }
 
     void Update()
     {
         _curposition = transform.position;
         Vector3 distMoved = _curposition - _prevPosition;
-        _prevPosition = _curposition;
-
         cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player)
+        if (LevelManager.freeze_player || !LevelManager.CanMove())
         {
             return;
         }
@@ -66,14 +61,12 @@ public class Player : MonoBehaviour
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
         //    Vector3.up * _capsuleCollider.height, Color.green);
 
-        if (!LevelManager.IsPaintSelectionUIDisplayed()){
-            _horizontalMovement = isoCamera.isIntervteredControl
-                ? -_controllerUtil.GetHorizontalAxisRaw()
-                : _controllerUtil.GetHorizontalAxisRaw();
-            _verticalMovement = isoCamera.isIntervteredControl
-                ? -_controllerUtil.GetVerticalAxisRaw()
-                : _controllerUtil.GetVerticalAxisRaw();
-        }
+        _horizontalMovement = isoCamera.isIntervteredControl
+            ? -_controllerUtil.GetHorizontalAxisRaw()
+            : _controllerUtil.GetHorizontalAxisRaw();
+        _verticalMovement = isoCamera.isIntervteredControl
+            ? -_controllerUtil.GetVerticalAxisRaw()
+            : _controllerUtil.GetVerticalAxisRaw();
 
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
@@ -82,16 +75,6 @@ public class Player : MonoBehaviour
         {
             _targetLocation.y = transform.position.y;
             RigidGridMove();
-        }
-        
-        // Color Wheel HUD
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            _colorWheelHUD.SetActive(true);
-        }
-        if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            _colorWheelHUD.SetActive(false);
         }
 
         _prevPosition = _curposition;
@@ -117,7 +100,7 @@ public class Player : MonoBehaviour
     {
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
-            //print("tracking starts when player starts moving");
+            print("tracking starts when player starts moving");
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
             // print("trigger first");
@@ -131,7 +114,7 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
-            //print("tracking ends when player reaches dest");
+            print("tracking ends when player reaches dest");
         }
 
         Vector3 newPosition = Vector3.MoveTowards(
@@ -218,18 +201,11 @@ public class Player : MonoBehaviour
     private bool ValidMove(string pressedButton, Vector3 currentTransformPosition)
     {
         RaycastHit hitInfo;
-        RaycastHit ground_hitInfo;
         LayerMask mask = LayerMask.GetMask("Default");
 
         switch (pressedButton)
         {
             case "Up":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1, mask))
-                {
-                    //Debug.Log("Up bottom is empty");
-                    return false;
-                }
-                ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -245,15 +221,15 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
-
-            case "Down":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1))
                 {
-                    //Debug.Log("down bottom is empty");
+                    //Debug.Log("Up bottom is empty");
                     return false;
                 }
-                ground_hitInfo = hitInfo;
+
+                return ValidateFloorMove(hitInfo, Vector3.forward, mask);
+
+            case "Down":
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, -1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -269,17 +245,16 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                
-
-                return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
-
-            case "Left":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
                 {
-                    // Debug.Log("left bottom is empty ");
+                    //Debug.Log("down bottom is empty");
                     return false;
                 }
-                ground_hitInfo = hitInfo;
+
+                return ValidateFloorMove(hitInfo, Vector3.back, mask);
+
+            case "Left":
+
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(-1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -296,17 +271,15 @@ public class Player : MonoBehaviour
                     return false;
                 }
 
-                
-
-                return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
-
-            case "Right":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
                 {
-                    //Debug.Log("right bottom is empty");
+                    // Debug.Log("left bottom is empty ");
                     return false;
                 }
-                ground_hitInfo = hitInfo;
+
+                return ValidateFloorMove(hitInfo, Vector3.left, mask);
+
+            case "Right":
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
@@ -319,11 +292,16 @@ public class Player : MonoBehaviour
                                     new Vector3(1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("Just right is not empty");
                     return false;
                 }
 
-                return ValidateFloorMove(ground_hitInfo, Vector3.right, mask);
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
+                {
+                    //Debug.Log("right bottom is empty");
+                    return false;
+                }
+
+                return ValidateFloorMove(hitInfo, Vector3.right, mask);
         }
 
         return false;
@@ -412,10 +390,5 @@ public class Player : MonoBehaviour
         }
 
         return "";
-    }
-
-    public double GetYLevel()
-    {
-        return Math.Floor(transform.position.y);
     }
 }

@@ -3739,18 +3739,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b05af4ff0d35ac418c23371f2747c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  paintColour1: Blue
-  paintColour2: Yellow
-  paintQuantity1: 2
-  paintQuantity2: 2
-  isPainted: 0
   isTriggered: 0
   wall: {fileID: 1472471005}
   manager: {fileID: 1704174257}
   player: {fileID: 859007761}
   radius: 1.5
+  _isPainted: 0
+  paintColour1: Blue
+  paintColour2: Yellow
+  paintQuantity1: 2
+  paintQuantity2: 2
 --- !u!65 &370820981
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4200,13 +4198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
@@ -6604,13 +6601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
@@ -7500,7 +7496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  controllerPanningSpeed: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1510057400}
   _gameplayPos: {x: 0, y: 0, z: 0}
@@ -11946,13 +11941,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
@@ -14798,13 +14792,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
@@ -21279,13 +21272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
@@ -22637,13 +22629,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74bb09bbcf22c4d8db8cd4014bdce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalColour: {r: 0, g: 0, b: 0, a: 0}
-  paintedColour: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
+  _originalColour: {r: 0, g: 0, b: 0, a: 0}
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}

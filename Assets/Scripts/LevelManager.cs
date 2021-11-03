@@ -21,12 +21,11 @@ public class LevelManager : MonoBehaviour
     private UpdateUI _updateUI;
     private bool _isExitActive;
     private bool _isPanning;
-    private bool _paintSelectionUIDisplayed;
+    private bool _canMove;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
 
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
-    private PaintSelectionUI _paintSelectionUI;
 
     void Start()
     {
@@ -50,15 +49,13 @@ public class LevelManager : MonoBehaviour
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = GameConstants.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
-        _updateUI.SetPaint(paintQuantity["Yellow"]);
 
         playerPaintBrush = FindObjectOfType<PaintBrush>();
         playerPaintBottle = FindObjectOfType<PaintBottle>();
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
 
-        _paintSelectionUIDisplayed = false;
-        _paintSelectionUI = FindObjectOfType<PaintSelectionUI>();
+        _canMove = true;
     }
 
     IEnumerator ManageCoroutines()
@@ -78,12 +75,6 @@ public class LevelManager : MonoBehaviour
 
     public void EnqueueAction(Func<IEnumerator> action)
     {
-        //For debugging actions getting stuck
-        //print(actionQueue.Count);
-        //foreach (Func<IEnumerator> i in actionQueue)
-        //{
-        //    print(i.Method.Name);
-        //}
         actionQueue.Enqueue(action);
     }
 
@@ -95,52 +86,48 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Undo"))
+        _isColourSwitched = Input.GetButtonDown("Fire2");
+        if (_isColourSwitched)
         {
-            Undo();
-        }
-    }
+            _colourChangeSoundManager.PlayRandom();
+            switch (currentSelectedColour)
+            {
+                case "Blue":
+                    currentSelectedColour = "Red";
+                    currentSelectedColourClass = GameConstants.red;
 
-    public void ChangePaint(string paintType)
-    {
-        _colourChangeSoundManager.PlayRandom();
-        switch (paintType)
-        {
-            case "Red":
-                currentSelectedColour = "Red";
-                currentSelectedColourClass = GameConstants.red;
+                    _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.red);
+                    playerPaintBottle.SetColor(GameConstants.red);
+                    break;
 
-                _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(GameConstants.red);
-                playerPaintBottle.SetColor(GameConstants.red);
-                break;
+                case "Red":
+                    currentSelectedColour = "Green";
+                    currentSelectedColourClass = GameConstants.green;
 
-            case "Green":
-                currentSelectedColour = "Green";
-                currentSelectedColourClass = GameConstants.green;
+                    _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.green);
+                    playerPaintBottle.SetColor(GameConstants.green);
+                    break;
 
-                _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(GameConstants.green);
-                playerPaintBottle.SetColor(GameConstants.green);
-                break;
+                case "Green":
+                    currentSelectedColour = "Yellow";
+                    currentSelectedColourClass = GameConstants.yellow;
 
-            case "Yellow":
-                currentSelectedColour = "Yellow";
-                currentSelectedColourClass = GameConstants.yellow;
+                    _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.yellow);
+                    playerPaintBottle.SetColor(GameConstants.yellow);
+                    break;
 
-                _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(GameConstants.yellow);
-                playerPaintBottle.SetColor(GameConstants.yellow);
-                break;
+                case "Yellow":
+                    currentSelectedColour = "Blue";
+                    currentSelectedColourClass = GameConstants.blue;
 
-            case "Blue":
-                currentSelectedColour = "Blue";
-                currentSelectedColourClass = GameConstants.blue;
-
-                _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(GameConstants.blue);
-                playerPaintBottle.SetColor(GameConstants.blue);
-                break;
+                    _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
+                    playerPaintBrush.SetColor(GameConstants.blue);
+                    playerPaintBottle.SetColor(GameConstants.blue);
+                    break;
+            }
         }
     }
 
@@ -279,8 +266,7 @@ public class LevelManager : MonoBehaviour
 
     public bool IsExitActive()
     {
-        //return _isExitActive;
-        return true;
+        return _isExitActive;
     }
 
     public void SetExitActive(bool isActive)
@@ -288,22 +274,13 @@ public class LevelManager : MonoBehaviour
         _isExitActive = isActive;
     }
 
-    public void SetPaintSelectionUIDisplayed(bool isDisplayed)
+    public void setCanMove(bool canMove)
     {
-        _paintSelectionUIDisplayed = isDisplayed;
+        _canMove = canMove;
     }
 
-    public bool IsPaintSelectionUIDisplayed()
+    public bool CanMove()
     {
-        return _paintSelectionUIDisplayed;
-    }
-
-    public void RefreshPaintSelectionUI()
-    {
-        if (_paintSelectionUIDisplayed)
-        {
-            _paintSelectionUI.ClosePaintSelectionUI();
-            _paintSelectionUI.DisplayPaintSelectionUI();
-        }
+        return _canMove;
     }
 }

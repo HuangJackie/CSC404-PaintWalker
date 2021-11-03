@@ -13,7 +13,7 @@ public class PaintBucketIcon : MonoBehaviour
     [SerializeField] private Sprite yellowPaintBucket;
     [SerializeField] private Sprite specialPaintBucket;
 
-    private void Awake()
+    private void Start()
     {
         paintBucketIcon = GetComponent<Image>();
     }

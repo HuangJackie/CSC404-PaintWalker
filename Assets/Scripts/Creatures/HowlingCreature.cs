@@ -43,7 +43,6 @@ public class HowlingCreature : SpecialCreature
             GameConstants.green))
         {
             originalColour = Material.color;
-            paintedColour = Material.color;
             isPainted = true;
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
 

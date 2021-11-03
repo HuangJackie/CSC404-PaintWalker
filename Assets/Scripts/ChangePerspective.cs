@@ -24,7 +24,7 @@ public class ChangePerspective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || Input.GetAxisRaw("RotateCamera") > 0)
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("changing persepctive");
             _changingPersective = true;

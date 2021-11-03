@@ -5,19 +5,17 @@ public class Interactable : MonoBehaviour
     // For highlighting the selected block.
     protected Material Material;
     public Color originalColour;
-    public Color paintedColour;
 
     protected bool IsMouseOver;
     protected void Start()
     {
         Material = GetComponentInChildren<Renderer>().material;
         originalColour = Material.color;
-        paintedColour = Material.color;
     }
 
     public void UndoHighlight()
     {
-        Material.color = paintedColour;
+        Material.color = originalColour;
     }
 
     public void HighlightForHoverover()
@@ -31,7 +29,7 @@ public class Interactable : MonoBehaviour
     public void HighlightForPaintSelectionUI()
     {
         Material.color = new Color(
-            tintColour(Material.color.r, GameConstants.SELECTION_R),
+            tintColour(Material.color.r, GameConstants.SELECTION_R) + 0.1f,
             tintColour(Material.color.g, GameConstants.SELECTION_G),
             tintColour(Material.color.b, GameConstants.SELECTION_B));
     }
@@ -41,7 +39,7 @@ public class Interactable : MonoBehaviour
         return colourToTint + (tint - colourToTint) * 0.2f;
     }
 
-    protected void OnMouseEnter()
+    protected void OnMouseOver()
     {
         IsMouseOver = true;
     }

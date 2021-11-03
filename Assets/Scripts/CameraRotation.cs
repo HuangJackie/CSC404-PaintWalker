@@ -14,7 +14,7 @@ public class CameraRotation : MonoBehaviour
     private bool _transitioning_back;
     private Vector3 _panningPos;
     private Vector3 _initialClickPosition;
-
+    
 
     Vector3 forward, right;
 
@@ -23,7 +23,6 @@ public class CameraRotation : MonoBehaviour
     {
         return LevelManager.IsPanning();
     }
-
     void Start()
     {
         forward = Camera.main.transform.forward;
@@ -56,7 +55,6 @@ public class CameraRotation : MonoBehaviour
 
         if (!_transitioning_back)
         {
-            bool paintSelectionUIDisplayed = LevelManager.IsPaintSelectionUIDisplayed();
             if (!LevelManager.IsPanning())
             {
                 _gameplayPos = transform.parent.parent.position;
@@ -66,7 +64,7 @@ public class CameraRotation : MonoBehaviour
             {
                 _initialClickPosition = Input.mousePosition;
             }
-            else if ((Input.GetMouseButton(2)) && !paintSelectionUIDisplayed)
+            else if (Input.GetMouseButton(2))
             {
                 //Note: because panning is detected alongside clicking thus causes jittering when reset, 
                 //      I changed the panning to a separate button as this will reflect our final product
@@ -86,20 +84,17 @@ public class CameraRotation : MonoBehaviour
                 return;
             }
 
-            if (!paintSelectionUIDisplayed)
+            float horizontalPanning = Input.GetAxis("HorizontalPanning") * controllerPanningSpeed;
+            float verticalPanning = Input.GetAxis("VerticalPanning") * controllerPanningSpeed;
+
+            if (horizontalPanning != 0 || verticalPanning != 0)
             {
-                float horizontalPanning = Input.GetAxis("HorizontalPanning") * controllerPanningSpeed;
-                float verticalPanning = Input.GetAxis("VerticalPanning") * controllerPanningSpeed;
-
-                if (horizontalPanning != 0 || verticalPanning != 0)
-                {
-                    _panningPos = transform.parent.parent.position;
-                    _wasPanning = true;
-                    LevelManager.SetIsPanning(true);
-                }
-
-                transform.transform.parent.parent.position += new Vector3(verticalPanning, 0, horizontalPanning);
+                _panningPos = transform.parent.parent.position;
+                _wasPanning = true;
+                LevelManager.SetIsPanning(true);
             }
+
+            transform.transform.parent.parent.position += new Vector3(verticalPanning, 0, horizontalPanning);
         }
     }
 }
