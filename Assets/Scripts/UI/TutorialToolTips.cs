@@ -13,6 +13,7 @@ public class TutorialToolTips : Interactable, TooltipObject
 
     public GameObject ToolTipWalking;
     public GameObject ToolTipPainting;
+    public GameObject ToolTipPanning;
     public GameObject ToolTipDoor;
     public GameObject ToolTipYellow;
     public GameObject ToolTipRed;
@@ -65,6 +66,10 @@ public class TutorialToolTips : Interactable, TooltipObject
             case "Painting":
                 ToolTipUI = ToolTipPainting;
                 HoverText = "About Painting";
+                break;
+            case "Panning":
+                ToolTipUI = ToolTipPanning;
+                HoverText = "About Panning";
                 break;
             case "Ulala":
                 ToolTipUI = ToolTipUlala;
