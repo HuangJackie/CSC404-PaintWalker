@@ -8,7 +8,7 @@ public class startbutton : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene("DesignDoc");
+        SceneManager.LoadScene("AlphaScenev2");
     }
 
     public void StartTutorial()

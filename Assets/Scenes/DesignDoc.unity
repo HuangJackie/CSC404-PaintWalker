@@ -4038,6 +4038,8 @@ MonoBehaviour:
   isPainted: 0
   isTriggered: 0
   wall: {fileID: 1472471005}
+  wall2: {fileID: 0}
+  wall3: {fileID: 0}
   manager: {fileID: 1704174257}
   player: {fileID: 859007761}
   radius: 1.5
@@ -5456,7 +5458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Any Key To Return
+  m_text: Press A To Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7564,8 +7566,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1423604318}
+  controlMenuUI: {fileID: 2010310690}
   resume: {fileID: 2012189175}
   menu: {fileID: 1099487702}
+  control: {fileID: 652933035}
 --- !u!1001 &571818677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21326,6 +21330,10 @@ MonoBehaviour:
   freeze_player: 0
   player_script: {fileID: 859007763}
   player: {fileID: 859007761}
+  init_yellow: 0
+  init_red: 0
+  init_green: 0
+  init_blue: 0
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0
@@ -26513,7 +26521,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2145413838
 PrefabInstance:
