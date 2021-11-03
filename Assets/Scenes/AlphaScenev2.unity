@@ -10492,6 +10492,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
   m_PrefabInstance: {fileID: 859007759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &222737432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5616881381544338440, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+  m_PrefabInstance: {fileID: 859007759}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222737430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &227073545
 GameObject:
   m_ObjectHideFlags: 0
@@ -82354,8 +82365,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 0
   freeze_player: 0
-  player_script: {fileID: 0}
-  player: {fileID: 0}
+  player_script: {fileID: 222737432}
+  player: {fileID: 222737430}
   init_yellow: 10
   init_red: 10
   init_green: 1
