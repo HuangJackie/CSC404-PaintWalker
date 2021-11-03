@@ -10,9 +10,9 @@ namespace DefaultNamespace
         private bool _isMenuOpen;
         public ChangePerspective isoCamera;
 
-
         private void Start()
         {
+            isoCamera = GameObject.FindGameObjectWithTag("ISOCamera").GetComponent<ChangePerspective>();
             _lastTimeButtonPressed = Time.time;
         }
 
@@ -169,6 +169,16 @@ namespace DefaultNamespace
             }
 
             return Input.GetAxisRaw("RotateCamera") != 0;
+        }
+
+        // Return 0 if no rotation changes happening
+        public float GetRotationChange()
+        {
+            if (GetRotationChangePressed())
+            {
+                return Input.GetAxisRaw("RotateCamera");
+            }
+            return 0;
         }
 
         public bool GetMenuButtonPressed()
