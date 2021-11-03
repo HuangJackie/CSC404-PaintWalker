@@ -17,7 +17,6 @@ public class PauseMenu : MonoBehaviour
 
     private ControllerUtil _controllerUtil;
     private Button[] _menuOptions;
-    private GameObject[] _gameObjects;
     private int _selectedMenuOption;
     private const int TotalNumberOfMenuOptions = 3;
 
@@ -45,13 +44,10 @@ public class PauseMenu : MonoBehaviour
         {
             if (gameIsPaused)
             {
-                print("resumed");
                 Resume();
             }
             else
             {
-                print("paused");
-
                 _menuOptions[_selectedMenuOption].OnPointerEnter(null);
                 Pause();
             }
@@ -65,7 +61,6 @@ public class PauseMenu : MonoBehaviour
         {
             if (_controllerUtil.GetConfirmButtonPressed())
             {
-                print("clicked" + _selectedMenuOption);
                 _menuOptions[_selectedMenuOption].onClick.Invoke();
                 _selectedMenuOption = 0;
                 if (_selectedMenuOption == 0)
@@ -116,7 +111,6 @@ public class PauseMenu : MonoBehaviour
         controlMenuUI.SetActive(false);
         //Time.timeScale = 1f;
         gameIsPaused = false;
-        print("set to false in resume");
     }
 
     void Pause()

@@ -12,7 +12,9 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            // isoCamera = GameObject.FindGameObjectWithTag("ISOCamera").GetComponent<ChangePerspective>();
+            isoCamera = isoCamera == null 
+                ? GameObject.FindGameObjectWithTag("ISOCamera").GetComponent<ChangePerspective>() 
+                : isoCamera;
             _lastTimeButtonPressed = Time.time;
         }
 
