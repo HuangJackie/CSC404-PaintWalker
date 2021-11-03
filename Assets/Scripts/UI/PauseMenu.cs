@@ -10,8 +10,10 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
+    private bool controlUIActive = false;
 
     public GameObject pauseMenuUI;
+    public GameObject controlMenuUI;
 
     private ControllerUtil _controllerUtil;
     private Button[] _menuOptions;
@@ -32,8 +34,9 @@ public class PauseMenu : MonoBehaviour
         _selectedMenuOption = 1;
     }
 
-
+    
     // Update is called once per frame
+
     void Update()
     {
         if (_controllerUtil.GetMenuButtonPressed())
@@ -50,6 +53,10 @@ public class PauseMenu : MonoBehaviour
                 _menuOptions[_selectedMenuOption].OnPointerEnter(null);
                 Pause();
             }
+        }
+        if (controlUIActive && Input.anyKey)
+        {
+            HideControl();
         }
 
         if (gameIsPaused)
@@ -89,7 +96,6 @@ public class PauseMenu : MonoBehaviour
         if (_selectedMenuOption == -1)
         {
             _selectedMenuOption = TotalNumberOfMenuOptions - 1;
-        }
     }
 
     private void IncrementMenuOption()
@@ -104,7 +110,8 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        // Time.timeScale = 1f;
+        controlMenuUI.SetActive(false);
+        //Time.timeScale = 1f;
         gameIsPaused = false;
         print("set to false in resume");
     }
@@ -114,6 +121,20 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         // Time.timeScale = 0f;
         gameIsPaused = true;
+    }
+
+    public void ShowControl()
+    {
+        pauseMenuUI.SetActive(false);
+        controlMenuUI.SetActive(true);
+        controlUIActive = true;
+    }
+
+    void HideControl()
+    {
+        pauseMenuUI.SetActive(true);
+        controlMenuUI.SetActive(false);
+        controlUIActive = false;
     }
 
     public void LoadMenu()

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    //private static LevelManager instance;
     private Dictionary<String, int> paintQuantity;
     private String currentSelectedColour;
     private Color currentSelectedColourClass;
@@ -15,8 +17,15 @@ public class LevelManager : MonoBehaviour
 
     public RedoCommandHandler redoCommandHandler = new RedoCommandHandler();
     public Player player_script;
+    public GameObject player;
+    public static Vector3 checkpointPos;
+    public static List<Vector3> pastCheckPoints;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
+    public int init_yellow;
+    public int init_red;
+    public int init_green;
+    public int init_blue;
 
     private UpdateUI _updateUI;
     private bool _isExitActive;
@@ -26,15 +35,32 @@ public class LevelManager : MonoBehaviour
 
     private Queue<Func<IEnumerator>> actionQueue = new Queue<Func<IEnumerator>>();
 
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(instance);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    private void Awake()
+    {
+        LevelManager.pastCheckPoints = new List<Vector3>();
+    }
     void Start()
     {
         StartCoroutine(ManageCoroutines());
 
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", 0); // Freezes Platform
-        paintQuantity.Add("Green", 0); // Growing Platform
-        paintQuantity.Add("Red", 0); // Drops Platform
-        paintQuantity.Add("Yellow", 4); // Raises Platform
+        paintQuantity.Add("Blue", init_blue); // Freezes Platform
+        paintQuantity.Add("Green", init_green); // Growing Platform
+        paintQuantity.Add("Red", init_red); // Drops Platform
+        paintQuantity.Add("Yellow", init_yellow); // Raises Platform
 
         if (dev_mode)
         {
@@ -44,6 +70,7 @@ public class LevelManager : MonoBehaviour
             paintQuantity["Yellow"] = 30;
         }
 
+        
         freeze_player = false;
         currentSelectedColour = "Yellow";
         currentSelectedColourClass = GameConstants.yellow;
@@ -157,6 +184,21 @@ public class LevelManager : MonoBehaviour
         if (player_script != null)
         {
             player_script.UpdateTargetLocation(player_script.gameObject.transform.position);
+        }
+    }
+
+    public void RestartAtLastCheckpoint()
+    {
+        
+        if (LevelManager.checkpointPos == Vector3.zero)
+        {
+            RestartFunction.Restart();
+        }
+        else
+        {
+            Vector3 spawn_pos = new Vector3(LevelManager.checkpointPos.x, LevelManager.checkpointPos.y + 1f, LevelManager.checkpointPos.z);
+            player.transform.position = spawn_pos;
+            player_script.UpdateTargetLocation(LevelManager.checkpointPos);
         }
     }
 

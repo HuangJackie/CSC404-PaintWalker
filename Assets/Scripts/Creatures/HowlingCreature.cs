@@ -7,6 +7,8 @@ public class HowlingCreature : SpecialCreature
 {
     public bool isTriggered = false;
     public MoveWall wall;
+    public MoveWall wall2;
+    public MoveWall wall3;
     public LevelManager manager;
 
     // For painting
@@ -26,6 +28,14 @@ public class HowlingCreature : SpecialCreature
         if (isTriggered)
         {
             wall.operate = true;
+            if (wall2)
+            {
+                wall2.operate = true;
+            }
+            if (wall3)
+            {
+                wall3.operate = true;
+            }
             isTriggered = false;
         }
     }

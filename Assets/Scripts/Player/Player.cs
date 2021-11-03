@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hitInfo;
         RaycastHit ground_hitInfo;
-        LayerMask mask = LayerMask.GetMask("Default");
+        LayerMask mask = LayerMask.GetMask("Default") | LayerMask.GetMask("IceCube");
 
         switch (pressedButton)
         {
@@ -252,7 +252,7 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case "Down":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
                 {
                     //Debug.Log("down bottom is empty");
                     return false;
@@ -278,7 +278,7 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
 
             case "Left":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     // Debug.Log("left bottom is empty ");
                     return false;
@@ -305,7 +305,7 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
 
             case "Right":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
                     //Debug.Log("right bottom is empty");
                     return false;
