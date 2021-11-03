@@ -20,7 +20,7 @@ public class Exit : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
-        if (playerCollision && manager.IsExitActive())
+        if (playerCollision)
         {
             if (scene.name == "TutorialColors")
             {
