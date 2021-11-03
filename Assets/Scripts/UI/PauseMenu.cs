@@ -122,14 +122,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowControl()
     {
-        // pauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
         controlMenuUI.SetActive(true);
         controlUIActive = true;
     }
 
     void HideControl()
     {
-        // pauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(true);
         controlMenuUI.SetActive(false);
         controlUIActive = false;
     }
