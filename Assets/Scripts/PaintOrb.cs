@@ -64,9 +64,9 @@ public class PaintOrb : Interactable, TooltipObject
         }
     }
 
-    private new void OnMouseOver()
+    private new void OnMouseEnter()
     {
-        base.OnMouseOver();
+        base.OnMouseEnter();
         if (this)
         {
             OnDisplayTooltip();

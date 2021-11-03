@@ -29,7 +29,6 @@ public class Ground : Interactable, Paintable
     private bool _isMouseClicked;
     private bool _isMouseOver;
 
-    private bool _isRevertingBlock;
     private bool _isIceBlockEffectEnabled;
     private Vector3 _directionToSlideTo;
     private Vector3 _destinationDrop;
@@ -50,9 +49,9 @@ public class Ground : Interactable, Paintable
     private new void Start()
     {
         Material = GetComponentInChildren<Renderer>().material;
-        base.originalColour = Material.color;
-        originalColour = base.originalColour;
-        _paintedColour = originalColour;
+        originalColour = Material.color;
+        _paintedColour = originalColour; // TODO: Replace _paintedColour with paintedColour
+        paintedColour = Material.color;
         _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
@@ -60,7 +59,6 @@ public class Ground : Interactable, Paintable
 
         _isMouseOver = false;
 
-        _isRevertingBlock = false;
         _isIceBlockEffectEnabled = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         _destinationNeutral = transform.position;
@@ -93,13 +91,14 @@ public class Ground : Interactable, Paintable
         if (_levelManager.GetCurrentlySelectedPaintClass() != _paintedColour || !isPaintedByBrush)
         {
             _isMouseClicked = Input.GetButtonDown("Fire1");
-            if (_isMouseOver && _isMouseClicked &&
+            bool clickedUI = EventSystem.current.IsPointerOverGameObject();
+
+            if (_isMouseOver && _isMouseClicked && !clickedUI &&
                 Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
             {
                 Paint(true);
             }
         }
-
     }
 
     private bool ReinitializeIceBlockMovement(bool isPushed)
@@ -179,11 +178,11 @@ public class Ground : Interactable, Paintable
                                   (destination == _destinationRaise && !NoUnmovableBlockAbove());
         while (this && Vector3.Distance(transform.position, destination) > 0.01f)
         {
-            if (destination == _destinationNeutral)
+            if (reverting)
             {
-                //print("neutrual destination. Moving block");
+                //print("neutrual destination. Moving block to revert");
                 transform.position = Vector3.MoveTowards(
-                    transform.position, destination, speed * Time.deltaTime
+                    transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
                 if (movableObjectOnTop)
                 {
@@ -192,19 +191,18 @@ public class Ground : Interactable, Paintable
 
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
-                    _isRevertingBlock = false;
                     transform.position = destination;
-                    if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
-                    {
+                    //if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
+                    //{
                         //_player.GameState.UpdatePlayerY(player.transform.position.y);
-                    }
+                    //}
                     //print("reached neutral dest");
+                    _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
-            }
-
-            if (!_isRevertingBlock)
+            } else
             {
+                //print("moving by effect");
                 if (blockPathIsBlocked && destination != _destinationNeutral)
                 {
                     //print("changing to neutral dest since path blocked");
@@ -212,7 +210,7 @@ public class Ground : Interactable, Paintable
                     blockPathIsBlocked = false;
                 }
                 transform.position = Vector3.Lerp(
-                    transform.position, destination, speed * Time.deltaTime
+                    transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
@@ -222,6 +220,7 @@ public class Ground : Interactable, Paintable
                     {
                        //_player.GameState.UpdatePlayerY(player.transform.position.y);
                     }
+                    _levelManager.RefreshPaintSelectionUI();
                     yield break;
                 }
                 if (movableObjectOnTop)
@@ -229,7 +228,6 @@ public class Ground : Interactable, Paintable
                     MoveObjectWithBlock(transform.position, movableObjectOnTop);
                 }
             }
-
             yield return null;
         }
 
@@ -241,7 +239,6 @@ public class Ground : Interactable, Paintable
                 MoveObjectWithBlock(destination, movableObjectOnTop);
             }
         }
-        isPaintedByBrush = true;
     }
 
     private void MoveObjectWithBlock(Vector3 curBlockPosition, GameObject otherObject)
@@ -379,6 +376,7 @@ public class Ground : Interactable, Paintable
                 case "Red":
                     Material.color = GameConstants.red;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Red", 1);
                     if (paintWithBrush && NoBlockBelow())
                     {
@@ -388,6 +386,7 @@ public class Ground : Interactable, Paintable
                         {
                             return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                         });
+                        isPaintedByBrush = true;
 
                     }
 
@@ -395,6 +394,7 @@ public class Ground : Interactable, Paintable
                 case "Green":
                     Material.color = GameConstants.green;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Green", 1);
                     if (paintWithBrush)
                     {
@@ -411,6 +411,7 @@ public class Ground : Interactable, Paintable
                 case "Yellow":
                     Material.color = GameConstants.yellow;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Yellow", 1);
                     if (paintWithBrush && NoUnmovableBlockAbove())
                     {
@@ -420,12 +421,15 @@ public class Ground : Interactable, Paintable
                         {
                             return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
                         });
+                        isPaintedByBrush = true;
+
                     }
 
                     break;
                 case "Blue":
                     Material.color = GameConstants.blue;
                     _paintedColour = Material.color;
+                    paintedColour = Material.color;
                     _levelManager.DecreasePaint("Blue", 1);
                     if (paintWithBrush)
                     {
@@ -462,7 +466,6 @@ public class Ground : Interactable, Paintable
             if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
             {
                 //print("top empty");
-                _isRevertingBlock = true;
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
             }
@@ -488,8 +491,7 @@ public class Ground : Interactable, Paintable
         {
             if (NoBlockBelow() && _destinationNeutral != transform.position)
             {
-                //print("bottom empty");
-                _isRevertingBlock = true;
+                print("bottom empty");
                 _levelManager.EnqueueAction(
                     () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
             }
@@ -617,16 +619,18 @@ public class Ground : Interactable, Paintable
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.right, 1);
     }
 
-    private void OnMouseEnter()
+    private new void OnMouseEnter()
     {
-        originalColour = Material.color;
-        Material.color = new Color(0.98f, 1f, 0.45f);
+        // originalColour = Material.color;
+        // Material.color = new Color(0.98f, 1f, 0.45f);
+        HighlightForHoverover();
         _isMouseOver = true;
     }
 
     private new void OnMouseExit()
     {
-        Material.color = _paintedColour;
+        // Material.color = _paintedColour;
+        UndoHighlight();
         _isMouseOver = false;
     }
 

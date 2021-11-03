@@ -49,9 +49,25 @@ public class RammingCreature : SpecialCreature
             Destroy(collision.gameObject);
         }
     }
+
+    private bool PlayerInTheWay()
+    {
+        RaycastHit hit;
+        LayerMask mask = LayerMask.GetMask("Player");
+        float dist = Mathf.Abs(target.position.x - transform.position.x);
+        Debug.DrawRay(transform.position, (target.position - transform.position), Color.red, 120f);
+        if (Physics.Raycast(transform.position, target.position - transform.position, out hit, dist, mask))
+        {
+            print("player in the way");
+            return true;
+        }
+        return false;
+    }
     
     public override bool Paint(bool paintWithBrush)
     {
+        print("Painting Special Creature");
+
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
                 IsMouseOver,
@@ -66,6 +82,7 @@ public class RammingCreature : SpecialCreature
                 Color.magenta))
         {
             originalColour = Material.color;
+            paintedColour = Material.color;
             isPainted = true;
             is_moving = true;
             return true;
