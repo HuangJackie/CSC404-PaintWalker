@@ -8065,8 +8065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc0cb634e7ca9f48b2c90bb087a6f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 0.5
   controllerPanningSpeed: 0.3
+  transitionBackSpeed: 10
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1510057400}
   _gameplayPos: {x: 0, y: 0, z: 0}
@@ -18691,9 +18692,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe4a5cdb09a5a3499b432a31cf38372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelManager: {fileID: 1704174257}
   rotationSpeed: 1
   isIntervteredControl: 0
-  LevelManager: {fileID: 1704174257}
 --- !u!1001 &1513166303
 PrefabInstance:
   m_ObjectHideFlags: 0

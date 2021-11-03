@@ -7,6 +7,7 @@ public class CameraRotation : MonoBehaviour
 {
     public float speed;
     public float controllerPanningSpeed;
+    public float transitionBackSpeed;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
     public Vector3 _gameplayPos;
@@ -42,8 +43,9 @@ public class CameraRotation : MonoBehaviour
         if (_wasPanning && !LevelManager.IsPanning())
         {
             transform.parent.parent.position = Vector3.Lerp(
-                transform.parent.parent.position, _gameplayPos, speed * Time.deltaTime
+                transform.parent.parent.position, _gameplayPos, transitionBackSpeed * Time.deltaTime
             );
+            
             if (Vector3.Distance(transform.parent.parent.position, _gameplayPos) >= 0.01f)
             {
                 _transitioning_back = true;

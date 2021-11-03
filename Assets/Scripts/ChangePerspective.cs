@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class ChangePerspective : MonoBehaviour
 {
-    public float rotationSpeed;
-    public bool isIntervteredControl;
     public LevelManager LevelManager;
-    private float _target_y_angle;
-    private float _rot_dest;
     private GameObject _player;
-    private bool _changingPersective;
     private ControllerUtil _controllerUtil;
+
+    public float rotationSpeed;
+    private float _target_y_angle = 180f;
+    private float _rot_dest = 0f;
     
-    // Start is called before the first frame update
+    public bool isIntervteredControl;
+    private bool _changingPersective;
+
     void Start()
     {
         isIntervteredControl = false;
-        _target_y_angle = 180f;
-        _rot_dest = 180f;
         _player = GameObject.FindWithTag("Player");
         _changingPersective = false;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
@@ -28,10 +27,37 @@ public class ChangePerspective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || _controllerUtil.GetRotationChangePressed())
+        if (Input.GetKeyDown(KeyCode.Q) || _controllerUtil.GetRotationChange() > 0)
         {
-            Debug.Log("changing persepctive");
             _changingPersective = true;
+            _rot_dest = 180f;
+
+            // TODO: Uncomment when 90 degree control works
+            // _rot_dest = 90;
+            // if (_target_y_angle < 250f)
+            // {
+            //     _target_y_angle = _target_y_angle + 90f;
+            // }
+            // else
+            // {
+            //     _target_y_angle = 0;
+            // }
+        }
+        else if (Input.GetKeyDown(KeyCode.E) || _controllerUtil.GetRotationChange() < 0)
+        {
+            _changingPersective = true;
+            _rot_dest = -180f;
+
+            // TODO: Uncomment when 90 degree control works
+            // _rot_dest = -90;
+            // if (_target_y_angle == 0f)
+            // {
+            //     _target_y_angle = 270f;
+            // }
+            // else
+            // {
+            //     _target_y_angle = _target_y_angle - 90f;
+            // }
         }
     }
 
@@ -45,26 +71,29 @@ public class ChangePerspective : MonoBehaviour
                 if (transform.rotation.eulerAngles.y > 0)
                 {
                     transform.eulerAngles = new Vector3(
-                    transform.eulerAngles.x,
-                    Mathf.Abs(_target_y_angle),
-                    transform.eulerAngles.z
+                        transform.eulerAngles.x,
+                        Mathf.Abs(_target_y_angle),
+                        transform.eulerAngles.z
                     );
                 } else
                 {
                     transform.eulerAngles = new Vector3(
-                    transform.eulerAngles.x,
-                    -Mathf.Abs(_target_y_angle),
-                    transform.eulerAngles.z
+                        transform.eulerAngles.x,
+                        -Mathf.Abs(_target_y_angle),
+                        transform.eulerAngles.z
                     );
                 }
+
+                // TODO: Remove when 90-degree control is implemented
                 if (_target_y_angle == 0)
                 {
-                    _target_y_angle = 180f;
                     isIntervteredControl = false;
-                } else
+                    _target_y_angle = 180f;
+                }
+                else
                 {
-                    _target_y_angle = 0f;
                     isIntervteredControl = true;
+                    _target_y_angle = 0f;
                 }
             }
         }
