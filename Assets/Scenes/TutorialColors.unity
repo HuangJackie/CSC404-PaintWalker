@@ -66230,10 +66230,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev_mode: 1
+  dev_mode: 0
   freeze_player: 0
   player_script: {fileID: 0}
   player: {fileID: 0}
+  init_yellow: 0
+  init_red: 0
+  init_green: 0
+  init_blue: 0
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0
@@ -77934,6 +77938,8 @@ MonoBehaviour:
   isPainted: 0
   isTriggered: 0
   wall: {fileID: 951993139}
+  wall2: {fileID: 0}
+  wall3: {fileID: 0}
   manager: {fileID: 1704174257}
   player: {fileID: 222737430}
   radius: 1.5

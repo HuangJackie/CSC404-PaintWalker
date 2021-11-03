@@ -7,6 +7,8 @@ public class HowlingCreature : SpecialCreature
 {
     public bool isTriggered = false;
     public MoveWall wall;
+    public MoveWall wall2;
+    public MoveWall wall3;
     public LevelManager manager;
 
     public GameObject player;
@@ -23,6 +25,8 @@ public class HowlingCreature : SpecialCreature
         if (isTriggered)
         {
             wall.operate = true;
+            wall2.operate = true;
+            wall3.operate = true;
             isTriggered = false;
         }
     }
