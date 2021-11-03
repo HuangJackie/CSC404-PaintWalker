@@ -17,20 +17,26 @@ public class Interactable : MonoBehaviour
 
     public void UndoHighlight()
     {
-        Material.color = paintedColour;
+        if (Material)
+        {
+            Material.color = paintedColour;
+        }
     }
 
     public void HighlightForHoverover()
     {
-        Material.color = new Color(
+        if (Material)
+        {
+            Material.color = new Color(
             tintColour(Material.color.r, GameConstants.HOVEROVER_R),
             tintColour(Material.color.g, GameConstants.HOVEROVER_G),
             tintColour(Material.color.b, GameConstants.HOVEROVER_B));
+        }
     }
 
     public void HighlightForPaintSelectionUI()
     {
-        if (Material != null)
+        if (Material)
         {
             Material.color = new Color(
                 tintColour(Material.color.r, GameConstants.SELECTION_R),

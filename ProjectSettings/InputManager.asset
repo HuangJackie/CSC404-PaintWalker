@@ -441,10 +441,10 @@ InputManager:
     m_Name: RotateCamera
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: joystick button 4
-    altPositiveButton: joystick button 5
+    negativeButton: joystick button 5
+    positiveButton: joystick button 4
+    altNegativeButton: 
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
