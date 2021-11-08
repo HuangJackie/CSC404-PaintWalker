@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    private ControllerUtil controllerUtil;
-    private List<MenuButton> menuButtons;
-    private int highlightedButton;
+    protected ControllerUtil controllerUtil;
+    protected List<MenuButton> menuButtons;
+    protected int highlightedButton;
 
     protected virtual void Start()
     {
         controllerUtil = FindObjectOfType<ControllerUtil>();
-        PopulateButtons();
+        PopulateButtons(transform);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (controllerUtil.GetConfirmButtonPressed())
         {
@@ -32,20 +32,20 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void PopulateButtons()
+    protected void PopulateButtons(Transform callingMenu)
     {
         bool foundButtonToSelect = false;
         highlightedButton = -1;
         menuButtons = new List<MenuButton>();
 
         int currMenuButtonIndex = 0;
-        foreach (Transform child in transform)
+        foreach (Transform child in callingMenu)
         {
             // If the current child has a MenuButton component
             MenuButton currMenuButton = child.GetComponent<MenuButton>();
             if (currMenuButton != null)
             {
-                // Select the first child with a MenuToggle component
+                // Select the first child with a MenuButton component
                 if (!foundButtonToSelect)
                 {
                     highlightedButton = currMenuButtonIndex;
@@ -61,7 +61,7 @@ public class Menu : MonoBehaviour
 
     public void ChangeHighlightedButton(int buttonIndex)
     {
-        highlightedButton = Mathf.Clamp(buttonIndex, 0, menuButtons.Count);
+        highlightedButton = Mathf.Clamp(buttonIndex, 0, menuButtons.Count - 1);
         menuButtons[highlightedButton].DisplayAsSelected(true);
 
         // Disable the selectionIndication Image of all other buttons

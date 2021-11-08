@@ -5,16 +5,23 @@ using UnityEngine;
 public class MainMenu : Menu
 {
     private OptionsMenu optionsMenu;
+    private LevelSelectMenu levelSelectMenu;
 
     protected override void Start()
     {
         base.Start();
         optionsMenu = FindObjectOfType<OptionsMenu>();
+        levelSelectMenu = FindObjectOfType<LevelSelectMenu>();
     }
 
-    public void LoadOptionsPanel()
+    public void LoadOptionsMenu()
     {
-        optionsMenu.Load(gameObject);
+        optionsMenu.LoadSelf(gameObject);
+    }
+
+    public void LoadLevelSelectMenu()
+    {
+        levelSelectMenu.LoadSelf(gameObject);
     }
 
     public static void ExitGame()

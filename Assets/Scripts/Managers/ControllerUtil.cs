@@ -200,16 +200,24 @@ namespace DefaultNamespace
             return Input.GetButtonDown("ConfirmMenu");
         }
 
+        public static bool GetCancelButtonPressed()
+        {
+            return Input.GetButtonDown("Cancel");
+        }
+
         public bool GetGameMenuSelectAxis(out int axis)
         {
-            axis = Input.GetAxis("GameMenuSelectAxis") > 0
-                ? 1
-                : (Input.GetAxis("GameMenuSelectAxis") < 0
-                    ? -1
-                    : 0);
-            // print("Test " + (FinishedMovementDelay(axis) && axis != 0) + " " + axis);
-
-            return FinishedMovementDelay(axis) && axis != 0;
+            axis = 0;
+            if (Input.GetAxis("GameMenuDPadSelectAxis") != 0)
+            {
+                axis = Input.GetAxis("GameMenuDPadSelectAxis") > 0 ? 1 : -1;
+            } 
+            else if (Input.GetAxis("GameMenuSelectAxis") != 0)
+            {
+                axis = Input.GetAxis("GameMenuSelectAxis") > 0 ? 1 : -1;
+            }
+            
+            return axis != 0 && FinishedMovementDelay(axis);
         }
 
         public void CloseMenu()

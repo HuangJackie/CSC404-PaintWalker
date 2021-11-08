@@ -20,8 +20,12 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
     private void Start()
     {
         self = GetComponent<Button>();
-        parentMenu = GetComponentInParent<Menu>();
         selectionIndication = GetComponent<Image>();
+
+        // Get parenting Menu. If no Menu in parent, the parent must
+        // be an empty renderer GameObject, so its parent must be a Menu
+        parentMenu = GetComponentInParent<Menu>();
+        if (parentMenu == null) transform.parent.GetComponentInParent<Menu>();
     }
 
     // Triggers the onClick methods defined in the inspector
