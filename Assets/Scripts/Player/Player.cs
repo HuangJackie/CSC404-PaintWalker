@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool resetMode;
     public Transform cameraWorldAxis;
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     private Quaternion _previsouRotationForRedo;
     private CapsuleCollider _capsuleCollider;
     private Rigidbody _rigidbody;
-    private GameObject _colorWheelHUD;
+    public GameObject _colorWheelHUD;
 
     // Rigid Grid Movement
     public float speed;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        resetMode = false;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
         _targetLocation = transform.position;
@@ -47,8 +49,6 @@ public class Player : MonoBehaviour
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _paintingSystem = FindObjectOfType<PaintingSystem>();
         _paintingSystem.ResetSelectedObject();
-        _colorWheelHUD = GameObject.Find("ColorWheelHUD");
-        _colorWheelHUD.SetActive(false);
     }
 
     void Update()
@@ -56,6 +56,12 @@ public class Player : MonoBehaviour
         _curposition = transform.position;
         Vector3 distMoved = _curposition - _prevPosition;
         _prevPosition = _curposition;
+
+        if (resetMode)
+        {
+            distMoved = Vector3.zero;
+            resetMode = false;
+        }
 
         cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
         cameraPanningRevertTarget._gameplayPos =

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using Microsoft.CSharp;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
@@ -18,14 +19,16 @@ public class LevelManager : MonoBehaviour
     public RedoCommandHandler redoCommandHandler = new RedoCommandHandler();
     public Player player_script;
     public GameObject player;
-    public static Vector3 checkpointPos;
-    public static List<Vector3> pastCheckPoints;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
     public int init_yellow;
     public int init_red;
     public int init_green;
     public int init_blue;
+
+    //attributes used for restart function
+    public static Dictionary<string, dynamic> checkpointInfo;
+    public static List<Vector3> pastCheckPoints;
 
     private UpdateUI _updateUI;
     private bool _isExitActive;
@@ -51,6 +54,8 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         LevelManager.pastCheckPoints = new List<Vector3>();
+        checkpointInfo = new Dictionary<string, dynamic>();
+        checkpointInfo["checkpointPos"] = Vector3.zero;
     }
     void Start()
     {
@@ -189,17 +194,60 @@ public class LevelManager : MonoBehaviour
 
     public void RestartAtLastCheckpoint()
     {
-        
-        if (LevelManager.checkpointPos == Vector3.zero)
+        Vector3 checkpointPos = checkpointInfo["checkpointPos"];
+        if (checkpointPos == Vector3.zero)
         {
             RestartFunction.Restart();
         }
         else
         {
-            Vector3 spawn_pos = new Vector3(LevelManager.checkpointPos.x, LevelManager.checkpointPos.y + 1f, LevelManager.checkpointPos.z);
+            // the player height on ground is 1.764744f, if we ever change this parameter, the code here needs to be updated as well
+            Vector3 spawn_pos = new Vector3(checkpointPos.x, checkpointPos.y + 1.764744f, checkpointPos.z);
+            player_script.UpdateTargetLocation(spawn_pos);
             player.transform.position = spawn_pos;
-            player_script.UpdateTargetLocation(LevelManager.checkpointPos);
+            player_script.resetMode = true;
+            player.transform.rotation = checkpointInfo["playerRotation"];
+
+            CameraRotation cameraToMove = checkpointInfo["cameraAttributes"];
+            cameraToMove.transform.parent.parent.position = spawn_pos;
+            if (cameraToMove._wasPanning)
+            {
+                cameraToMove._gameplayPos = spawn_pos;
+                SetIsPanning(false);
+            }
+
+            //remove new blocks that got added after the checkpoint
+            //int storedBlockNumber = ObjectStorage.blockStates.Count;
+            //int currentBlockNumber = ObjectStorage.blockStorage.Count;
+            //if (currentBlockNumber > storedBlockNumber)
+            //{
+            //    ObjectStorage.blockStorage = ObjectStorage.blockStorage[0: storedBlockNumber];
+            //}
+
+            //reset block attributes
+            for (int i = 0; i < ObjectStorage.blockStorage.Count; i++)
+            {
+                GameObject block = ObjectStorage.blockStorage[i];
+                if (i+1 > ObjectStorage.blockStates.Count)
+                {
+                    Destroy(block);
+                }
+                else
+                {
+                    Ground groundScript = block.GetComponent<Ground>();
+                    block.transform.position = ObjectStorage.blockStates[i][0];
+                    groundScript.isPaintedByBrush = ObjectStorage.blockStates[i][1];
+                    groundScript.isPaintedByFeet = ObjectStorage.blockStates[i][2];
+                    groundScript.originalColour = ObjectStorage.blockStates[i][3];
+                    groundScript.paintedColour = ObjectStorage.blockStates[i][4];
+                    block.GetComponentInChildren<Renderer>().material.color = ObjectStorage.blockStates[i][5];
+                    block.SetActive(ObjectStorage.blockStates[i][6]);
+                }
+            }
         }
+        actionQueue.Clear();
+        StopAllCoroutines();
+        StartCoroutine(ManageCoroutines());
     }
 
     public void SetIsPanning(bool isPanning)

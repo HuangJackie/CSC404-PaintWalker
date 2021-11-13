@@ -49,11 +49,13 @@ public class Ground : Interactable, Paintable
 
     private new void Start()
     {
+        _levelManager = FindObjectOfType<LevelManager>();
+        ObjectStorage objectStorage = FindObjectOfType<ObjectStorage>();
+        objectStorage.AddBlock(this.gameObject);
         Material = GetComponentInChildren<Renderer>().material;
         originalColour = Material.color;
         _paintedColour = originalColour; // TODO: Replace _paintedColour with paintedColour
         paintedColour = Material.color;
-        _levelManager = FindObjectOfType<LevelManager>();
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
         _playerYPosition = player.transform.position.y;
@@ -83,7 +85,6 @@ public class Ground : Interactable, Paintable
 
     void Update()
     {
-        latestState = _levelManager.GetLasestGameState();
         if (_levelManager.freeze_player)
         {
             return;
@@ -289,7 +290,7 @@ public class Ground : Interactable, Paintable
         IceBlockMovementWhenPushed(other);
         if (other.gameObject.CompareTag("SpecialCreature"))
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
