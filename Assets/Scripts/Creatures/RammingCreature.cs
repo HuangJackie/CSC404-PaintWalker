@@ -48,7 +48,7 @@ public class RammingCreature : SpecialCreature
     {
         if (collision.gameObject.GetComponent<Ground>())
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 

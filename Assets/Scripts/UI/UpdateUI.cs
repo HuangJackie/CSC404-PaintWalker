@@ -21,7 +21,7 @@ public class UpdateUI : MonoBehaviour
     private PaintNeededText infoText;
     private bool _alreadyOverriden;
 
-    private void Start()
+    private void Awake()
     {
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
@@ -41,6 +41,7 @@ public class UpdateUI : MonoBehaviour
 
     private void Update()
     {
+        
         if (_isCrosshairActive)
         {
             Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));

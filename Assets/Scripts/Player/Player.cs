@@ -63,6 +63,11 @@ public class Player : MonoBehaviour
             resetMode = false;
         }
 
+        if (this.gameObject.transform.position.y < -4)
+        {
+            LevelManager.RestartAtLastCheckpoint();
+        }
+
         cameraWorldAxis.position = cameraWorldAxis.position + new Vector3(0, distMoved.y, 0);
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);

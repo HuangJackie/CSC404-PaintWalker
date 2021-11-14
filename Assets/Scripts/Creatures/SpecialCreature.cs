@@ -19,6 +19,7 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
     {
         base.Start();
         _updateUI = FindObjectOfType<UpdateUI>();
+        ObjectStorage.specialCreatureStorage.Add(this);
     }
 
     protected void OnMouseDown()

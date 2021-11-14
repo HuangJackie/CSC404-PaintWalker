@@ -7,6 +7,11 @@ public class MoveWall : MonoBehaviour
     public bool operate = false;
     private float end_y = -0.5f;
 
+    private void Start()
+    {
+        ObjectStorage.wallStorage.Add(this.gameObject);
+    }
+
     void Update()
     {
         if (operate == true)
