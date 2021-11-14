@@ -22,7 +22,7 @@ public class checkpoint : MonoBehaviour
     {
         if (active)
         {
-            //Debug.DrawRay(this.transform.position, Vector3.up * 2, Color.black);
+            Debug.DrawRay(this.transform.position, Vector3.up * 2, Color.black);
             if (Physics.Raycast(this.transform.position, Vector3.up, out hitInfo, 2, mask))
             {
                 LevelManager.checkpointInfo["checkpointPos"] = this.transform.position;
@@ -35,6 +35,7 @@ public class checkpoint : MonoBehaviour
                 ObjectStorage.UpdateSpecialCreatureStorage();
                 ObjectStorage.UpdateWallStorage();
                 active = false;
+                this.gameObject.SetActive(false);
             }
         }
         
