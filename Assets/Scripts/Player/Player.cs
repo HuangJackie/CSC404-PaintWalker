@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private bool _hasWaitedTurn;
     private ControllerUtil _controllerUtil;
     private PaintingSystem _paintingSystem;
+    private Animator animator;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _paintingSystem = FindObjectOfType<PaintingSystem>();
         _paintingSystem.ResetSelectedObject();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour
     {
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
+            
             //print("tracking starts when player starts moving");
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
@@ -134,6 +137,7 @@ public class Player : MonoBehaviour
 
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
+            animator.SetBool("moving", true);
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
@@ -154,6 +158,7 @@ public class Player : MonoBehaviour
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
+            animator.SetBool("moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
