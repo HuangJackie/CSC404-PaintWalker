@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
 
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
-            animator.SetBool("moving", true);
+            //animator.SetBool("moving", true);
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
-            animator.SetBool("moving", false);
+            //animator.SetBool("moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
