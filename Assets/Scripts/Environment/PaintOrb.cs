@@ -48,6 +48,7 @@ public class PaintOrb : Interactable, TooltipObject
         {
             mesh.material.color = newColor;
         }
+        ObjectStorage.paintOrbStorage.Add(this.gameObject);
     }
 
     void OnTriggerEnter(Collider other)

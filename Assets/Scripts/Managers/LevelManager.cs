@@ -56,7 +56,10 @@ public class LevelManager : MonoBehaviour
         LevelManager.pastCheckPoints = new List<Vector3>();
         checkpointInfo = new Dictionary<string, dynamic>();
         checkpointInfo["checkpointPos"] = Vector3.zero;
+        playerPaintBrush = FindObjectOfType<PaintBrush>();
+        playerPaintBottle = FindObjectOfType<PaintBottle>();
     }
+
     void Start()
     {
         StartCoroutine(ManageCoroutines());
@@ -82,8 +85,7 @@ public class LevelManager : MonoBehaviour
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
         _updateUI.SetPaint(paintQuantity["Yellow"]);
 
-        playerPaintBrush = FindObjectOfType<PaintBrush>();
-        playerPaintBottle = FindObjectOfType<PaintBottle>();
+        
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
@@ -244,6 +246,41 @@ public class LevelManager : MonoBehaviour
                     block.SetActive(ObjectStorage.blockStates[i][6]);
                 }
             }
+
+            //reset paintOrb attributes
+            for (int i = 0; i < ObjectStorage.paintOrbStorage.Count; i++)
+            {
+                GameObject paintOrb = ObjectStorage.paintOrbStorage[i];
+                paintOrb.transform.position = ObjectStorage.paintOrbStates[i][0];
+                paintOrb.SetActive(ObjectStorage.paintOrbStates[i][1]);
+            }
+
+            //reset specialCreature attributes
+            for (int i = 0; i < ObjectStorage.specialCreatureStorage.Count; i++)
+            {
+                SpecialCreature specialCreature = ObjectStorage.specialCreatureStorage[i];
+                specialCreature.gameObject.transform.position = ObjectStorage.specialCreatureStates[i][0];
+                specialCreature.isPainted = ObjectStorage.specialCreatureStates[i][1];
+                specialCreature.originalColour = ObjectStorage.specialCreatureStates[i][2];
+                specialCreature.paintedColour = ObjectStorage.specialCreatureStates[i][3];
+                specialCreature.GetComponentInChildren<Renderer>().material.color = ObjectStorage.specialCreatureStates[i][3];
+                specialCreature.gameObject.SetActive(ObjectStorage.specialCreatureStates[i][4]);
+            }
+
+            //reset wall attributes
+            for (int i = 0; i < ObjectStorage.wallStorage.Count; i++)
+            {
+                GameObject wall = ObjectStorage.wallStorage[i];
+                wall.transform.position = ObjectStorage.wallStates[i][0];
+                wall.GetComponent<MoveWall>().operate = ObjectStorage.wallStates[i][1];
+            }
+
+            //reset paint amount
+            paintQuantity["Blue"] = ObjectStorage.paintStates[0];
+            paintQuantity["Green"] = ObjectStorage.paintStates[1];
+            paintQuantity["Red"] = ObjectStorage.paintStates[2];
+            paintQuantity["Yellow"] = ObjectStorage.paintStates[3];
+            _updateUI.SetPaint(GetPaintQuantity(GetCurrentlySelectedPaint()));
         }
         actionQueue.Clear();
         StopAllCoroutines();
@@ -293,6 +330,14 @@ public class LevelManager : MonoBehaviour
 
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
         StartCoroutine("CheckPaintQuantity");
+    }
+
+    public void AddPaintInfoToStorage()
+    {
+        ObjectStorage.paintStates.Add(paintQuantity["Blue"]);
+        ObjectStorage.paintStates.Add(paintQuantity["Green"]);
+        ObjectStorage.paintStates.Add(paintQuantity["Red"]);
+        ObjectStorage.paintStates.Add(paintQuantity["Yellow"]);
     }
 
     private void ClearUIInfoText()

@@ -29,8 +29,13 @@ public class checkpoint : MonoBehaviour
                 LevelManager.pastCheckPoints.Add(this.transform.position);
                 LevelManager.checkpointInfo["playerRotation"] = hitInfo.transform.rotation;
                 LevelManager.checkpointInfo["cameraAttributes"] = cameraPanningRevertTarget;
-                ObjectStorage.UpdateStorage();
+                FindObjectOfType<LevelManager>().AddPaintInfoToStorage();
+                ObjectStorage.UpdateBlockStorage();
+                ObjectStorage.UpdatePaintOrbStorage();
+                ObjectStorage.UpdateSpecialCreatureStorage();
+                ObjectStorage.UpdateWallStorage();
                 active = false;
+                this.gameObject.SetActive(false);
             }
         }
         
