@@ -126,7 +126,6 @@ public class Player : MonoBehaviour
 
     private void RigidGridMove()
     {
-        animator.SetBool("moving", true);
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
             
@@ -155,6 +154,11 @@ public class Player : MonoBehaviour
             transform.position, _targetLocation, speed * Time.deltaTime
         );
 
+        if (transform.position - _targetLocation != Vector3.zero)
+        {
+            animator.SetBool("moving", true);
+        }
+        
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
