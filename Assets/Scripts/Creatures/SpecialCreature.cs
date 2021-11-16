@@ -67,4 +67,10 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
         }
     }
     public abstract bool Paint(bool paintWithBrush);
+    
+    // Not implemented for special creatures currently.
+    public bool IsPaintable()
+    {
+        return true;
+    }
 }

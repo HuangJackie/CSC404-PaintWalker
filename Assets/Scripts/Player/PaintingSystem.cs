@@ -74,7 +74,7 @@ public class PaintingSystem : MonoBehaviour
     {
         print(numShiftsToRecord);
         if (!RaycastForTopMostObject(_currentlySelectedToPaint.transform.position, shift * numShiftsToRecord,
-            out RaycastHit hitInfo))
+            out RaycastHit hitInfo) || !IsPaintableBlock(hitInfo))
         {
             if ( shift.x != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.x + shift.x * numShiftsToRecord, 1)
                 || shift.z != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.y + shift.z * numShiftsToRecord, 1))
@@ -87,6 +87,16 @@ public class PaintingSystem : MonoBehaviour
 
         SetCurrentlySelectedObject(hitInfo.collider);
         _selectedCoordinatesRelToPlayer += new Vector2(shift.x, shift.z) * numShiftsToRecord;
+    }
+
+    private bool IsPaintableBlock(RaycastHit hitInfo)
+    {
+        if (!hitInfo.collider.TryGetComponent(out Paintable collidedPaintable))
+        {
+            return false;
+        }
+
+        return collidedPaintable.IsPaintable();
     }
 
     private void ListenForPaintingCommand()
