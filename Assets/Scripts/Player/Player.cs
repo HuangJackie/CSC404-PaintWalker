@@ -158,7 +158,11 @@ public class Player : MonoBehaviour
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
-            animator.SetBool("moving", false);
+            if (!(_isHorizontalMovementPressed || _isVerticalMovementPressed))
+            {
+                animator.SetBool("moving", false);
+            }
+
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
