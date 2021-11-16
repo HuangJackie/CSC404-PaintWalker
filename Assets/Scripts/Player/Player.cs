@@ -151,7 +151,6 @@ public class Player : MonoBehaviour
             // leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
-
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
