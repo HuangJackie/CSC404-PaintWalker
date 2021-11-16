@@ -23,9 +23,10 @@ public class checkpoint : MonoBehaviour
         if (active)
         {
             Debug.DrawRay(this.transform.position, Vector3.up * 2, Color.black);
-            if (Physics.Raycast(this.transform.position, Vector3.up, out hitInfo, 2, mask))
+            if (Physics.Raycast(this.transform.position, Vector3.up, out hitInfo, 8, mask))
             {
                 LevelManager.checkpointInfo["checkpointPos"] = this.transform.position;
+                LevelManager.checkpointInfo["playerPos"] = hitInfo.transform.position;
                 LevelManager.pastCheckPoints.Add(this.transform.position);
                 LevelManager.checkpointInfo["playerRotation"] = hitInfo.transform.rotation;
                 LevelManager.checkpointInfo["cameraAttributes"] = cameraPanningRevertTarget;
