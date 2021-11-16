@@ -19,6 +19,7 @@ public class Ground : Interactable, Paintable
 
     public Color _paintedColour;
     // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
+    public bool isPaintable = true;
 
     private MoveRedo latestState;
     private LevelManager _levelManager;
@@ -373,6 +374,11 @@ public class Ground : Interactable, Paintable
 
     public bool Paint(bool paintWithBrush = false)
     {
+        if (!IsPaintable())
+        {
+            return false;
+        }
+        
         // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
         if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
         {
@@ -484,6 +490,11 @@ public class Ground : Interactable, Paintable
         }
 
         return true;
+    }
+
+    public bool IsPaintable()
+    {
+        return isPaintable;
     }
 
     private void RevertEffect(Color colorToRevert, String newColor)
@@ -648,6 +659,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseEnter()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // originalColour = Material.color;
         // Material.color = new Color(0.98f, 1f, 0.45f);
         HighlightForHoverover();
@@ -656,6 +671,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseExit()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // Material.color = _paintedColour;
         UndoHighlight();
         _isMouseOver = false;

@@ -364,9 +364,9 @@ public class Player : MonoBehaviour
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
-            if (ground.isPaintedByBrush || ground.isPaintedByFeet)
+            if (ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable())
             {
-                // Painted surface, can move.
+                // Painted surface or not painted in the first place, can move.
                 return true;
             }
 
