@@ -95,8 +95,10 @@ public class Ground : Interactable, Paintable
             _isMouseClicked = Input.GetButtonDown("Fire1");
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
 
+            Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            Vector3 horizontalBlockPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
             if (_isMouseOver && _isMouseClicked && !clickedUI &&
-                Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
+                Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
                 Paint(true);
             }
@@ -122,7 +124,7 @@ public class Ground : Interactable, Paintable
             // _isMovingBlock = true;
         }
 
-        if (pos.y < -10 || pos.z > 30 || pos.z < -10 || pos.x > 20 || pos.x < -30)
+        if (pos.y < -5)
         {
             // Block out of bounds so set inactive.
             canMove = false;
