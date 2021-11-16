@@ -19,6 +19,7 @@ public class Ground : Interactable, Paintable
 
     public Color _paintedColour;
     // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
+    public bool isPaintable = true;
 
     private MoveRedo latestState;
     private LevelManager _levelManager;
@@ -102,8 +103,10 @@ public class Ground : Interactable, Paintable
             _isMouseClicked = Input.GetButtonDown("Fire1");
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
 
+            Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            Vector3 horizontalBlockPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
             if (_isMouseOver && _isMouseClicked && !clickedUI &&
-                Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
+                Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
                 Paint(true);
             }
@@ -129,7 +132,7 @@ public class Ground : Interactable, Paintable
             // _isMovingBlock = true;
         }
 
-        if (pos.y < -10 || pos.z > 30 || pos.z < -10 || pos.x > 20 || pos.x < -30)
+        if (pos.y < -5)
         {
             // Block out of bounds so set inactive.
             canMove = false;
@@ -380,6 +383,11 @@ public class Ground : Interactable, Paintable
 
     public bool Paint(bool paintWithBrush = false)
     {
+        if (!IsPaintable())
+        {
+            return false;
+        }
+        
         // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
         if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
         {
@@ -500,6 +508,11 @@ public class Ground : Interactable, Paintable
         }
 
         return true;
+    }
+
+    public bool IsPaintable()
+    {
+        return isPaintable;
     }
 
     private void RevertEffect(Color colorToRevert, String newColor)
@@ -668,6 +681,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseEnter()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // originalColour = Material.color;
         // Material.color = new Color(0.98f, 1f, 0.45f);
         HighlightForHoverover();
@@ -676,6 +693,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseExit()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // Material.color = _paintedColour;
         UndoHighlight();
         _isMouseOver = false;
