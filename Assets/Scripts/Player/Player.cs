@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
 
         if (LevelManager.freeze_player)
         {
+            animator.SetBool("moving", false);
             return;
         }
 
