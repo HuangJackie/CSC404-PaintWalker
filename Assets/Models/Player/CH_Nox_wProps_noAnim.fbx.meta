@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe55e522550a9024b99ea5c9c2bd0cac
+guid: db8a84df33689b94aa3e751c2e3f5d14
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -11,17 +11,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Brush_rig_M_Paint_Brush
-    second: {fileID: 2100000, guid: 84660b46acf017441ab6a84bed4e8d46, type: 2}
+    second: {fileID: 2100000, guid: 1b1f2dcdee120b445a234661308a0a9a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Paint_Bottle_rig_M_Paint_Bottle
-    second: {fileID: 2100000, guid: 13f4c23262602b1498d998e856a293a2, type: 2}
+    second: {fileID: 2100000, guid: 00d2cbdea2235704088d756a4f7f8e6a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: reskin_Nox_rig_Nox_walk_v_0007_lambert2
-    second: {fileID: 2100000, guid: 6a6bbad73aac5c2458dfb865bfc56813, type: 2}
+    second: {fileID: 2100000, guid: be51f72b1f221dd45a60d95f99ca90ba, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -52,7 +52,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 40
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -103,7 +103,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.39999998
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
