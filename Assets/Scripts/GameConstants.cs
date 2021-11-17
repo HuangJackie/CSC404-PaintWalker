@@ -10,6 +10,12 @@ public class GameConstants : MonoBehaviour
     public const int YELLOW_PAINT = 2;
     public const int BLUE_PAINT = 3;
 
+    // Identifiers for paint colours
+    public const string RedColour = "Red";
+    public const string GreenColour = "Green";
+    public const string YellowColour = "Yellow";
+    public const string BlueColour = "Blue";
+    
     // Paint colors
     public static readonly Color32 red = new Color32(241, 95, 62, 255);
     public static readonly Color32 green = new Color32(166, 191, 75, 255);
@@ -24,7 +30,10 @@ public class GameConstants : MonoBehaviour
     public const float SELECTION_R = 0.1f;
     public const float SELECTION_G = 0.1f;
     public const float SELECTION_B = 0.1f;
-    // public static readonly Color32 TOOLTIP_HIGHLIGHT_COLOUR = new Color(1f, 0.99f, 0f);
+    
+    public const float UNINTERACTABLE_SELECTION_R = 1f;
+    public const float UNINTERACTABLE_SELECTION_G = 0.2f;
+    public const float UNINTERACTABLE_SELECTION_B = 0f;
     // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.26f, 0.26f, 0.26f);
 
     /*
