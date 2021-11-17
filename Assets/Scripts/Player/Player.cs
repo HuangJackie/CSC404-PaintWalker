@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private bool _hasWaitedTurn;
     private ControllerUtil _controllerUtil;
     private PaintingSystem _paintingSystem;
+    private Animator animator;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _paintingSystem = FindObjectOfType<PaintingSystem>();
         _paintingSystem.ResetSelectedObject();
+        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -74,6 +76,7 @@ public class Player : MonoBehaviour
 
         if (LevelManager.freeze_player)
         {
+            animator.SetBool("Moving", false);
             return;
         }
 
@@ -127,6 +130,7 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
             //print("tracking starts when player starts moving");
+            animator.SetBool("Moving", true);
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
             // print("trigger first");
@@ -146,7 +150,7 @@ public class Player : MonoBehaviour
             // leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
-
+        
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
@@ -154,6 +158,7 @@ public class Player : MonoBehaviour
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
+            animator.SetBool("Moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
@@ -376,8 +381,7 @@ public class Player : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        //Debug.DrawRay(transform.position, Vector3.down * (_capsuleCollider.height / 2 + +0.1f), Color.black, 120f);
-        return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height / 2 + 0.1f);
+        return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height *40 / 2 + 0.1f);
     }
 
     private bool IsObjectInFrontSpecialCreature(RaycastHit hit)
