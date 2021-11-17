@@ -60,4 +60,19 @@ public class GameConstants : MonoBehaviour
         Tutorial15,
         Tutorial1
     }
+
+    /*
+     * Used to determine which way to invert Player movement
+     * since the camera rotates at 90-degree intervals.
+     * Default camera placement should always be considered N
+     */
+    public enum CameraDirection
+    {
+        None, N, E, S, W
+    }
+
+    public enum PlayerDirection
+    {
+        None, Forward, Right, Backward, Left
+    }
 }
