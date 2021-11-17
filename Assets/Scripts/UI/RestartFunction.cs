@@ -7,7 +7,7 @@ public class RestartFunction : MonoBehaviour
 {
     public static void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneLoader.RestartLevel();
         Time.timeScale = 1f;
     }
 }

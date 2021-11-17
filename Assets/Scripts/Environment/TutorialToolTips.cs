@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class TutorialToolTips : Interactable, TooltipObject
 {
-    // Start is called before the first frame update
     public static bool ToolTipOpened = false;
+    private String HoverText;
+    private bool HoverTextActive;
+
     public GameObject player;
     private LevelManager _levelManager;
+    private UpdateUI _updateUI;
+    private ControllerUtil _controllerUtil;
+    private GameObject ToolTipUI;
 
     public GameObject ToolTipWalking;
     public GameObject ToolTipPainting;
@@ -22,15 +27,7 @@ public class TutorialToolTips : Interactable, TooltipObject
     public GameObject ToolTipUlala;
     public GameObject ToolTipArie;
     public GameObject ToolTipGemi;
-    private String HoverText;
-    private bool HoverTextActive;
     
-    private UpdateUI _updateUI;
-
-    private ControllerUtil _controllerUtil;
-
-    private GameObject ToolTipUI;
-    // Update is called once per frame
     private void Start()
     {
         _controllerUtil = FindObjectOfType<ControllerUtil>();
@@ -86,7 +83,6 @@ public class TutorialToolTips : Interactable, TooltipObject
                 ToolTipUI = ToolTipGemi;
                 HoverText = "About Gemi";
                 break;
-            
         }
         
         base.Start();
@@ -96,11 +92,10 @@ public class TutorialToolTips : Interactable, TooltipObject
     {
         Vector3 playerpos = player.transform.position;
         Vector3 signpos = transform.position;
-        //Debug.Log("X: " + Vector3.Normalize(playerpos- signpos).x + " Z: " + Vector3.Normalize(playerpos- signpos).z);
+        //Debug.Log("X: " + Vector3.Normalize(playerpos- signpos).x +
+        // " Z: " + Vector3.Normalize(playerpos- signpos).z);
+
         if ((Vector3.Distance(playerpos, signpos) < 2))
-            
-        // if (Vector3.Distance(player.transform.position, transform.position) < 2)
-        // if (Vector3.Normalize(player.transform.position - transform.position).z < 0) 
         {
             if (!HoverTextActive)
             {
@@ -122,7 +117,8 @@ public class TutorialToolTips : Interactable, TooltipObject
                     OpenToolTip();
                 }
             }
-        } else
+        }
+        else
         {
             if (HoverTextActive)
             {
@@ -131,7 +127,6 @@ public class TutorialToolTips : Interactable, TooltipObject
                 UndoHighlight();
             }
         }
-        
     }
 
     public void CloseToolTip()
@@ -144,19 +139,19 @@ public class TutorialToolTips : Interactable, TooltipObject
 
     public void OpenToolTip()
     {
-     ToolTipUI.SetActive(true);
-     ToolTipOpened = true;
-     Time.timeScale = 0f;
-     _levelManager.freeze_player = true;
+        ToolTipUI.SetActive(true);
+        ToolTipOpened = true;
+        Time.timeScale = 0f;
+        _levelManager.freeze_player = true;
     }
     
     
-    new void OnMouseOver()
+    private void OnMouseOver()
     {
-        //base.OnMouseOver();
         IsMouseOver = true;
         OnDisplayTooltip();
     }
+
     private new void OnMouseExit()
     {
         base.OnMouseExit();
@@ -168,14 +163,12 @@ public class TutorialToolTips : Interactable, TooltipObject
 
     public void OnDisplayTooltip()
     {
-        
         _updateUI.SetInfoText(HoverText);
         HighlightForHoverover();
     }
 
     public void OnExitTooltip()
     {
-
         _updateUI.WipeInfoText();
         UndoHighlight();
     }
