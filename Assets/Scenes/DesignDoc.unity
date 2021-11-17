@@ -4031,11 +4031,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
   paintQuantity2: 2
   isPainted: 0
+  frozen_model: {fileID: 0}
+  coloured_model: {fileID: 0}
   isTriggered: 0
   wall: {fileID: 1472471005}
   wall2: {fileID: 0}
@@ -4494,16 +4497,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &381544833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5891,6 +5901,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: 7678c006a710d5a44abab66cfff1a5fa, type: 3}
   m_PrefabInstance: {fileID: 468971881}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &470269409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 470269411}
+  - component: {fileID: 470269410}
+  m_Layer: 0
+  m_Name: PaintSwitchSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &470269410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470269409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c270b33229568da4f8a3719aafd997af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &470269411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470269409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &472216900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7032,16 +7085,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &545769363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7470,7 +7530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb0b474231721d4fb60311f256c8b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelManager: {fileID: 0}
 --- !u!64 &568711192
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12798,16 +12857,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &979561378
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15792,16 +15858,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &1287707723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18695,7 +18768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb0b474231721d4fb60311f256c8b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelManager: {fileID: 0}
 --- !u!1 &1510057398
 GameObject:
   m_ObjectHideFlags: 0
@@ -20573,11 +20645,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   paintColour1: Green
   paintColour2: Red
   paintQuantity1: 2
   paintQuantity2: 2
   isPainted: 0
+  frozen_model: {fileID: 0}
+  coloured_model: {fileID: 0}
   speed: 3
   target: {fileID: 1415597695}
   player: {fileID: 859007761}
@@ -22421,16 +22496,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &1771002680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23868,16 +23950,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 859007761}
   speed: 3
   test: b8
   isPaintedByFeet: 0
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  isPaintable: 1
   YellowSounds: {fileID: 1551740754}
   RedSounds: {fileID: 712128807}
   BlueSounds: {fileID: 1573442288}
   GreenSounds: {fileID: 1484132120}
+  blue_model: {fileID: 0}
+  yellow_model: {fileID: 0}
+  green_model: {fileID: 0}
+  red_model: {fileID: 0}
+  base_model: {fileID: 0}
 --- !u!65 &1960626324
 BoxCollider:
   m_ObjectHideFlags: 0

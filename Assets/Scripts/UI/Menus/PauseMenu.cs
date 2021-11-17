@@ -71,7 +71,7 @@ public class PauseMenu : MonoBehaviour
             
             if (_controllerUtil.GetGameMenuSelectAxis(out int select))
             {
-
+                select = -select;
                 _menuOptions[_selectedMenuOption].OnPointerExit(null);
                 if (select > 0)
                 {
@@ -137,6 +137,6 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         // Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenuScene");
+        SceneLoader.LoadMainMenu();
     }
 }
