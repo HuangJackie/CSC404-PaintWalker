@@ -83,7 +83,6 @@ public class LevelManager : MonoBehaviour
         currentSelectedColourClass = GameConstants.yellow;
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
         _updateUI.SetPaint(paintQuantity["Yellow"]);
-        _updateUI.InitPaintInfoText(paintQuantity["Yellow"], paintQuantity["Red"], paintQuantity["Blue"], paintQuantity["Green"]);
 
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
 
@@ -306,7 +305,6 @@ public class LevelManager : MonoBehaviour
         {
             _updateUI.SetPaint(paintQuantity[paintColour]);
         }
-        _updateUI.UpdatePaintInfoText(paintColour, paintQuantity[paintColour]);
         MoveRedo lastCommand = redoCommandHandler.LatestCommand() as MoveRedo;
         if (lastCommand)
         {
@@ -327,8 +325,6 @@ public class LevelManager : MonoBehaviour
         {
             lastCommand.RecordPaintSpent(paintColour, quantity);
         }
-
-        _updateUI.UpdatePaintInfoText(paintColour, paintQuantity[paintColour]);
         
 
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
