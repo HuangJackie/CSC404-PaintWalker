@@ -47,4 +47,17 @@ public class GameConstants : MonoBehaviour
     public const string NortheastQuadrant = "NE";
     public const string SouthwestQuadrant = "SW";
     public const string SoutheastQuadrant = "SE";
+
+    /* The Levels enum denotes the various levels available to the Player.
+     * Levels should be named after their respective Scene names.
+     */
+    public enum Levels {
+        AlphaScenev2,
+        TutorialColors,
+
+        Level1,
+        Tutorial2,
+        Tutorial15,
+        Tutorial1
+    }
 }
