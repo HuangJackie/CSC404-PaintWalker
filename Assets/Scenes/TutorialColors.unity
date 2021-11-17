@@ -464,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -3019,6 +3020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -3246,6 +3248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -4489,6 +4492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -5398,6 +5402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -6535,6 +6540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -8354,6 +8360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -8712,6 +8719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -9120,6 +9128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -9580,6 +9589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -11245,6 +11255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -13164,6 +13175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -13582,6 +13594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -13926,6 +13939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -14218,6 +14232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -14297,6 +14312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -14629,6 +14645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -15227,6 +15244,10 @@ PrefabInstance:
     - target: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616881381544338443, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6028936447467709963, guid: dac5fd1b427a0804497d9b2456d2af59, type: 3}
       propertyPath: m_Layer
@@ -16246,6 +16267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -16583,6 +16605,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
   m_PrefabInstance: {fileID: 1527209513}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &949332115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+  m_PrefabInstance: {fileID: 1994639521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &949332116 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+  m_PrefabInstance: {fileID: 1994639521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &949332117
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949332115}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5771f22ef39a89499ff27af0906d031, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &950492462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
@@ -17148,6 +17199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -17784,6 +17836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -18203,6 +18256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -18556,6 +18610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -19433,6 +19488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -19512,6 +19568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -20065,6 +20122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -22056,6 +22114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -23005,6 +23064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 0}
@@ -24906,6 +24966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -26051,6 +26112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -27022,6 +27084,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494413679}
   m_CullTransparentMesh: 1
+--- !u!1 &1500792124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1500792125}
+  - component: {fileID: 1500792129}
+  - component: {fileID: 1500792128}
+  - component: {fileID: 1500792126}
+  m_Layer: 0
+  m_Name: Player (1)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1500792125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500792124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.44, y: 1, z: -2.51}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_Children:
+  - {fileID: 949332116}
+  m_Father: {fileID: 1704174258}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500792126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500792124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetMode: 0
+  cameraWorldAxis: {fileID: 1847892864}
+  cameraPanningRevertTarget: {fileID: 599639710}
+  LevelManager: {fileID: 1704174257}
+  isoCamera: {fileID: 1510057400}
+  GameState: {fileID: 0}
+  _colorWheelHUD: {fileID: 1400497622}
+  speed: 5
+--- !u!136 &1500792128
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500792124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.007
+  m_Height: 0.04
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.016, z: 0}
+--- !u!54 &1500792129
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500792124}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 3
 --- !u!1 &1502931769
 GameObject:
   m_ObjectHideFlags: 0
@@ -27807,6 +27953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -29942,6 +30089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 0}
@@ -30675,6 +30823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -31007,6 +31156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -31804,6 +31954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -31946,7 +32097,7 @@ MonoBehaviour:
   dev_mode: 1
   freeze_player: 0
   player_script: {fileID: 222737432}
-  player: {fileID: 222737430}
+  player: {fileID: 0}
   init_yellow: 1
   init_red: 1
   init_green: 1
@@ -31967,6 +32118,7 @@ Transform:
   - {fileID: 1787475413}
   - {fileID: 1508767183}
   - {fileID: 461722546}
+  - {fileID: 1500792125}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32535,6 +32687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 770569232}
@@ -33593,6 +33746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -34291,6 +34445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -34997,6 +35152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -36054,6 +36210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -36958,6 +37115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -37319,6 +37477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -37968,6 +38127,63 @@ PrefabInstance:
       objectReference: {fileID: 599639710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+--- !u!1001 &1994639521
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1500792125}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
+      propertyPath: m_Name
+      value: CH_Nox_wProps_noAnim 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79945e5aa56458241b174650aa246dbe, type: 3}
 --- !u!1 &2013882455
 GameObject:
   m_ObjectHideFlags: 0
@@ -38394,6 +38610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -39858,6 +40075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -39959,6 +40177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 222737430}
   ToolTipWalking: {fileID: 1781583770}
   ToolTipPainting: {fileID: 0}
@@ -40588,6 +40807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
