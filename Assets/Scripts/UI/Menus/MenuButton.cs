@@ -11,7 +11,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
 {
     private Button self;
     private Menu parentMenu;
-    private Image selectionIndication;
+    [SerializeField] private Image selectionIndication;
 
     // The index in which it appears in its parentMenu
     // Must be set by parentMenu upon initializing its MenuToggle children
@@ -20,7 +20,6 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
     private void Start()
     {
         self = GetComponent<Button>();
-        selectionIndication = GetComponent<Image>();
 
         // Get parenting Menu. If no Menu in parent, the parent must
         // be an empty renderer GameObject, so its parent must be a Menu

@@ -210,7 +210,7 @@ namespace DefaultNamespace
             axis = 0;
             if (Input.GetAxis("GameMenuDPadSelectAxis") != 0)
             {
-                axis = Input.GetAxis("GameMenuDPadSelectAxis") > 0 ? 1 : -1;
+                axis = Input.GetAxis("GameMenuDPadSelectAxis") > 0 ? -1 : 1;
             } 
             else if (Input.GetAxis("GameMenuSelectAxis") != 0)
             {

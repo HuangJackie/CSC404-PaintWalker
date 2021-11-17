@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
         if (controllerUtil.GetGameMenuSelectAxis(out int selectDirection))
         {
             highlightedButton += selectDirection;
-            if (highlightedButton < 0) highlightedButton = menuButtons.Count;
+            if (highlightedButton < 0) highlightedButton = menuButtons.Count - 1;
             if (highlightedButton > menuButtons.Count - 1) highlightedButton = 0;
             ChangeHighlightedButton(highlightedButton);
         }

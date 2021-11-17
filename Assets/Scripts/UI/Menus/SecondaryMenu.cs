@@ -24,10 +24,13 @@ public class SecondaryMenu : Menu
 
     protected override void Update()
     {
-        base.Update();
-        if (ControllerUtil.GetCancelButtonPressed())
+        if (menuRenderer.activeSelf)
         {
-            Exit();
+            base.Update();
+            if (ControllerUtil.GetCancelButtonPressed())
+            {
+                Exit();
+            }
         }
     }
 
