@@ -65,6 +65,7 @@ public class HowlingCreature : SpecialCreature
                 hitCollider.SendMessage("TriggerButtton",
                     SendMessageOptions.DontRequireReceiver);
             }
+            ReinitializeMaterialColours();
 
             return true;
         }

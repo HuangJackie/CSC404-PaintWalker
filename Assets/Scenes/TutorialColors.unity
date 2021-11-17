@@ -7067,7 +7067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3972072984971113446, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
       propertyPath: isPaintable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8606979560250860972, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
       propertyPath: m_Name

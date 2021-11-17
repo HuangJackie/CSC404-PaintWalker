@@ -89,6 +89,8 @@ public class Ground : Interactable, Paintable
         _blueSoundManager.SetAudioSources(BlueSounds.GetComponents<AudioSource>());
         _greenSoundManager.SetAudioSources(GreenSounds.GetComponents<AudioSource>());
         _pushIceBlockSoundManager.SetAudioSources(GetComponents<AudioSource>());
+        
+        base.Start();
     }
 
     void Update()
@@ -509,6 +511,8 @@ public class Ground : Interactable, Paintable
         {
             isPaintedByFeet = true;
         }
+
+        ReinitializeMaterialColours();
 
         return true;
     }
