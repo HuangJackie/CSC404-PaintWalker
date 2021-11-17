@@ -42,6 +42,13 @@ public class Ground : Interactable, Paintable
     public GameObject RedSounds;
     public GameObject BlueSounds;
     public GameObject GreenSounds;
+
+    public GameObject blue_model;
+    public GameObject yellow_model;
+    public GameObject green_model;
+    public GameObject red_model;
+    public GameObject base_model;
+    
     private SoundManager _yellowSoundManager = new SoundManager();
     private SoundManager _redSoundManager = new SoundManager();
     private SoundManager _blueSoundManager = new SoundManager();
@@ -424,7 +431,10 @@ public class Ground : Interactable, Paintable
                     {
                         return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                     });
+                    
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    red_model.SetActive(true);
                 }
 
                 break;
@@ -443,6 +453,8 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    green_model.SetActive(true);
                 }
 
                 break;
@@ -460,6 +472,8 @@ public class Ground : Interactable, Paintable
                         return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
                     });
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    yellow_model.SetActive(true);
                 }
 
                 break;
@@ -481,6 +495,8 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    blue_model.SetActive(true);
                 }
 
                 break;
@@ -515,6 +531,7 @@ public class Ground : Interactable, Paintable
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
+                red_model.SetActive(false);
             }
 
             Debug.Log("reverting red");
@@ -525,6 +542,7 @@ public class Ground : Interactable, Paintable
             _destinationNeutral = transform.position;
             _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
+            green_model.SetActive(false);
             Debug.Log("reverting green");
         }
         else if (colorToRevert == GameConstants.yellow && newColor != "Blue")
@@ -542,12 +560,13 @@ public class Ground : Interactable, Paintable
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             }
-
+            yellow_model.SetActive(false);
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == GameConstants.blue)
         {
             //Make the block not pushable.
+            blue_model.SetActive(false);
             Debug.Log("reverting blue");
             gameObject.layer = LayerMask.NameToLayer("Default");
             _destinationNeutral = transform.position;
@@ -555,6 +574,7 @@ public class Ground : Interactable, Paintable
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             _isIceBlockEffectEnabled = false;
         }
+        base_model.SetActive(true);
     }
 
     private bool NoBlockBelow()
