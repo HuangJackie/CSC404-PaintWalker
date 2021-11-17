@@ -106,7 +106,7 @@ public class TutorialToolTips : Interactable, TooltipObject
             {
                 _updateUI.SetInfoText(HoverText);
                 HoverTextActive = true;
-                HighlightForHoverover();
+                // HighlightForHoverover();
             }
             if (Input.GetKeyDown(KeyCode.F) 
                 // TODO: Remove
@@ -128,7 +128,7 @@ public class TutorialToolTips : Interactable, TooltipObject
             {
                 _updateUI.WipeInfoText();
                 HoverTextActive = false;
-                UndoHighlight();
+                // UndoHighlight();
             }
         }
         
