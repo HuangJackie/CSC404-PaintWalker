@@ -12,6 +12,11 @@ public class UpdateUI : MonoBehaviour
     private PaintLeftText paintText;
     private PaintLeftBG paintLeftBG;
 
+    private YellowDotText yellowDotText;
+    private RedDotText redDotText;
+    private BlueDotText blueDotText;
+    private GreenDotText greenDotText;
+
     private CrosshairUI crosshairUI;
     private bool _isCrosshairActive;
     private Camera _camera;
@@ -35,6 +40,11 @@ public class UpdateUI : MonoBehaviour
 
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
+
+        yellowDotText = FindObjectOfType<YellowDotText>();
+        redDotText = FindObjectOfType<RedDotText>();
+        blueDotText = FindObjectOfType<BlueDotText>();
+        greenDotText = FindObjectOfType<GreenDotText>();
 
         ChangePaint(GameConstants.YELLOW_PAINT, 3);
     }
@@ -93,6 +103,34 @@ public class UpdateUI : MonoBehaviour
     {
         paintBar.SetPaint(paintLeft);
         paintText.SetPaint(paintLeft);
+    }
+
+    public void InitPaintInfoText(int yellow, int red, int blue, int green)
+    {
+        yellowDotText.SetPaint(yellow);
+        redDotText.SetPaint(red);
+        blueDotText.SetPaint(blue);
+        greenDotText.SetPaint(green);
+    }
+
+    public void UpdatePaintInfoText(string color, int cur_amount)
+    {
+        if (color == "Red")
+        {
+            redDotText.SetPaint(cur_amount);
+        } 
+        else if (color == "Yellow")
+        {
+            yellowDotText.SetPaint(cur_amount);
+        }
+        else if (color == "Green")
+        {
+            greenDotText.SetPaint(cur_amount);
+        }
+        else if (color == "Blue")
+        {
+            blueDotText.SetPaint(cur_amount);
+        }
     }
 
     public void ChangePaint(int paintType, int paintLeft)
