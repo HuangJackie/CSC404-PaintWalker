@@ -53,6 +53,11 @@ public class GameConstants : MonoBehaviour
      */
     public enum Levels {
         AlphaScenev2,
-        TutorialColors
+        TutorialColors,
+
+        Level1,
+        Tutorial2,
+        Tutorial15,
+        Tutorial1
     }
 }

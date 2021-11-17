@@ -71,7 +71,7 @@ public class PauseMenu : MonoBehaviour
             
             if (_controllerUtil.GetGameMenuSelectAxis(out int select))
             {
-
+                select = -select;
                 _menuOptions[_selectedMenuOption].OnPointerExit(null);
                 if (select > 0)
                 {
