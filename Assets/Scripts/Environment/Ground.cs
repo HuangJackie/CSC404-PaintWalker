@@ -517,6 +517,8 @@ public class Ground : Interactable, Paintable
 
     private void RevertEffect(Color colorToRevert, String newColor)
     {
+        GameObject new_model;
+        
         if (colorToRevert == GameConstants.red && newColor != "Blue")
         {
             if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
@@ -531,10 +533,10 @@ public class Ground : Interactable, Paintable
                 _destinationNeutral = transform.position;
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
-                red_model.SetActive(false);
             }
 
             Debug.Log("reverting red");
+            red_model.SetActive(false);
         }
         else if (colorToRevert == GameConstants.green)
         {
@@ -574,7 +576,26 @@ public class Ground : Interactable, Paintable
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             _isIceBlockEffectEnabled = false;
         }
-        base_model.SetActive(true);
+
+        switch (newColor)
+        {
+            case("Blue"):
+                new_model = blue_model;
+                break;
+            case("Yellow"):
+                new_model = yellow_model;
+                break;
+            case("Green"):
+                new_model = green_model;
+                break;
+            case("Red"):
+                new_model = red_model;
+                break;
+            default:
+                new_model = base_model;
+                break;
+        }
+        new_model.SetActive(true);
     }
 
     private bool NoBlockBelow()
