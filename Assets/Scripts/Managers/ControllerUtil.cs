@@ -84,12 +84,12 @@ namespace DefaultNamespace
                 : (Input.GetAxisRaw("XAxisPaintSelect") < 0
                     ? -1
                     : 0);
-            
+
             if (isoCamera.isIntervteredControl)
             {
                 axis = -axis;
             }
-            
+
             return FinishedMovementDelay(axis);
         }
 
@@ -106,11 +106,12 @@ namespace DefaultNamespace
                 : (Input.GetAxisRaw("ZAxisPaintSelect") < 0
                     ? -1
                     : 0);
-            
+
             if (isoCamera.isIntervteredControl)
             {
                 axis = -axis;
             }
+
             return FinishedMovementDelay(axis);
         }
 
@@ -121,12 +122,12 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetAxisRaw("PaintHUD") < 0 || Input.GetKeyDown(KeyCode.Tab);
+            return Input.GetButton("PaintHUD") || Input.GetKeyDown(KeyCode.Tab);
         }
 
         public bool GetColourWheelNotPressed()
         {
-            return Input.GetAxisRaw("PaintHUD") == 0 || Input.GetKeyUp(KeyCode.Tab);
+            return !Input.GetButton("PaintHUD") || Input.GetKeyUp(KeyCode.Tab);
         }
 
         public float GetColourWheelSelectXAxis()
@@ -146,18 +147,19 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetAxisRaw("Paint") > 0;
+            // return Input.GetAxisRaw("Paint") > 0;
+            return Input.GetButtonDown("Paint");
         }
 
-        public bool GetInteractButtonDown()
-        {
-            if (GetColourWheelPressed() || _isMenuOpen)
-            {
-                return false;
-            }
-
-            return Input.GetButtonDown("Interact");
-        }
+        // public bool GetInteractButtonDown()
+        // {
+        //     if (GetColourWheelPressed() || _isMenuOpen)
+        //     {
+        //         return false;
+        //     }
+        //
+        //     return Input.GetButtonDown("Interact");
+        // }
 
 
         public bool GetRotationChangePressed()
@@ -177,6 +179,7 @@ namespace DefaultNamespace
             {
                 return Input.GetAxisRaw("RotateCamera");
             }
+
             return 0;
         }
 
@@ -205,14 +208,54 @@ namespace DefaultNamespace
                     ? -1
                     : 0);
             // print("Test " + (FinishedMovementDelay(axis) && axis != 0) + " " + axis);
-            
-            return FinishedMovementDelay(axis) && axis != 0 ;
+
+            return FinishedMovementDelay(axis) && axis != 0;
         }
 
         public void CloseMenu()
         {
             print("MENU CLOSED");
             _isMenuOpen = false;
+        }
+
+        public bool GetSwitchGreenPressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+            
+            return Input.GetButtonDown("SwitchGreen");
+        }
+
+        public bool GetSwitchYellowPressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+            
+            return Input.GetButtonDown("SwitchYellow");
+        }
+
+        public bool GetSwitchRedPressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+            
+            return Input.GetButtonDown("SwitchRed");
+        }
+
+        public bool GetSwitchBluePressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+            
+            return Input.GetButtonDown("SwitchBlue");
         }
     }
 }
