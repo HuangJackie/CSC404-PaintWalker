@@ -88,6 +88,8 @@ public class TutorialToolTips : Interactable, TooltipObject
                 break;
             
         }
+        
+        base.Start();
     }
 
     void Update()

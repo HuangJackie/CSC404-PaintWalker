@@ -30,6 +30,9 @@ public class GameConstants : MonoBehaviour
     public const float SELECTION_R = 0.1f;
     public const float SELECTION_G = 0.1f;
     public const float SELECTION_B = 0.1f;
+    public const float SELECTION_LIGHT_R = 1f;
+    public const float SELECTION_LIGHT_G = 1f;
+    public const float SELECTION_LIGHT_B = 1f;
     
     public const float UNINTERACTABLE_SELECTION_R = 1f;
     public const float UNINTERACTABLE_SELECTION_G = 0.2f;

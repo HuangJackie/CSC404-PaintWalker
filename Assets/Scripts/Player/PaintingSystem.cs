@@ -128,17 +128,7 @@ public class PaintingSystem : MonoBehaviour
             out RaycastHit hitInfo);
         if (!hitTopMostObject || !IsSelectableBlock(hitInfo))
         {
-            //
-            // if ( shift.x != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.x + shift.x * numShiftsToRecord, 1)
-            //     || shift.z != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.y + shift.z * numShiftsToRecord, 1))
-            // {
-            //     BestEffortUpdateCurrentlySelectedBlock(shift, numShiftsToRecord + 1);
-            // }
-
             HighlightUnpaintableObject(hitTopMostObject, hitInfo);
-            // _emptySpaceLocation = _currentlySelectedToPaint.transform.position + shift;
-            // _emptySpaceLocation.y = Mathf.Floor(_player.transform.position.y - 1.7f);
-            // return;
         }
 
         Vector2 newShift = new Vector2(shift.x, shift.z) * numShiftsToRecord;
@@ -192,6 +182,8 @@ public class PaintingSystem : MonoBehaviour
             }
 
             paintable.Paint(true);
+            // Re-highlight new model.
+            SetCurrentlySelectedObject(_currentlySelectedToPaint, Vector2.zero);
         }
     }
 
@@ -261,21 +253,21 @@ public class PaintingSystem : MonoBehaviour
 
         if (_canInteractWithSelected)
         {
-            print("Interactable");
             collidedInteractable.HighlightForPaintSelectionUI();
         }
         else
         {
-            // collidedInteractable.HighlightForPaintSelectionUI();
-            print("Not interactable");
             collidedInteractable.HighlightForPaintSelectionUIUninteractable();
         }
     }
 
     private void DisplayEmptySpaceBlock()
     {
-        print("DisplayEmptySpaceBlock");
-
+        if (_emptySpaceBlock == null)
+        {
+            return;
+        }
+        
         Vector3 playerPosition = _player.transform.position;
         _emptySpaceBlock.transform.position =
             new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
@@ -291,13 +283,16 @@ public class PaintingSystem : MonoBehaviour
         if (collidedInteractable != null)
         {
             collidedInteractable.UndoHighlight();
-            return;
         }
     }
 
     private void RemoveEmptySpaceBlock()
     {
-        print("RemoveEmptySpaceBlock");
+        if (_emptySpaceBlock == null)
+        {
+            return;
+        }
+
         _emptySpaceBlock.SetActive(false);
     }
 

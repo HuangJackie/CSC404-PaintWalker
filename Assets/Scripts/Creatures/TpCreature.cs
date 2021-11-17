@@ -81,8 +81,13 @@ public class TpCreature : SpecialCreature
             for (int i = 0; i < tp_creaturesx.Length; i++)
             {
                 tp_creaturesx[i].isPainted = true;
-            }
 
+                if (tp_creaturesx[i].TryGetComponent(out Interactable interactable))
+                {
+                    interactable.paintedColour = Material.color;
+                    interactable.ReinitializeMaterialColours();
+                }
+            }
             return true;
         }
         return false;
