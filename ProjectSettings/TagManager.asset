@@ -17,6 +17,7 @@ TagManager:
   - ResumeButton
   - MenuButton
   - ISOCamera
+  - UI
   layers:
   - Default
   - TransparentFX

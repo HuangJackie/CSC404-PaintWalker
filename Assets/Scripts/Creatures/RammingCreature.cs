@@ -83,6 +83,8 @@ public class RammingCreature : SpecialCreature
         {
             originalColour = Material.color;
             paintedColour = Material.color;
+            frozen_model.SetActive(false);
+            coloured_model.SetActive(true);
             isPainted = true;
             is_moving = true;
             return true;

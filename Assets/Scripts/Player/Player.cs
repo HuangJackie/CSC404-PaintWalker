@@ -222,6 +222,7 @@ public class Player : MonoBehaviour
 
         if (!ValidMove(pressedButton, currentTransformPosition))
         {
+            print("not valid");
             return;
         }
 
@@ -271,6 +272,7 @@ public class Player : MonoBehaviour
                                     new Vector3(0, -_capsuleCollider.height / 2, 1), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
+                    //Debug.Log("just up is not empty");
                     return false;
                 }
 
@@ -296,6 +298,7 @@ public class Player : MonoBehaviour
                                     new Vector3(0, -_capsuleCollider.height / 2, -1), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
+                    //Debug.Log("just bottom is not empty");
                     return false;
                 }
 
@@ -305,7 +308,7 @@ public class Player : MonoBehaviour
             case "Left":
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
-                    // Debug.Log("left bottom is empty ");
+                    //Debug.Log("left bottom is empty ");
                     return false;
                 }
 
@@ -314,7 +317,7 @@ public class Player : MonoBehaviour
                                     new Vector3(-1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    // Debug.Log("left top is not empty");
+                    //Debug.Log("left top is not empty");
                     return noObstructionAhead(hitInfo);
                 }
 
@@ -322,7 +325,7 @@ public class Player : MonoBehaviour
                                     new Vector3(-1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    // Debug.Log("Just left is not empty");
+                    //Debug.Log("Just left is not empty");
                     return false;
                 }
 
@@ -369,18 +372,12 @@ public class Player : MonoBehaviour
             return false;
         }
 
-        // If going to hit a wall, don't move.
-        if (hitInfo.transform.position.y > 1 && !hitInfo.collider.CompareTag("PaintRefill"))
-        {
-            return false;
-        }
-
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
-            if (ground.isPaintedByBrush || ground.isPaintedByFeet)
+            if (ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable())
             {
-                // Painted surface, can move.
+                // Painted surface or not painted in the first place, can move.
                 return true;
             }
 

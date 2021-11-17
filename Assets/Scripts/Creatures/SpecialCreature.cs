@@ -13,6 +13,8 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
 
     private UpdateUI _updateUI;
     public bool isPainted;
+    public GameObject frozen_model;
+    public GameObject coloured_model;
     
 
     protected new void Start()
@@ -67,4 +69,10 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
         }
     }
     public abstract bool Paint(bool paintWithBrush);
+    
+    // Not implemented for special creatures currently.
+    public bool IsPaintable()
+    {
+        return true;
+    }
 }

@@ -19,6 +19,7 @@ public class Ground : Interactable, Paintable
 
     public Color _paintedColour;
     // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
+    public bool isPaintable = true;
 
     private MoveRedo latestState;
     private LevelManager _levelManager;
@@ -41,6 +42,13 @@ public class Ground : Interactable, Paintable
     public GameObject RedSounds;
     public GameObject BlueSounds;
     public GameObject GreenSounds;
+
+    public GameObject blue_model;
+    public GameObject yellow_model;
+    public GameObject green_model;
+    public GameObject red_model;
+    public GameObject base_model;
+    
     private SoundManager _yellowSoundManager = new SoundManager();
     private SoundManager _redSoundManager = new SoundManager();
     private SoundManager _blueSoundManager = new SoundManager();
@@ -95,8 +103,10 @@ public class Ground : Interactable, Paintable
             _isMouseClicked = Input.GetButtonDown("Fire1");
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
 
+            Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            Vector3 horizontalBlockPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
             if (_isMouseOver && _isMouseClicked && !clickedUI &&
-                Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
+                Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
                 Paint(true);
             }
@@ -122,7 +132,7 @@ public class Ground : Interactable, Paintable
             // _isMovingBlock = true;
         }
 
-        if (pos.y < -10 || pos.z > 30 || pos.z < -10 || pos.x > 20 || pos.x < -30)
+        if (pos.y < -5)
         {
             // Block out of bounds so set inactive.
             canMove = false;
@@ -373,6 +383,11 @@ public class Ground : Interactable, Paintable
 
     public bool Paint(bool paintWithBrush = false)
     {
+        if (!IsPaintable())
+        {
+            return false;
+        }
+        
         // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
         if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
         {
@@ -408,15 +423,19 @@ public class Ground : Interactable, Paintable
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
                 _levelManager.DecreasePaint("Red", 1);
-                if (paintWithBrush && NoBlockBelow())
+                if (paintWithBrush)
                 {
-                    _redSoundManager.PlayRandom();
+                    base_model.SetActive(false);
+                    red_model.SetActive(true);
+                    if (NoBlockBelow()) {
+                        _redSoundManager.PlayRandom();
                     Debug.Log("red effect triggered");
                     _levelManager.EnqueueAction(() =>
                     {
                         return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                     });
-                    isPaintedByBrush = true;
+
+                    isPaintedByBrush = true; }
                 }
 
                 break;
@@ -435,6 +454,8 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    green_model.SetActive(true);
                 }
 
                 break;
@@ -443,15 +464,19 @@ public class Ground : Interactable, Paintable
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
                 _levelManager.DecreasePaint("Yellow", 1);
-                if (paintWithBrush && NoUnmovableBlockAbove())
+                if (paintWithBrush)
                 {
-                    _yellowSoundManager.PlayRandom();
-                    Debug.Log("yellow effect triggered");
-                    _levelManager.EnqueueAction(() =>
-                    {
-                        return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
-                    });
-                    isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    yellow_model.SetActive(true);
+                    if (NoUnmovableBlockAbove()){
+                        _yellowSoundManager.PlayRandom();
+                        Debug.Log("yellow effect triggered");
+                        _levelManager.EnqueueAction(() =>
+                        {
+                            return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
+                        });
+                        isPaintedByBrush = true;
+                    }
                 }
 
                 break;
@@ -473,6 +498,8 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     isPaintedByBrush = true;
+                    base_model.SetActive(false);
+                    blue_model.SetActive(true);
                 }
 
                 break;
@@ -486,8 +513,15 @@ public class Ground : Interactable, Paintable
         return true;
     }
 
+    public bool IsPaintable()
+    {
+        return isPaintable;
+    }
+
     private void RevertEffect(Color colorToRevert, String newColor)
     {
+        GameObject new_model;
+        
         if (colorToRevert == GameConstants.red && newColor != "Blue")
         {
             if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
@@ -505,6 +539,7 @@ public class Ground : Interactable, Paintable
             }
 
             Debug.Log("reverting red");
+            red_model.SetActive(false);
         }
         else if (colorToRevert == GameConstants.green)
         {
@@ -512,6 +547,7 @@ public class Ground : Interactable, Paintable
             _destinationNeutral = transform.position;
             _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
+            green_model.SetActive(false);
             Debug.Log("reverting green");
         }
         else if (colorToRevert == GameConstants.yellow && newColor != "Blue")
@@ -529,12 +565,13 @@ public class Ground : Interactable, Paintable
                 _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
                 _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             }
-
+            yellow_model.SetActive(false);
             Debug.Log("reverting yellow");
         }
         else if (colorToRevert == GameConstants.blue)
         {
             //Make the block not pushable.
+            blue_model.SetActive(false);
             Debug.Log("reverting blue");
             gameObject.layer = LayerMask.NameToLayer("Default");
             _destinationNeutral = transform.position;
@@ -542,6 +579,26 @@ public class Ground : Interactable, Paintable
             _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
             _isIceBlockEffectEnabled = false;
         }
+
+        switch (newColor)
+        {
+            case("Blue"):
+                new_model = blue_model;
+                break;
+            case("Yellow"):
+                new_model = yellow_model;
+                break;
+            case("Green"):
+                new_model = green_model;
+                break;
+            case("Red"):
+                new_model = red_model;
+                break;
+            default:
+                new_model = base_model;
+                break;
+        }
+        new_model.SetActive(true);
     }
 
     private bool NoBlockBelow()
@@ -648,6 +705,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseEnter()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // originalColour = Material.color;
         // Material.color = new Color(0.98f, 1f, 0.45f);
         HighlightForHoverover();
@@ -656,6 +717,10 @@ public class Ground : Interactable, Paintable
 
     private new void OnMouseExit()
     {
+        if (!IsPaintable())
+        {
+            return;
+        }
         // Material.color = _paintedColour;
         UndoHighlight();
         _isMouseOver = false;

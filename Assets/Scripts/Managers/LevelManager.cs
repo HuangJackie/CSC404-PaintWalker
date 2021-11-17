@@ -203,8 +203,9 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            Vector3 playerPos = checkpointInfo["playerPos"];
             // the player height on ground is 1.764744f, if we ever change this parameter, the code here needs to be updated as well
-            Vector3 spawn_pos = new Vector3(checkpointPos.x, checkpointPos.y + 1.764744f, checkpointPos.z);
+            Vector3 spawn_pos = new Vector3(checkpointPos.x, playerPos.y, checkpointPos.z);
             player_script.UpdateTargetLocation(spawn_pos);
             player.transform.position = spawn_pos;
             player_script.resetMode = true;
