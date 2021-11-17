@@ -106,7 +106,10 @@ public class TutorialToolTips : Interactable, TooltipObject
                 HoverTextActive = true;
                 HighlightForHoverover();
             }
-            if (Input.GetKeyDown(KeyCode.F) || _controllerUtil.GetInteractButtonDown())
+            if (Input.GetKeyDown(KeyCode.F) 
+                // TODO: Remove
+                // || _controllerUtil.GetInteractButtonDown()
+                )
             {
                 if (ToolTipOpened)
                 {
@@ -129,7 +132,7 @@ public class TutorialToolTips : Interactable, TooltipObject
         
     }
 
-    void CloseToolTip()
+    public void CloseToolTip()
     {
         ToolTipUI.SetActive(false);
         ToolTipOpened = false;
@@ -137,7 +140,7 @@ public class TutorialToolTips : Interactable, TooltipObject
         _levelManager.freeze_player = false;
     }
 
-    void OpenToolTip()
+    public void OpenToolTip()
     {
      ToolTipUI.SetActive(true);
      ToolTipOpened = true;
@@ -173,5 +176,10 @@ public class TutorialToolTips : Interactable, TooltipObject
 
         _updateUI.WipeInfoText();
         UndoHighlight();
+    }
+
+    public bool IsToolTipOpen()
+    {
+        return ToolTipOpened;
     }
 }
