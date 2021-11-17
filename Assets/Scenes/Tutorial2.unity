@@ -17584,8 +17584,8 @@ Transform:
   - {fileID: 354936975}
   - {fileID: 1448469320}
   - {fileID: 1100860546}
-  - {fileID: 1107154986}
   - {fileID: 1050730464}
+  - {fileID: 1107154986}
   - {fileID: 568850161}
   - {fileID: 1296025593}
   m_Father: {fileID: 1787475413}
@@ -20677,6 +20677,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1207042298}
     m_Modifications:
+    - target: {fileID: 59764305783863548, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 59764305783863548, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 59764305783863548, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.51
+      objectReference: {fileID: 0}
     - target: {fileID: 1334181637083021242, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
       value: 6
