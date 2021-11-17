@@ -9573,6 +9573,10 @@ PrefabInstance:
       propertyPath: paintColour1
       value: Red
       objectReference: {fileID: 0}
+    - target: {fileID: 889983864610983342, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2664324113767875659, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -33143,6 +33147,10 @@ PrefabInstance:
     - target: {fileID: 2039017950, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: paintColour1
       value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 889983864610983342, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2664324113767875659, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: m_RootOrder
