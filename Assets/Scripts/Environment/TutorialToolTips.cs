@@ -61,7 +61,7 @@ public class TutorialToolTips : Interactable, TooltipObject
                 break;
             case "Walking":
                 ToolTipUI = ToolTipWalking;
-                HoverText = "About Walking, press f";
+                HoverText = "About Walking, press f/RB";
                 break;
             case "Painting":
                 ToolTipUI = ToolTipPainting;

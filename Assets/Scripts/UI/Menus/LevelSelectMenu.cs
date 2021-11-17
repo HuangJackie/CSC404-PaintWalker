@@ -17,4 +17,24 @@ public class LevelSelectMenu : SecondaryMenu
     {
         SceneLoader.LoadLevel(Levels.AlphaScenev2);
     }
+    
+    public static void LoadTut1()
+    {
+        SceneLoader.LoadLevel(Levels.Tutorial1);
+    }
+
+    public static void LoadTut15()
+    {
+        SceneLoader.LoadLevel(Levels.Tutorial15);
+    }
+    
+    public static void LoadTut2()
+    {
+        SceneLoader.LoadLevel(Levels.Tutorial2);
+    }
+
+    public static void LoadLevel1()
+    {
+        SceneLoader.LoadLevel(Levels.Level1);
+    }
 }
