@@ -281,6 +281,7 @@ public class LevelManager : MonoBehaviour
             paintQuantity["Red"] = ObjectStorage.paintStates[2];
             paintQuantity["Yellow"] = ObjectStorage.paintStates[3];
             _updateUI.SetPaint(GetPaintQuantity(GetCurrentlySelectedPaint()));
+            _updateUI.InitPaintInfoText(paintQuantity["Yellow"], paintQuantity["Red"], paintQuantity["Blue"], paintQuantity["Green"]);
         }
         actionQueue.Clear();
         StopAllCoroutines();
