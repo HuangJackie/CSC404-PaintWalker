@@ -423,18 +423,19 @@ public class Ground : Interactable, Paintable
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
                 _levelManager.DecreasePaint("Red", 1);
-                if (paintWithBrush && NoBlockBelow())
+                if (paintWithBrush)
                 {
-                    _redSoundManager.PlayRandom();
+                    base_model.SetActive(false);
+                    red_model.SetActive(true);
+                    if (NoBlockBelow()) {
+                        _redSoundManager.PlayRandom();
                     Debug.Log("red effect triggered");
                     _levelManager.EnqueueAction(() =>
                     {
                         return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                     });
-                    
-                    isPaintedByBrush = true;
-                    base_model.SetActive(false);
-                    red_model.SetActive(true);
+
+                    isPaintedByBrush = true; }
                 }
 
                 break;
@@ -463,17 +464,19 @@ public class Ground : Interactable, Paintable
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
                 _levelManager.DecreasePaint("Yellow", 1);
-                if (paintWithBrush && NoUnmovableBlockAbove())
+                if (paintWithBrush)
                 {
-                    _yellowSoundManager.PlayRandom();
-                    Debug.Log("yellow effect triggered");
-                    _levelManager.EnqueueAction(() =>
-                    {
-                        return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
-                    });
-                    isPaintedByBrush = true;
                     base_model.SetActive(false);
                     yellow_model.SetActive(true);
+                    if (NoUnmovableBlockAbove()){
+                        _yellowSoundManager.PlayRandom();
+                        Debug.Log("yellow effect triggered");
+                        _levelManager.EnqueueAction(() =>
+                        {
+                            return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
+                        });
+                        isPaintedByBrush = true;
+                    }
                 }
 
                 break;
