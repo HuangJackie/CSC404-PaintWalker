@@ -147,11 +147,6 @@ public class Player : MonoBehaviour
             _paintingSystem.ResetSelectedObject();
         }
         
-        if (transform.position != _targetLocation)
-        {
-            print("should move");
-        }
-
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
@@ -381,7 +376,6 @@ public class Player : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        Debug.DrawRay(transform.position, Vector3.down * (_capsuleCollider.height * 40 / 2 + +0.1f), Color.black, 120f);
         return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height *40 / 2 + 0.1f);
     }
 
