@@ -21,7 +21,10 @@ public class TpCreature : SpecialCreature
     public GameObject tp_creature2;
     public TpCreature[] tp_creaturesx;
     private Color _tpCreatureColor = Color.blue;
-
+    
+    // To not interact right after painting.
+    private bool _isRecentlyPainted;
+    
     new void Start()
     {
         base.Start();
@@ -38,11 +41,13 @@ public class TpCreature : SpecialCreature
         _material2 = tp_creature2.GetComponentInChildren<Renderer>().material;
         _originalColour2 = _material2.color;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
+        _isRecentlyPainted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _isRecentlyPainted = false;
     }
 
     new void OnMouseDown()
@@ -69,6 +74,7 @@ public class TpCreature : SpecialCreature
             originalColour = Material.color;
             paintedColour = Material.color;
             isPainted = true;
+            _isRecentlyPainted = true;
             // color other creature:
             _material2.color = _tpCreatureColor;
             _originalColour2 = _material2.color;
@@ -104,5 +110,10 @@ public class TpCreature : SpecialCreature
                 // Destroy(gameObject);
             }
         }
+    }
+
+    public bool IsRecentlyPainted()
+    {
+        return _isRecentlyPainted;
     }
 }

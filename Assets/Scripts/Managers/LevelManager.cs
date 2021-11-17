@@ -77,7 +77,6 @@ public class LevelManager : MonoBehaviour
             paintQuantity["Red"] = 30;
             paintQuantity["Yellow"] = 30;
         }
-
         
         freeze_player = false;
         currentSelectedColour = "Yellow";
@@ -85,9 +84,8 @@ public class LevelManager : MonoBehaviour
         _updateUI = FindObjectOfType<UpdateUI>(); // Auto-sets yellow to 3/10
         _updateUI.SetPaint(paintQuantity["Yellow"]);
 
-        
-
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
+
     }
 
     IEnumerator ManageCoroutines()

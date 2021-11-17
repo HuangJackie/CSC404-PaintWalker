@@ -9,6 +9,14 @@ public class PaintingSystem : MonoBehaviour
 
     private Collider _groundBlockBelowPlayer;
     private Collider _currentlySelectedToPaint;
+    private bool _isInteractingWithTutorialSign;
+
+    private bool _canInteractWithSelected;
+    private bool _emptySpaceSelected;
+    private bool _emptySpaceJustSelected;
+
+    private GameObject _emptySpaceBlock;
+    // private Vector3 _emptySpaceLocation; // To figure out where to place the block.
 
     /**
      * The currently selected coordinates relative to the player.
@@ -19,12 +27,20 @@ public class PaintingSystem : MonoBehaviour
 
     private void Start()
     {
+        var emptySpaceBlockModel = Resources.Load(path: "Blocks/EmptySpaceHighlight");
+        _emptySpaceBlock = (GameObject) Instantiate(emptySpaceBlockModel, Vector3.zero,
+            Quaternion.identity);
+        _emptySpaceBlock.SetActive(false);
+        
         _player = FindObjectOfType<Player>();
         _controllerUtil = FindObjectOfType<ControllerUtil>();
 
         UpdateGroundBlockBelowPlayer();
-        SetCurrentlySelectedObject(_groundBlockBelowPlayer);
+        SetCurrentlySelectedObject(_groundBlockBelowPlayer, Vector2.zero);
         _selectedCoordinatesRelToPlayer = Vector2.zero;
+
+        _isInteractingWithTutorialSign = false;
+        _canInteractWithSelected = true;
     }
 
 ////////////////////////////////////////////////////////
@@ -39,17 +55,46 @@ public class PaintingSystem : MonoBehaviour
 
     private void ListenForInteractingCommand()
     {
-        if (_controllerUtil.GetInteractButtonDown())
+        if (_currentlySelectedToPaint == null)
         {
-            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature))
+            return;
+        }
+
+        // TODO Change to painting button
+        if (_controllerUtil.GetPaintButtonDown())
+        {
+            // Teleport Creature Interaction
+            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature)
+                && !teleportCreature.IsRecentlyPainted()
+                && teleportCreature.isPainted)
             {
                 teleportCreature.Interact();
+            }
+
+            // Tutorial Sign Interaction
+            if (_currentlySelectedToPaint.TryGetComponent(out TutorialToolTips tutorialSign))
+            {
+                if (!tutorialSign.IsToolTipOpen())
+                {
+                    tutorialSign.OpenToolTip();
+                    _isInteractingWithTutorialSign = true;
+                }
+                else
+                {
+                    tutorialSign.CloseToolTip();
+                    _isInteractingWithTutorialSign = false;
+                }
             }
         }
     }
 
     private void ListenForMoveSelectInteractableCommand()
     {
+        if (_isInteractingWithTutorialSign)
+        {
+            return;
+        }
+
         if (_controllerUtil.GetXAxisPaintSelectAxis(out int xSelect)
             && IsWithinRange(_selectedCoordinatesRelToPlayer.x + xSelect, 2))
         {
@@ -72,36 +117,73 @@ public class PaintingSystem : MonoBehaviour
 
     private void BestEffortUpdateCurrentlySelectedBlock(Vector3 shift, int numShiftsToRecord)
     {
-        print(numShiftsToRecord);
-        if (!RaycastForTopMostObject(_currentlySelectedToPaint.transform.position, shift * numShiftsToRecord,
-            out RaycastHit hitInfo) || !IsPaintableBlock(hitInfo))
+        _canInteractWithSelected = true;
+        _emptySpaceJustSelected = false;
+        Vector3 playerPosition = _player.transform.position;
+        bool hitTopMostObject = RaycastForTopMostObject(
+            new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
+                0,
+                playerPosition.z + _selectedCoordinatesRelToPlayer.y),
+            shift * numShiftsToRecord,
+            out RaycastHit hitInfo);
+        if (!hitTopMostObject || !IsSelectableBlock(hitInfo))
         {
-            if ( shift.x != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.x + shift.x * numShiftsToRecord, 1)
-                || shift.z != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.y + shift.z * numShiftsToRecord, 1))
-            {
-                BestEffortUpdateCurrentlySelectedBlock(shift, numShiftsToRecord + 1);
-            }
+            //
+            // if ( shift.x != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.x + shift.x * numShiftsToRecord, 1)
+            //     || shift.z != 0 && IsWithinRange(_selectedCoordinatesRelToPlayer.y + shift.z * numShiftsToRecord, 1))
+            // {
+            //     BestEffortUpdateCurrentlySelectedBlock(shift, numShiftsToRecord + 1);
+            // }
 
+            HighlightUnpaintableObject(hitTopMostObject, hitInfo);
+            // _emptySpaceLocation = _currentlySelectedToPaint.transform.position + shift;
+            // _emptySpaceLocation.y = Mathf.Floor(_player.transform.position.y - 1.7f);
+            // return;
+        }
+
+        Vector2 newShift = new Vector2(shift.x, shift.z) * numShiftsToRecord;
+        if (hitTopMostObject)
+        {
+            SetCurrentlySelectedObject(hitInfo.collider, newShift);
+        }
+        else
+        {
+            SetCurrentlySelectedObject(null, newShift);
+        }
+    }
+
+    private void HighlightUnpaintableObject(bool hitTopMostObject, RaycastHit hitInfo)
+    {
+        if (!hitTopMostObject)
+        {
+            // Means empty space so show a phantom block here.
+            _emptySpaceSelected = true;
+            _emptySpaceJustSelected = true;
             return;
         }
 
-        SetCurrentlySelectedObject(hitInfo.collider);
-        _selectedCoordinatesRelToPlayer += new Vector2(shift.x, shift.z) * numShiftsToRecord;
+        if (hitInfo.collider.TryGetComponent(out Ground ground))
+        {
+            // Means it's an unpaintable ground object.
+            _canInteractWithSelected = false;
+        }
     }
 
-    private bool IsPaintableBlock(RaycastHit hitInfo)
+    private bool IsSelectableBlock(RaycastHit hitInfo)
     {
-        if (!hitInfo.collider.TryGetComponent(out Paintable collidedPaintable))
+        TutorialToolTips tutorialSign = null;
+        if (!hitInfo.collider.TryGetComponent(out Paintable collidedPaintable) &&
+            !hitInfo.collider.TryGetComponent(out tutorialSign))
         {
             return false;
         }
 
-        return collidedPaintable.IsPaintable();
+        return (collidedPaintable != null && collidedPaintable.IsPaintable()) || tutorialSign != null;
     }
 
     private void ListenForPaintingCommand()
     {
-        if (_controllerUtil.GetPaintButtonDown())
+        if (_controllerUtil.GetPaintButtonDown() && !_isInteractingWithTutorialSign)
         {
             Paintable paintable = GetCurrentlySelectedComponent<Paintable>();
             if (paintable == null)
@@ -129,14 +211,13 @@ public class PaintingSystem : MonoBehaviour
         _selectedCoordinatesRelToPlayer = Vector2.zero;
     }
 
-    private void SetCurrentlySelectedObject(Collider newSelectedObject)
+    private void SetCurrentlySelectedObject(Collider newSelectedObject, Vector2 newShift)
     {
-        if (_currentlySelectedToPaint != null)
-        {
-            UnhighlightSelectedInteractable();
-        }
+        UnhighlightSelectedInteractable();
 
         _currentlySelectedToPaint = newSelectedObject;
+        _selectedCoordinatesRelToPlayer += newShift;
+
         HighlightSelectedInteractable();
     }
 
@@ -167,24 +248,57 @@ public class PaintingSystem : MonoBehaviour
 
     private void HighlightSelectedInteractable()
     {
+        if (_currentlySelectedToPaint == null)
+        {
+            DisplayEmptySpaceBlock();
+        }
+
         Interactable collidedInteractable = GetCurrentlySelectedComponent<Interactable>();
         if (collidedInteractable == null)
         {
             return;
         }
 
-        collidedInteractable.HighlightForPaintSelectionUI();
+        if (_canInteractWithSelected)
+        {
+            print("Interactable");
+            collidedInteractable.HighlightForPaintSelectionUI();
+        }
+        else
+        {
+            // collidedInteractable.HighlightForPaintSelectionUI();
+            print("Not interactable");
+            collidedInteractable.HighlightForPaintSelectionUIUninteractable();
+        }
+    }
+
+    private void DisplayEmptySpaceBlock()
+    {
+        print("DisplayEmptySpaceBlock");
+
+        Vector3 playerPosition = _player.transform.position;
+        _emptySpaceBlock.transform.position =
+            new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
+                Mathf.Floor(playerPosition.y - 1.5f) + 0.5f,
+                playerPosition.z + _selectedCoordinatesRelToPlayer.y);
+        _emptySpaceBlock.SetActive(true);
     }
 
     private void UnhighlightSelectedInteractable()
     {
+        RemoveEmptySpaceBlock();
         Interactable collidedInteractable = GetCurrentlySelectedComponent<Interactable>();
-        if (collidedInteractable == null)
+        if (collidedInteractable != null)
         {
+            collidedInteractable.UndoHighlight();
             return;
         }
+    }
 
-        collidedInteractable.UndoHighlight();
+    private void RemoveEmptySpaceBlock()
+    {
+        print("RemoveEmptySpaceBlock");
+        _emptySpaceBlock.SetActive(false);
     }
 
     /**
