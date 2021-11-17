@@ -34,7 +34,8 @@ public class ChangePerspective : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || _controllerUtil.GetRotationChange() > 0)
+        if (!_changingPersective && (Input.GetKeyDown(KeyCode.Q) ||
+                                     _controllerUtil.GetRotationChange() > 0))
         {
             _changingPersective = true;
             _rot_dest = 90;
@@ -42,7 +43,8 @@ public class ChangePerspective : MonoBehaviour
                 ? _target_y_angle + 90f
                 : 0f;
         }
-        else if (Input.GetKeyDown(KeyCode.E) || _controllerUtil.GetRotationChange() < 0)
+        else if (!_changingPersective && (Input.GetKeyDown(KeyCode.E) ||
+                                          _controllerUtil.GetRotationChange() < 0))
         {
             _changingPersective = true;
             _rot_dest = -90;
@@ -71,7 +73,8 @@ public class ChangePerspective : MonoBehaviour
                         Mathf.Abs(_target_y_angle),
                         transform.eulerAngles.z
                     );
-                } else
+                }
+                else
                 {
                     transform.eulerAngles = new Vector3(
                         transform.eulerAngles.x,
