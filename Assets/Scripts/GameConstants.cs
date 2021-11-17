@@ -68,6 +68,11 @@ public class GameConstants : MonoBehaviour
      */
     public enum CameraDirection
     {
-        N, E, S, W
+        None, N, E, S, W
+    }
+
+    public enum PlayerDirection
+    {
+        None, Forward, Right, Backward, Left
     }
 }

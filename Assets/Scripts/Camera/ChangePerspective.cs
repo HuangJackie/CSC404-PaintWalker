@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using DefaultNamespace;
 using UnityEngine;
 using static GameConstants;
@@ -16,6 +17,7 @@ public class ChangePerspective : MonoBehaviour
     
     public bool isIntervteredControl;
     public CameraDirection direction;
+    public static event Action<CameraDirection> onDirectionChange;
     private bool _changingPersective;
 
     void Start()
@@ -77,9 +79,9 @@ public class ChangePerspective : MonoBehaviour
                         transform.eulerAngles.z
                     );
                 }
-            }
 
-            UpdateDirection();
+                UpdateDirection();
+            }
         }
     }
 
@@ -89,15 +91,17 @@ public class ChangePerspective : MonoBehaviour
     {
         if (_rot_dest > 0)  // Rotating clockwise
         {
-            direction = (int)direction == 3
+            direction = direction == CameraDirection.W
                 ? CameraDirection.N
                 : direction + 1;
         }
         else if (_rot_dest < 0)  // Rotating counter-clockwise
         {
-            direction = (int)direction == 0
+            direction = direction == CameraDirection.N
                 ? CameraDirection.W
                 : direction - 1;
         }
+
+        onDirectionChange?.Invoke(direction);
     }
 }
