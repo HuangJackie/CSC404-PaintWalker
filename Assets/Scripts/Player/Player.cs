@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private bool _hasWaitedTurn;
     private ControllerUtil _controllerUtil;
     private PaintingSystem _paintingSystem;
+    private Animator animator;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _paintingSystem = FindObjectOfType<PaintingSystem>();
         _paintingSystem.ResetSelectedObject();
+        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -74,6 +76,7 @@ public class Player : MonoBehaviour
 
         if (LevelManager.freeze_player)
         {
+            animator.SetBool("Moving", false);
             return;
         }
 
@@ -127,6 +130,7 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position && _isNotTrackingMovement)
         {
             //print("tracking starts when player starts moving");
+            animator.SetBool("Moving", true);
             _previousPosForRedo = transform.position;
             _isNotTrackingMovement = false;
             // print("trigger first");
@@ -159,6 +163,7 @@ public class Player : MonoBehaviour
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
+            animator.SetBool("Moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
