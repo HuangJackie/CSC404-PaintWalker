@@ -15,10 +15,13 @@ public class HowlingCreature : SpecialCreature
     public GameObject player;
     private ControllerUtil _controllerUtil;
     public float radius = 1.5f;
+    private AudioSource m_MyAudioSource;
+
 
     new void Start()
     {
         base.Start();
+        m_MyAudioSource = GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
         _controllerUtil = FindObjectOfType<ControllerUtil>();
     }
@@ -55,6 +58,7 @@ public class HowlingCreature : SpecialCreature
             Material,
             GameConstants.green))
         {
+            m_MyAudioSource.Play();
             originalColour = Material.color;
             paintedColour = Material.color;
             isPainted = true;
