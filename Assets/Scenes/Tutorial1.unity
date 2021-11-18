@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4702643}
   - component: {fileID: 4702645}
   - component: {fileID: 4702644}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Post_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10651,7 +10651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153990933}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignPost_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10747,7 +10747,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 162879848}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignPost_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11854,15 +11854,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7285358859888053995, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6452193879227298824, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1858300071322905210, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Name
@@ -11870,15 +11870,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324811550528994654, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6295880320740071761, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
@@ -12360,7 +12360,7 @@ GameObject:
   - component: {fileID: 429989941}
   - component: {fileID: 429989943}
   - component: {fileID: 429989942}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignLower_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12911,7 +12911,7 @@ GameObject:
   - component: {fileID: 533558597}
   - component: {fileID: 533558599}
   - component: {fileID: 533558598}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignLower_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13993,7 +13993,7 @@ GameObject:
   - component: {fileID: 639500116}
   - component: {fileID: 639500118}
   - component: {fileID: 639500117}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leaf_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14516,7 +14516,7 @@ GameObject:
   - component: {fileID: 707655014}
   - component: {fileID: 707655016}
   - component: {fileID: 707655015}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignUpper_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15468,15 +15468,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7285358859888053995, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6452193879227298824, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1858300071322905210, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Name
@@ -15484,15 +15484,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324811550528994654, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6295880320740071761, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
@@ -15636,7 +15636,7 @@ GameObject:
   - component: {fileID: 783245777}
   - component: {fileID: 783245779}
   - component: {fileID: 783245778}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignLower_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15719,7 +15719,7 @@ GameObject:
   - component: {fileID: 783961990}
   - component: {fileID: 783961989}
   - component: {fileID: 783961988}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Door
   m_TagString: HowlingCreature
   m_Icon: {fileID: 0}
@@ -15899,7 +15899,7 @@ GameObject:
   - component: {fileID: 792353725}
   - component: {fileID: 792353727}
   - component: {fileID: 792353726}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignUpper_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16283,7 +16283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 852818194}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignPost_low
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16916,7 +16916,7 @@ GameObject:
   - component: {fileID: 912467551}
   - component: {fileID: 912467553}
   - component: {fileID: 912467552}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignUpper_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17002,7 +17002,7 @@ GameObject:
   - component: {fileID: 930903453}
   - component: {fileID: 930903455}
   - component: {fileID: 930903454}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leaf_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17762,7 +17762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1072343944}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignPost_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17844,15 +17844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7285358859888053995, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6452193879227298824, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1858300071322905210, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Name
@@ -17860,15 +17860,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324811550528994654, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6295880320740071761, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
@@ -18467,7 +18467,7 @@ GameObject:
   - component: {fileID: 1228998305}
   - component: {fileID: 1228998307}
   - component: {fileID: 1228998306}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignLower_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19872,7 +19872,7 @@ GameObject:
   - component: {fileID: 1273320064}
   - component: {fileID: 1273320066}
   - component: {fileID: 1273320065}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Post_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21784,7 +21784,7 @@ GameObject:
   - component: {fileID: 1502931770}
   - component: {fileID: 1502931772}
   - component: {fileID: 1502931771}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Post_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21863,7 +21863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1508767183}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TutorialSigns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22076,7 +22076,7 @@ GameObject:
   - component: {fileID: 1540552726}
   - component: {fileID: 1540552728}
   - component: {fileID: 1540552727}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignUpper_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23631,7 +23631,7 @@ GameObject:
   - component: {fileID: 1604573539}
   - component: {fileID: 1604573537}
   - component: {fileID: 1604573538}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Walking
   m_TagString: HowlingCreature
   m_Icon: {fileID: 0}
@@ -24004,7 +24004,7 @@ GameObject:
   - component: {fileID: 1662549174}
   - component: {fileID: 1662549173}
   - component: {fileID: 1662549172}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Red
   m_TagString: HowlingCreature
   m_Icon: {fileID: 0}
@@ -24184,7 +24184,7 @@ GameObject:
   - component: {fileID: 1678096969}
   - component: {fileID: 1678096971}
   - component: {fileID: 1678096970}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leaf_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26114,7 +26114,7 @@ GameObject:
   - component: {fileID: 1830540301}
   - component: {fileID: 1830540303}
   - component: {fileID: 1830540302}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leaf_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26467,7 +26467,7 @@ GameObject:
   - component: {fileID: 1862383305}
   - component: {fileID: 1862383307}
   - component: {fileID: 1862383306}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Post_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26748,15 +26748,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7285358859888053995, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6452193879227298824, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1858300071322905210, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Name
@@ -26764,15 +26764,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324811550528994654, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6295880320740071761, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
@@ -27866,7 +27866,7 @@ GameObject:
   - component: {fileID: 2127423688}
   - component: {fileID: 2127423687}
   - component: {fileID: 2127423686}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Yellow
   m_TagString: HowlingCreature
   m_Icon: {fileID: 0}
