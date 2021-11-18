@@ -50,6 +50,7 @@ public class PaintOrb : Interactable, TooltipObject
             mesh.material.color = newColor;
         }
         ObjectStorage.paintOrbStorage.Add(this.gameObject);
+        ReinitializeMaterialColours();
     }
 
     

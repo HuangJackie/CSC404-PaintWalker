@@ -26,7 +26,7 @@ public class UpdateUI : MonoBehaviour
     private PaintNeededText infoText;
     private bool _alreadyOverriden;
 
-    private void Awake()
+    private void Start()
     {
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();

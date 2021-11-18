@@ -18,20 +18,27 @@ public class PauseMenu : MonoBehaviour
     private ControllerUtil _controllerUtil;
     private Button[] _menuOptions;
     private int _selectedMenuOption;
-    private const int TotalNumberOfMenuOptions = 3;
+    private const int TotalNumberOfMenuOptions = 5;
 
     public GameObject resume;
     public GameObject menu;
     public GameObject control;
+    public GameObject loadCheckpoint;
+    public GameObject restart;
+
+    private LevelManager _levelManager;
 
     private void Start()
     {
+        _levelManager = FindObjectOfType<LevelManager>();
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _menuOptions = new Button[TotalNumberOfMenuOptions];
 
         _menuOptions[0] = resume.GetComponentInChildren<Button>();
-        _menuOptions[1] = menu.GetComponentInChildren<Button>();
-        _menuOptions[2] = control.GetComponentInChildren<Button>();
+        _menuOptions[1] = control.GetComponentInChildren<Button>();
+        _menuOptions[2] = menu.GetComponentInChildren<Button>();
+        _menuOptions[3] = loadCheckpoint.GetComponentInChildren<Button>();
+        _menuOptions[4] = restart.GetComponentInChildren<Button>();
         _selectedMenuOption = 0;
     }
 
@@ -71,7 +78,6 @@ public class PauseMenu : MonoBehaviour
             
             if (_controllerUtil.GetGameMenuSelectAxis(out int select))
             {
-                select = -select;
                 _menuOptions[_selectedMenuOption].OnPointerExit(null);
                 if (select > 0)
                 {
@@ -84,6 +90,16 @@ public class PauseMenu : MonoBehaviour
 
                 _menuOptions[_selectedMenuOption].OnPointerEnter(null);
             }
+        }
+
+        ListenForLoadCheckpoint();
+    }
+
+    private void ListenForLoadCheckpoint()
+    {
+        if (_controllerUtil.loadCheckpointPressed())
+        {
+            _levelManager.RestartAtLastCheckpoint();
         }
     }
 
@@ -138,5 +154,17 @@ public class PauseMenu : MonoBehaviour
     {
         // Time.timeScale = 1f;
         SceneLoader.LoadMainMenu();
+    }
+
+    public void LoadCheckpoint()
+    {
+        _levelManager.RestartAtLastCheckpoint();
+        Resume();
+    }
+    
+    public void Restart()
+    {
+        RestartFunction.Restart();
+        Resume();
     }
 }
