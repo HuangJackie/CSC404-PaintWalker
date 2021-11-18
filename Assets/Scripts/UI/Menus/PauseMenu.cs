@@ -154,6 +154,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Time.timeScale = 1f;
         SceneLoader.LoadMainMenu();
+        Resume();
     }
 
     public void LoadCheckpoint()

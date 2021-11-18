@@ -45,7 +45,7 @@ public class DisplayCheckpointHint : MonoBehaviour
             _lastTimeButtonPressed = Time.time;
         }
 
-        if (Time.time - _lastTimeButtonPressed > 5 || Time.time < 5)
+        if ((Time.time - _lastTimeButtonPressed > 5 || Time.time < 5))
         {
             _showHint = true;
         }
