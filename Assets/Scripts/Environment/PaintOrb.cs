@@ -13,6 +13,7 @@ public class PaintOrb : Interactable, TooltipObject
     private Light lightSettings;
     private Renderer[] meshRenderers;
     private UpdateUI _updateUI;
+    
 
     private new void Start()
     {
@@ -51,17 +52,13 @@ public class PaintOrb : Interactable, TooltipObject
         ObjectStorage.paintOrbStorage.Add(this.gameObject);
     }
 
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             manager.IncreasePaint(color, paintReplenished);
             gameObject.SetActive(false);
-            MoveRedo lastCommand = manager.redoCommandHandler.LatestCommand() as MoveRedo;
-            if (lastCommand)
-            {
-                lastCommand.InjectPaintPickup(this.gameObject);
-            }
         }
     }
 
