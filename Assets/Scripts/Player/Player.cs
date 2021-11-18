@@ -142,15 +142,21 @@ public class Player : MonoBehaviour
 
     private void RigidGridMove()
     {
-        if (_targetLocation != transform.position && _isNotTrackingMovement)
+        if (_targetLocation != transform.position)
         {
             animator.SetBool("Moving", true);
-            _previousPosForRedo = transform.position;
-            _isNotTrackingMovement = false;
+            if (_isNotTrackingMovement)
+            {
+                _previousPosForRedo = transform.position;
+                _isNotTrackingMovement = false;
+            }
         }
 
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
+            if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
+                animator.SetBool("Moving", false);
+                print("stopped moving");
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
@@ -167,10 +173,15 @@ public class Player : MonoBehaviour
             transform.position, _targetLocation, speed * Time.deltaTime
         );
 
+        if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
+        {
+            animator.SetBool("Moving", true);
+        }
+
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
-            animator.SetBool("Moving", false);
+            //animator.SetBool("Moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
@@ -238,6 +249,7 @@ public class Player : MonoBehaviour
         if (!ValidMove(pressedDirection, currentTransformPosition))
         {
             print("Invalid Player move");
+            animator.SetBool("Moving", false);
             return;
         }
 

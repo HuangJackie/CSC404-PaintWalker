@@ -48,6 +48,7 @@ public class Ground : Interactable, Paintable
     public GameObject green_model;
     public GameObject red_model;
     public GameObject base_model;
+    private GameObject _cur_model;
     
     private SoundManager _yellowSoundManager = new SoundManager();
     private SoundManager _redSoundManager = new SoundManager();
@@ -67,6 +68,7 @@ public class Ground : Interactable, Paintable
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
         _playerYPosition = player.transform.position.y;
+        _cur_model = base_model;
 
         _isMouseOver = false;
 
@@ -237,6 +239,9 @@ public class Ground : Interactable, Paintable
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     transform.position = destination;
+                    _destinationDrop = transform.position + new Vector3(0, -1, 0);
+                    _destinationNeutral = transform.position;
+                    _destinationRaise = transform.position - new Vector3(0, -1, 0);
                     //print("reached effect dest");
                     if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
                     {
@@ -429,6 +434,7 @@ public class Ground : Interactable, Paintable
                 {
                     base_model.SetActive(false);
                     red_model.SetActive(true);
+                    _cur_model = red_model;
                     if (NoBlockBelow()) {
                         _redSoundManager.PlayRandom();
                     Debug.Log("red effect triggered");
@@ -458,6 +464,7 @@ public class Ground : Interactable, Paintable
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
                     green_model.SetActive(true);
+                    _cur_model = green_model;
                 }
 
                 break;
@@ -470,6 +477,7 @@ public class Ground : Interactable, Paintable
                 {
                     base_model.SetActive(false);
                     yellow_model.SetActive(true);
+                    _cur_model = yellow_model;
                     if (NoUnmovableBlockAbove()){
                         _yellowSoundManager.PlayRandom();
                         Debug.Log("yellow effect triggered");
@@ -502,6 +510,7 @@ public class Ground : Interactable, Paintable
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
+                    _cur_model = blue_model;
                 }
 
                 break;
@@ -525,64 +534,6 @@ public class Ground : Interactable, Paintable
     private void RevertEffect(Color colorToRevert, String newColor)
     {
         GameObject new_model;
-        
-        if (colorToRevert == GameConstants.red && newColor != "Blue")
-        {
-            if (NoUnmovableBlockAbove() && _destinationNeutral != transform.position)
-            {
-                //print("top empty");
-                _levelManager.EnqueueAction(
-                    () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
-            }
-            else if (_destinationNeutral != transform.position)
-            {
-                //print("top not empty, setting new destinations");
-                _destinationNeutral = transform.position;
-                _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
-                _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
-            }
-
-            Debug.Log("reverting red");
-            red_model.SetActive(false);
-        }
-        else if (colorToRevert == GameConstants.green)
-        {
-            // Does nothing for now. Staying here in case we implement erase in the future.
-            _destinationNeutral = transform.position;
-            _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
-            _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
-            green_model.SetActive(false);
-            Debug.Log("reverting green");
-        }
-        else if (colorToRevert == GameConstants.yellow && newColor != "Blue")
-        {
-            if (NoBlockBelow() && _destinationNeutral != transform.position)
-            {
-                print("bottom empty");
-                _levelManager.EnqueueAction(
-                    () => { return RaiseLowerRedYellowBlockToDestination(_destinationNeutral, true); });
-            }
-            else if (_destinationNeutral != transform.position)
-            {
-                // print("bottom not empty, setting new destinations");
-                _destinationNeutral = transform.position;
-                _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
-                _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
-            }
-            yellow_model.SetActive(false);
-            Debug.Log("reverting yellow");
-        }
-        else if (colorToRevert == GameConstants.blue)
-        {
-            //Make the block not pushable.
-            blue_model.SetActive(false);
-            Debug.Log("reverting blue");
-            gameObject.layer = LayerMask.NameToLayer("Default");
-            _destinationNeutral = transform.position;
-            _destinationDrop = _destinationNeutral + new Vector3(0, -1, 0);
-            _destinationRaise = _destinationNeutral - new Vector3(0, -1, 0);
-            _isIceBlockEffectEnabled = false;
-        }
 
         switch (newColor)
         {
@@ -602,6 +553,7 @@ public class Ground : Interactable, Paintable
                 new_model = base_model;
                 break;
         }
+        _cur_model.SetActive(false);
         new_model.SetActive(true);
     }
 
