@@ -15,6 +15,16 @@ namespace DefaultNamespace
             _lastTimeButtonPressed = Time.time;
         }
 
+        public bool PressedMovementKeys()
+        {
+            return Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
+        }
+        
+        public bool PressedPaintKeys()
+        {
+            return GetPaintButtonDown() || GetColourWheelPressed();
+        }
+
         public float GetHorizontalAxisRaw()
         {
             if (GetColourWheelPressed() || _isMenuOpen)
@@ -201,12 +211,12 @@ namespace DefaultNamespace
             if (Input.GetAxis("GameMenuDPadSelectAxis") != 0)
             {
                 axis = Input.GetAxis("GameMenuDPadSelectAxis") > 0 ? -1 : 1;
-            } 
+            }
             else if (Input.GetAxis("GameMenuSelectAxis") != 0)
             {
                 axis = Input.GetAxis("GameMenuSelectAxis") > 0 ? 1 : -1;
             }
-            
+
             return axis != 0 && FinishedMovementDelay(axis);
         }
 
@@ -222,7 +232,7 @@ namespace DefaultNamespace
             {
                 return false;
             }
-            
+
             return Input.GetButtonDown("SwitchGreen");
         }
 
@@ -232,7 +242,7 @@ namespace DefaultNamespace
             {
                 return false;
             }
-            
+
             return Input.GetButtonDown("SwitchYellow");
         }
 
@@ -242,7 +252,7 @@ namespace DefaultNamespace
             {
                 return false;
             }
-            
+
             return Input.GetButtonDown("SwitchRed");
         }
 
@@ -252,8 +262,18 @@ namespace DefaultNamespace
             {
                 return false;
             }
-            
+
             return Input.GetButtonDown("SwitchBlue");
+        }
+
+        public bool loadCheckpointPressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+
+            return Input.GetButtonDown("LoadCheckpoint");
         }
     }
 }

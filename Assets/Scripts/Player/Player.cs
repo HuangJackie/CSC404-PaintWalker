@@ -100,10 +100,9 @@ public class Player : MonoBehaviour
 
         _horizontalMovement = _controllerUtil.GetHorizontalAxisRaw();
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
-
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
-
+        
         if (this.CheckGrounded())
         {
             _targetLocation.y = transform.position.y;
@@ -252,7 +251,7 @@ public class Player : MonoBehaviour
             animator.SetBool("Moving", false);
             return;
         }
-
+        
         switch (pressedDirection)
         {
             case PlayerDirection.Forward:
