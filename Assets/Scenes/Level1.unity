@@ -5957,7 +5957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372977632}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignPost_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5998,7 +5998,7 @@ GameObject:
   - component: {fileID: 396964831}
   - component: {fileID: 396964833}
   - component: {fileID: 396964832}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leaf_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9716,7 +9716,7 @@ GameObject:
   - component: {fileID: 879542940}
   - component: {fileID: 879542942}
   - component: {fileID: 879542941}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignUpper_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15709,7 +15709,7 @@ GameObject:
   - component: {fileID: 1083210925}
   - component: {fileID: 1083210927}
   - component: {fileID: 1083210926}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SignLower_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18695,7 +18695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1508767183}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TutorialSigns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21506,7 +21506,7 @@ GameObject:
   - component: {fileID: 1717890757}
   - component: {fileID: 1717890756}
   - component: {fileID: 1717890755}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ulala
   m_TagString: HowlingCreature
   m_Icon: {fileID: 0}
@@ -22590,15 +22590,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7285358859888053995, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6452193879227298824, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1858300071322905210, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Name
@@ -22606,15 +22606,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324811550528994654, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6295880320740071761, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79354ab7a1f47ee47bfe2c70f5be964d, type: 3}
@@ -25133,7 +25133,7 @@ GameObject:
   - component: {fileID: 2145384543}
   - component: {fileID: 2145384545}
   - component: {fileID: 2145384544}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Post_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
