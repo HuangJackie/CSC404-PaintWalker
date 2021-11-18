@@ -7,7 +7,6 @@ public class PaintLeftBar : MonoBehaviour
 {
     private Slider slider;
     private Image fill;
-    private LevelManager _levelManager;
 
     private void Awake()
     {
@@ -15,14 +14,8 @@ public class PaintLeftBar : MonoBehaviour
         fill =  transform.Find("Fill").gameObject.GetComponent<Image>();
     }
 
-    private void Start()
-    {
-        _levelManager = FindObjectOfType<LevelManager>();
-    }
-
     public void SetPaint(int paintLeft)
     {
-        //print("set paint to" + paintLeft.ToString());
         slider.value = paintLeft;
     }
 
@@ -38,9 +31,4 @@ public class PaintLeftBar : MonoBehaviour
         }
         fill.color = paintColor;
     }
-
-    //public void IncreaseMax(string color)
-    //{
-    //    slider.maxValue = _levelManager.GetPaintQuantity();
-    //}
 }
