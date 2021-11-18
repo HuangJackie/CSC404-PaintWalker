@@ -85,11 +85,6 @@ namespace DefaultNamespace
                     ? -1
                     : 0);
 
-            if (isoCamera.isIntervteredControl)
-            {
-                axis = -axis;
-            }
-
             return FinishedMovementDelay(axis);
         }
 
@@ -106,11 +101,6 @@ namespace DefaultNamespace
                 : (Input.GetAxisRaw("ZAxisPaintSelect") < 0
                     ? -1
                     : 0);
-
-            if (isoCamera.isIntervteredControl)
-            {
-                axis = -axis;
-            }
 
             return FinishedMovementDelay(axis);
         }
