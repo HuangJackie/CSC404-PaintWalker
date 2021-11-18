@@ -45,13 +45,15 @@ public class UpdateUI : MonoBehaviour
         redDotText = FindObjectOfType<RedDotText>();
         blueDotText = FindObjectOfType<BlueDotText>();
         greenDotText = FindObjectOfType<GreenDotText>();
+    }
 
+    private void Start()
+    {
         ChangePaint(GameConstants.YELLOW_PAINT, 3);
     }
 
     private void Update()
     {
-        
         if (_isCrosshairActive)
         {
             Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
