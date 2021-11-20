@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332064197}
-  m_LocalRotation: {x: -0.81448776, y: 0.019079195, z: -0.24690382, w: 0.52467537}
-  m_LocalPosition: {x: 0.2, y: 0.169, z: -0.123}
+  m_LocalRotation: {x: -0.6116536, y: -0.13960388, z: -0.2831646, w: 0.72540224}
+  m_LocalPosition: {x: -0.383, y: 1.217, z: 0.186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 517045653153361257}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -57.7, y: -232.2, z: 212.89}
+  m_LocalEulerAnglesHint: {x: -75.117, y: -325.938, z: 290.844}
 --- !u!198 &1332064200
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 1
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -606,7 +606,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -660,8 +660,8 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 8
-    angle: 0
-    length: 1
+    angle: 17.3
+    length: 0.27
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4829,7 +4829,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442944298}
   m_LocalRotation: {x: 0.0065088724, y: 0.011273359, z: -0.024303962, w: 0.9996199}
-  m_LocalPosition: {x: 0.029, y: -0.046, z: -0.071}
+  m_LocalPosition: {x: -0.238, y: 0.5, z: 0.634}
   m_LocalScale: {x: 1.7137, y: 1.7137, z: 1.7137}
   m_Children: []
   m_Father: {fileID: 517045653153361257}
@@ -4847,16 +4847,16 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8207547, g: 0.6990995, b: 0.43747774, a: 1}
-  m_Intensity: 0.9
-  m_Range: 0.23
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 4.7
+  m_Range: 2
+  m_SpotAngle: 49
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.691
+    m_Strength: 0.269
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -4892,7 +4892,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 7.7e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
