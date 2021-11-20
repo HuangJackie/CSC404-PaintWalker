@@ -1,11 +1,13 @@
 ﻿using System;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class PaintingSystem : MonoBehaviour
 {
     private Player _player;
     private ControllerUtil _controllerUtil;
+    private ChangePerspective _isoCamera;
 
     private Collider _groundBlockBelowPlayer;
     private Collider _currentlySelectedToPaint;
@@ -34,6 +36,7 @@ public class PaintingSystem : MonoBehaviour
         
         _player = FindObjectOfType<Player>();
         _controllerUtil = FindObjectOfType<ControllerUtil>();
+        _isoCamera = FindObjectOfType<ChangePerspective>();
 
         UpdateGroundBlockBelowPlayer();
         SetCurrentlySelectedObject(_groundBlockBelowPlayer, Vector2.zero);
@@ -95,15 +98,59 @@ public class PaintingSystem : MonoBehaviour
             return;
         }
 
-        if (_controllerUtil.GetXAxisPaintSelectAxis(out int xSelect)
-            && IsWithinRange(_selectedCoordinatesRelToPlayer.x + xSelect, 2))
+        bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out int xSelect);
+        bool zAxisActive = _controllerUtil.GetZAxisPaintSelectAxis(out int zSelect);
+
+        // Move painting selection indicator based on the direction
+        // the ISO camera is facing
+        if (xAxisActive || zAxisActive)
         {
-            BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.right : Vector3.left, 1);
-        }
-        else if (_controllerUtil.GetZAxisPaintSelectAxis(out int zSelect)
-                 && IsWithinRange(_selectedCoordinatesRelToPlayer.y + zSelect, 2))
-        {
-            BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.forward : Vector3.back, 1);
+            switch (_isoCamera.direction)
+            {
+                case CameraDirection.N:
+                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.x + xSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.right : Vector3.left, 1);
+                    }
+                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.y + zSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.forward : Vector3.back, 1);
+                    }
+                    break;
+
+                case CameraDirection.E:
+                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.y - xSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.back : Vector3.forward, 1);
+                    }
+                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.x + zSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.right : Vector3.left, 1);
+                    }
+                    break;
+
+                case CameraDirection.S:
+                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.x - xSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.left : Vector3.right, 1);
+                    }
+                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.y - zSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.back : Vector3.forward, 1);
+                    }
+                    break;
+
+                case CameraDirection.W:
+                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.y + xSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.forward : Vector3.back, 1);
+                    }
+                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.x - zSelect, 2))
+                    {
+                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.left : Vector3.right, 1);
+                    }
+                    break;
+            }
         }
     }
 

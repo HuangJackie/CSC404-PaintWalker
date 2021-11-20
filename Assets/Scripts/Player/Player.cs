@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class Player : MonoBehaviour
 {
@@ -39,7 +40,21 @@ public class Player : MonoBehaviour
     private PaintingSystem _paintingSystem;
     private Animator animator;
 
-    void Start()
+    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
+
+    private void Awake()
+    {
+        cameraToPlayerDir = new Dictionary<CameraDirection, PlayerDirection>()
+        {
+            {CameraDirection.None, PlayerDirection.None},
+            {CameraDirection.N, PlayerDirection.Forward},
+            {CameraDirection.E, PlayerDirection.Right},
+            {CameraDirection.S, PlayerDirection.Backward},
+            {CameraDirection.W, PlayerDirection.Left}
+        };
+    }
+
+    private void Start()
     {
         resetMode = false;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -85,10 +100,9 @@ public class Player : MonoBehaviour
 
         _horizontalMovement = _controllerUtil.GetHorizontalAxisRaw();
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
-
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
-
+        
         if (this.CheckGrounded())
         {
             _targetLocation.y = transform.position.y;
@@ -127,24 +141,27 @@ public class Player : MonoBehaviour
 
     private void RigidGridMove()
     {
-        if (_targetLocation != transform.position && _isNotTrackingMovement)
+        if (_targetLocation != transform.position)
         {
-            //print("tracking starts when player starts moving");
             animator.SetBool("Moving", true);
-            _previousPosForRedo = transform.position;
-            _isNotTrackingMovement = false;
-            // print("trigger first");
+            if (_isNotTrackingMovement)
+            {
+                _previousPosForRedo = transform.position;
+                _isNotTrackingMovement = false;
+            }
         }
 
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
+            if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
+                animator.SetBool("Moving", false);
+                print("stopped moving");
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
-            //print("tracking ends when player reaches dest");
             
             // To reset the selected object to the block under the player. If removing the redo code above,
             // leave this line here.
@@ -155,10 +172,15 @@ public class Player : MonoBehaviour
             transform.position, _targetLocation, speed * Time.deltaTime
         );
 
+        if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
+        {
+            animator.SetBool("Moving", true);
+        }
+
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
-            animator.SetBool("Moving", false);
+            //animator.SetBool("Moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
@@ -175,13 +197,26 @@ public class Player : MonoBehaviour
             _moveDirection = new Vector3(_horizontalMovement, 0f, _verticalMovement);
             _previsouRotationForRedo = transform.rotation;
             _isRotating = true;
-            //print("recording");
-            //transform.rotation = Quaternion.Slerp(
-            //    transform.rotation, Quaternion.LookRotation(_moveDirection), 0.5f
-            //);
         }
 
-        Vector3 lookDirection = isoCamera.isIntervteredControl ? -_moveDirection : _moveDirection;
+        // Set direction of player character
+        Vector3 lookDirection = _moveDirection;
+        switch (isoCamera.direction)
+        {
+            case CameraDirection.N:
+                // Already set to _moveDirection, so break
+                break;
+            case CameraDirection.E:
+                lookDirection = new Vector3(_moveDirection.z, _moveDirection.y, -_moveDirection.x);
+                break;
+            case CameraDirection.S:
+                lookDirection = -_moveDirection;
+                break;
+            case CameraDirection.W:
+                lookDirection = new Vector3(-_moveDirection.z, _moveDirection.y, _moveDirection.x);
+                break;
+        }
+
         if (lookDirection != Vector3.zero && _isRotating)
         {
             transform.rotation = Quaternion.Slerp(
@@ -204,75 +239,70 @@ public class Player : MonoBehaviour
 
     private void SetNewTargetLocation(Vector3 currentTransformPosition)
     {
-        string pressedButton = GetCurrentlyPressedDirection();
-
-        if (pressedButton == "")
+        PlayerDirection pressedDirection = GetCurrentlyPressedDirection();
+        if (pressedDirection == PlayerDirection.None)
         {
             return;
         }
 
-        if (!ValidMove(pressedButton, currentTransformPosition))
+        if (!ValidMove(pressedDirection, currentTransformPosition))
         {
-            print("not valid");
+            print("Invalid Player move");
+            animator.SetBool("Moving", false);
             return;
         }
-
-        switch (pressedButton)
+        
+        switch (pressedDirection)
         {
-            case "Up":
+            case PlayerDirection.Forward:
                 _targetLocation = currentTransformPosition + new Vector3(0, 0, 1);
                 break;
-            case "Down":
+            case PlayerDirection.Backward:
                 _targetLocation = currentTransformPosition + new Vector3(0, 0, -1);
                 break;
-            case "Left":
+            case PlayerDirection.Left:
                 _targetLocation = currentTransformPosition + new Vector3(-1, 0, 0);
                 break;
-            case "Right":
+            case PlayerDirection.Right:
                 _targetLocation = currentTransformPosition + new Vector3(1, 0, 0);
                 break;
         }
     }
 
-    private bool ValidMove(string pressedButton, Vector3 currentTransformPosition)
+    private bool ValidMove(PlayerDirection pressedDirection, Vector3 currentTransformPosition)
     {
         RaycastHit hitInfo;
         RaycastHit ground_hitInfo;
         LayerMask mask = LayerMask.GetMask("Default") | LayerMask.GetMask("IceCube");
 
-        switch (pressedButton)
+        switch (pressedDirection)
         {
-            case "Up":
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1), Vector3.down, out hitInfo, 1,
-                    mask))
+            case PlayerDirection.Forward:
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1),
+                                    Vector3.down, out hitInfo, 1, mask))
                 {
-                    //Debug.Log("Up bottom is empty");
                     return false;
                 }
 
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
-                    _capsuleCollider.height, mask))
+                                    _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("Up top is not empty");
                     return noObstructionAhead(hitInfo);
                 }
 
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, -_capsuleCollider.height / 2, 1), Vector3.up, out hitInfo,
-                    _capsuleCollider.height, mask))
+                                    _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("just up is not empty");
                     return false;
                 }
-
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
-            case "Down":
+            case PlayerDirection.Backward:
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
                 {
-                    //Debug.Log("down bottom is empty");
                     return false;
                 }
 
@@ -281,7 +311,6 @@ public class Player : MonoBehaviour
                                     new Vector3(0, _capsuleCollider.height / 2, -1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("down top is not empty");
                     return noObstructionAhead(hitInfo);
                 }
 
@@ -289,17 +318,13 @@ public class Player : MonoBehaviour
                                     new Vector3(0, -_capsuleCollider.height / 2, -1), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("just bottom is not empty");
                     return false;
                 }
-
-
                 return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
 
-            case "Left":
+            case PlayerDirection.Left:
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
-                    //Debug.Log("left bottom is empty ");
                     return false;
                 }
 
@@ -308,7 +333,6 @@ public class Player : MonoBehaviour
                                     new Vector3(-1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("left top is not empty");
                     return noObstructionAhead(hitInfo);
                 }
 
@@ -316,17 +340,13 @@ public class Player : MonoBehaviour
                                     new Vector3(-1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("Just left is not empty");
                     return false;
                 }
-
-
                 return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
 
-            case "Right":
+            case PlayerDirection.Right:
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
                 {
-                    //Debug.Log("right bottom is empty");
                     return false;
                 }
 
@@ -335,7 +355,6 @@ public class Player : MonoBehaviour
                                     new Vector3(1, _capsuleCollider.height / 2, 0), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("right top is not empty");
                     return noObstructionAhead(hitInfo);
                 }
 
@@ -343,10 +362,8 @@ public class Player : MonoBehaviour
                                     new Vector3(1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    //Debug.Log("Just right is not empty");
                     return false;
                 }
-
                 return ValidateFloorMove(ground_hitInfo, Vector3.right, mask);
         }
 
@@ -356,9 +373,8 @@ public class Player : MonoBehaviour
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)
     {
         //Debug.DrawRay(transform.position, Vector3.Normalize(direction), Color.black, 120f);
-        if (Physics.Raycast(transform.position, direction, out var hit, 1f)
-            && (!IsBlockInFrontPushable(hit) || IsObjectInFrontSpecialCreature(hit))
-        )
+        if (Physics.Raycast(transform.position, direction, out var hit, 1f) &&
+            (!IsBlockInFrontPushable(hit) || IsObjectInFrontSpecialCreature(hit)))
         {
             return false;
         }
@@ -406,29 +422,49 @@ public class Player : MonoBehaviour
                        ground.CanIceBlockSlide(gameObject))); // There is an ice block that can be moved.
     }
 
-    private string GetCurrentlyPressedDirection()
+    private PlayerDirection GetCurrentlyPressedDirection()
     {
-        if (_verticalMovement > 0)
+        // Get the current camera direction as N,E,S or W/
+        // This will be the forward direction for player
+        CameraDirection camForwardDir = isoCamera.direction;
+
+        if (_verticalMovement > 0) // Forward
         {
-            return isoCamera.isIntervteredControl ? "Down" : "Up";
+            return GetCameraToPlayerDir(camForwardDir, 0);
+        }
+        else if (_verticalMovement < 0) // Backward
+        {
+            return GetCameraToPlayerDir(camForwardDir, 2);
+        }
+        else if (_horizontalMovement < 0) // Left
+        {
+            return GetCameraToPlayerDir(camForwardDir, 3);
+        }
+        else if (_horizontalMovement > 0) // Right
+        {
+            return GetCameraToPlayerDir(camForwardDir, 1);
         }
 
-        if (_verticalMovement < 0)
-        {
-            return isoCamera.isIntervteredControl ? "Up" : "Down";
-        }
+        return PlayerDirection.None;
+    }
 
-        if (_horizontalMovement < 0)
-        {
-            return isoCamera.isIntervteredControl ? "Right" : "Left";
-        }
+    // Return the value corresponding to cameraToPlayerDir[camDir + offset]
+    // while ensuring the index is not out-of-bounds
+    // offset - Must be a positive integer < 4
+    private PlayerDirection GetCameraToPlayerDir(CameraDirection camDir, int offset)
+    {
+        int camDirInt = (int) camDir;
 
-        if (_horizontalMovement > 0)
+        if (camDirInt + offset > 4)
         {
-            return isoCamera.isIntervteredControl ? "Left" : "Right";
+            int cycleCompletionAmount = 4 - camDirInt;
+            int newOffset = offset - cycleCompletionAmount;
+            return cameraToPlayerDir[(CameraDirection) newOffset];
         }
-
-        return "";
+        else
+        {
+            return cameraToPlayerDir[(CameraDirection) (camDirInt + offset)];
+        }
     }
 
     public double GetYLevel()

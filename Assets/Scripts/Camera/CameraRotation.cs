@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class CameraRotation : MonoBehaviour
 {
@@ -71,17 +72,36 @@ public class CameraRotation : MonoBehaviour
             }
             else if ((Input.GetMouseButton(2)))
             {
-                //Note: because panning is detected alongside clicking thus causes jittering when reset, 
-                //      I changed the panning to a separate button as this will reflect our final product
-                // remove this comment once controller support is realized
                 LevelManager.SetIsPanning(true);
                 _wasPanning = true;
                 _panningPos = transform.parent.parent.position;
                 Vector3 distanceMoved = Input.mousePosition - _initialClickPosition;
-                Vector3 rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
-                Vector3 upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
-                rightMovement = isoCamera.isIntervteredControl ? -rightMovement : rightMovement;
-                upMovement = isoCamera.isIntervteredControl ? -upMovement : upMovement;
+
+                Vector3 rightMovement = Vector3.zero;
+                Vector3 upMovement = Vector3.zero;
+                switch (isoCamera.direction)
+                {
+                    case CameraDirection.N:
+                        rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
+                        upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
+                        break;
+                    case CameraDirection.E:
+                        rightMovement = right * speed * Time.deltaTime * -distanceMoved.y;
+                        upMovement = forward * speed * Time.deltaTime * distanceMoved.x;
+                        break;
+                    case CameraDirection.S:
+                        rightMovement = right * speed * Time.deltaTime * distanceMoved.x;
+                        upMovement = forward * speed * Time.deltaTime * distanceMoved.y;
+                        break;
+                    case CameraDirection.W:
+                        rightMovement = right * speed * Time.deltaTime * distanceMoved.y;
+                        upMovement = forward * speed * Time.deltaTime * -distanceMoved.x;
+                        break;
+                    default:  // Same as CameraDirection.N
+                        rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
+                        upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
+                        break;
+                }
 
                 transform.transform.parent.parent.position += rightMovement;
                 transform.transform.parent.parent.position += upMovement;
