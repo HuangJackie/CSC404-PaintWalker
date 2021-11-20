@@ -18523,7 +18523,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: NaN, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -18630,6 +18630,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704174258}
     m_Modifications:
+    - target: {fileID: 1332064198, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442944300, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651822280, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652518818, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836724266, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2807936401866356, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -20949,7 +20969,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.754717, g: 0.6410579, b: 0.33107865, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
