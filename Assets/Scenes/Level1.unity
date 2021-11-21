@@ -16688,6 +16688,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1510057400}
     - target: {fileID: 4180352918738585245, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: new_model
+      value: 
+      objectReference: {fileID: 516591517}
+    - target: {fileID: 4180352918738585245, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+      propertyPath: old_model
+      value: 
+      objectReference: {fileID: 1731167828}
+    - target: {fileID: 4180352918738585245, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
       propertyPath: LevelManager
       value: 
       objectReference: {fileID: 1704174257}
@@ -17592,7 +17600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev_mode: 0
+  dev_mode: 1
   freeze_player: 0
   player_script: {fileID: 0}
   player: {fileID: 0}
@@ -18149,6 +18157,11 @@ PrefabInstance:
 --- !u!4 &1725125451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3695935944820494820, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
+  m_PrefabInstance: {fileID: 1651315261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731167828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3945981227553846867, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
   m_PrefabInstance: {fileID: 1651315261}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1734405301

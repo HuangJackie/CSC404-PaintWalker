@@ -338,6 +338,7 @@ public class Ground : Interactable, Paintable
 
         if (shouldMoveIceBlock)
         {
+            _player.animation_update("push", true);
             _pushIceBlockSoundManager.PlayRandom();
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
@@ -352,6 +353,7 @@ public class Ground : Interactable, Paintable
                 }
 
                 _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(true); });
+                _player.animation_update("push", false);
                 // _isMovingBlock = true;
             }
         }
