@@ -16,7 +16,7 @@ public class PaintBucketIcon : MonoBehaviour
     // For changing/restoring icon sizes
     private Vector2 originalSize;
     private Vector2 currSelectionSize;
-    private float selectionGrowFactor = 1.5f;
+    private float selectionGrowFactor = 1.3f;
 
     // For changing/restoring icon positions
     private Vector2 originalPos;
@@ -26,7 +26,7 @@ public class PaintBucketIcon : MonoBehaviour
     {
         currSelection = null;
         originalPos = Vector2.zero;
-        selectionPosOffset = new Vector3(-25f, 25f, 0f);
+        selectionPosOffset = new Vector3(-15f, 15f, 0f);
 
         originalSize = yellowPaintBucket.rectTransform.sizeDelta;
         currSelectionSize = originalSize * selectionGrowFactor;
@@ -101,7 +101,7 @@ public class PaintBucketIcon : MonoBehaviour
     private void SetAlpha(Image icon, bool selected)
     {
         Color newColor = icon.color;
-        newColor.a = selected ? 1f : 0.65f;
+        newColor.a = selected ? 1f : 0.85f;
         icon.color = newColor;
     }
 

@@ -19922,26 +19922,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4630231335841536327, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4630231335841536345, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1704174256}
-    - target: {fileID: 4630231335841536345, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Restart
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630231335913717551, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630231335976129929, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -8.238525
-      objectReference: {fileID: 0}
     - target: {fileID: 4630231336095935056, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -20028,10 +20012,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4630231336095935063, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630231336181251400, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
