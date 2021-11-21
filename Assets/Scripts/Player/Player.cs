@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
         LevelManager.redoCommandHandler.AddCommand(GameState);
         LevelManager.redoCommandHandler.TransitionToNewGameState();
     }
-
+    
     private void RigidGridMove()
     {
         if (_targetLocation != transform.position)
