@@ -8500,6 +8500,7 @@ GameObject:
   - component: {fileID: 4630231335252004187}
   - component: {fileID: 4630231335252004184}
   - component: {fileID: 4630231335252004185}
+  - component: {fileID: 8526060814691407501}
   m_Layer: 5
   m_Name: PaintLeftText
   m_TagString: Untagged
@@ -8592,7 +8593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.5254902}
+  m_EffectColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.27058825}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!1 &4630231335804107635
