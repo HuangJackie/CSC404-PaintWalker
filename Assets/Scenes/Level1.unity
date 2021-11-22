@@ -23674,11 +23674,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 517045653153361257, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
   m_PrefabInstance: {fileID: 1925696720}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1925696724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7306833419742903866, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
-  m_PrefabInstance: {fileID: 1925696720}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1925696725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3695935944820494820, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
@@ -23687,11 +23682,6 @@ Transform:
 --- !u!4 &1925696726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7702750902835937752, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
-  m_PrefabInstance: {fileID: 1925696720}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1925696727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 346191250090115882, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
   m_PrefabInstance: {fileID: 1925696720}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1925696728 stripped
@@ -23705,32 +23695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1925696729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925696724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9458ca32989486e46abec311a1306f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottlePaint: {fileID: 2100000, guid: 012cf5822cbb8584886246026e542851, type: 2}
---- !u!114 &1925696730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925696727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5ac1f6273f24a4d856e1746f81032f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brushTip: {fileID: 2100000, guid: 777ec8c306d4849449c3631d44e1fa03, type: 2}
 --- !u!1001 &1956516994
 PrefabInstance:
   m_ObjectHideFlags: 0
