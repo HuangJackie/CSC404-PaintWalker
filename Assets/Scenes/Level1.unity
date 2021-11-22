@@ -23958,7 +23958,7 @@ PrefabInstance:
     - target: {fileID: 2039017950, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 222737430}
+      objectReference: {fileID: 0}
     - target: {fileID: 2039017950, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: manager
       value: 
