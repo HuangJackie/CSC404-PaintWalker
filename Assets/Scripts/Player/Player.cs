@@ -13,22 +13,36 @@ public class Player : MonoBehaviour
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
+    public Transform cameraWorldAxis;
+    public CameraRotation cameraPanningRevertTarget;
     public MoveRedo GameState;
+    public GameObject _colorWheelHUD;
+
+    private UpdateUI _updateUI;
+    private Animator animator;
+    private ControllerUtil _controllerUtil;
+    private PaintingSystem _paintingSystem;
+
+    public bool resetMode;
+    private bool _hasWaitedTurn;
+
+    // For basic movement
+    private Rigidbody _rigidbody;
+    private CapsuleCollider _capsuleCollider;
+    private Vector3 _previousPosForRedo;
+    private Quaternion _previsouRotationForRedo;
 
     private float _horizontalMovement;
     private float _verticalMovement;
+    public float speed;
+
     private bool _isNotTrackingMovement;
     private bool _isHorizontalMovementPressed;
     private bool _isVerticalMovementPressed;
     private bool _isRotating;
-    private Vector3 _previousPosForRedo;
-    private Quaternion _previsouRotationForRedo;
-    private CapsuleCollider _capsuleCollider;
-    private Rigidbody _rigidbody;
-    public GameObject _colorWheelHUD;
 
-    // Rigid Grid Movement
-    public float speed;
+    // For rigid grid-based Movement
+    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
     private Vector3 _moveDirection;
     private Vector3 _targetLocation;
     private Vector3 _curposition;
