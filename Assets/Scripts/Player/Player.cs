@@ -92,14 +92,11 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player)
+        if (LevelManager.freezePlayer)
         {
             animator.SetBool("Moving", false);
             return;
         }
-
-        //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
-        //    Vector3.up * _capsuleCollider.height, Color.green);
 
         _horizontalMovement = _controllerUtil.GetHorizontalAxisRaw();
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
@@ -157,8 +154,9 @@ public class Player : MonoBehaviour
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
             if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
+            {
                 animator.SetBool("Moving", false);
-                print("stopped moving");
+            }
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
@@ -166,8 +164,8 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
             
-            // To reset the selected object to the block under the player. If removing the redo code above,
-            // leave this line here.
+            // To reset the selected object to the block under the player.
+            // If removing the redo code above, leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
         
@@ -250,7 +248,6 @@ public class Player : MonoBehaviour
 
         if (!ValidMove(pressedDirection, currentTransformPosition))
         {
-            print("Invalid Player move");
             animator.SetBool("Moving", false);
             return;
         }
@@ -304,7 +301,8 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case PlayerDirection.Backward:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1),
+                                     Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
