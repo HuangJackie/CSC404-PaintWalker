@@ -25056,7 +25056,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.7529412, g: 0.6392157, b: 0.32941177, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -47936,15 +47936,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 503461363, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 624482659, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 716212586, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 982400799, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
@@ -47952,11 +47952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1542211283, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1937978874, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 490254623075471024, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
@@ -48212,7 +48212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875224060288820267, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
