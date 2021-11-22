@@ -28092,24 +28092,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543553370}
   m_Mesh: {fileID: 6891689884508345074, guid: 2120b6193e20ea94d912fa460b81b7fb, type: 3}
---- !u!1 &1544216322 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 346191250090115882, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
-  m_PrefabInstance: {fileID: 4180352918053585827}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1544216324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544216322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5ac1f6273f24a4d856e1746f81032f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brushTip: {fileID: 2100000, guid: 777ec8c306d4849449c3631d44e1fa03, type: 2}
 --- !u!1 &1551740754
 GameObject:
   m_ObjectHideFlags: 0
@@ -42413,24 +42395,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 761849136}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1954531501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7306833419742903866, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
-  m_PrefabInstance: {fileID: 4180352918053585827}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1954531503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954531501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9458ca32989486e46abec311a1306f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottlePaint: {fileID: 2100000, guid: 012cf5822cbb8584886246026e542851, type: 2}
 --- !u!1001 &1960567431
 PrefabInstance:
   m_ObjectHideFlags: 0
