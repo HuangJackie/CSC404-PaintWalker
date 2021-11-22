@@ -14413,8 +14413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 0
   freeze_player: 0
-  player_script: {fileID: 567774416}
   player: {fileID: 567774412}
+  playerBehavior: {fileID: 567774416}
   init_yellow: 1
   init_red: 1
   init_green: 1

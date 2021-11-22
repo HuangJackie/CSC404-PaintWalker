@@ -250,8 +250,8 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
             
-            // To reset the selected object to the block under the player. If removing the redo code above,
-            // leave this line here.
+            // To reset the selected object to the block under the player.
+            // If removing the redo code above, leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
         
@@ -391,7 +391,8 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case PlayerDirection.Backward:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1),
+                                     Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
