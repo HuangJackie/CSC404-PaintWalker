@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
 {
     public bool resetMode;
     public bool _isPushing;
-    public Transform cameraWorldAxis;
-    public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
     public Transform cameraWorldAxis;
@@ -18,13 +16,10 @@ public class Player : MonoBehaviour
     public MoveRedo GameState;
     public GameObject _colorWheelHUD;
 
-    private UpdateUI _updateUI;
     private Animator animator;
     private ControllerUtil _controllerUtil;
     private PaintingSystem _paintingSystem;
 
-    public bool resetMode;
-    private bool _hasWaitedTurn;
 
     // For basic movement
     private Rigidbody _rigidbody;
@@ -52,11 +47,7 @@ public class Player : MonoBehaviour
     public float _pushTimer = 30.0f;
 
     private bool _hasWaitedTurn;
-    private ControllerUtil _controllerUtil;
-    private PaintingSystem _paintingSystem;
-    private Animator animator;
 
-    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
 
     private void Awake()
     {
