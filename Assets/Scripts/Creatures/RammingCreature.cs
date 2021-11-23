@@ -81,6 +81,7 @@ public class RammingCreature : SpecialCreature
                 Material,
                 Color.magenta))
         {
+            player.GetComponent<Player>().animation_update("paint", true);
             originalColour = Material.color;
             paintedColour = Material.color;
             frozen_model.SetActive(false);

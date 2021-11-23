@@ -58,6 +58,7 @@ public class HowlingCreature : SpecialCreature
             Material,
             GameConstants.green))
         {
+            player.GetComponent<Player>().animation_update("paint", true);
             m_MyAudioSource.Play();
             originalColour = Material.color;
             paintedColour = Material.color;
