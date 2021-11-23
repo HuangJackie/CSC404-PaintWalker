@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
     private CapsuleCollider _capsuleCollider;
     private Rigidbody _rigidbody;
     public GameObject _colorWheelHUD;
-    public GameObject old_model;
-    public GameObject new_model;
 
     // Rigid Grid Movement
     public float speed;
@@ -68,7 +66,6 @@ public class Player : MonoBehaviour
         _paintingSystem = FindObjectOfType<PaintingSystem>();
         _paintingSystem.ResetSelectedObject();
         animator = gameObject.GetComponentInChildren<Animator>();
-        old_model.SetActive(false);
     }
 
     void Update()
@@ -146,22 +143,16 @@ public class Player : MonoBehaviour
     {
         if (type == "idle")
         {
-            new_model.SetActive(true);
-            old_model.SetActive(false);
             animator.SetBool("Idle", true);
         }
         if (type == "walk")
         {
             if (state)
             {
-                new_model.SetActive(false);
-                old_model.SetActive(true);
                 animator.SetBool("Moving", true);
             }
             else
             {
-                new_model.SetActive(true);
-                old_model.SetActive(false);
                 animator.SetBool("Moving", false);
             }
         }
@@ -170,8 +161,6 @@ public class Player : MonoBehaviour
         {
             if (state)
             {
-                new_model.SetActive(true);
-                old_model.SetActive(false);
                 animator.SetBool("Pushing", true);
             }
             else
@@ -197,8 +186,6 @@ public class Player : MonoBehaviour
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
             if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
-                new_model.SetActive(true);
-                old_model.SetActive(false);
                 animator.SetBool("Moving", false);
                 print("stopped moving");
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;

@@ -27,6 +27,7 @@ public class Ground : Interactable, Paintable
     private Player _player;
     private float _playerYPosition;
     private float _moveableObjYPosition;
+    private Animator animator;
 
     private bool _isMouseClicked;
     private bool _isMouseOver;
@@ -58,6 +59,7 @@ public class Ground : Interactable, Paintable
 
     private new void Start()
     {
+        
         _levelManager = FindObjectOfType<LevelManager>();
         ObjectStorage objectStorage = FindObjectOfType<ObjectStorage>();
         objectStorage.AddBlock(this.gameObject);
@@ -67,6 +69,7 @@ public class Ground : Interactable, Paintable
         paintedColour = Material.color;
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
+        animator = player.GetComponentInChildren<Animator>();
         _playerYPosition = player.transform.position.y;
         _cur_model = base_model;
 
@@ -442,9 +445,10 @@ public class Ground : Interactable, Paintable
                     Debug.Log("red effect triggered");
                     _levelManager.EnqueueAction(() =>
                     {
+                        animator.SetBool("Painting", true);
                         return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                     });
-
+                    animator.SetBool("Painting", false);
                     isPaintedByBrush = true; }
                 }
 
@@ -462,11 +466,14 @@ public class Ground : Interactable, Paintable
                     NewState.ObjectInit(gameObject);
                     _levelManager.redoCommandHandler.AddCommand(NewState);
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
+                    animator.SetBool("Painting", true);
                     _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
                     green_model.SetActive(true);
                     _cur_model = green_model;
+                    animator.SetBool("Painting", false);
+
                 }
 
                 break;
@@ -485,8 +492,10 @@ public class Ground : Interactable, Paintable
                         Debug.Log("yellow effect triggered");
                         _levelManager.EnqueueAction(() =>
                         {
+                            animator.SetBool("Painting", true);
                             return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
                         });
+                        animator.SetBool("Painting", false);
                         isPaintedByBrush = true;
                     }
                 }
@@ -510,8 +519,10 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     isPaintedByBrush = true;
+                    animator.SetBool("Painting", true);
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
+                    animator.SetBool("Painting", false);
                     _cur_model = blue_model;
                 }
 
