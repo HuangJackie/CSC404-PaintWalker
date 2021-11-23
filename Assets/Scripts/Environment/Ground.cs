@@ -12,14 +12,13 @@ public class Ground : Interactable, Paintable
 {
     public GameObject player;
     public float speed;
-    public string test;  // For debugging by giving a block a specific name
+    public string test; // for debugging by giving a block a specific name
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
 
-    // TODO: Refactor _paintedColour with paintedColour
-    // --> Requires re-entering values in Unity UI
     public Color _paintedColour;
+    // [FormerlySerializedAs("_paintedColour")] public Color originalColour;
     public bool isPaintable = true;
 
     private MoveRedo latestState;
@@ -67,7 +66,7 @@ public class Ground : Interactable, Paintable
         objectStorage.AddBlock(this.gameObject);
         Material = GetComponentInChildren<Renderer>().material;
         originalColour = Material.color;
-        _paintedColour = originalColour;
+        _paintedColour = originalColour; // TODO: Replace _paintedColour with paintedColour
         paintedColour = Material.color;
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
@@ -103,7 +102,7 @@ public class Ground : Interactable, Paintable
 
     void Update()
     {
-        if (_levelManager.freezePlayer)
+        if (_levelManager.freeze_player)
         {
             return;
         }

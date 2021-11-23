@@ -381,7 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -671,7 +670,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -1360,7 +1358,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -2146,7 +2143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -2434,7 +2430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -2884,7 +2879,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -3172,7 +3166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -3541,7 +3534,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -3910,7 +3902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -4675,7 +4666,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -4963,7 +4953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -5648,7 +5637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -5936,7 +5924,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -6593,7 +6580,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -6881,7 +6867,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -7347,7 +7332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -7878,7 +7862,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -8357,7 +8340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -8645,7 +8627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -9067,7 +9048,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -9357,7 +9337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -9570,7 +9549,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -9980,7 +9958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -10430,7 +10407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -10799,7 +10775,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -11381,7 +11356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -11819,7 +11793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -12198,7 +12171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -12486,7 +12458,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -12774,7 +12745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -13062,7 +13032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -13431,7 +13400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -13934,7 +13902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -14303,7 +14270,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -14764,7 +14730,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -15052,7 +15017,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -15340,7 +15304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -15709,7 +15672,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -15997,7 +15959,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -16285,7 +16246,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -16573,7 +16533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -16861,7 +16820,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -17149,7 +17107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -18008,7 +17965,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -18371,7 +18327,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -19482,7 +19437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -19770,7 +19724,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -20310,7 +20263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -20598,7 +20550,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -20886,7 +20837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -21174,7 +21124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -21462,7 +21411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -21831,7 +21779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -22877,7 +22824,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -23246,7 +23192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -24093,7 +24038,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -24381,7 +24325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -24669,7 +24612,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -25486,7 +25428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -26718,7 +26659,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -27006,7 +26946,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -27294,7 +27233,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -27663,7 +27601,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -28032,7 +27969,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -28401,7 +28337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -29110,7 +29045,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -29522,7 +29456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -29905,7 +29838,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -29957,8 +29889,6 @@ MonoBehaviour:
   resume: {fileID: 116041060}
   menu: {fileID: 278486937}
   control: {fileID: 1306982153}
-  loadCheckpoint: {fileID: 0}
-  restart: {fileID: 0}
 --- !u!1 &1006416096
 GameObject:
   m_ObjectHideFlags: 0
@@ -30721,7 +30651,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -31009,7 +30938,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -31459,7 +31387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -31828,7 +31755,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -32116,7 +32042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -32404,7 +32329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -32907,7 +32831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -33195,7 +33118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -33645,7 +33567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -34107,7 +34028,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -34395,7 +34315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -34683,7 +34602,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -35295,7 +35213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -35593,7 +35510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -35881,7 +35797,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -36169,7 +36084,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -36591,7 +36505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -36954,7 +36867,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -37242,7 +37154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -37692,7 +37603,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -37980,7 +37890,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -38384,7 +38293,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -38672,7 +38580,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -39122,7 +39029,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -39734,7 +39640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -40022,7 +39927,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -40310,7 +40214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -40733,7 +40636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -41249,7 +41151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -41997,7 +41898,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -42447,7 +42347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -42901,7 +42800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -43270,7 +43168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -43845,7 +43742,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -44133,7 +44029,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -44512,7 +44407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -44982,7 +44876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -45551,7 +45444,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7529412, g: 0.6392157, b: 0.32941177, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -46208,7 +46101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -47744,7 +47636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -47896,7 +47787,6 @@ MonoBehaviour:
   LevelManager: {fileID: 1704174257}
   rotationSpeed: 1
   isIntervteredControl: 0
-  direction: 0
 --- !u!1 &1511840878
 GameObject:
   m_ObjectHideFlags: 0
@@ -48521,7 +48411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -48811,7 +48700,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -50602,7 +50490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -51187,7 +51074,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -51793,7 +51679,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -52174,7 +52059,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -52624,7 +52508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -52987,7 +52870,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -53065,8 +52947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 1
   freeze_player: 0
+  player_script: {fileID: 222737432}
   player: {fileID: 222737430}
-  playerBehavior: {fileID: 222737432}
   init_yellow: 20
   init_red: 20
   init_green: 1
@@ -53748,7 +53630,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -54145,7 +54026,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -54605,7 +54485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -55412,7 +55291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -55700,7 +55578,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -56063,7 +55940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -56351,7 +56227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -56639,7 +56514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -57320,7 +57194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -57672,7 +57545,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -58277,7 +58149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -58565,7 +58436,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -58962,7 +58832,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -59574,7 +59443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -59862,7 +59730,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -60636,7 +60503,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -61042,7 +60908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 1
   test: 
@@ -61394,7 +61259,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -62023,7 +61887,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -62510,7 +62373,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -62879,7 +62741,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -63167,7 +63028,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -63536,7 +63396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -63824,7 +63683,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -64112,7 +63970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -64400,7 +64257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -64688,7 +64544,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -64976,7 +64831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -65339,7 +65193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -65627,7 +65480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 
@@ -65681,7 +65533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -65716,14 +65567,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 716212586, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1542211283, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 4630231335804107634, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_Pivot.y
       value: 0
@@ -66679,7 +66522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
-  _allColours: []
   player: {fileID: 0}
   speed: 3
   test: 

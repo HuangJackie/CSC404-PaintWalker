@@ -13,6 +13,7 @@ public class PaintOrb : Interactable, TooltipObject
     private Light lightSettings;
     private Renderer[] meshRenderers;
     private UpdateUI _updateUI;
+    
 
     private new void Start()
     {
@@ -47,12 +48,11 @@ public class PaintOrb : Interactable, TooltipObject
         foreach (Renderer mesh in meshRenderers)
         {
             mesh.material.color = newColor;
-            mesh.material.SetFloat("_Glossiness", 0.1f);
         }
-
         ObjectStorage.paintOrbStorage.Add(this.gameObject);
         ReinitializeMaterialColours();
     }
+
     
     void OnTriggerEnter(Collider other)
     {
