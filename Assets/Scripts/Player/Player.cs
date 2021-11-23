@@ -128,11 +128,13 @@ public class Player : MonoBehaviour
         GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
         if (up)
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.up, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 Vector3.up, transform.rotation);
         }
         else
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.down, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 Vector3.down, transform.rotation);
         }
 
         LevelManager.redoCommandHandler.AddCommand(GameState);
@@ -157,9 +159,12 @@ public class Player : MonoBehaviour
             {
                 animator.SetBool("Moving", false);
             }
+
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
-                _previsouRotationForRedo);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 _targetLocation - _previousPosForRedo,
+                                 _previsouRotationForRedo);
+            
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
