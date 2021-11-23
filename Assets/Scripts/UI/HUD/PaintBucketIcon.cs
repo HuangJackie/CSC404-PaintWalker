@@ -22,11 +22,11 @@ public class PaintBucketIcon : MonoBehaviour
     private Vector2 originalPos;
     private Vector3 selectionPosOffset;
 
-    private void Awake()
+    private void Start()
     {
         currSelection = null;
         originalPos = Vector2.zero;
-        selectionPosOffset = new Vector3(-15f, 15f, 0f);
+        selectionPosOffset = new Vector3(-20f, 20f, 0f);
 
         originalSize = yellowPaintBucket.rectTransform.sizeDelta;
         currSelectionSize = originalSize * selectionGrowFactor;
@@ -36,10 +36,6 @@ public class PaintBucketIcon : MonoBehaviour
         SetAlpha(greenPaintBucket, false);
         SetAlpha(yellowPaintBucket, false);
         SetAlpha(bluePaintBucket, false);
-    }
-
-    private void Start()
-    {
         SetIcon(GameConstants.YELLOW_PAINT);
     }
 
