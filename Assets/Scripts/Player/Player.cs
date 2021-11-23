@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player || _isPushing)
+        if (LevelManager.freezePlayer || _isPushing)
         {
             animation_update("walk", false);
             if (_isPushing)
