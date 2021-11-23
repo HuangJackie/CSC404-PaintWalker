@@ -8,6 +8,7 @@ using static GameConstants;
 public class Player : MonoBehaviour
 {
     public bool resetMode;
+    public bool _isPushing;
     public Transform cameraWorldAxis;
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     private Vector3 _prevPosition;
 
     private UpdateUI _updateUI;
+    public float _pushTimer = 30.0f;
 
     private bool _hasWaitedTurn;
     private ControllerUtil _controllerUtil;
@@ -89,10 +91,32 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player)
+        if (LevelManager.freeze_player || _isPushing)
         {
             animation_update("walk", false);
+            if (_isPushing)
+            {
+                _pushTimer -= Time.deltaTime;
+                if (_pushTimer <= 0)
+                {
+                    _isPushing = false;
+                    animation_update("push", false);
+                }
+            }
             return;
+        }
+
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Painting") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 && !animator.IsInTransition(0))
+        {
+            animation_update("idle", true);
+            animation_update("walk", false);
+            animation_update("push", false);
+            animator.SetBool("Painting", false);
+        }
+
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Pushing") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 && !animator.IsInTransition(0))
+        {
+            animator.SetBool("Pushing", false);
         }
 
         //Debug.DrawRay(_targetLocation + new Vector3(1, -_capsuleCollider.height / 2, 0),
@@ -144,16 +168,23 @@ public class Player : MonoBehaviour
         if (type == "idle")
         {
             animator.SetBool("Idle", true);
+            animator.SetBool("Painting", false);
+            animator.SetBool("Moving", false);
+            animator.SetBool("Pushing", false);
         }
         if (type == "walk")
         {
             if (state)
             {
                 animator.SetBool("Moving", true);
+                animator.SetBool("Painting", false);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Pushing", false);
             }
             else
             {
                 animator.SetBool("Moving", false);
+                animator.SetBool("Idle", true);
             }
         }
 
@@ -162,11 +193,28 @@ public class Player : MonoBehaviour
             if (state)
             {
                 animator.SetBool("Pushing", true);
+                animator.SetBool("Painting", false);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Moving", false);
             }
             else
             {
                 animator.SetBool("Pushing", false);
-                animator.SetBool("Idle", true);
+            }
+        }
+
+        if (type == "paint")
+        {
+            if (state)
+            {
+                animator.SetBool("Pushing", false);
+                animator.SetBool("Painting", true);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Moving", false);
+            }
+            else
+            {
+                animator.SetBool("Painting", false);
             }
         }
     }
@@ -209,12 +257,12 @@ public class Player : MonoBehaviour
         if (_isHorizontalMovementPressed || _isVerticalMovementPressed)
         {
             animation_update("walk", true);
+            animator.SetBool("Painting", false);
         }
 
         // The player has reached their movement destination.
         if (Vector3.Distance(newPosition, _targetLocation) <= 0.01f)
         {
-            //animator.SetBool("Moving", false);
             newPosition = _targetLocation;
             SetNewTargetLocation(newPosition);
         }
@@ -282,9 +330,11 @@ public class Player : MonoBehaviour
         if (!ValidMove(pressedDirection, currentTransformPosition))
         {
             print("Invalid Player move");
-            animator.SetBool("Moving", false);
+            animation_update("walk", false);
             return;
         }
+
+        print("moving");
         
         switch (pressedDirection)
         {
@@ -323,6 +373,7 @@ public class Player : MonoBehaviour
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
                                     _capsuleCollider.height, mask))
                 {
+                    print(noObstructionAhead(hitInfo));
                     return noObstructionAhead(hitInfo);
                 }
 
@@ -416,9 +467,10 @@ public class Player : MonoBehaviour
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
-            if (ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable())
+            if ((ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable()) && !ground._isSliding)
             {
                 // Painted surface or not painted in the first place, can move.
+                print("there");
                 return true;
             }
 

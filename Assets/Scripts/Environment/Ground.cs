@@ -33,6 +33,7 @@ public class Ground : Interactable, Paintable
     private bool _isMouseOver;
 
     private bool _isIceBlockEffectEnabled;
+    public bool _isSliding;
     private Vector3 _directionToSlideTo;
     private Vector3 _destinationDrop;
     private Vector3 _destinationNeutral;
@@ -76,6 +77,7 @@ public class Ground : Interactable, Paintable
         _isMouseOver = false;
 
         _isIceBlockEffectEnabled = false;
+        _isSliding = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         _destinationNeutral = transform.position;
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
@@ -152,13 +154,14 @@ public class Ground : Interactable, Paintable
     IEnumerator MoveIceBlockToDestination(bool isPushed)
     {
         bool stillMoving = true;
+        yield return new WaitForSeconds(0.3f);
         while (stillMoving)
         {
             float distance = Vector3.Distance(transform.position, _destinationMove);
             while (distance > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(
-                    transform.position, _destinationMove, speed * 2 * Time.deltaTime
+                    transform.position, _destinationMove, speed * 2f * Time.deltaTime
                 );
                 yield return null;
 
@@ -169,6 +172,10 @@ public class Ground : Interactable, Paintable
                 transform.position = _destinationMove;
             }
             stillMoving = ReinitializeIceBlockMovement(isPushed);
+            if (!stillMoving)
+            {
+                _isSliding = false;
+            }
         }
     }
 
@@ -342,6 +349,11 @@ public class Ground : Interactable, Paintable
         if (shouldMoveIceBlock)
         {
             _player.animation_update("push", true);
+            _player.animation_update("walk", false);
+            _player.animation_update("paint", false);
+            _isSliding = true;
+            _player._isPushing = true;
+            _player._pushTimer = 0.35f;
             _pushIceBlockSoundManager.PlayRandom();
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
@@ -356,7 +368,6 @@ public class Ground : Interactable, Paintable
                 }
 
                 _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(true); });
-                _player.animation_update("push", false);
                 // _isMovingBlock = true;
             }
         }
@@ -437,6 +448,7 @@ public class Ground : Interactable, Paintable
                 _levelManager.DecreasePaint("Red", 1);
                 if (paintWithBrush)
                 {
+                    _player.animation_update("paint", true);
                     base_model.SetActive(false);
                     red_model.SetActive(true);
                     _cur_model = red_model;
@@ -445,10 +457,8 @@ public class Ground : Interactable, Paintable
                     Debug.Log("red effect triggered");
                     _levelManager.EnqueueAction(() =>
                     {
-                        animator.SetBool("Painting", true);
                         return RaiseLowerRedYellowBlockToDestination(_destinationDrop);
                     });
-                    animator.SetBool("Painting", false);
                     isPaintedByBrush = true; }
                 }
 
@@ -460,19 +470,18 @@ public class Ground : Interactable, Paintable
                 _levelManager.DecreasePaint("Green", 1);
                 if (paintWithBrush)
                 {
+                    _player.animation_update("paint", true);
                     _greenSoundManager.PlayRandom();
                     Debug.Log("green effect triggered");
                     MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
                     NewState.ObjectInit(gameObject);
                     _levelManager.redoCommandHandler.AddCommand(NewState);
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
-                    animator.SetBool("Painting", true);
                     _levelManager.EnqueueAction(() => { return GreenExtend(NewState); });
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
                     green_model.SetActive(true);
                     _cur_model = green_model;
-                    animator.SetBool("Painting", false);
 
                 }
 
@@ -484,6 +493,7 @@ public class Ground : Interactable, Paintable
                 _levelManager.DecreasePaint("Yellow", 1);
                 if (paintWithBrush)
                 {
+                    _player.animation_update("paint", true);
                     base_model.SetActive(false);
                     yellow_model.SetActive(true);
                     _cur_model = yellow_model;
@@ -492,10 +502,8 @@ public class Ground : Interactable, Paintable
                         Debug.Log("yellow effect triggered");
                         _levelManager.EnqueueAction(() =>
                         {
-                            animator.SetBool("Painting", true);
                             return RaiseLowerRedYellowBlockToDestination(_destinationRaise);
                         });
-                        animator.SetBool("Painting", false);
                         isPaintedByBrush = true;
                     }
                 }
@@ -508,6 +516,7 @@ public class Ground : Interactable, Paintable
                 _levelManager.DecreasePaint("Blue", 1);
                 if (paintWithBrush)
                 {
+                    _player.animation_update("paint", true);
                     gameObject.layer = LayerMask.NameToLayer("IceCube");
                     _blueSoundManager.PlayRandom();
                     Debug.Log("blue effect triggered");
@@ -519,10 +528,8 @@ public class Ground : Interactable, Paintable
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     _levelManager.EnqueueAction(() => { return MoveIceBlockToDestination(false); });
                     isPaintedByBrush = true;
-                    animator.SetBool("Painting", true);
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
-                    animator.SetBool("Painting", false);
                     _cur_model = blue_model;
                 }
 

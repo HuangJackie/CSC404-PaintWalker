@@ -71,6 +71,7 @@ public class TpCreature : SpecialCreature
                 Material,
                 _tpCreatureColor))
         {
+            player.GetComponent<Player>().animation_update("paint", true);
             originalColour = Material.color;
             paintedColour = Material.color;
             isPainted = true;
