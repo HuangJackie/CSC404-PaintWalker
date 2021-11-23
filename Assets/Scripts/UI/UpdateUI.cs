@@ -14,7 +14,7 @@ public class UpdateUI : MonoBehaviour
     private PaintBucketIcon paintIcon;
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
-    private PaintLeftBG paintLeftBG;
+    //private PaintLeftBG paintLeftBG;
 
     private YellowDotText yellowDotText;
     private RedDotText redDotText;
@@ -41,7 +41,7 @@ public class UpdateUI : MonoBehaviour
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
-        paintLeftBG = FindObjectOfType<PaintLeftBG>();
+        //paintLeftBG = FindObjectOfType<PaintLeftBG>();
 
         yellowDotText = FindObjectOfType<YellowDotText>();
         redDotText = FindObjectOfType<RedDotText>();
@@ -173,7 +173,7 @@ public class UpdateUI : MonoBehaviour
         paintBar.ChangePaint(paintLeft, paintColor);
         paintText.SetPaint(paintLeft);
         paintIcon.SetIcon(paintType);
-        paintLeftBG.SetColor(paintColor);
+        //paintLeftBG.SetColor(paintColor);
     }
 
     public void ClearUIInfoText()
