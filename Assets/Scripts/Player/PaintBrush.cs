@@ -28,6 +28,7 @@ public class PaintBrush : MonoBehaviour
     {
         currentColor = color;
         brushTip.SetColor("_Color", color);
+        
         particleSettings.startColor = (Color) color;
         lightSettings.color = color;
     }
