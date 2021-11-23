@@ -22,12 +22,12 @@ public class PaintLeftBar : MonoBehaviour
     public void ChangePaint(int currPaint, Color32 paintColor)
     {
         slider.value = currPaint;
-        if (currPaint > 100)
-        {
-            slider.maxValue = 120;
-        } else
+        if (currPaint > 60)
         {
             slider.maxValue = 100;
+        } else
+        {
+            slider.maxValue = 60;
         }
         fill.color = paintColor;
     }
