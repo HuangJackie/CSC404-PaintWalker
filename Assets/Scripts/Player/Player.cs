@@ -7,43 +7,28 @@ using static GameConstants;
 
 public class Player : MonoBehaviour
 {
-    // For basic management
     public bool resetMode;
     public bool _isPushing;
     public Transform cameraWorldAxis;
     public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
-    public Transform cameraWorldAxis;
-    public CameraRotation cameraPanningRevertTarget;
     public MoveRedo GameState;
-    public GameObject _colorWheelHUD;
-
-    private UpdateUI _updateUI;
-    private Animator animator;
-    private ControllerUtil _controllerUtil;
-    private PaintingSystem _paintingSystem;
-
-    public bool resetMode;
-    private bool _hasWaitedTurn;
-
-    // For basic movement
-    private Rigidbody _rigidbody;
-    private CapsuleCollider _capsuleCollider;
-    private Vector3 _previousPosForRedo;
-    private Quaternion _previsouRotationForRedo;
 
     private float _horizontalMovement;
     private float _verticalMovement;
-    public float speed;
-
     private bool _isNotTrackingMovement;
     private bool _isHorizontalMovementPressed;
     private bool _isVerticalMovementPressed;
     private bool _isRotating;
+    private Vector3 _previousPosForRedo;
+    private Quaternion _previsouRotationForRedo;
+    private CapsuleCollider _capsuleCollider;
+    private Rigidbody _rigidbody;
+    public GameObject _colorWheelHUD;
 
-    // For rigid grid-based Movement
-    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
+    // Rigid Grid Movement
+    public float speed;
     private Vector3 _moveDirection;
     private Vector3 _targetLocation;
     private Vector3 _curposition;
@@ -167,13 +152,11 @@ public class Player : MonoBehaviour
         GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
         if (up)
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
-                                 Vector3.up, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.up, transform.rotation);
         }
         else
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
-                                 Vector3.down, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.down, transform.rotation);
         }
 
         LevelManager.redoCommandHandler.AddCommand(GameState);
@@ -256,16 +239,14 @@ public class Player : MonoBehaviour
                 print("stopped moving");
             }
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
-                                 _targetLocation - _previousPosForRedo,
-                                 _previsouRotationForRedo);
-            
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
+                _previsouRotationForRedo);
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
             
-            // To reset the selected object to the block under the player.
-            // If removing the redo code above, leave this line here.
+            // To reset the selected object to the block under the player. If removing the redo code above,
+            // leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
         
@@ -405,8 +386,7 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case PlayerDirection.Backward:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1),
-                                     Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }

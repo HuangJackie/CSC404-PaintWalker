@@ -7629,8 +7629,6 @@ MonoBehaviour:
   resume: {fileID: 2012189175}
   menu: {fileID: 1099487702}
   control: {fileID: 652933035}
-  loadCheckpoint: {fileID: 0}
-  restart: {fileID: 0}
 --- !u!1001 &571818677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17239,7 +17237,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7529412, g: 0.6392157, b: 0.32941177, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -18817,7 +18815,6 @@ MonoBehaviour:
   LevelManager: {fileID: 1704174257}
   rotationSpeed: 1
   isIntervteredControl: 0
-  direction: 0
 --- !u!1001 &1513166303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21450,8 +21447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dev_mode: 1
   freeze_player: 0
+  player_script: {fileID: 859007763}
   player: {fileID: 859007761}
-  playerBehavior: {fileID: 859007763}
   init_yellow: 0
   init_red: 0
   init_green: 0
@@ -25193,14 +25190,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 716212586, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1542211283, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4630231335804107634, guid: 55ac21c667e34b34bacccaaed9cff42a, type: 3}
       propertyPath: m_Pivot.y
       value: 0

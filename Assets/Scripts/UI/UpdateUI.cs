@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class UpdateUI : MonoBehaviour
 {
-    // General components
-    private Camera _camera;
-
-    // Top-left HUD components
     private PaintBucketIcon paintIcon;
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
@@ -21,40 +17,34 @@ public class UpdateUI : MonoBehaviour
     private BlueDotText blueDotText;
     private GreenDotText greenDotText;
 
-    // Info displaying components
-    [SerializeField] private GameObject infoTextBG;
-    private PaintNeededText infoText;
-    private TooltipObject _tooltipObject;
-    private bool _alreadyOverriden;
-
-    // Crosshair components
     private CrosshairUI crosshairUI;
     private bool _isCrosshairActive;
+    private Camera _camera;
+    private TooltipObject _tooltipObject;
+
+    [SerializeField] private GameObject infoTextBG;
+    private PaintNeededText infoText;
+    private bool _alreadyOverriden;
 
     private void Awake()
     {
-        // Init general objects
-        _camera = FindObjectOfType<Camera>();
-        _tooltipObject = null;
-
-        // Init top-left HUD objects
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
         //paintLeftBG = FindObjectOfType<PaintLeftBG>();
 
+        crosshairUI = FindObjectOfType<CrosshairUI>();
+        _isCrosshairActive = false;
+        _camera = FindObjectOfType<Camera>();
+        _tooltipObject = null;
+
+        infoText = FindObjectOfType<PaintNeededText>();
+        infoTextBG.SetActive(false);
+
         yellowDotText = FindObjectOfType<YellowDotText>();
         redDotText = FindObjectOfType<RedDotText>();
         blueDotText = FindObjectOfType<BlueDotText>();
         greenDotText = FindObjectOfType<GreenDotText>();
-
-        // Init corsshair
-        crosshairUI = FindObjectOfType<CrosshairUI>();
-        _isCrosshairActive = false;
-
-        // Init corsshair
-        infoText = FindObjectOfType<PaintNeededText>();
-        infoTextBG.SetActive(false);
     }
 
     private void Start()
@@ -69,8 +59,7 @@ public class UpdateUI : MonoBehaviour
             Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hitInfo;
             TooltipObject newTooltipObject;
-            if (Physics.Raycast(ray, out hitInfo) &&
-                hitInfo.collider.gameObject.TryGetComponent(out newTooltipObject))
+            if (Physics.Raycast(ray, out hitInfo) && hitInfo.collider.gameObject.TryGetComponent(out newTooltipObject))
             {
                 if (_tooltipObject != null && newTooltipObject != _tooltipObject)
                 {
@@ -83,9 +72,7 @@ public class UpdateUI : MonoBehaviour
             else if (_tooltipObject != null)
             {
                 _tooltipObject.OnExitTooltip();
-
-                // Must set null otherwise UI won't appear onMouseOver,
-                // and can't activate special creature on click.
+                // Must set null otherwise UI won't appear onMouseOver, and can't activate special creature on click.
                 // Since it causes the UI to keep being wiped.
                 _tooltipObject = null;
             }

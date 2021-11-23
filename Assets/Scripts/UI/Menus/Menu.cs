@@ -57,11 +57,6 @@ public class Menu : MonoBehaviour
                 currMenuButtonIndex++;
             }
         }
-
-        if (highlightedButton > -1)
-        {
-            ChangeHighlightedButton(highlightedButton);
-        }
     }
 
     public void ChangeHighlightedButton(int buttonIndex)

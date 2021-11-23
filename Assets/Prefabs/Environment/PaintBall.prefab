@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.5
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -990,7 +990,7 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.6000061
+          time: 1
           value: 0
           inSlope: 0
           outSlope: 0
@@ -4816,7 +4816,6 @@ GameObject:
   - component: {fileID: 5137538040173277411}
   - component: {fileID: 3748543724197547219}
   - component: {fileID: 8579858294870208396}
-  - component: {fileID: 8028216076526889821}
   m_Layer: 6
   m_Name: PaintBall
   m_TagString: PaintRefill
@@ -4871,18 +4870,6 @@ MonoBehaviour:
   manager: {fileID: 0}
   color: Yellow
   paintReplenished: 100
---- !u!114 &8028216076526889821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5478597113105738329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7975edcd5d7776e4c835c50c64a47e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6308788112189960203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,6 +4963,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &9223263981236386241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7311166278405282971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7975edcd5d7776e4c835c50c64a47e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7508720874627712761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5158,6 +5157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd029fba958def44db01e6dce50ce17f, type: 3}
+--- !u!1 &7311166278405282971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bd029fba958def44db01e6dce50ce17f, type: 3}
+  m_PrefabInstance: {fileID: 7617578389756731850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7943692590884914721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bd029fba958def44db01e6dce50ce17f, type: 3}
