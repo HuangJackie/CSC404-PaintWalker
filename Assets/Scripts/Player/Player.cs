@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
 
         if (LevelManager.freeze_player)
         {
-            animator.SetBool("Moving", false);
+            animation_update("walk", false);
             return;
         }
 
@@ -186,8 +186,10 @@ public class Player : MonoBehaviour
         if (_targetLocation == transform.position && !_isNotTrackingMovement)
         {
             if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
-                animator.SetBool("Moving", false);
+            {
+                animation_update("walk", false);
                 print("stopped moving");
+            }
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
                 _previsouRotationForRedo);
