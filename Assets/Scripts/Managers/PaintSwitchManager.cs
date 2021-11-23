@@ -43,4 +43,14 @@ public class PaintSwitchManager : MonoBehaviour
             _levelManager.ChangePaint(GameConstants.BlueColour);
         }
     }
+
+    /**
+     * Return true if color1 has the same RGBA values as color2
+     * NOTE: This method is more efficient than calling color1.Equals(color2)
+     */
+    public static bool IsSameColor(Color32 color1, Color32 color2)
+    {
+        return color1.r == color2.r && color1.g == color2.g &&
+               color1.b == color2.b && color1.a == color2.a;
+    }
 }

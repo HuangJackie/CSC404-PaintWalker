@@ -134,7 +134,7 @@ public class TutorialToolTips : Interactable, TooltipObject
         ToolTipUI.SetActive(false);
         ToolTipOpened = false;
         Time.timeScale = 1f;
-        _levelManager.freeze_player = false;
+        _levelManager.freezePlayer = false;
     }
 
     public void OpenToolTip()
@@ -142,9 +142,8 @@ public class TutorialToolTips : Interactable, TooltipObject
         ToolTipUI.SetActive(true);
         ToolTipOpened = true;
         Time.timeScale = 0f;
-        _levelManager.freeze_player = true;
+        _levelManager.freezePlayer = true;
     }
-    
     
     private void OnMouseOver()
     {
