@@ -28,7 +28,7 @@ public class TutorialToolTips : Interactable, TooltipObject
     public GameObject ToolTipArie;
     public GameObject ToolTipGemi;
     
-    private void Start()
+    private new void Start()
     {
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         Material = GetComponentInChildren<Renderer>().material;

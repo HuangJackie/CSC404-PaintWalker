@@ -38,6 +38,7 @@ public class Ground : Interactable, Paintable
     private Vector3 _destinationNeutral;
     private Vector3 _destinationRaise;
     private Vector3 _destinationMove;
+    private bool _isBlockMoving;
 
     public GameObject YellowSounds;
     public GameObject RedSounds;
@@ -172,6 +173,11 @@ public class Ground : Interactable, Paintable
         }
     }
 
+    public bool IsMoving()
+    {
+        return _isBlockMoving;
+    }
+
     IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination, bool reverting = false)
     {
         GameObject movableObjectOnTop = IsMovableObjectOnTop();
@@ -206,6 +212,7 @@ public class Ground : Interactable, Paintable
         {
             if (reverting)
             {
+                _isBlockMoving = true;
                 //print("neutrual destination. Moving block to revert");
                 transform.position = Vector3.MoveTowards(
                     transform.position, destination, speed * 1.6f * Time.deltaTime
@@ -217,6 +224,7 @@ public class Ground : Interactable, Paintable
 
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
+                    _isBlockMoving = false;
                     transform.position = destination;
                     //if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
                     //{
@@ -235,12 +243,14 @@ public class Ground : Interactable, Paintable
                     destination = _destinationNeutral;
                     blockPathIsBlocked = false;
                 }
+                _isBlockMoving = true;
 
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
+                    _isBlockMoving = false;
                     transform.position = destination;
                     _destinationDrop = transform.position + new Vector3(0, -1, 0);
                     _destinationNeutral = transform.position;
