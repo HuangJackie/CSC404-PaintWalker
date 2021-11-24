@@ -288,22 +288,12 @@ public class LevelManager : MonoBehaviour
                                         paintQuantity["Blue"], paintQuantity["Green"]);
 
             //reset foot step FX and Sparkle FX
-            for (int i = 0; i < ObjectStorage.footPrintStates.Count; i++)
-            {
-                GameObject footprint = ObjectStorage.footStepStorage[i];
-                footprint.gameObject.SetActive(ObjectStorage.footPrintStates[i][0]);
-            }
             for (int i = ObjectStorage.footPrintStates.Count; i < ObjectStorage.footStepStorage.Count; i++)
             {
                 GameObject footprint = ObjectStorage.footStepStorage[i];
                 Destroy(footprint);
             }
 
-            for (int i = 0; i < ObjectStorage.sparkleStates.Count; i++)
-            {
-                GameObject sparkle = ObjectStorage.sparkleStorage[i];
-                sparkle.gameObject.SetActive(ObjectStorage.sparkleStates[i][0]);
-            }
             for (int i = ObjectStorage.sparkleStates.Count; i < ObjectStorage.sparkleStorage.Count; i++)
             {
                 GameObject sparkle = ObjectStorage.sparkleStorage[i];

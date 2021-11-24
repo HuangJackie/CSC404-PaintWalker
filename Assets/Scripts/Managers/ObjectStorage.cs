@@ -103,8 +103,9 @@ public class ObjectStorage : MonoBehaviour
         {
             List<dynamic> footStepInfo = new List<dynamic>();
             footStepInfo.Add(footStep.gameObject.activeSelf);
-            wallStates.Add(footStepInfo);
+            footPrintStates.Add(footStepInfo);
         }
+        print("update done");
     }
 
     public static void UpdateSparkleStorage()
@@ -116,6 +117,8 @@ public class ObjectStorage : MonoBehaviour
             sparkleInfo.Add(sparkle.gameObject.activeSelf);
             sparkleStates.Add(sparkleInfo);
         }
+        print(sparkleStates.Count);
+        print("sparkle update done");
     }
 
     public void AddBlock(GameObject block)

@@ -359,7 +359,7 @@ public class Player : MonoBehaviour
 
         if (!ValidMove(pressedDirection, currentTransformPosition))
         {
-            print("Invalid Player move");
+            //print("Invalid Player move");
             animation_update("walk", false);
             return;
         }
@@ -392,7 +392,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(currentTransformPosition, Vector3.down, out hitInfo, 1, mask)
             && hitInfo.collider.gameObject.TryGetComponent(out Ground ground))
         {
-            print("checking ground infront" + ground.IsMoving());
+            //print("checking ground infront" + ground.IsMoving());
             if (ground.IsMoving())
             {
                 // If the ground is in the middle of moving don't let the player move off of it.
@@ -514,7 +514,7 @@ public class Player : MonoBehaviour
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
-            print(ground.transform.position.y);
+            //print(ground.transform.position.y);
             // If the ground is in the middle of moving don't let the player move on to it.
             if (ground.IsMoving())
             {

@@ -11067,6 +11067,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5137538040173277411, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
   m_PrefabInstance: {fileID: 1067309896}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1685059392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586372580521511, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 1701268722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1701268722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11642,7 +11647,7 @@ MonoBehaviour:
   ToolTipRed: {fileID: 0}
   ToolTipGreen: {fileID: 0}
   ToolTipBlue: {fileID: 0}
-  ToolTipUlala: {fileID: 0}
+  ToolTipUlala: {fileID: 1685059392}
   ToolTipArie: {fileID: 0}
   ToolTipGemi: {fileID: 0}
 --- !u!65 &1717890756
@@ -11657,7 +11662,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.705925, y: 1.1501294, z: 8.131895}
-  m_Center: {x: 0, y: 0.48, z: 0}
+  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!23 &1717890757
 MeshRenderer:
   m_ObjectHideFlags: 0
