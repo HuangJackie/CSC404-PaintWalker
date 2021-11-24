@@ -24195,7 +24195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetMode: 0
   _isPushing: 0
-  isPlayerMoving: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 67328661}
   cameraWorldAxis: {fileID: 1134361251}

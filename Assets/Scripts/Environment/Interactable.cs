@@ -144,7 +144,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    private float tintColour(float colourToTint, float tint, float amountToTint)
+    public float tintColour(float colourToTint, float tint, float amountToTint)
     {
         return colourToTint + (tint - colourToTint) * amountToTint;
     }

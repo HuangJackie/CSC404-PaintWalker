@@ -12,7 +12,7 @@ public class Ground : Interactable, Paintable
 {
     public GameObject player;
     public float speed;
-    public string test;  // For debugging by giving a block a specific name
+    public string test; // For debugging by giving a block a specific name
 
     public bool isPaintedByFeet;
     public bool isPaintedByBrush;
@@ -59,7 +59,7 @@ public class Ground : Interactable, Paintable
     public GameObject red_model;
     public GameObject base_model;
     public GameObject _cur_model;
-    
+
     private SoundManager _yellowSoundManager = new SoundManager();
     private SoundManager _redSoundManager = new SoundManager();
     private SoundManager _blueSoundManager = new SoundManager();
@@ -69,7 +69,6 @@ public class Ground : Interactable, Paintable
 
     private new void Start()
     {
-        
         _levelManager = FindObjectOfType<LevelManager>();
         ObjectStorage objectStorage = FindObjectOfType<ObjectStorage>();
         objectStorage.AddBlock(this.gameObject);
@@ -109,7 +108,7 @@ public class Ground : Interactable, Paintable
         _greenSoundManager.SetAudioSources(GreenSounds.GetComponents<AudioSource>());
         _pushIceBlockSoundManager.SetAudioSources(GetComponents<AudioSource>());
         _outOfPaintSoundManager.SetAudioSource(NoPaintSound.GetComponent<AudioSource>());
-        
+
         base.Start();
     }
 
@@ -136,7 +135,8 @@ public class Ground : Interactable, Paintable
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
 
             Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-            Vector3 horizontalBlockPosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+            Vector3 horizontalBlockPosition =
+                new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
             if (_isMouseOver && _isMouseClicked && !clickedUI &&
                 Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
@@ -148,7 +148,8 @@ public class Ground : Interactable, Paintable
         LayerMask mask = LayerMask.GetMask("Player");
         if (Physics.Raycast(this.transform.position, Vector3.up, out PlayerhitInfo, 1, mask))
         {
-            if ((player_enter_from_north && !isWalkedOverVertially) || (!player_enter_from_north && !isWalkedOverHorizontally))
+            if ((player_enter_from_north && !isWalkedOverVertially) ||
+                (!player_enter_from_north && !isWalkedOverHorizontally))
             {
                 GameObject footstepFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 footstepFX.transform.parent = gameObject.transform;
@@ -205,21 +206,38 @@ public class Ground : Interactable, Paintable
         RaycastHit hit;
         LayerMask mask = LayerMask.GetMask("Player");
         Color intialColor = Material.color;
+
+        // Needs to match the highlight given in Interactable.cs
+        float amountToTint = 0.2f;
+        Color initialTintedColor = new Color(
+            tintColour(intialColor.r, GameConstants.SELECTION_R, amountToTint),
+            tintColour(intialColor.g, GameConstants.SELECTION_G, amountToTint),
+            tintColour(intialColor.b, GameConstants.SELECTION_B, amountToTint));
+        
         bool stillMoving = true;
         while (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1, mask))
         {
             yield return null;
-            if (intialColor != Material.color)
+            if (intialColor != Material.color && initialTintedColor != Material.color)
             {
                 yield break;
             }
         }
+
+        print("out of loop");
+
         if (isPushed)
         {
+            print("isPushed");
             yield return new WaitForSeconds(0.3f);
         }
+
+        print("out of loop");
+
         while (stillMoving)
         {
+            print("stillMoving");
+
             float distance = Vector3.Distance(transform.position, _destinationMove);
             while (distance > 0.01f)
             {
@@ -230,10 +248,12 @@ public class Ground : Interactable, Paintable
 
                 distance = Vector3.Distance(transform.position, _destinationMove);
             }
+
             if (distance < 0.01f)
             {
                 transform.position = _destinationMove;
             }
+
             stillMoving = ReinitializeIceBlockMovement(isPushed);
             if (!stillMoving)
             {
@@ -312,6 +332,7 @@ public class Ground : Interactable, Paintable
                     destination = destinationNeutral;
                     blockPathIsBlocked = false;
                 }
+
                 _isBlockMoving = true;
 
                 transform.position = Vector3.Lerp(
@@ -386,7 +407,8 @@ public class Ground : Interactable, Paintable
             if (other.transform.position.z - this.transform.position.z != 0)
             {
                 player_enter_from_north = true;
-            } else if (other.transform.position.x - this.transform.position.x != 0)
+            }
+            else if (other.transform.position.x - this.transform.position.x != 0)
             {
                 player_enter_from_north = false;
             }
@@ -415,10 +437,12 @@ public class Ground : Interactable, Paintable
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
         RaycastHit RayHit;
         bool _isOnSameLevelAsPlayer = false;
-        if (Physics.Raycast(other.gameObject.transform.position, other.gameObject.transform.forward, out RayHit) && RayHit.collider.gameObject == this.gameObject)
+        if (Physics.Raycast(other.gameObject.transform.position, other.gameObject.transform.forward, out RayHit) &&
+            RayHit.collider.gameObject == this.gameObject)
         {
             _isOnSameLevelAsPlayer = true;
         }
+
         bool shouldMoveIceBlock = _isIceBlockEffectEnabled &&
                                   _isOnSameLevelAsPlayer &&
                                   other.gameObject.CompareTag("Player") &&
@@ -488,13 +512,13 @@ public class Ground : Interactable, Paintable
         {
             return false;
         }
-        
+
         // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
         if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
         {
             return false;
         }
-        
+
         if (!_levelManager.HasEnoughPaint())
         {
             if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.isPlayerMoving)
@@ -502,6 +526,7 @@ public class Ground : Interactable, Paintable
                 _outOfPaintSoundManager.PlayAudio();
                 _outOfPaintAudioAlreadyPlayed = true;
             }
+
             return false;
         }
 
@@ -535,12 +560,15 @@ public class Ground : Interactable, Paintable
                     base_model.SetActive(false);
                     red_model.SetActive(true);
                     _cur_model = red_model;
-                    if (NoBlockBelow()) {
+                    if (NoBlockBelow())
+                    {
                         _redSoundManager.PlayRandom();
-                    Debug.Log("red effect triggered");
-                    StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationDrop));
-                    isPaintedByBrush = true; }
-                } else
+                        Debug.Log("red effect triggered");
+                        StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationDrop));
+                        isPaintedByBrush = true;
+                    }
+                }
+                else
                 {
                     AddSparkleFX();
                 }
@@ -565,8 +593,8 @@ public class Ground : Interactable, Paintable
                     base_model.SetActive(false);
                     green_model.SetActive(true);
                     _cur_model = green_model;
-
-                } else
+                }
+                else
                 {
                     AddSparkleFX();
                 }
@@ -583,13 +611,15 @@ public class Ground : Interactable, Paintable
                     base_model.SetActive(false);
                     yellow_model.SetActive(true);
                     _cur_model = yellow_model;
-                    if (NoUnmovableBlockAbove()){
+                    if (NoUnmovableBlockAbove())
+                    {
                         _yellowSoundManager.PlayRandom();
                         Debug.Log("yellow effect triggered");
                         StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationRaise));
                         isPaintedByBrush = true;
                     }
-                } else
+                }
+                else
                 {
                     AddSparkleFX();
                 }
@@ -617,7 +647,8 @@ public class Ground : Interactable, Paintable
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
                     _cur_model = blue_model;
-                } else
+                }
+                else
                 {
                     AddSparkleFX();
                 }
@@ -646,22 +677,23 @@ public class Ground : Interactable, Paintable
 
         switch (newColor)
         {
-            case("Blue"):
+            case ("Blue"):
                 new_model = blue_model;
                 break;
-            case("Yellow"):
+            case ("Yellow"):
                 new_model = yellow_model;
                 break;
-            case("Green"):
+            case ("Green"):
                 new_model = green_model;
                 break;
-            case("Red"):
+            case ("Red"):
                 new_model = red_model;
                 break;
             default:
                 new_model = base_model;
                 break;
         }
+
         _cur_model.SetActive(false);
         new_model.SetActive(true);
     }
@@ -792,6 +824,7 @@ public class Ground : Interactable, Paintable
         {
             return;
         }
+
         // originalColour = Material.color;
         // Material.color = new Color(0.98f, 1f, 0.45f);
         HighlightForHoverover();
@@ -804,6 +837,7 @@ public class Ground : Interactable, Paintable
         {
             return;
         }
+
         // Material.color = _paintedColour;
         UndoHighlight();
         _isMouseOver = false;
