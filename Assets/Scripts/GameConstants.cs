@@ -37,7 +37,8 @@ public class GameConstants : MonoBehaviour
     public const float UNINTERACTABLE_SELECTION_R = 1f;
     public const float UNINTERACTABLE_SELECTION_G = 0.2f;
     public const float UNINTERACTABLE_SELECTION_B = 0f;
-    // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.26f, 0.26f, 0.26f);
+    // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.459f, 0.679f, 0.663f, 1.000);
+    // public static readonly Color32 SELECTION_HIGHLIGHT_COLOUR = new Color(0.549f, 0.824f, 0.804f, 1.000);
 
     /*
      * Note this is for the switch paint UI but they're not pointing in the right direction.
