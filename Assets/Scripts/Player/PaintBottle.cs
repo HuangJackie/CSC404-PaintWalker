@@ -13,7 +13,7 @@ public class PaintBottle : MonoBehaviour
     private ParticleSystem.MainModule switchParticleSettings;
     private Light lightSettings;
 
-    private void Start()
+    private void Awake()
     {
         lightSettings = GetComponentInChildren<Light>();
         coreParticleSystem = GetComponentsInChildren<ParticleSystem>()[0];
