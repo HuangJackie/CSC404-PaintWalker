@@ -17,7 +17,7 @@ public class CameraRotation : MonoBehaviour
     private bool _transitioning_back;
     private Vector3 _panningPos;
     private Vector3 _initialClickPosition;
-    
+
     Vector3 forward, right;
 
     private ControllerUtil _controllerUtil;
@@ -47,7 +47,7 @@ public class CameraRotation : MonoBehaviour
             transform.parent.parent.position = Vector3.Lerp(
                 transform.parent.parent.position, _gameplayPos, transitionBackSpeed * Time.deltaTime
             );
-            
+
             if (Vector3.Distance(transform.parent.parent.position, _gameplayPos) >= 0.01f)
             {
                 _transitioning_back = true;
@@ -98,7 +98,7 @@ public class CameraRotation : MonoBehaviour
                         rightMovement = right * speed * Time.deltaTime * distanceMoved.y;
                         upMovement = forward * speed * Time.deltaTime * -distanceMoved.x;
                         break;
-                    default:  // Same as CameraDirection.N
+                    default: // Same as CameraDirection.N
                         rightMovement = right * speed * Time.deltaTime * -distanceMoved.x;
                         upMovement = forward * speed * Time.deltaTime * -distanceMoved.y;
                         break;
@@ -115,12 +115,38 @@ public class CameraRotation : MonoBehaviour
             print(horizontalPanning);
             print(verticalPanning);
 
-            if (isoCamera.isIntervteredControl)
+            // if (isoCamera.isIntervteredControl)
+            // {
+            //     horizontalPanning = -horizontalPanning;
+            //     verticalPanning = -verticalPanning;
+            // }
+
+            switch (isoCamera.direction)
             {
-                horizontalPanning = -horizontalPanning;
-                verticalPanning = -verticalPanning;
+                case CameraDirection.N:
+                    horizontalPanning = horizontalPanning;
+                    verticalPanning = verticalPanning;
+                    break;
+                case CameraDirection.E:
+                    float tempValue = horizontalPanning;
+                    horizontalPanning = -verticalPanning;
+                    verticalPanning = tempValue;
+                    break;
+                case CameraDirection.S:
+                    horizontalPanning = -horizontalPanning;
+                    verticalPanning = -verticalPanning;
+                    break;
+                case CameraDirection.W:
+                    tempValue = horizontalPanning;
+                    horizontalPanning = verticalPanning;
+                    verticalPanning = -tempValue;
+                    break;
+                default: // Same as CameraDirection.N
+                    horizontalPanning = horizontalPanning;
+                    verticalPanning = verticalPanning;
+                    break;
             }
-            
+
             if (horizontalPanning != 0 || verticalPanning != 0)
             {
                 _panningPos = transform.parent.parent.position;

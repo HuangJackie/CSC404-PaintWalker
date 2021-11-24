@@ -242,6 +242,7 @@ public class LevelManager : MonoBehaviour
                     groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
                     groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
                     block.SetActive(ObjectStorage.blockStates[i][6]);
+                    groundScript.ReinitializeMaterialColours();
                 }
             }
 
