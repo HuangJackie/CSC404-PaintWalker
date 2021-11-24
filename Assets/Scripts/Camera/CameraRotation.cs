@@ -43,6 +43,7 @@ public class CameraRotation : MonoBehaviour
     {
         if (_wasPanning && !LevelManager.IsPanning())
         {
+            // transitioning back
             transform.parent.parent.position = Vector3.Lerp(
                 transform.parent.parent.position, _gameplayPos, transitionBackSpeed * Time.deltaTime
             );
@@ -70,7 +71,7 @@ public class CameraRotation : MonoBehaviour
             {
                 _initialClickPosition = Input.mousePosition;
             }
-            else if ((Input.GetMouseButton(2)))
+            else if (Input.GetMouseButton(2))
             {
                 LevelManager.SetIsPanning(true);
                 _wasPanning = true;
@@ -111,6 +112,8 @@ public class CameraRotation : MonoBehaviour
 
             float horizontalPanning = _controllerUtil.GetHorizontalPanningAxis() * controllerPanningSpeed;
             float verticalPanning = _controllerUtil.GetVerticalPanningAxis() * controllerPanningSpeed;
+            print(horizontalPanning);
+            print(verticalPanning);
 
             if (isoCamera.isIntervteredControl)
             {
