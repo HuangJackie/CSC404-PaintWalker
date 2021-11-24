@@ -207,7 +207,10 @@ public class Ground : Interactable, Paintable
 
     IEnumerator MoveIceBlockToDestination(bool isPushed)
     {
-        yield return new WaitForSeconds(BlockMovementDelay * 2);
+        if (!isPushed)
+        {
+            yield return new WaitForSeconds(BlockMovementDelay * 2);
+        }
 
         RaycastHit hit;
         LayerMask mask = LayerMask.GetMask("Player");
