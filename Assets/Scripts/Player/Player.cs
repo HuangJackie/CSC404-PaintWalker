@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public bool resetMode;
     public bool _isPushing;
+    public bool isPlayerMoving;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
     public Transform cameraWorldAxis;
@@ -133,6 +134,7 @@ public class Player : MonoBehaviour
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
+        isPlayerMoving = _controllerUtil.CheckPlayerPressingMovement();
 
         if (this.CheckGrounded())
         {
@@ -159,11 +161,13 @@ public class Player : MonoBehaviour
         GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
         if (up)
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.up, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 Vector3.up, transform.rotation);
         }
         else
         {
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, Vector3.down, transform.rotation);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 Vector3.down, transform.rotation);
         }
 
         LevelManager.redoCommandHandler.AddCommand(GameState);
@@ -231,10 +235,12 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position)
         {
             animation_update("walk", true);
-            if (InvalidMove())
-            {
-                _targetLocation = _prevTargetLocation;
-            }
+            // Slide back if block below is moving for yellow. Commenting out for now to prevent the snapback 
+            // since it messes up red.
+            // if (InvalidMove())
+            // {
+            //     _targetLocation = _prevTargetLocation;
+            // }
             
             if (_isNotTrackingMovement)
             {
@@ -249,9 +255,12 @@ public class Player : MonoBehaviour
             {
                 animation_update("walk", false);
             }
+
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
-            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
-                _previsouRotationForRedo);
+            GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget,
+                                 _targetLocation - _previousPosForRedo,
+                                 _previsouRotationForRedo);
+            
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
@@ -491,11 +500,6 @@ public class Player : MonoBehaviour
         }
 
         return false;
-    }
-
-    public bool IsPlayerMoving()
-    {
-        return _isHorizontalMovementPressed || _isVerticalMovementPressed;
     }
 
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)

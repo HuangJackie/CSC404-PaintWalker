@@ -7,23 +7,35 @@ public class PaintBottle : MonoBehaviour
     public Material bottlePaint;
     private Color32 currentColor;
 
-    private ParticleSystem particleSystemCore;
-    private ParticleSystem.MainModule particleSettings;
+    private ParticleSystem coreParticleSystem;
+    private ParticleSystem switchParticleSystem;
+    private ParticleSystem.MainModule coreParticleSettings;
+    private ParticleSystem.MainModule switchParticleSettings;
     private Light lightSettings;
 
-    private void Start()
+    private void Awake()
     {
         lightSettings = GetComponentInChildren<Light>();
-        particleSystemCore = GetComponentInChildren<ParticleSystem>();
-        particleSettings = particleSystemCore.main;
+        coreParticleSystem = GetComponentsInChildren<ParticleSystem>()[0];
+        coreParticleSettings = coreParticleSystem.main;
+        switchParticleSystem = GetComponentsInChildren<ParticleSystem>()[1];
+        switchParticleSettings = switchParticleSystem.main;
     }
 
     private void SwitchColor(Color32 color)
     {
         currentColor = color;
         bottlePaint.SetColor("_Color", color);
-        particleSettings.startColor = (Color) color;
+
+        coreParticleSettings.startColor = (Color) color;
+        switchParticleSettings.startColor = (Color) color;
         lightSettings.color = color;
+        PlayColorSwitchEffect();
+    }
+
+    public void PlayColorSwitchEffect()
+    {
+        switchParticleSystem.Play();
     }
 
     public void SetColor(Color32 color)
@@ -32,7 +44,7 @@ public class PaintBottle : MonoBehaviour
         {
             SwitchColor(color);
         }
-        particleSystemCore.Play();
+        coreParticleSystem.Play();
         lightSettings.enabled = true;
     }
 
@@ -47,12 +59,12 @@ public class PaintBottle : MonoBehaviour
         
         if (paintQuantity == 0)
         {
-            particleSystemCore.Stop();
+            coreParticleSystem.Stop();
             lightSettings.enabled = false;
         }
         else
         {
-            particleSystemCore.Play();
+            coreParticleSystem.Play();
             lightSettings.enabled = true;
         }
     }
