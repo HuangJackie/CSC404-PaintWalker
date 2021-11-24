@@ -112,8 +112,6 @@ public class CameraRotation : MonoBehaviour
 
             float horizontalPanning = _controllerUtil.GetHorizontalPanningAxis() * controllerPanningSpeed;
             float verticalPanning = _controllerUtil.GetVerticalPanningAxis() * controllerPanningSpeed;
-            print(horizontalPanning);
-            print(verticalPanning);
 
             if (isoCamera.isIntervteredControl)
             {
