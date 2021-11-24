@@ -22,6 +22,10 @@ public class Ground : Interactable, Paintable
     public Color _paintedColour;
     public bool isPaintable = true;
 
+    public bool player_enter_from_north = false;
+    public bool isWalkedOverVertially = false;
+    public bool isWalkedOverHorizontally = false;
+
     private MoveRedo latestState;
     private LevelManager _levelManager;
     private UpdateUI _updateUI;
@@ -472,6 +476,16 @@ public class Ground : Interactable, Paintable
                     Debug.Log("red effect triggered");
                     StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationDrop));
                     isPaintedByBrush = true; }
+                } else
+                {
+                    GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                    plane.transform.parent = gameObject.transform;
+                    plane.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.02f, gameObject.transform.position.z);
+                    plane.transform.localScale = plane.transform.localScale * 0.1f;
+                    Destroy(plane.GetComponent<MeshCollider>());
+                    Material footstep = Resources.Load("Materials/FootSteps", typeof(Material)) as Material;
+                    print(footstep);
+                    plane.GetComponent<Renderer>().material = footstep;
                 }
 
                 break;
