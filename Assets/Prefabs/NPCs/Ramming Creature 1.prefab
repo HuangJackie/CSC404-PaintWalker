@@ -59,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
+  _allColours: []
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
