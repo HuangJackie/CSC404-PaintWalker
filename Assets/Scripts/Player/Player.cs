@@ -403,28 +403,17 @@ public class Player : MonoBehaviour
                 }
 
                 ground_hitInfo = hitInfo;
-                print("transform.position.y - PlayerHeight + 0.5f " + (transform.position.y - PlayerHeight + 0.5f));
-                print("transform.position.y " + (transform.position.y));
-                print("_capsuleCollider.height / 2 " + (_capsuleCollider.height / 2));
-                print("currentTransformPosition " + (currentTransformPosition));
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
                     _capsuleCollider.height, mask))
                 {
-                    print("noObstructionAhead(hitInfo) " + noObstructionAhead(hitInfo));
                     return noObstructionAhead(hitInfo);
                 }
-
-                // print("DRAWING RAY " + Physics.Raycast(currentTransformPosition +
-                //                                        new Vector3(0, 2, 1), Vector3.down, out hitInfo,
-                //     0.5f, mask));
-                // Debug.DrawRay(currentTransformPosition +
-                //               new Vector3(0, 2, 1), Vector3.down *0.5f, Color.white, 2, false);
+                
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, 2, 1), Vector3.down, out hitInfo,
                     0.5f, mask))
                 {
-                    // print("False");
                     return false;
                 }
 
