@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
     private Vector3 _moveDirection;
     private Vector3 _targetLocation;
+    private Vector3 _prevTargetLocation;
     private Vector3 _curposition;
     private Vector3 _prevPosition;
 
@@ -66,7 +67,8 @@ public class Player : MonoBehaviour
         resetMode = false;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
-        _targetLocation = transform.position;
+        UpdateTargetLocation(transform.position);
+        _prevTargetLocation = transform.position;
         _prevPosition = _targetLocation;
         _isNotTrackingMovement = true;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
-        
+
         if (this.CheckGrounded())
         {
             _targetLocation.y = transform.position.y;
@@ -229,6 +231,11 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position)
         {
             animation_update("walk", true);
+            if (InvalidMove())
+            {
+                _targetLocation = _prevTargetLocation;
+            }
+            
             if (_isNotTrackingMovement)
             {
                 _previousPosForRedo = transform.position;
@@ -248,12 +255,12 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.AddCommand(GameState);
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
-            
-            // To reset the selected object to the block under the player.
-            // If removing the redo code above, leave this line here.
+
+            // To reset the selected object to the block under the player. If removing the redo code above,
+            // leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
-        
+
         Vector3 newPosition = Vector3.MoveTowards(
             transform.position, _targetLocation, speed * Time.deltaTime
         );
@@ -318,8 +325,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private bool InvalidMove()
+    {
+        LayerMask mask = LayerMask.GetMask("Default") | LayerMask.GetMask("IceCube");
+
+        return Physics.Raycast(_targetLocation, Vector3.down, out RaycastHit hitInfo, 1, mask) 
+               && hitInfo.collider.gameObject.TryGetComponent(out Ground ground)
+               && ground.IsMoving();
+    }
+
     public void UpdateTargetLocation(Vector3 newTargetLocation)
     {
+        _prevTargetLocation = _targetLocation;
         _targetLocation = newTargetLocation;
     }
 
@@ -339,19 +356,20 @@ public class Player : MonoBehaviour
         }
 
         
+
         switch (pressedDirection)
         {
             case PlayerDirection.Forward:
-                _targetLocation = currentTransformPosition + new Vector3(0, 0, 1);
+                UpdateTargetLocation(currentTransformPosition + new Vector3(0, 0, 1));
                 break;
             case PlayerDirection.Backward:
-                _targetLocation = currentTransformPosition + new Vector3(0, 0, -1);
+                UpdateTargetLocation(currentTransformPosition + new Vector3(0, 0, -1));
                 break;
             case PlayerDirection.Left:
-                _targetLocation = currentTransformPosition + new Vector3(-1, 0, 0);
+                UpdateTargetLocation(currentTransformPosition + new Vector3(-1, 0, 0));
                 break;
             case PlayerDirection.Right:
-                _targetLocation = currentTransformPosition + new Vector3(1, 0, 0);
+                UpdateTargetLocation(currentTransformPosition + new Vector3(1, 0, 0));
                 break;
         }
     }
@@ -362,11 +380,22 @@ public class Player : MonoBehaviour
         RaycastHit ground_hitInfo;
         LayerMask mask = LayerMask.GetMask("Default") | LayerMask.GetMask("IceCube");
 
+        if (Physics.Raycast(currentTransformPosition, Vector3.down, out hitInfo, 1, mask)
+            && hitInfo.collider.gameObject.TryGetComponent(out Ground ground))
+        {
+            print("checking ground infront" + ground.IsMoving());
+            if (ground.IsMoving())
+            {
+                // If the ground is in the middle of moving don't let the player move off of it.
+                return false;
+            }
+        }
+
         switch (pressedDirection)
         {
             case PlayerDirection.Forward:
                 if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, 1),
-                                    Vector3.down, out hitInfo, 1, mask))
+                    Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
@@ -374,18 +403,18 @@ public class Player : MonoBehaviour
                 ground_hitInfo = hitInfo;
                 if (Physics.Raycast(currentTransformPosition +
                                     new Vector3(0, _capsuleCollider.height / 2, 1), Vector3.down, out hitInfo,
-                                    _capsuleCollider.height, mask))
+                    _capsuleCollider.height, mask))
                 {
-                    print(noObstructionAhead(hitInfo));
                     return noObstructionAhead(hitInfo);
                 }
-
+                
                 if (Physics.Raycast(currentTransformPosition +
-                                    new Vector3(0, -_capsuleCollider.height / 2, 1), Vector3.up, out hitInfo,
-                                    _capsuleCollider.height, mask))
+                                    new Vector3(0, 2, 1), Vector3.down, out hitInfo,
+                    0.5f, mask))
                 {
                     return false;
                 }
+
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case PlayerDirection.Backward:
@@ -404,15 +433,17 @@ public class Player : MonoBehaviour
                 }
 
                 if (Physics.Raycast(currentTransformPosition +
-                                    new Vector3(0, -_capsuleCollider.height / 2, -1), Vector3.up, out hitInfo,
-                    _capsuleCollider.height, mask))
+                                    new Vector3(0, 2, -1), Vector3.down, out hitInfo,
+                    0.5f, mask))
                 {
                     return false;
                 }
+
                 return ValidateFloorMove(ground_hitInfo, Vector3.back, mask);
 
             case PlayerDirection.Left:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(-1, 0, 0), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }
@@ -426,15 +457,17 @@ public class Player : MonoBehaviour
                 }
 
                 if (Physics.Raycast(currentTransformPosition +
-                                    new Vector3(-1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
-                    _capsuleCollider.height, mask))
+                                    new Vector3(-1, 2, 0), Vector3.down, out hitInfo,
+                    0.5f, mask))
                 {
                     return false;
                 }
+
                 return ValidateFloorMove(ground_hitInfo, Vector3.left, mask);
 
             case PlayerDirection.Right:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1, mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(1, 0, 0), Vector3.down, out hitInfo, 1,
+                    mask))
                 {
                     return false;
                 }
@@ -448,11 +481,12 @@ public class Player : MonoBehaviour
                 }
 
                 if (Physics.Raycast(currentTransformPosition +
-                                    new Vector3(1, -_capsuleCollider.height / 2, 0), Vector3.up, out hitInfo,
-                    _capsuleCollider.height, mask))
+                                    new Vector3(1, 2, 0), Vector3.down, out hitInfo,
+                    0.5f, mask))
                 {
                     return false;
                 }
+
                 return ValidateFloorMove(ground_hitInfo, Vector3.right, mask);
         }
 
@@ -476,6 +510,13 @@ public class Player : MonoBehaviour
         Ground ground;
         if (hitInfo.collider.gameObject.TryGetComponent(out ground))
         {
+            print(ground.transform.position.y);
+            // If the ground is in the middle of moving don't let the player move on to it.
+            if (ground.IsMoving())
+            {
+                return false;
+            }
+
             if ((ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable()) && !ground._isSliding)
             {
                 // Painted surface or not painted in the first place, can move.
@@ -483,7 +524,7 @@ public class Player : MonoBehaviour
             }
 
             // Try to paint.
-            return ground.Paint(false); // If false then the floor was not painted.
+            return ground.Paint(_controllerUtil.IsPaintButtonPressed()); // If false then the floor was not painted.
         }
 
         return true;
@@ -491,7 +532,7 @@ public class Player : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height *40 / 2 + 0.1f);
+        return Physics.Raycast(transform.position, Vector3.down, _capsuleCollider.height * 40 / 2 + 0.1f);
     }
 
     private bool IsObjectInFrontSpecialCreature(RaycastHit hit)

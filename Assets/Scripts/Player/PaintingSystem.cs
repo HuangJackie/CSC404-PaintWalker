@@ -14,8 +14,6 @@ public class PaintingSystem : MonoBehaviour
     private bool _isInteractingWithTutorialSign;
 
     private bool _canInteractWithSelected;
-    private bool _emptySpaceSelected;
-    private bool _emptySpaceJustSelected;
 
     private GameObject _emptySpaceBlock;
     // private Vector3 _emptySpaceLocation; // To figure out where to place the block.
@@ -33,7 +31,7 @@ public class PaintingSystem : MonoBehaviour
         _emptySpaceBlock = (GameObject) Instantiate(emptySpaceBlockModel, Vector3.zero,
             Quaternion.identity);
         _emptySpaceBlock.SetActive(false);
-        
+
         _player = FindObjectOfType<Player>();
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _isoCamera = FindObjectOfType<ChangePerspective>();
@@ -72,6 +70,7 @@ public class PaintingSystem : MonoBehaviour
                 && teleportCreature.isPainted)
             {
                 teleportCreature.Interact();
+                ResetSelectedObject();
             }
 
             // Tutorial Sign Interaction
@@ -98,79 +97,95 @@ public class PaintingSystem : MonoBehaviour
             return;
         }
 
-        bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out int xSelect);
-        bool zAxisActive = _controllerUtil.GetZAxisPaintSelectAxis(out int zSelect);
+        bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out float xSelect);
+        bool zAxisActive = _controllerUtil.GetZAxisPaintSelectAxis(out float zSelect);
+
+        if (Math.Abs(xSelect) > Math.Abs(zSelect))
+        {
+            zAxisActive = false;
+            zSelect = 0;
+        }
+        else
+        {
+            xAxisActive = false;
+            xSelect = 0;
+        }
 
         // Move painting selection indicator based on the direction
         // the ISO camera is facing
-        if (xAxisActive || zAxisActive)
+        if (!xAxisActive && !zAxisActive)
         {
-            switch (_isoCamera.direction)
-            {
-                case CameraDirection.N:
-                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.x + xSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.right : Vector3.left, 1);
-                    }
-                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.y + zSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.forward : Vector3.back, 1);
-                    }
-                    break;
+            ResetSelectedObject();
+            return;
+        }
 
-                case CameraDirection.E:
-                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.y - xSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.back : Vector3.forward, 1);
-                    }
-                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.x + zSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.right : Vector3.left, 1);
-                    }
-                    break;
+        switch (_isoCamera.direction)
+        {
+            case CameraDirection.N:
+                if (xAxisActive)
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(xSelect > 0 ? Vector3.right : Vector3.left);
+                }
+                else
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(zSelect > 0 ? Vector3.forward : Vector3.back);
+                }
 
-                case CameraDirection.S:
-                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.x - xSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.left : Vector3.right, 1);
-                    }
-                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.y - zSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.back : Vector3.forward, 1);
-                    }
-                    break;
+                break;
 
-                case CameraDirection.W:
-                    if (xAxisActive && IsWithinRange(_selectedCoordinatesRelToPlayer.y + xSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(xSelect == 1 ? Vector3.forward : Vector3.back, 1);
-                    }
-                    else if (IsWithinRange(_selectedCoordinatesRelToPlayer.x - zSelect, 2))
-                    {
-                        BestEffortUpdateCurrentlySelectedBlock(zSelect == 1 ? Vector3.left : Vector3.right, 1);
-                    }
-                    break;
-            }
+            case CameraDirection.E:
+                if (xAxisActive)
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(xSelect > 0 ? Vector3.back : Vector3.forward);
+                }
+                else
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(zSelect > 0 ? Vector3.right : Vector3.left);
+                }
+
+                break;
+
+            case CameraDirection.S:
+                if (xAxisActive)
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(xSelect > 0 ? Vector3.left : Vector3.right);
+                }
+                else
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(zSelect > 0 ? Vector3.back : Vector3.forward);
+                }
+
+                break;
+
+            case CameraDirection.W:
+                if (xAxisActive)
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(xSelect > 0 ? Vector3.forward : Vector3.back);
+                }
+                else
+                {
+                    BestEffortUpdateCurrentlySelectedBlock(zSelect > 0 ? Vector3.left : Vector3.right);
+                }
+
+                break;
         }
     }
-
-    /**
-     * TODO make this into a util function. It currently duplicates the one in ColorWheelQuadrant.
-     */
-    private bool IsWithinRange(float toCompare, float delta)
+    private void BestEffortUpdateCurrentlySelectedBlock(Vector3 shift, int numShiftsToRecord = 1)
     {
-        return -delta <= toCompare && toCompare <= delta;
-    }
+        if (Math.Abs(shift.x - _selectedCoordinatesRelToPlayer.x) < 0.1
+            && Math.Abs(shift.z - _selectedCoordinatesRelToPlayer.y) < 0.1)
+        {
+            return;
+        }
 
-    private void BestEffortUpdateCurrentlySelectedBlock(Vector3 shift, int numShiftsToRecord)
-    {
+        ResetCurrentlySelectedBlock(shift);
+
         _canInteractWithSelected = true;
-        _emptySpaceJustSelected = false;
         Vector3 playerPosition = _player.transform.position;
         bool hitTopMostObject = RaycastForTopMostObject(
-            new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
+            new Vector3(playerPosition.x,
                 0,
-                playerPosition.z + _selectedCoordinatesRelToPlayer.y),
+                playerPosition.z),
             shift * numShiftsToRecord,
             out RaycastHit hitInfo);
         if (!hitTopMostObject || !IsSelectableBlock(hitInfo))
@@ -189,17 +204,25 @@ public class PaintingSystem : MonoBehaviour
         }
     }
 
+    private void ResetCurrentlySelectedBlock(Vector3 shift)
+    {
+        if (_selectedCoordinatesRelToPlayer.Equals(new Vector2(shift.x, shift.z)))
+        {
+            return;
+        }
+
+        ResetSelectedObject();
+    }
+
     private void HighlightUnpaintableObject(bool hitTopMostObject, RaycastHit hitInfo)
     {
         if (!hitTopMostObject)
         {
             // Means empty space so show a phantom block here.
-            _emptySpaceSelected = true;
-            _emptySpaceJustSelected = true;
             return;
         }
 
-        if (hitInfo.collider.TryGetComponent(out Ground ground))
+        if (hitInfo.collider.TryGetComponent(out Ground _))
         {
             // Means it's an unpaintable ground object.
             _canInteractWithSelected = false;
@@ -220,7 +243,7 @@ public class PaintingSystem : MonoBehaviour
 
     private void ListenForPaintingCommand()
     {
-        if (_controllerUtil.GetPaintButtonDown() && !_isInteractingWithTutorialSign)
+        if (_controllerUtil.IsPaintButtonPressed() && !_isInteractingWithTutorialSign)
         {
             Paintable paintable = GetCurrentlySelectedComponent<Paintable>();
             if (paintable == null)
@@ -269,7 +292,7 @@ public class PaintingSystem : MonoBehaviour
 
 
         if (RaycastForTopMostObject(_player.transform.position, Vector3.zero, out RaycastHit hitInfo)
-            && (hitInfo.collider.gameObject.TryGetComponent(out Ground ground)))
+            && (hitInfo.collider.gameObject.TryGetComponent(out Ground _)))
         {
             _groundBlockBelowPlayer = hitInfo.collider;
         }
@@ -315,11 +338,11 @@ public class PaintingSystem : MonoBehaviour
         {
             return;
         }
-        
+
         Vector3 playerPosition = _player.transform.position;
         _emptySpaceBlock.transform.position =
             new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
-                Mathf.Floor(playerPosition.y - 1.5f) + 0.5f,
+                Mathf.Floor(playerPosition.y - 0.5f) + 0.5f,
                 playerPosition.z + _selectedCoordinatesRelToPlayer.y);
         _emptySpaceBlock.SetActive(true);
     }

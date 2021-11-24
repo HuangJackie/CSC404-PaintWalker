@@ -15,11 +15,17 @@ namespace DefaultNamespace
             _lastTimeButtonPressed = Time.time;
         }
 
+        /*
+         * Deprecated Was used for the checkpoint hint.
+         */
         public bool PressedMovementKeys()
         {
             return Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
         }
         
+        /*
+         * Deprecated Was used for the checkpoint hint.
+         */
         public bool PressedPaintKeys()
         {
             return GetPaintButtonDown() || GetColourWheelPressed();
@@ -68,7 +74,7 @@ namespace DefaultNamespace
         }
 
         /**
-         * This is so that a single movement press doesn't trigger two blocks of movement.
+         * This is so that a single movement press doesn't trigger multiple blocks of movement.
          */
         private bool FinishedMovementDelay(float movement)
         {
@@ -81,7 +87,7 @@ namespace DefaultNamespace
             return false;
         }
 
-        public bool GetXAxisPaintSelectAxis(out int axis)
+        public bool GetXAxisPaintSelectAxis(out float axis)
         {
             if (GetColourWheelPressed() || _isMenuOpen)
             {
@@ -89,16 +95,12 @@ namespace DefaultNamespace
                 return false;
             }
 
-            axis = Input.GetAxisRaw("XAxisPaintSelect") > 0
-                ? 1
-                : (Input.GetAxisRaw("XAxisPaintSelect") < 0
-                    ? -1
-                    : 0);
+            axis = Input.GetAxisRaw("XAxisPaintSelect");
 
-            return FinishedMovementDelay(axis);
+            return Input.GetAxisRaw("XAxisPaintSelect") != 0;
         }
 
-        public bool GetZAxisPaintSelectAxis(out int axis)
+        public bool GetZAxisPaintSelectAxis(out float axis)
         {
             if (GetColourWheelPressed() || _isMenuOpen)
             {
@@ -106,13 +108,9 @@ namespace DefaultNamespace
                 return false;
             }
 
-            axis = Input.GetAxisRaw("ZAxisPaintSelect") > 0
-                ? 1
-                : (Input.GetAxisRaw("ZAxisPaintSelect") < 0
-                    ? -1
-                    : 0);
+            axis = Input.GetAxisRaw("ZAxisPaintSelect");
 
-            return FinishedMovementDelay(axis);
+            return Input.GetAxisRaw("ZAxisPaintSelect") != 0;
         }
 
         public bool GetColourWheelPressed()
@@ -138,6 +136,17 @@ namespace DefaultNamespace
         public float GetColourWheelSelectYAxis()
         {
             return Input.GetAxis("ColourWheelSelectYAxis");
+        }
+
+        public bool IsPaintButtonPressed()
+        {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return false;
+            }
+
+            // return Input.GetAxisRaw("Paint") > 0;
+            return Input.GetButton("Paint");
         }
 
         public bool GetPaintButtonDown()
@@ -264,16 +273,6 @@ namespace DefaultNamespace
             }
 
             return Input.GetButtonDown("SwitchBlue");
-        }
-
-        public bool loadCheckpointPressed()
-        {
-            if (_isMenuOpen)
-            {
-                return false;
-            }
-
-            return Input.GetButtonDown("LoadCheckpoint");
         }
     }
 }

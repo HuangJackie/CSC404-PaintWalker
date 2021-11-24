@@ -75,4 +75,6 @@ public class GameConstants : MonoBehaviour
     {
         None, Forward, Right, Backward, Left
     }
+
+    public const float PlayerHeight = 1.766f;
 }

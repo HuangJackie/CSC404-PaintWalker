@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
         _selectedMenuOption = 0;
     }
 
-    
+
     // Update is called once per frame
 
     void Update()
@@ -59,6 +59,7 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
         if (controlUIActive && (_controllerUtil.GetConfirmButtonPressed() || Input.GetKeyDown(KeyCode.RightShift)))
         {
             HideControl();
@@ -75,7 +76,7 @@ public class PauseMenu : MonoBehaviour
                     _controllerUtil.CloseMenu();
                 }
             }
-            
+
             if (_controllerUtil.GetGameMenuSelectAxis(out int select))
             {
                 _menuOptions[_selectedMenuOption].OnPointerExit(null);
@@ -90,16 +91,6 @@ public class PauseMenu : MonoBehaviour
 
                 _menuOptions[_selectedMenuOption].OnPointerEnter(null);
             }
-        }
-
-        ListenForLoadCheckpoint();
-    }
-
-    private void ListenForLoadCheckpoint()
-    {
-        if (_controllerUtil.loadCheckpointPressed())
-        {
-            _levelManager.RestartAtLastCheckpoint();
         }
     }
 
@@ -162,7 +153,7 @@ public class PauseMenu : MonoBehaviour
         _levelManager.RestartAtLastCheckpoint();
         Resume();
     }
-    
+
     public void Restart()
     {
         RestartFunction.Restart();
