@@ -67,6 +67,8 @@ public class Ground : Interactable, Paintable
     private SoundManager _pushIceBlockSoundManager = new SoundManager();
     private SoundManager _outOfPaintSoundManager = new SoundManager();
 
+    private const float BlockMovementDelay = 0.1f;
+
     private new void Start()
     {
         _levelManager = FindObjectOfType<LevelManager>();
@@ -203,6 +205,8 @@ public class Ground : Interactable, Paintable
 
     IEnumerator MoveIceBlockToDestination(bool isPushed)
     {
+        yield return new WaitForSeconds(BlockMovementDelay * 2);
+
         RaycastHit hit;
         LayerMask mask = LayerMask.GetMask("Player");
         Color intialColor = Material.color;
@@ -223,21 +227,14 @@ public class Ground : Interactable, Paintable
                 yield break;
             }
         }
-
-        print("out of loop");
-
+        
         if (isPushed)
         {
-            print("isPushed");
             yield return new WaitForSeconds(0.3f);
         }
 
-        print("out of loop");
-
         while (stillMoving)
         {
-            print("stillMoving");
-
             float distance = Vector3.Distance(transform.position, _destinationMove);
             while (distance > 0.01f)
             {
@@ -269,6 +266,8 @@ public class Ground : Interactable, Paintable
 
     IEnumerator RaiseLowerRedYellowBlockToDestination(Vector3 destination, bool reverting = false)
     {
+        yield return new WaitForSeconds(BlockMovementDelay);
+
         GameObject movableObjectOnTop = IsMovableObjectOnTop();
         if (!movableObjectOnTop && !reverting)
         {
