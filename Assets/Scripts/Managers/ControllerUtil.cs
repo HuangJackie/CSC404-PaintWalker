@@ -53,6 +53,15 @@ namespace DefaultNamespace
             return FinishedMovementDelay(verticalAxis) ? verticalAxis : 0;
         }
 
+        public bool CheckPlayerPressingMovement()
+        {
+            if (GetColourWheelPressed() || _isMenuOpen)
+            {
+                return false;
+            }
+            return (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0);
+        }
+
         public float GetHorizontalPanningAxis()
         {
             if (GetColourWheelPressed() || _isMenuOpen)

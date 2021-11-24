@@ -4167,6 +4167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5642586374054505751, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5642586374309679526, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -9482,6 +9486,9 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
   _destinationDrop: {x: 0, y: 0, z: 0}
   destinationNeutral: {x: 0, y: 0, z: 0}
@@ -9490,6 +9497,7 @@ MonoBehaviour:
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
@@ -12577,7 +12585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devMode: 0
+  devMode: 1
   freezePlayer: 0
   player: {fileID: 1796352079}
   playerBehavior: {fileID: 1796352081}

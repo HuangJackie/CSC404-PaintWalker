@@ -113,12 +113,17 @@ public class Ground : Interactable, Paintable
         base.Start();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!_player.IsPlayerMoving())
+        if (!_player.isPlayerMoving)
         {
             _outOfPaintAudioAlreadyPlayed = false;
         }
+    }
+
+    void Update()
+    {
+        
 
         if (_levelManager.freezePlayer)
         {
@@ -492,7 +497,7 @@ public class Ground : Interactable, Paintable
         
         if (!_levelManager.HasEnoughPaint())
         {
-            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.IsPlayerMoving())
+            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.isPlayerMoving)
             {
                 _outOfPaintSoundManager.PlayAudio();
                 _outOfPaintAudioAlreadyPlayed = true;

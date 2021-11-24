@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public bool resetMode;
     public bool _isPushing;
+    public bool isPlayerMoving;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
     public Transform cameraWorldAxis;
@@ -133,6 +134,7 @@ public class Player : MonoBehaviour
         _verticalMovement = _controllerUtil.GetVerticalAxisRaw();
         _isHorizontalMovementPressed = _horizontalMovement != 0;
         _isVerticalMovementPressed = _verticalMovement != 0;
+        isPlayerMoving = _controllerUtil.CheckPlayerPressingMovement();
 
         if (this.CheckGrounded())
         {
@@ -491,11 +493,6 @@ public class Player : MonoBehaviour
         }
 
         return false;
-    }
-
-    public bool IsPlayerMoving()
-    {
-        return _isHorizontalMovementPressed || _isVerticalMovementPressed;
     }
 
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)
