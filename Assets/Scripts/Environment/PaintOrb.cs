@@ -48,7 +48,7 @@ public class PaintOrb : Interactable, TooltipObject
         foreach (Renderer mesh in meshRenderers)
         {
             mesh.material.color = newColor;
-            mesh.material.SetFloat("_Glossiness", 0.2f);
+            mesh.material.SetFloat("_Glossiness", 0.4f);
         }
         ObjectStorage.paintOrbStorage.Add(this.gameObject);
         ReinitializeMaterialColours();
