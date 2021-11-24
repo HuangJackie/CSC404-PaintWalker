@@ -152,7 +152,7 @@ public class Ground : Interactable, Paintable
             {
                 GameObject footstepFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 footstepFX.transform.parent = gameObject.transform;
-                footstepFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.948f, gameObject.transform.position.z);
+                footstepFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.03f, gameObject.transform.position.z);
                 if (player_enter_from_north)
                 {
                     footstepFX.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -670,9 +670,9 @@ public class Ground : Interactable, Paintable
     {
         GameObject sparklesFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
         sparklesFX.transform.parent = gameObject.transform;
-        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.945f, gameObject.transform.position.z);
+        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.02f, gameObject.transform.position.z);
         sparklesFX.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 4) * 90, 0);
-        sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.12f;
+        sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.1f;
         Destroy(sparklesFX.GetComponent<MeshCollider>());
         Material sparkles = Resources.Load("Materials/Sparkles", typeof(Material)) as Material;
         sparklesFX.GetComponent<Renderer>().material = sparkles;
