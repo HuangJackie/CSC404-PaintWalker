@@ -112,20 +112,10 @@ public class CameraRotation : MonoBehaviour
 
             float horizontalPanning = _controllerUtil.GetHorizontalPanningAxis() * controllerPanningSpeed;
             float verticalPanning = _controllerUtil.GetVerticalPanningAxis() * controllerPanningSpeed;
-            print(horizontalPanning);
-            print(verticalPanning);
-
-            // if (isoCamera.isIntervteredControl)
-            // {
-            //     horizontalPanning = -horizontalPanning;
-            //     verticalPanning = -verticalPanning;
-            // }
-
+            
             switch (isoCamera.direction)
             {
                 case CameraDirection.N:
-                    horizontalPanning = horizontalPanning;
-                    verticalPanning = verticalPanning;
                     break;
                 case CameraDirection.E:
                     float tempValue = horizontalPanning;
@@ -140,10 +130,6 @@ public class CameraRotation : MonoBehaviour
                     tempValue = horizontalPanning;
                     horizontalPanning = verticalPanning;
                     verticalPanning = -tempValue;
-                    break;
-                default: // Same as CameraDirection.N
-                    horizontalPanning = horizontalPanning;
-                    verticalPanning = verticalPanning;
                     break;
             }
 
