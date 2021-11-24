@@ -8,10 +8,21 @@ namespace DefaultNamespace
     public class SoundManager
     {
         public AudioSource[] AudioSources = Array.Empty<AudioSource>();
+        public AudioSource AudioSource;
 
         public void SetAudioSources(AudioSource[] audioSource)
         {
             AudioSources = audioSource;
+        }
+
+        public void SetAudioSource(AudioSource audioSource)
+        {
+            AudioSource = audioSource;
+        }
+
+        public void PlayAudio()
+        {
+            AudioSource.Play();
         }
 
         public void PlayRandom()
