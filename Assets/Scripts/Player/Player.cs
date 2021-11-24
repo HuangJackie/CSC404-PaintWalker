@@ -459,6 +459,11 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    public bool IsPlayerMoving()
+    {
+        return _isHorizontalMovementPressed || _isVerticalMovementPressed;
+    }
+
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)
     {
         //Debug.DrawRay(transform.position, Vector3.Normalize(direction), Color.black, 120f);

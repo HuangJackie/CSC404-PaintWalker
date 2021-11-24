@@ -32,6 +32,7 @@ public class Ground : Interactable, Paintable
     private Player _player;
     private float _playerYPosition;
     private float _moveableObjYPosition;
+    private bool _outOfPaintAudioAlreadyPlayed;
     private Animator animator;
 
     private bool _isMouseClicked;
@@ -49,6 +50,7 @@ public class Ground : Interactable, Paintable
     public GameObject RedSounds;
     public GameObject BlueSounds;
     public GameObject GreenSounds;
+    public GameObject NoPaintSound;
 
     public GameObject blue_model;
     public GameObject yellow_model;
@@ -62,6 +64,7 @@ public class Ground : Interactable, Paintable
     private SoundManager _blueSoundManager = new SoundManager();
     private SoundManager _greenSoundManager = new SoundManager();
     private SoundManager _pushIceBlockSoundManager = new SoundManager();
+    private SoundManager _outOfPaintSoundManager = new SoundManager();
 
     private new void Start()
     {
@@ -84,6 +87,7 @@ public class Ground : Interactable, Paintable
 
         _isIceBlockEffectEnabled = false;
         _isSliding = false;
+        _outOfPaintAudioAlreadyPlayed = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         destinationNeutral = transform.position;
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
@@ -96,18 +100,25 @@ public class Ground : Interactable, Paintable
         RedSounds = GameObject.Find("PaintingRed");
         BlueSounds = GameObject.Find("PaintingBlue");
         GreenSounds = GameObject.Find("PaintingGreen");
+        NoPaintSound = GameObject.Find("OutOfPaint");
 
         _yellowSoundManager.SetAudioSources(YellowSounds.GetComponents<AudioSource>());
         _redSoundManager.SetAudioSources(RedSounds.GetComponents<AudioSource>());
         _blueSoundManager.SetAudioSources(BlueSounds.GetComponents<AudioSource>());
         _greenSoundManager.SetAudioSources(GreenSounds.GetComponents<AudioSource>());
         _pushIceBlockSoundManager.SetAudioSources(GetComponents<AudioSource>());
+        _outOfPaintSoundManager.SetAudioSource(NoPaintSound.GetComponent<AudioSource>());
         
         base.Start();
     }
 
     void Update()
     {
+        if (!_player.IsPlayerMoving())
+        {
+            _outOfPaintAudioAlreadyPlayed = false;
+        }
+
         if (_levelManager.freezePlayer)
         {
             return;
@@ -471,6 +482,11 @@ public class Ground : Interactable, Paintable
         
         if (!_levelManager.HasEnoughPaint())
         {
+            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.IsPlayerMoving())
+            {
+                _outOfPaintSoundManager.PlayAudio();
+                _outOfPaintAudioAlreadyPlayed = true;
+            }
             return false;
         }
 

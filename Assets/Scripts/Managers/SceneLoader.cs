@@ -12,6 +12,24 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("MainMenuScene");
     }
 
+    public static void LoadNextLevel()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Tutorial1")
+        {
+            LoadLevel(Levels.Tutorial15);
+        } else if (scene.name == "Tutorial15")
+        {
+            LoadLevel(Levels.Tutorial2);
+        } else if (scene.name == "Tutorial2")
+        {
+            LoadLevel(Levels.Level1);
+        } else
+        {
+            LoadMainMenu();
+        }
+    }
+
     public static void LoadLevel(Levels level)
     {
         SceneManager.LoadScene(Enum.GetName(typeof(Levels), level));
