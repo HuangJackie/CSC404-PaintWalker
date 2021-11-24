@@ -112,12 +112,17 @@ public class Ground : Interactable, Paintable
         base.Start();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!_player.IsPlayerMoving())
+        if (!_player.isPlayerMoving)
         {
             _outOfPaintAudioAlreadyPlayed = false;
         }
+    }
+
+    void Update()
+    {
+        
 
         if (_levelManager.freezePlayer)
         {
@@ -148,8 +153,7 @@ public class Ground : Interactable, Paintable
             {
                 GameObject footstepFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 footstepFX.transform.parent = gameObject.transform;
-                footstepFX.transform.position = new Vector3(gameObject.transform.position.x,
-                    gameObject.transform.position.y + 0.948f, gameObject.transform.position.z);
+                footstepFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.03f, gameObject.transform.position.z);
                 if (player_enter_from_north)
                 {
                     footstepFX.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -160,8 +164,7 @@ public class Ground : Interactable, Paintable
                     footstepFX.transform.rotation = Quaternion.Euler(0, 90, 0);
                     isWalkedOverHorizontally = true;
                 }
-
-                footstepFX.transform.localScale = footstepFX.transform.localScale * 0.11f;
+                footstepFX.transform.localScale = footstepFX.transform.localScale * 0.1f;
                 Destroy(footstepFX.GetComponent<MeshCollider>());
                 Material footstep = Resources.Load("Materials/FootSteps", typeof(Material)) as Material;
                 footstepFX.GetComponent<Renderer>().material = footstep;
@@ -518,7 +521,7 @@ public class Ground : Interactable, Paintable
 
         if (!_levelManager.HasEnoughPaint())
         {
-            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.IsPlayerMoving())
+            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.isPlayerMoving)
             {
                 _outOfPaintSoundManager.PlayAudio();
                 _outOfPaintAudioAlreadyPlayed = true;
@@ -699,10 +702,9 @@ public class Ground : Interactable, Paintable
     {
         GameObject sparklesFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
         sparklesFX.transform.parent = gameObject.transform;
-        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x,
-            gameObject.transform.position.y + 0.945f, gameObject.transform.position.z);
+        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.02f, gameObject.transform.position.z);
         sparklesFX.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 4) * 90, 0);
-        sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.11f;
+        sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.1f;
         Destroy(sparklesFX.GetComponent<MeshCollider>());
         Material sparkles = Resources.Load("Materials/Sparkles", typeof(Material)) as Material;
         sparklesFX.GetComponent<Renderer>().material = sparkles;
