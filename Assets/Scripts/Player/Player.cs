@@ -9,26 +9,35 @@ public class Player : MonoBehaviour
 {
     public bool resetMode;
     public bool _isPushing;
-    public Transform cameraWorldAxis;
-    public CameraRotation cameraPanningRevertTarget;
     public LevelManager LevelManager;
     public ChangePerspective isoCamera;
+    public Transform cameraWorldAxis;
+    public CameraRotation cameraPanningRevertTarget;
     public MoveRedo GameState;
+    public GameObject _colorWheelHUD;
+
+    private Animator animator;
+    private ControllerUtil _controllerUtil;
+    private PaintingSystem _paintingSystem;
+
+
+    // For basic movement
+    private Rigidbody _rigidbody;
+    private CapsuleCollider _capsuleCollider;
+    private Vector3 _previousPosForRedo;
+    private Quaternion _previsouRotationForRedo;
 
     private float _horizontalMovement;
     private float _verticalMovement;
+    public float speed;
+
     private bool _isNotTrackingMovement;
     private bool _isHorizontalMovementPressed;
     private bool _isVerticalMovementPressed;
     private bool _isRotating;
-    private Vector3 _previousPosForRedo;
-    private Quaternion _previsouRotationForRedo;
-    private CapsuleCollider _capsuleCollider;
-    private Rigidbody _rigidbody;
-    public GameObject _colorWheelHUD;
 
-    // Rigid Grid Movement
-    public float speed;
+    // For rigid grid-based Movement
+    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
     private Vector3 _moveDirection;
     private Vector3 _targetLocation;
     private Vector3 _prevTargetLocation;
@@ -39,11 +48,7 @@ public class Player : MonoBehaviour
     public float _pushTimer = 30.0f;
 
     private bool _hasWaitedTurn;
-    private ControllerUtil _controllerUtil;
-    private PaintingSystem _paintingSystem;
-    private Animator animator;
 
-    private Dictionary<CameraDirection, PlayerDirection> cameraToPlayerDir;
 
     private void Awake()
     {
@@ -93,7 +98,7 @@ public class Player : MonoBehaviour
         cameraPanningRevertTarget._gameplayPos =
             cameraPanningRevertTarget._gameplayPos + new Vector3(0, distMoved.y, 0);
 
-        if (LevelManager.freeze_player || _isPushing)
+        if (LevelManager.freezePlayer || _isPushing)
         {
             animation_update("walk", false);
             if (_isPushing)
@@ -416,8 +421,8 @@ public class Player : MonoBehaviour
                 return ValidateFloorMove(ground_hitInfo, Vector3.forward, mask);
 
             case PlayerDirection.Backward:
-                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1), Vector3.down, out hitInfo, 1,
-                    mask))
+                if (!Physics.Raycast(currentTransformPosition + new Vector3(0, 0, -1),
+                                     Vector3.down, out hitInfo, 1, mask))
                 {
                     return false;
                 }
