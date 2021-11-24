@@ -6049,7 +6049,7 @@ MonoBehaviour:
   ToolTipWalking: {fileID: 0}
   ToolTipPainting: {fileID: 0}
   ToolTipPanning: {fileID: 0}
-  ToolTipDoor: {fileID: 0}
+  ToolTipDoor: {fileID: 2016310312}
   ToolTipYellow: {fileID: 0}
   ToolTipRed: {fileID: 0}
   ToolTipGreen: {fileID: 0}
@@ -6069,7 +6069,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.0814376, y: 1.3071003, z: 9.94576}
-  m_Center: {x: 0.11571876, y: 0.36644664, z: 4.6376057}
+  m_Center: {x: 0.11571876, y: -0.02, z: 4.6376057}
 --- !u!23 &783961990
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6380,6 +6380,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3517091834837948321, guid: d43312ba220fe6341b8a0a24af2730bd, type: 3}
   m_PrefabInstance: {fileID: 632650596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &814172264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586374425140732, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 605882550}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &821378105 stripped
 Transform:
@@ -7324,6 +7329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
+--- !u!1 &951027043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586373523177657, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 605882550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &954278448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7052674356264002792, guid: 6287aefaf8a77a24888fca27b709a8be, type: 3}
@@ -13697,7 +13707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604573535}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.557, y: 1.109, z: -1.56}
+  m_LocalPosition: {x: 1.517, y: 1.109, z: -1.431}
   m_LocalScale: {x: 0.4155954, y: 0.98445, z: 0.053179987}
   m_Children:
   - {fileID: 852818194}
@@ -13721,7 +13731,7 @@ MonoBehaviour:
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
   _allColours: []
   player: {fileID: 0}
-  ToolTipWalking: {fileID: 0}
+  ToolTipWalking: {fileID: 1678101087}
   ToolTipPainting: {fileID: 0}
   ToolTipPanning: {fileID: 0}
   ToolTipDoor: {fileID: 0}
@@ -13743,8 +13753,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.85, y: 1, z: 3.98}
-  m_Center: {x: 0, y: 0.52, z: 0}
+  m_Size: {x: 2.06, y: 1.48, z: 10.1}
+  m_Center: {x: 0, y: 0.52, z: 0.66}
 --- !u!23 &1604573539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14099,7 +14109,7 @@ MonoBehaviour:
   ToolTipPanning: {fileID: 0}
   ToolTipDoor: {fileID: 0}
   ToolTipYellow: {fileID: 0}
-  ToolTipRed: {fileID: 0}
+  ToolTipRed: {fileID: 814172264}
   ToolTipGreen: {fileID: 0}
   ToolTipBlue: {fileID: 0}
   ToolTipUlala: {fileID: 0}
@@ -14305,6 +14315,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678096968}
   m_Mesh: {fileID: -7497325171917879279, guid: 2120b6193e20ea94d912fa460b81b7fb, type: 3}
+--- !u!1 &1678101087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586372604571245, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 605882550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1678546336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16934,6 +16949,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 164392036}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2016310312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586373874518774, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 605882550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2024827162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
@@ -17534,7 +17554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127423684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.97, y: 0.956, z: 1.99}
+  m_LocalPosition: {x: -0.734, y: 0.956, z: 1.71}
   m_LocalScale: {x: 0.4155954, y: 0.98445, z: 0.053179987}
   m_Children:
   - {fileID: 153990933}
@@ -17562,7 +17582,7 @@ MonoBehaviour:
   ToolTipPainting: {fileID: 0}
   ToolTipPanning: {fileID: 0}
   ToolTipDoor: {fileID: 0}
-  ToolTipYellow: {fileID: 0}
+  ToolTipYellow: {fileID: 951027043}
   ToolTipRed: {fileID: 0}
   ToolTipGreen: {fileID: 0}
   ToolTipBlue: {fileID: 0}
@@ -17581,7 +17601,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.0814376, y: 1.3071003, z: 9.94576}
-  m_Center: {x: 0.11571876, y: 0.36644664, z: -5.59}
+  m_Center: {x: 0.57, y: 0.66, z: -3.9}
 --- !u!23 &2127423688
 MeshRenderer:
   m_ObjectHideFlags: 0
