@@ -22,12 +22,17 @@ public class Ground : Interactable, Paintable
     public Color _paintedColour;
     public bool isPaintable = true;
 
+    public bool player_enter_from_north;
+    public bool isWalkedOverVertially = false;
+    public bool isWalkedOverHorizontally = false;
+
     private MoveRedo latestState;
     private LevelManager _levelManager;
     private UpdateUI _updateUI;
     private Player _player;
     private float _playerYPosition;
     private float _moveableObjYPosition;
+    private bool _outOfPaintAudioAlreadyPlayed;
     private Animator animator;
 
     private bool _isMouseClicked;
@@ -46,6 +51,7 @@ public class Ground : Interactable, Paintable
     public GameObject RedSounds;
     public GameObject BlueSounds;
     public GameObject GreenSounds;
+    public GameObject NoPaintSound;
 
     public GameObject blue_model;
     public GameObject yellow_model;
@@ -59,6 +65,7 @@ public class Ground : Interactable, Paintable
     private SoundManager _blueSoundManager = new SoundManager();
     private SoundManager _greenSoundManager = new SoundManager();
     private SoundManager _pushIceBlockSoundManager = new SoundManager();
+    private SoundManager _outOfPaintSoundManager = new SoundManager();
 
     private new void Start()
     {
@@ -70,6 +77,7 @@ public class Ground : Interactable, Paintable
         originalColour = Material.color;
         _paintedColour = originalColour;
         paintedColour = Material.color;
+        player_enter_from_north = false;
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
         animator = player.GetComponentInChildren<Animator>();
@@ -80,6 +88,7 @@ public class Ground : Interactable, Paintable
 
         _isIceBlockEffectEnabled = false;
         _isSliding = false;
+        _outOfPaintAudioAlreadyPlayed = false;
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         destinationNeutral = transform.position;
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
@@ -92,18 +101,25 @@ public class Ground : Interactable, Paintable
         RedSounds = GameObject.Find("PaintingRed");
         BlueSounds = GameObject.Find("PaintingBlue");
         GreenSounds = GameObject.Find("PaintingGreen");
+        NoPaintSound = GameObject.Find("OutOfPaint");
 
         _yellowSoundManager.SetAudioSources(YellowSounds.GetComponents<AudioSource>());
         _redSoundManager.SetAudioSources(RedSounds.GetComponents<AudioSource>());
         _blueSoundManager.SetAudioSources(BlueSounds.GetComponents<AudioSource>());
         _greenSoundManager.SetAudioSources(GreenSounds.GetComponents<AudioSource>());
         _pushIceBlockSoundManager.SetAudioSources(GetComponents<AudioSource>());
+        _outOfPaintSoundManager.SetAudioSource(NoPaintSound.GetComponent<AudioSource>());
         
         base.Start();
     }
 
     void Update()
     {
+        if (!_player.IsPlayerMoving())
+        {
+            _outOfPaintAudioAlreadyPlayed = false;
+        }
+
         if (_levelManager.freezePlayer)
         {
             return;
@@ -120,6 +136,32 @@ public class Ground : Interactable, Paintable
                 Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
                 Paint(true);
+            }
+        }
+
+        RaycastHit PlayerhitInfo;
+        LayerMask mask = LayerMask.GetMask("Player");
+        if (Physics.Raycast(this.transform.position, Vector3.up, out PlayerhitInfo, 1, mask))
+        {
+            if ((player_enter_from_north && !isWalkedOverVertially) || (!player_enter_from_north && !isWalkedOverHorizontally))
+            {
+                GameObject footstepFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                footstepFX.transform.parent = gameObject.transform;
+                footstepFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.948f, gameObject.transform.position.z);
+                if (player_enter_from_north)
+                {
+                    footstepFX.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    isWalkedOverVertially = true;
+                }
+                else
+                {
+                    footstepFX.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    isWalkedOverHorizontally = true;
+                }
+                footstepFX.transform.localScale = footstepFX.transform.localScale * 0.11f;
+                Destroy(footstepFX.GetComponent<MeshCollider>());
+                Material footstep = Resources.Load("Materials/FootSteps", typeof(Material)) as Material;
+                footstepFX.GetComponent<Renderer>().material = footstep;
             }
         }
     }
@@ -336,7 +378,13 @@ public class Ground : Interactable, Paintable
     {
         if ((!isPaintedByBrush || !isPaintedByFeet) && other.gameObject.CompareTag("Player"))
         {
-            Paint(false);
+            if (other.transform.position.z - this.transform.position.z != 0)
+            {
+                player_enter_from_north = true;
+            } else if (other.transform.position.x - this.transform.position.x != 0)
+            {
+                player_enter_from_north = false;
+            }
         }
 
         IceBlockMovementWhenPushed(other);
@@ -444,6 +492,11 @@ public class Ground : Interactable, Paintable
         
         if (!_levelManager.HasEnoughPaint())
         {
+            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.IsPlayerMoving())
+            {
+                _outOfPaintSoundManager.PlayAudio();
+                _outOfPaintAudioAlreadyPlayed = true;
+            }
             return false;
         }
 
@@ -482,6 +535,9 @@ public class Ground : Interactable, Paintable
                     Debug.Log("red effect triggered");
                     StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationDrop));
                     isPaintedByBrush = true; }
+                } else
+                {
+                    AddSparkleFX();
                 }
 
                 break;
@@ -505,6 +561,9 @@ public class Ground : Interactable, Paintable
                     green_model.SetActive(true);
                     _cur_model = green_model;
 
+                } else
+                {
+                    AddSparkleFX();
                 }
 
                 break;
@@ -525,6 +584,9 @@ public class Ground : Interactable, Paintable
                         StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationRaise));
                         isPaintedByBrush = true;
                     }
+                } else
+                {
+                    AddSparkleFX();
                 }
 
                 break;
@@ -550,6 +612,9 @@ public class Ground : Interactable, Paintable
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
                     _cur_model = blue_model;
+                } else
+                {
+                    AddSparkleFX();
                 }
 
                 break;
@@ -594,6 +659,18 @@ public class Ground : Interactable, Paintable
         }
         _cur_model.SetActive(false);
         new_model.SetActive(true);
+    }
+
+    public void AddSparkleFX()
+    {
+        GameObject sparklesFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        sparklesFX.transform.parent = gameObject.transform;
+        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.945f, gameObject.transform.position.z);
+        sparklesFX.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 4) * 90, 0);
+        sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.11f;
+        Destroy(sparklesFX.GetComponent<MeshCollider>());
+        Material sparkles = Resources.Load("Materials/Sparkles", typeof(Material)) as Material;
+        sparklesFX.GetComponent<Renderer>().material = sparkles;
     }
 
     public void UpdateModel(GameObject new_model)

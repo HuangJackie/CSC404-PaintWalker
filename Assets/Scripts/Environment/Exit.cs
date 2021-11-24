@@ -38,6 +38,6 @@ public class Exit : MonoBehaviour
     private IEnumerator ReturnToMenu()
     {
         yield return new WaitForSeconds(3);
-        SceneLoader.LoadMainMenu();
+        SceneLoader.LoadNextLevel();
     }
 }

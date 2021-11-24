@@ -248,7 +248,6 @@ public class Player : MonoBehaviour
             if (!_isHorizontalMovementPressed && !_isVerticalMovementPressed)
             {
                 animation_update("walk", false);
-                print("stopped moving");
             }
             GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
             GameState.PlayerInit(this.gameObject, cameraPanningRevertTarget, _targetLocation - _previousPosForRedo,
@@ -356,7 +355,6 @@ public class Player : MonoBehaviour
             return;
         }
 
-        print("moving");
         
 
         switch (pressedDirection)
@@ -495,6 +493,11 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    public bool IsPlayerMoving()
+    {
+        return _isHorizontalMovementPressed || _isVerticalMovementPressed;
+    }
+
     private bool ValidateFloorMove(RaycastHit hitInfo, Vector3 direction, LayerMask mask)
     {
         //Debug.DrawRay(transform.position, Vector3.Normalize(direction), Color.black, 120f);
@@ -517,7 +520,6 @@ public class Player : MonoBehaviour
             if ((ground.isPaintedByBrush || ground.isPaintedByFeet || !ground.IsPaintable()) && !ground._isSliding)
             {
                 // Painted surface or not painted in the first place, can move.
-                print("there");
                 return true;
             }
 
