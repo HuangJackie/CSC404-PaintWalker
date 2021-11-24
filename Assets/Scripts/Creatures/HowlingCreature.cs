@@ -62,6 +62,8 @@ public class HowlingCreature : SpecialCreature
             m_MyAudioSource.Play();
             originalColour = Material.color;
             paintedColour = Material.color;
+            frozen_model.SetActive(false);
+            coloured_model.SetActive(true);
             isPainted = true;
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
 

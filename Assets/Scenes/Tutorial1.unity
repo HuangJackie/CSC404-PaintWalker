@@ -19513,7 +19513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devMode: 0
+  devMode: 1
   freezePlayer: 0
   player: {fileID: 2026074254}
   playerBehavior: {fileID: 567774416}
