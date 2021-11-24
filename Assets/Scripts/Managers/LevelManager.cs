@@ -198,6 +198,7 @@ public class LevelManager : MonoBehaviour
             // NOTE: The player height on ground is 1.764744f,
             // if we ever change this parameter, the code here needs to be updated as well
             Vector3 spawn_pos = new Vector3(checkpointPos.x, playerPos.y, checkpointPos.z);
+            print(spawn_pos);
             playerBehavior.UpdateTargetLocation(spawn_pos);
             player.transform.position = spawn_pos;
             playerBehavior.resetMode = true;
@@ -241,6 +242,8 @@ public class LevelManager : MonoBehaviour
                     groundScript.destinationNeutral = ObjectStorage.blockStates[i][8];
                     groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
                     groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
+                    groundScript.isWalkedOverHorizontally = ObjectStorage.blockStates[i][10];
+                    groundScript.isWalkedOverVertially = ObjectStorage.blockStates[i][11];
                     block.SetActive(ObjectStorage.blockStates[i][6]);
                     groundScript.ReinitializeMaterialColours();
                 }
@@ -283,6 +286,29 @@ public class LevelManager : MonoBehaviour
             _updateUI.SetPaint(GetPaintQuantity(GetCurrentlySelectedPaint()));
             _updateUI.InitPaintInfoText(paintQuantity["Yellow"], paintQuantity["Red"],
                                         paintQuantity["Blue"], paintQuantity["Green"]);
+
+            //reset foot step FX and Sparkle FX
+            for (int i = 0; i < ObjectStorage.footPrintStates.Count; i++)
+            {
+                GameObject footprint = ObjectStorage.footStepStorage[i];
+                footprint.gameObject.SetActive(ObjectStorage.footPrintStates[i][0]);
+            }
+            for (int i = ObjectStorage.footPrintStates.Count; i < ObjectStorage.footStepStorage.Count; i++)
+            {
+                GameObject footprint = ObjectStorage.footStepStorage[i];
+                Destroy(footprint);
+            }
+
+            for (int i = 0; i < ObjectStorage.sparkleStates.Count; i++)
+            {
+                GameObject sparkle = ObjectStorage.sparkleStorage[i];
+                sparkle.gameObject.SetActive(ObjectStorage.sparkleStates[i][0]);
+            }
+            for (int i = ObjectStorage.sparkleStates.Count; i < ObjectStorage.sparkleStorage.Count; i++)
+            {
+                GameObject sparkle = ObjectStorage.sparkleStorage[i];
+                Destroy(sparkle);
+            }
         }
         actionQueue.Clear();
         StopAllCoroutines();

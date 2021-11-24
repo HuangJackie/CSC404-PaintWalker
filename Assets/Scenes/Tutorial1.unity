@@ -6495,7 +6495,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: adf8effc5be44ab499fc123e23d8a59c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -16963,6 +16963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetMode: 0
   _isPushing: 0
+  isPlayerMoving: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 1132067918}
   cameraWorldAxis: {fileID: 810282248}
