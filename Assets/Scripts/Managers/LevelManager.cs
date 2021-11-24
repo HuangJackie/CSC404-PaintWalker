@@ -230,12 +230,17 @@ public class LevelManager : MonoBehaviour
                 else
                 {
                     Ground groundScript = block.GetComponent<Ground>();
+                    groundScript.UpdateModel(ObjectStorage.blockStates[i][7]);
                     block.transform.position = ObjectStorage.blockStates[i][0];
                     groundScript.isPaintedByBrush = ObjectStorage.blockStates[i][1];
                     groundScript.isPaintedByFeet = ObjectStorage.blockStates[i][2];
                     groundScript.originalColour = ObjectStorage.blockStates[i][3];
                     groundScript.paintedColour = ObjectStorage.blockStates[i][4];
+                    groundScript._paintedColour = ObjectStorage.blockStates[i][9];
                     block.GetComponentInChildren<Renderer>().material.color = ObjectStorage.blockStates[i][5];
+                    groundScript.destinationNeutral = ObjectStorage.blockStates[i][8];
+                    groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
+                    groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
                     block.SetActive(ObjectStorage.blockStates[i][6]);
                 }
             }
