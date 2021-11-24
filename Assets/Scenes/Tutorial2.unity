@@ -4287,6 +4287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5642586374054505751, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5642586374309679526, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -22554,7 +22558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   devMode: 0
   freezePlayer: 0
-  player: {fileID: 1796352079}
+  player: {fileID: 1993240028}
   playerBehavior: {fileID: 1796352081}
   init_yellow: 0
   init_red: 0
@@ -23511,11 +23515,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 1
---- !u!1 &1796352079 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4180352918738585247, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
-  m_PrefabInstance: {fileID: 95763049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1796352080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4180352918738585246, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
@@ -23526,7 +23525,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4180352918738585245, guid: 5ea672e07be222b43b950791fa3e07b2, type: 3}
   m_PrefabInstance: {fileID: 95763049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796352079}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}

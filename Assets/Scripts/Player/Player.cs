@@ -231,10 +231,12 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position)
         {
             animation_update("walk", true);
-            if (InvalidMove())
-            {
-                _targetLocation = _prevTargetLocation;
-            }
+            // Slide back if block below is moving for yellow. Commenting out for now to prevent the snapback 
+            // since it messes up red.
+            // if (InvalidMove())
+            // {
+            //     _targetLocation = _prevTargetLocation;
+            // }
             
             if (_isNotTrackingMovement)
             {
