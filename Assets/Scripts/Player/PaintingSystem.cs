@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DefaultNamespace;
 using UnityEngine;
 using static GameConstants;
@@ -8,6 +9,7 @@ public class PaintingSystem : MonoBehaviour
     private Player _player;
     private ControllerUtil _controllerUtil;
     private ChangePerspective _isoCamera;
+    private LevelManager _levelManager;
 
     private Collider _groundBlockBelowPlayer;
     private Collider _currentlySelectedToPaint;
@@ -27,6 +29,8 @@ public class PaintingSystem : MonoBehaviour
 
     private void Start()
     {
+        _levelManager = FindObjectOfType<LevelManager>();
+
         var emptySpaceBlockModel = Resources.Load(path: "Blocks/EmptySpaceHighlight");
         _emptySpaceBlock = (GameObject) Instantiate(emptySpaceBlockModel, Vector3.zero,
             Quaternion.identity);
@@ -257,7 +261,7 @@ public class PaintingSystem : MonoBehaviour
         }
     }
 
-////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
 // END: Code that Checks for Controller Input
 ////////////////////////////////////////////////////////
 
