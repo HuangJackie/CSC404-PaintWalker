@@ -154,8 +154,17 @@ public class Ground : Interactable, Paintable
 
     IEnumerator MoveIceBlockToDestination(bool isPushed)
     {
+        RaycastHit hit;
+        LayerMask mask = LayerMask.GetMask("Player");
         bool stillMoving = true;
-        yield return new WaitForSeconds(0.3f);
+        while (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1, mask))
+        {
+            yield return null;
+        }
+        if (isPushed)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
         while (stillMoving)
         {
             float distance = Vector3.Distance(transform.position, _destinationMove);

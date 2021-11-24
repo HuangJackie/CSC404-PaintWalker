@@ -8871,7 +8871,7 @@ MonoBehaviour:
   ToolTipYellow: {fileID: 0}
   ToolTipRed: {fileID: 0}
   ToolTipGreen: {fileID: 0}
-  ToolTipBlue: {fileID: 0}
+  ToolTipBlue: {fileID: 1745368439}
   ToolTipUlala: {fileID: 0}
   ToolTipArie: {fileID: 0}
   ToolTipGemi: {fileID: 0}
@@ -9586,6 +9586,7 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  _isSliding: 0
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
@@ -12713,8 +12714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dev_mode: 0
-  freeze_player: 0
+  devMode: 1
+  freezePlayer: 0
   player: {fileID: 1796352079}
   playerBehavior: {fileID: 1796352081}
   init_yellow: 0
@@ -13197,6 +13198,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 1592499792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745368439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586372815944540, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 569996343}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1750099150 stripped
 Transform:
