@@ -17,7 +17,7 @@ public class PaintBrush : MonoBehaviour
     private ParticleSystem.MainModule particleSettings;
     private Light lightSettings;
 
-    private void Start()
+    private void Awake()
     {
         lightSettings = GetComponentsInChildren<Light>()[0];
         particleSystemCore = GetComponentInChildren<ParticleSystem>();
@@ -28,6 +28,7 @@ public class PaintBrush : MonoBehaviour
     {
         currentColor = color;
         brushTip.SetColor("_Color", color);
+        
         particleSettings.startColor = (Color) color;
         lightSettings.color = color;
     }
