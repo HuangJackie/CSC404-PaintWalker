@@ -37,6 +37,9 @@ public class ObjectStorage : MonoBehaviour
             blockInfo.Add(groundScript.paintedColour);
             blockInfo.Add(block.GetComponentInChildren<Renderer>().material.color);
             blockInfo.Add(block.activeSelf);
+            blockInfo.Add(groundScript._cur_model);
+            blockInfo.Add(groundScript.destinationNeutral);
+            blockInfo.Add(groundScript._paintedColour);
             blockStates.Add(blockInfo);
         }
     }

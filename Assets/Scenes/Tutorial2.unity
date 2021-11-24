@@ -8771,7 +8771,7 @@ MonoBehaviour:
   ToolTipYellow: {fileID: 0}
   ToolTipRed: {fileID: 0}
   ToolTipGreen: {fileID: 0}
-  ToolTipBlue: {fileID: 0}
+  ToolTipBlue: {fileID: 1745368439}
   ToolTipUlala: {fileID: 0}
   ToolTipArie: {fileID: 0}
   ToolTipGemi: {fileID: 0}
@@ -13061,6 +13061,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 1592499792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745368439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5642586372815944540, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+  m_PrefabInstance: {fileID: 569996343}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1750099150 stripped
 Transform:

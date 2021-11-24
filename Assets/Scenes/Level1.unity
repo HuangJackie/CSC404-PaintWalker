@@ -16006,6 +16006,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5642586372639189160, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5642586374054505751, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16149,7 +16153,7 @@ MonoBehaviour:
   devMode: 0
   freezePlayer: 0
   player: {fileID: 4180352918515976783}
-  playerBehavior: {fileID: 0}
+  playerBehavior: {fileID: 4180352918515976784}
   init_yellow: 1
   init_red: 40
   init_green: 4
@@ -23754,6 +23758,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5896979215231548261, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
   m_PrefabInstance: {fileID: 7770362537309466922}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4180352918515976784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5896979215231548263, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
+  m_PrefabInstance: {fileID: 7770362537309466922}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180352918515976783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2a0324d78d86e41a0a4bebd96bbbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7285803935768311734
 PrefabInstance:
   m_ObjectHideFlags: 0
