@@ -8,8 +8,12 @@ public class ObjectStorage : MonoBehaviour
     public static List<GameObject> paintOrbStorage;
     public static List<SpecialCreature> specialCreatureStorage;
     public static List<GameObject> wallStorage;
+    public static List<GameObject> footStepStorage;
+    public static List<GameObject> sparkleStorage;
     public static List<List<dynamic>> blockStates;
     public static List<List<dynamic>> paintOrbStates;
+    public static List<List<dynamic>> footPrintStates;
+    public static List<List<dynamic>> sparkleStates;
     public static List<List<dynamic>> specialCreatureStates;
     public static List<List<dynamic>> wallStates;
     public static List<dynamic> paintStates;
@@ -20,6 +24,9 @@ public class ObjectStorage : MonoBehaviour
         specialCreatureStorage = new List<SpecialCreature>();
         wallStorage = new List<GameObject>();
         paintStates = new List<dynamic>();
+        footStepStorage = new List<GameObject>();
+        sparkleStorage = new List<GameObject>();
+
     }
 
     // Update is called once per frame
@@ -40,6 +47,8 @@ public class ObjectStorage : MonoBehaviour
             blockInfo.Add(groundScript._cur_model);
             blockInfo.Add(groundScript.destinationNeutral);
             blockInfo.Add(groundScript._paintedColour);
+            blockInfo.Add(groundScript.isWalkedOverHorizontally);
+            blockInfo.Add(groundScript.isWalkedOverVertially);
             blockStates.Add(blockInfo);
         }
     }
@@ -87,8 +96,40 @@ public class ObjectStorage : MonoBehaviour
         }
     }
 
+    public static void UpdateFootPrintStorage()
+    {
+        footPrintStates = new List<List<dynamic>>();
+        foreach (GameObject footStep in footStepStorage)
+        {
+            List<dynamic> footStepInfo = new List<dynamic>();
+            footStepInfo.Add(footStep.gameObject.activeSelf);
+            wallStates.Add(footStepInfo);
+        }
+    }
+
+    public static void UpdateSparkleStorage()
+    {
+        sparkleStates = new List<List<dynamic>>();
+        foreach (GameObject sparkle in sparkleStorage)
+        {
+            List<dynamic> sparkleInfo = new List<dynamic>();
+            sparkleInfo.Add(sparkle.gameObject.activeSelf);
+            sparkleStates.Add(sparkleInfo);
+        }
+    }
+
     public void AddBlock(GameObject block)
     {
         blockStorage.Add(block);
+    }
+
+    public void AddFootPrint(GameObject footPrint)
+    {
+        footStepStorage.Add(footPrint);
+    }
+
+    public void AddSparkle(GameObject sparkle)
+    {
+        sparkleStorage.Add(sparkle);
     }
 }

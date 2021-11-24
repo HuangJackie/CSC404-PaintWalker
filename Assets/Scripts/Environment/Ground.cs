@@ -67,12 +67,13 @@ public class Ground : Interactable, Paintable
     private SoundManager _pushIceBlockSoundManager = new SoundManager();
     private SoundManager _outOfPaintSoundManager = new SoundManager();
 
+    private ObjectStorage objectStorage;
     private const float BlockMovementDelay = 0.1f;
 
     private new void Start()
     {
         _levelManager = FindObjectOfType<LevelManager>();
-        ObjectStorage objectStorage = FindObjectOfType<ObjectStorage>();
+        objectStorage = FindObjectOfType<ObjectStorage>();
         objectStorage.AddBlock(this.gameObject);
         Material = GetComponentInChildren<Renderer>().material;
         originalColour = Material.color;
@@ -170,6 +171,7 @@ public class Ground : Interactable, Paintable
                 Destroy(footstepFX.GetComponent<MeshCollider>());
                 Material footstep = Resources.Load("Materials/FootSteps", typeof(Material)) as Material;
                 footstepFX.GetComponent<Renderer>().material = footstep;
+                objectStorage.AddFootPrint(footstepFX);
             }
         }
     }
@@ -707,6 +709,7 @@ public class Ground : Interactable, Paintable
         Destroy(sparklesFX.GetComponent<MeshCollider>());
         Material sparkles = Resources.Load("Materials/Sparkles", typeof(Material)) as Material;
         sparklesFX.GetComponent<Renderer>().material = sparkles;
+        objectStorage.AddSparkle(sparklesFX);
     }
 
     public void UpdateModel(GameObject new_model)

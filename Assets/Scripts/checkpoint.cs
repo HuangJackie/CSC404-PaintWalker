@@ -35,6 +35,8 @@ public class checkpoint : MonoBehaviour
                 ObjectStorage.UpdatePaintOrbStorage();
                 ObjectStorage.UpdateSpecialCreatureStorage();
                 ObjectStorage.UpdateWallStorage();
+                ObjectStorage.UpdateFootPrintStorage();
+                ObjectStorage.UpdateSparkleStorage();
                 active = false;
                 this.gameObject.SetActive(false);
             }
