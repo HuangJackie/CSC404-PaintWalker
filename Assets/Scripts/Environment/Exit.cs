@@ -13,7 +13,7 @@ public class Exit : MonoBehaviour
     void Start()
     {
         _updateUI = FindObjectOfType<UpdateUI>();
-        _winAudioSource = FindObjectOfType<AudioSource>();
+        _winAudioSource = this.GetComponent<AudioSource>();
     }
     
     private void OnTriggerEnter(Collider collision)

@@ -24195,6 +24195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetMode: 0
   _isPushing: 0
+  isPlayerMoving: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 67328661}
   cameraWorldAxis: {fileID: 1134361251}
@@ -24639,15 +24640,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.19
       objectReference: {fileID: 0}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.41
+      value: 32.194
       objectReference: {fileID: 0}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_LocalRotation.w
