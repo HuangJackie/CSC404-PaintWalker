@@ -15715,6 +15715,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1325838952}
     m_Modifications:
+    - target: {fileID: 4868283761035771344, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8606979560250860972, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
       propertyPath: m_Name
       value: NonColouredBlock
@@ -16092,10 +16096,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5642586372639189160, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5642586374054505751, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
