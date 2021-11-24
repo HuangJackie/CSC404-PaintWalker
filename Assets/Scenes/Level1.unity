@@ -2252,7 +2252,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5656586460375782526, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
   m_PrefabInstance: {fileID: 7770362537309466922}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &563234383
+--- !u!114 &563234384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7769,7 +7769,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.9098039, b: 0.65882355, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
