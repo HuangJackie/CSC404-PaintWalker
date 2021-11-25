@@ -3,20 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
-using Microsoft.CSharp;
-using UnityEngine.SceneManagement;
+using static GameConstants;
 
 public class LevelManager : MonoBehaviour
 {
-    // Level toggles
-    public bool devMode;
-    public bool freezePlayer;
-
     // Player info
+    [Header("Player")]
     public GameObject player;
     public Player playerBehavior;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
+
+    // Player initialization for this Level set in inspector
+    [Header("Player Initialization")]
+    [SerializeField] private int initialYellowPaint = 0;
+    [SerializeField] private int initialRedPaint = 0;
+    [SerializeField] private int initialGreenPaint = 0;
+    [SerializeField] private int initialBluePaint = 0;
+
+    // Level toggles
+    [Header("Dev Options")]
+    public bool devMode;
+    public bool freezePlayer;
 
     // Player paint info
     private String currentSelectedColour;
@@ -24,12 +32,6 @@ public class LevelManager : MonoBehaviour
     private Dictionary<String, int> paintQuantity;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
-
-    public int init_yellow;
-    public int init_red;
-    public int init_green;
-    public int init_blue;
-    private bool _isColourSwitched;
 
     // UI info
     private UpdateUI _updateUI;
@@ -60,10 +62,10 @@ public class LevelManager : MonoBehaviour
         freezePlayer = false;
 
         paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", init_blue);     // Freezes Platform
-        paintQuantity.Add("Green", init_green);   // Growing Platform
-        paintQuantity.Add("Red", init_red);       // Drops Platform
-        paintQuantity.Add("Yellow", init_yellow); // Raises Platform
+        paintQuantity.Add("Blue", initialBluePaint);     // Freezes Platform
+        paintQuantity.Add("Green", initialGreenPaint);   // Growing Platform
+        paintQuantity.Add("Red", initialRedPaint);       // Drops Platform
+        paintQuantity.Add("Yellow", initialYellowPaint); // Raises Platform
 
         if (devMode)
         {

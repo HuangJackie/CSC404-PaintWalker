@@ -14537,14 +14537,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devMode: 0
-  freezePlayer: 0
   player: {fileID: 2026074254}
   playerBehavior: {fileID: 567774416}
-  init_yellow: 1
-  init_red: 1
-  init_green: 1
-  init_blue: 1
+  initialYellowPaint: 1
+  initialRedPaint: 1
+  initialGreenPaint: 1
+  initialBluePaint: 1
+  devMode: 0
+  freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0
