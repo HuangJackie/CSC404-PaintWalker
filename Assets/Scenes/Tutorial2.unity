@@ -22279,6 +22279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2029509777}
   playerBehavior: {fileID: 1796352081}
+  initialPaintSelected: 3
   initialYellowPaint: 0
   initialRedPaint: 0
   initialGreenPaint: 0

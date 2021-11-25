@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
 
     // Player initialization for this Level set in inspector
     [Header("Player Initialization")]
+    [SerializeField] private Paints initialPaintSelected = Paints.Yellow;
     [SerializeField] private int initialYellowPaint = 0;
     [SerializeField] private int initialRedPaint = 0;
     [SerializeField] private int initialGreenPaint = 0;
@@ -61,12 +62,14 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ManageCoroutines());
         freezePlayer = false;
 
+        // Initialize player paint quantity
         paintQuantity = new Dictionary<Paints, int>();
         paintQuantity.Add(Paints.Yellow, initialYellowPaint); // Raises Platform
         paintQuantity.Add(Paints.Red, initialRedPaint);       // Drops Platform
         paintQuantity.Add(Paints.Green, initialGreenPaint);   // Growing Platform
         paintQuantity.Add(Paints.Blue, initialBluePaint);     // Freezes Platform
 
+        // If dev mode, give super powers!
         if (devMode)
         {
             paintQuantity[Paints.Yellow] = 100;
@@ -74,18 +77,16 @@ public class LevelManager : MonoBehaviour
             paintQuantity[Paints.Green] = 100;
             paintQuantity[Paints.Blue] = 100;
         }
-        
-        currentSelectedPaint = Paints.Yellow;
-        currentSelectedColourClass = GameConstants.Yellow;
 
-        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
-        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
-
+        // Initialize UI
         _updateUI = FindObjectOfType<UpdateUI>();
-        _updateUI.ChangePaint(currentSelectedPaint, paintQuantity[currentSelectedPaint]);
         _updateUI.InitPaintInfoText(paintQuantity[Paints.Yellow], paintQuantity[Paints.Red],
                                     paintQuantity[Paints.Blue], paintQuantity[Paints.Green]);
 
+        // Update Player and UI based on initialPaintSelected
+        ChangePaint(initialPaintSelected, false);
+
+        // Audio handling
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
 
@@ -116,7 +117,16 @@ public class LevelManager : MonoBehaviour
 
     public void ChangePaint(Paints paint)
     {
-        _colourChangeSoundManager.PlayRandom();
+        ChangePaint(paint, true);
+    }
+
+    public void ChangePaint(Paints paint, bool playEffects)
+    {
+        if (playEffects)
+        {
+            _colourChangeSoundManager.PlayRandom();
+        }
+        
         switch (paint)
         {
             case Paints.Yellow:
@@ -142,7 +152,7 @@ public class LevelManager : MonoBehaviour
 
          _updateUI.ChangePaint(currentSelectedPaint, paintQuantity[currentSelectedPaint]);
         playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
-        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
+        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint], playEffects);
     }
 
     IEnumerator CheckPaintQuantity()
