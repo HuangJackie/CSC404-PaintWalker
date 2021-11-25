@@ -2930,6 +2930,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1704174257}
     - target: {fileID: 2039017950, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
+      propertyPath: paintType1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039017950, guid: eb2adbb47749ded4eb67cb82a432377f, type: 3}
       propertyPath: paintColour1
       value: Red
       objectReference: {fileID: 0}
@@ -5751,7 +5755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: PaintBallYellow (1)
+      value: PaintBallYellow
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
@@ -13087,6 +13091,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1704174257}
+    - target: {fileID: 2554435816313427532, guid: bf13417b12b970b438e7e45c4775b0d6, type: 3}
+      propertyPath: paintType1
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8221744028876070355, guid: bf13417b12b970b438e7e45c4775b0d6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -13557,6 +13565,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -14377,6 +14389,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1704174257}
+    - target: {fileID: 2554435816313427532, guid: bf13417b12b970b438e7e45c4775b0d6, type: 3}
+      propertyPath: paintType1
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8221744028876070355, guid: bf13417b12b970b438e7e45c4775b0d6, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class TpCreature : SpecialCreature
 {
-    // Start is called before the first frame update
-    // Start is called before the first frame update
     private LevelManager _levelManager;
     private Material _material2;
     private Color _originalColour2;
-
 
     // For painting
     public CameraRotation cameraPanningRevertTarget;
@@ -64,8 +62,8 @@ public class TpCreature : SpecialCreature
                 player.transform.position,
                 transform.position,
                 _levelManager,
-                paintColour1,
-                paintColour2,
+                paintType1,
+                paintType2,
                 paintQuantity1,
                 paintQuantity2,
                 Material,

@@ -3044,6 +3044,10 @@ PrefabInstance:
       value: Blue
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1704174257}
@@ -4271,6 +4275,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -30470,6 +30478,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: tp_creature2
       value: 
       objectReference: {fileID: 595529318}
@@ -30797,6 +30813,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: tp_creature2
       value: 
       objectReference: {fileID: 1041012927}
@@ -30831,6 +30855,8 @@ MonoBehaviour:
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
   _allColours: []
+  paintType1: 3
+  paintType2: 0
   paintColour1: Blue
   paintColour2: Yellow
   paintQuantity1: 2
@@ -32240,6 +32266,10 @@ PrefabInstance:
       value: Green
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1704174257}
@@ -32883,6 +32913,10 @@ PrefabInstance:
     - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
+      propertyPath: paintType1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
       propertyPath: frozen_model

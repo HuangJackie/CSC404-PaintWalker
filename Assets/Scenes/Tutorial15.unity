@@ -1326,7 +1326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: PaintBallBlue
+      value: PaintBallGreenNearStart
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -1343,6 +1343,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -21267,7 +21271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Name
-      value: PaintBallGreen
+      value: PaintBallGreenNearExit
       objectReference: {fileID: 0}
     - target: {fileID: 5478597113105738329, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: m_Layer
@@ -21284,6 +21288,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager

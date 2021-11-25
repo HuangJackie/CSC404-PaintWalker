@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.UI;
+using static GameConstants;
 
 public class UpdateUI : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class UpdateUI : MonoBehaviour
     private PaintBucketIcon paintIcon;
     private PaintLeftBar paintBar;
     private PaintLeftText paintText;
-    //private PaintLeftBG paintLeftBG;
 
     private YellowDotText yellowDotText;
     private RedDotText redDotText;
@@ -41,7 +40,6 @@ public class UpdateUI : MonoBehaviour
         paintIcon = FindObjectOfType<PaintBucketIcon>();
         paintBar = FindObjectOfType<PaintLeftBar>();
         paintText = FindObjectOfType<PaintLeftText>();
-        //paintLeftBG = FindObjectOfType<PaintLeftBG>();
 
         yellowDotText = FindObjectOfType<YellowDotText>();
         redDotText = FindObjectOfType<RedDotText>();
@@ -57,11 +55,6 @@ public class UpdateUI : MonoBehaviour
         infoTextBG.SetActive(false);
     }
 
-    private void Start()
-    {
-        ChangePaint(GameConstants.YELLOW_PAINT, 3);
-    }
-
     private void Update()
     {
         if (_isCrosshairActive)
@@ -69,6 +62,7 @@ public class UpdateUI : MonoBehaviour
             Ray ray = _camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hitInfo;
             TooltipObject newTooltipObject;
+
             if (Physics.Raycast(ray, out hitInfo) &&
                 hitInfo.collider.gameObject.TryGetComponent(out newTooltipObject))
             {
@@ -128,52 +122,49 @@ public class UpdateUI : MonoBehaviour
         greenDotText.SetPaint(green);
     }
 
-    public void UpdatePaintInfoText(string color, int cur_amount)
+    public void UpdatePaintInfoText(Paints paintType, int cur_amount)
     {
-        if (color == "Red")
-        {
-            redDotText.SetPaint(cur_amount);
-        } 
-        else if (color == "Yellow")
-        {
-            yellowDotText.SetPaint(cur_amount);
-        }
-        else if (color == "Green")
-        {
-            greenDotText.SetPaint(cur_amount);
-        }
-        else if (color == "Blue")
-        {
-            blueDotText.SetPaint(cur_amount);
+        switch (paintType) {
+            case Paints.Yellow:
+                yellowDotText.SetPaint(cur_amount);
+                break;
+            case Paints.Red:
+                redDotText.SetPaint(cur_amount);
+                break;
+            case Paints.Green:
+                greenDotText.SetPaint(cur_amount);
+                break;
+            case Paints.Blue:
+                blueDotText.SetPaint(cur_amount);
+                break;
         }
     }
 
-    public void ChangePaint(int paintType, int paintLeft)
+    public void ChangePaint(Paints paintType, int paintLeft)
     {
         Color32 paintColor;
         switch (paintType)
         {
-            case GameConstants.GREEN_PAINT:
-                paintColor = GameConstants.green;
+            case Paints.Yellow:
+                paintColor = GameConstants.Yellow;
                 break;
-            case GameConstants.RED_PAINT:
-                paintColor = GameConstants.red;
+            case Paints.Red:
+                paintColor = GameConstants.Red;
                 break;
-            case GameConstants.YELLOW_PAINT:
-                paintColor = GameConstants.yellow;
+            case Paints.Green:
+                paintColor = GameConstants.Green;
                 break;
-            case GameConstants.BLUE_PAINT:
-                paintColor = GameConstants.blue;
+            case Paints.Blue:
+                paintColor = GameConstants.Blue;
                 break;
             default:
-                paintColor = GameConstants.red;
+                paintColor = GameConstants.Red;
                 break;
         }
 
         paintBar.ChangePaint(paintLeft, paintColor);
         paintText.SetPaint(paintLeft);
         paintIcon.SetIcon(paintType);
-        //paintLeftBG.SetColor(paintColor);
     }
 
     public void ClearUIInfoText()
