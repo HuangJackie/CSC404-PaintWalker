@@ -22,7 +22,7 @@ public class PaintBottle : MonoBehaviour
         switchParticleSettings = switchParticleSystem.main;
     }
 
-    private void SwitchColor(Color32 color)
+    private void SwitchColor(Color32 color, bool playEffects)
     {
         currentColor = color;
         bottlePaint.SetColor("_Color", color);
@@ -30,7 +30,11 @@ public class PaintBottle : MonoBehaviour
         coreParticleSettings.startColor = (Color) color;
         switchParticleSettings.startColor = (Color) color;
         lightSettings.color = color;
-        PlayColorSwitchEffect();
+
+        if (playEffects)
+        {
+            PlayColorSwitchEffect();
+        }
     }
 
     public void PlayColorSwitchEffect()
@@ -38,23 +42,18 @@ public class PaintBottle : MonoBehaviour
         switchParticleSystem.Play();
     }
 
-    public void SetColor(Color32 color)
+    public void SetColor(Color32 color, int paintQuantity)
     {
-        if (!PaintSwitchManager.IsSameColor(currentColor, color))
-        {
-            SwitchColor(color);
-        }
-        coreParticleSystem.Play();
-        lightSettings.enabled = true;
+        SetColor(color, paintQuantity, true);
     }
 
     // Change lighting to the provided `color` and toggle
     // lighting visibility based on paintQuantity == 0.
-    public void SetColor(Color32 color, int paintQuantity)
+    public void SetColor(Color32 color, int paintQuantity, bool playEffects)
     {
         if (!PaintSwitchManager.IsSameColor(currentColor, color))
         {
-            SwitchColor(color);
+            SwitchColor(color, playEffects);
         }
         
         if (paintQuantity == 0)

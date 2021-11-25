@@ -3,19 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
 {
-    public string paintColour1;
-    public string paintColour2;
+    // Paints required for activation
+    public Paints paintType1;
+    public Paints paintType2;
     public int paintQuantity1;
     public int paintQuantity2;
 
-    private UpdateUI _updateUI;
+    // Status
     public bool isPainted;
+
+    // Models for frozen/unfrozen states
     public GameObject frozen_model;
     public GameObject coloured_model;
-    
+
+    // Other required objects
+    private UpdateUI _updateUI;
 
     protected new void Start()
     {
@@ -54,8 +60,10 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
     {
         if (!isPainted)
         {
-            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " + paintColour1 +
-                                  " " + paintQuantity2 + " " + paintColour2);
+            _updateUI.SetInfoText("Needs: " + paintQuantity1 + " " +
+                                  Enum.GetName(typeof(Paints), paintType1) +
+                                  " " + paintQuantity2 + " " +
+                                  Enum.GetName(typeof(Paints), paintType2));
             HighlightForHoverover();
         }
     }
@@ -68,6 +76,7 @@ public abstract class SpecialCreature : Interactable, TooltipObject, Paintable
             UndoHighlight();
         }
     }
+
     public abstract bool Paint(bool paintWithBrush);
     
     // Not implemented for special creatures currently.

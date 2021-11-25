@@ -7243,6 +7243,10 @@ PrefabInstance:
       value: Blue
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1704174257}
@@ -22273,14 +22277,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devMode: 0
-  freezePlayer: 0
   player: {fileID: 2029509777}
   playerBehavior: {fileID: 1796352081}
-  init_yellow: 0
-  init_red: 0
-  init_green: 0
-  init_blue: 10
+  initialPaintSelected: 3
+  initialYellowPaint: 0
+  initialRedPaint: 0
+  initialGreenPaint: 0
+  initialBluePaint: 10
+  devMode: 0
+  freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0

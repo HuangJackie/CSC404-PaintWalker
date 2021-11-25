@@ -5,7 +5,7 @@ using System.Data;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
+using static GameConstants;
 using Object = UnityEngine.Object;
 
 public class Ground : Interactable, Paintable
@@ -539,7 +539,7 @@ public class Ground : Interactable, Paintable
             return false;
         }
 
-        string currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
+        Paints currentlySelectedPaint = _levelManager.GetCurrentlySelectedPaint();
 
         if (_paintedColour != originalColour && isPaintedByBrush)
         {
@@ -553,21 +553,22 @@ public class Ground : Interactable, Paintable
 
         switch (currentlySelectedPaint)
         {
-            case "Red":
-                Material.color = GameConstants.red;
+            case Paints.Red:
+                Material.color = GameConstants.Red;
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
-                _levelManager.DecreasePaint("Red", 1);
+                _levelManager.DecreasePaint(Paints.Red, 1);
+
                 if (paintWithBrush)
                 {
                     _player.animation_update("paint", true);
                     base_model.SetActive(false);
                     red_model.SetActive(true);
                     _cur_model = red_model;
+
                     if (NoBlockBelow())
                     {
                         _redSoundManager.PlayRandom();
-                        Debug.Log("red effect triggered");
                         StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationDrop));
                         isPaintedByBrush = true;
                     }
@@ -576,22 +577,24 @@ public class Ground : Interactable, Paintable
                 {
                     AddSparkleFX();
                 }
-
                 break;
-            case "Green":
-                Material.color = GameConstants.green;
+
+            case Paints.Green:
+                Material.color = GameConstants.Green;
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
-                _levelManager.DecreasePaint("Green", 1);
+                _levelManager.DecreasePaint(Paints.Green, 1);
+
                 if (paintWithBrush)
                 {
                     _player.animation_update("paint", true);
                     _greenSoundManager.PlayRandom();
-                    Debug.Log("green effect triggered");
+
                     MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
                     NewState.ObjectInit(gameObject);
                     _levelManager.redoCommandHandler.AddCommand(NewState);
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
+
                     StartCoroutine(GreenExtend(NewState));
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
@@ -602,23 +605,24 @@ public class Ground : Interactable, Paintable
                 {
                     AddSparkleFX();
                 }
-
                 break;
-            case "Yellow":
-                Material.color = GameConstants.yellow;
+
+            case Paints.Yellow:
+                Material.color = GameConstants.Yellow;
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
-                _levelManager.DecreasePaint("Yellow", 1);
+                _levelManager.DecreasePaint(Paints.Yellow, 1);
+
                 if (paintWithBrush)
                 {
                     _player.animation_update("paint", true);
                     base_model.SetActive(false);
                     yellow_model.SetActive(true);
                     _cur_model = yellow_model;
+
                     if (NoUnmovableBlockAbove())
                     {
                         _yellowSoundManager.PlayRandom();
-                        Debug.Log("yellow effect triggered");
                         StartCoroutine(RaiseLowerRedYellowBlockToDestination(_destinationRaise));
                         isPaintedByBrush = true;
                     }
@@ -627,26 +631,28 @@ public class Ground : Interactable, Paintable
                 {
                     AddSparkleFX();
                 }
-
                 break;
-            case "Blue":
-                Material.color = GameConstants.blue;
+
+            case Paints.Blue:
+                Material.color = GameConstants.Blue;
                 _paintedColour = Material.color;
                 paintedColour = Material.color;
-                _levelManager.DecreasePaint("Blue", 1);
+                _levelManager.DecreasePaint(Paints.Blue, 1);
+
                 if (paintWithBrush)
                 {
                     _player.animation_update("paint", true);
                     gameObject.layer = LayerMask.NameToLayer("IceCube");
                     _blueSoundManager.PlayRandom();
-                    Debug.Log("blue effect triggered");
                     _isIceBlockEffectEnabled = true;
                     _destinationMove = transform.position;
+
                     MoveRedo NewState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;
                     NewState.ObjectInit(gameObject);
                     _levelManager.redoCommandHandler.AddCommand(NewState);
                     _levelManager.redoCommandHandler.TransitionToNewGameState();
                     StartCoroutine(MoveIceBlockToDestination(false));
+
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
                     blue_model.SetActive(true);
@@ -656,7 +662,6 @@ public class Ground : Interactable, Paintable
                 {
                     AddSparkleFX();
                 }
-
                 break;
         }
 
@@ -675,22 +680,22 @@ public class Ground : Interactable, Paintable
         return isPaintable;
     }
 
-    private void RevertEffect(Color colorToRevert, String newColor)
+    private void RevertEffect(Color colorToRevert, Paints newPaintType)
     {
         GameObject new_model;
 
-        switch (newColor)
+        switch (newPaintType)
         {
-            case ("Blue"):
+            case (Paints.Blue):
                 new_model = blue_model;
                 break;
-            case ("Yellow"):
+            case (Paints.Yellow):
                 new_model = yellow_model;
                 break;
-            case ("Green"):
+            case (Paints.Green):
                 new_model = green_model;
                 break;
-            case ("Red"):
+            case (Paints.Red):
                 new_model = red_model;
                 break;
             default:

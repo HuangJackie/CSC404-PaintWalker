@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameConstants;
 
 public class PaintBucketIcon : MonoBehaviour
 {
@@ -36,12 +37,11 @@ public class PaintBucketIcon : MonoBehaviour
         SetAlpha(greenPaintBucket, false);
         SetAlpha(yellowPaintBucket, false);
         SetAlpha(bluePaintBucket, false);
-        SetIcon(GameConstants.YELLOW_PAINT);
     }
 
     // Change the active Icon type in the HUD UI
     // Should correspond to Player's currently selected paint
-    public void SetIcon(int paintType)
+    public void SetIcon(Paints paintType)
     {
         // Revert currently selected paint icon to original size, alpha and pos first
         if (currSelection != null)
@@ -57,28 +57,28 @@ public class PaintBucketIcon : MonoBehaviour
         // Then choose next icon to enlarge and display as "selected"
         switch(paintType)
         {
-            case GameConstants.GREEN_PAINT:
+            case Paints.Green:
                 currSelection = greenPaintBucket;
                 originalPos = greenPaintBucket.transform.position;
                 greenPaintBucket.rectTransform.sizeDelta = currSelectionSize;
                 greenPaintBucket.transform.position += selectionPosOffset;
                 break;
 
-            case GameConstants.RED_PAINT:
+            case Paints.Red:
                 currSelection = redPaintBucket;
                 originalPos = redPaintBucket.transform.position;
                 redPaintBucket.rectTransform.sizeDelta = currSelectionSize;
                 redPaintBucket.transform.position += selectionPosOffset;
                 break;
 
-            case GameConstants.YELLOW_PAINT:
+            case Paints.Yellow:
                 currSelection = yellowPaintBucket;
                 originalPos = yellowPaintBucket.transform.position;
                 yellowPaintBucket.rectTransform.sizeDelta = currSelectionSize;
                 yellowPaintBucket.transform.position += selectionPosOffset;
                 break;
 
-            case GameConstants.BLUE_PAINT:
+            case Paints.Blue:
                 currSelection = bluePaintBucket;
                 originalPos = bluePaintBucket.transform.position;
                 bluePaintBucket.rectTransform.sizeDelta = currSelectionSize;
@@ -88,7 +88,7 @@ public class PaintBucketIcon : MonoBehaviour
 
         // Only set currSelection to full alpha if paintType
         // was valid enough to enter one of the switch cases above
-        if (currSelection != null && IsValidPaint(paintType))
+        if (currSelection != null)
         {
             SetAlpha(currSelection, true);
         }
@@ -99,11 +99,5 @@ public class PaintBucketIcon : MonoBehaviour
         Color newColor = icon.color;
         newColor.a = selected ? 1f : 0.85f;
         icon.color = newColor;
-    }
-
-    // Return true if `paintType` is a valid paint type
-    private bool IsValidPaint(int paintType)
-    {
-        return paintType >= 0 && paintType < 4;
     }
 }

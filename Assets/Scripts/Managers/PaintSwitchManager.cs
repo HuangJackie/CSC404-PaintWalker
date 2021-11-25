@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class PaintSwitchManager : MonoBehaviour
 {
@@ -25,22 +26,22 @@ public class PaintSwitchManager : MonoBehaviour
     {
         if (_controllerUtil.GetSwitchGreenPressed())
         {
-            _levelManager.ChangePaint(GameConstants.GreenColour);
+            _levelManager.ChangePaint(Paints.Green);
         }
         
         if (_controllerUtil.GetSwitchYellowPressed())
         {
-            _levelManager.ChangePaint(GameConstants.YellowColour);
+            _levelManager.ChangePaint(Paints.Yellow);
         }
         
         if (_controllerUtil.GetSwitchRedPressed())
         {
-            _levelManager.ChangePaint(GameConstants.RedColour);
+            _levelManager.ChangePaint(Paints.Red);
         }
         
         if (_controllerUtil.GetSwitchBluePressed())
         {
-            _levelManager.ChangePaint(GameConstants.BlueColour);
+            _levelManager.ChangePaint(Paints.Blue);
         }
     }
 

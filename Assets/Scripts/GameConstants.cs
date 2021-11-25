@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class GameConstants : MonoBehaviour
 {
-    // Identifiers for conditionals
-    public const int RED_PAINT = 0;
-    public const int GREEN_PAINT = 1;
-    public const int YELLOW_PAINT = 2;
-    public const int BLUE_PAINT = 3;
-
-    // Identifiers for paint colours
-    public const string RedColour = "Red";
-    public const string GreenColour = "Green";
-    public const string YellowColour = "Yellow";
-    public const string BlueColour = "Blue";
+    /*
+     * Types of Paints Nox can carry
+     */
+    public enum Paints {
+        Yellow, Red, Green, Blue
+    }
     
-    // Paint colors
-    public static readonly Color32 red = new Color32(241, 95, 62, 255);
-    public static readonly Color32 green = new Color32(166, 191, 75, 255);
-    public static readonly Color32 yellow = new Color32(242, 191, 61, 255);
-    public static readonly Color32 blue = new Color32(140, 210, 205, 255);
+    /*
+     * The Colors of the Paints Nox can carry
+     */
+    public static readonly Color32 Red = new Color32(241, 95, 62, 255);
+    public static readonly Color32 Green = new Color32(166, 191, 75, 255);
+    public static readonly Color32 Yellow = new Color32(242, 191, 61, 255);
+    public static readonly Color32 Blue = new Color32(140, 210, 205, 255);
 
-    // Highlight interactable object colours
+    /*
+     * World interaction visual feedback constants
+     */
     public const float HOVEROVER_R = 1f;
     public const float HOVEROVER_G = 1f;
     public const float HOVEROVER_B = 0f;
@@ -72,6 +71,10 @@ public class GameConstants : MonoBehaviour
         None, N, E, S, W
     }
 
+     /*
+     * Representations of the directions the Player can face.
+     * Should align up with `GameConstants.CameraDirection`.
+     */
     public enum PlayerDirection
     {
         None, Forward, Right, Backward, Left

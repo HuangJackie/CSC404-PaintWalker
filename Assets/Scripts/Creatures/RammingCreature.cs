@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class RammingCreature : SpecialCreature
 {
@@ -69,8 +70,8 @@ public class RammingCreature : SpecialCreature
                 player.transform.position,
                 transform.position,
                 _levelManager,
-                paintColour1,
-                paintColour2,
+                paintType1,
+                paintType2,
                 paintQuantity1,
                 paintQuantity2,
                 Material,
