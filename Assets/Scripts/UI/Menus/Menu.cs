@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
     {
         if (controllerUtil.GetConfirmButtonPressed())
         {
-            controllerUtil.CloseMenu();
+            print("Selecting highlightedButton: " + highlightedButton);
             menuButtons[highlightedButton].Trigger();
         }
             

@@ -5,14 +5,26 @@ namespace DefaultNamespace
 {
     public class ControllerUtil : MonoBehaviour
     {
-        public float buttonPressDelayInSeconds;
-        private float _lastTimeButtonPressed;
-        private bool _isMenuOpen;
+        // General objects
         public ChangePerspective isoCamera;
+
+        // ControllerUtil state
+        private float _lastTimeButtonPressed;    // Generic button press
+        private float _lastTimeMovementPressed;  // Player movement
+        private float _lastTimeMenuDpadPressed;  // Menu navigation
+        private bool _isMenuOpen;
+
+        // Delay configuration
+        [Header("Button Delay Config")]
+        public float buttonPressDelayInSeconds = 0.2f;
+        public float menuDpadPressDelayInSeconds = 0.2f;
 
         private void Start()
         {
             _lastTimeButtonPressed = Time.time;
+            _lastTimeMovementPressed = _lastTimeButtonPressed;
+            _lastTimeMenuDpadPressed = _lastTimeButtonPressed;
+            _isMenuOpen = false;
         }
 
         /*
@@ -39,7 +51,9 @@ namespace DefaultNamespace
             }
 
             float horizontalAxis = Input.GetAxisRaw("Horizontal");
-            return FinishedMovementDelay(horizontalAxis) ? horizontalAxis : 0;
+            return horizontalAxis != 0 && FinishedMovementPressDelay()
+                ? horizontalAxis
+                : 0;
         }
 
         public float GetVerticalAxisRaw()
@@ -50,7 +64,9 @@ namespace DefaultNamespace
             }
 
             float verticalAxis = Input.GetAxisRaw("Vertical");
-            return FinishedMovementDelay(verticalAxis) ? verticalAxis : 0;
+            return verticalAxis != 0 && FinishedMovementPressDelay()
+                ? verticalAxis
+                : 0;
         }
 
         public bool CheckPlayerPressingMovement()
@@ -83,16 +99,36 @@ namespace DefaultNamespace
         }
 
         /**
-         * This is so that a single movement press doesn't trigger multiple blocks of movement.
+         * This is so that a single button press doesn't trigger multiple actions.
+         * NOTE: Does not work if Time.timeScale = 0.
          */
-        private bool FinishedMovementDelay(float movement)
+        private bool FinishedButtonPressDelay()
         {
-            if (movement != 0 && Time.time - _lastTimeButtonPressed > buttonPressDelayInSeconds)
+            if (Time.time - _lastTimeButtonPressed > buttonPressDelayInSeconds)
             {
                 _lastTimeButtonPressed = Time.time;
                 return true;
             }
+            return false;
+        }
 
+        private bool FinishedMovementPressDelay()
+        {
+            if (Time.time - _lastTimeMovementPressed > buttonPressDelayInSeconds)
+            {
+                _lastTimeMovementPressed = Time.time;
+                return true;
+            }
+            return false;
+        }
+
+        private bool FinishedDpadMenuActionDelay()
+        {
+            if (Time.time - _lastTimeMenuDpadPressed > menuDpadPressDelayInSeconds)
+            {
+                _lastTimeMenuDpadPressed = Time.time;
+                return true;
+            }
             return false;
         }
 
@@ -203,24 +239,18 @@ namespace DefaultNamespace
 
         public bool GetMenuButtonPressed()
         {
-            bool isPressed = Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Menu");
-            if (isPressed)
-            {
-                print("changed");
-                _isMenuOpen = !_isMenuOpen;
-            }
-
-            return isPressed;
+            return (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Menu")) &&
+                   FinishedButtonPressDelay();
         }
 
         public bool GetConfirmButtonPressed()
         {
-            return Input.GetButtonDown("ConfirmMenu");
+            return Input.GetButtonDown("ConfirmMenu") && FinishedButtonPressDelay();
         }
 
-        public static bool GetCancelButtonPressed()
+        public bool GetCancelButtonPressed()
         {
-            return Input.GetButtonDown("Cancel");
+            return Input.GetButtonDown("Cancel") && FinishedButtonPressDelay();
         }
 
         public bool GetGameMenuSelectAxis(out int axis)
@@ -230,18 +260,31 @@ namespace DefaultNamespace
             {
                 axis = Input.GetAxis("GameMenuDPadSelectAxis") > 0 ? -1 : 1;
             }
-            else if (Input.GetAxis("GameMenuSelectAxis") != 0)
+            else if (Input.GetAxis("GameMenuSelectAxis") > 0.3)
             {
-                axis = Input.GetAxis("GameMenuSelectAxis") > 0 ? 1 : -1;
+                axis = 1;
+            }
+            else if (Input.GetAxis("GameMenuSelectAxis") < -0.3)
+            {
+                axis = -1;
             }
 
-            return axis != 0 && FinishedMovementDelay(axis);
+            return axis != 0 && FinishedDpadMenuActionDelay();
+        }
+
+        public void OpenMenu()
+        {
+            _isMenuOpen = true;
         }
 
         public void CloseMenu()
         {
-            print("MENU CLOSED");
             _isMenuOpen = false;
+        }
+
+        public bool GetIsMenuOpen()
+        {
+            return _isMenuOpen;
         }
 
         public bool GetSwitchGreenPressed()
@@ -251,7 +294,8 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetButtonDown("SwitchGreen");
+            return Input.GetButtonDown("SwitchGreen") &&
+                   FinishedButtonPressDelay();
         }
 
         public bool GetSwitchYellowPressed()
@@ -271,7 +315,8 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetButtonDown("SwitchRed");
+            return Input.GetButtonDown("SwitchRed") &&
+                   FinishedButtonPressDelay();
         }
 
         public bool GetSwitchBluePressed()

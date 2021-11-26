@@ -162,8 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abac952cda5744a09998a09e365141ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPressDelayInSeconds: 0.2
   isoCamera: {fileID: 1510057400}
+  buttonPressDelayInSeconds: 0.2
+  menuDpadPressDelayInSeconds: 0.2
 --- !u!4 &15028090
 Transform:
   m_ObjectHideFlags: 0
@@ -11336,11 +11337,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1704174258}
   - component: {fileID: 1704174257}
-  - component: {fileID: 1704174256}
+  - component: {fileID: 1704174263}
   - component: {fileID: 1704174259}
   - component: {fileID: 1704174261}
   - component: {fileID: 1704174260}
-  - component: {fileID: 1704174263}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -11348,18 +11348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1704174256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704174255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107d19a33c3578b4fa4d481d9da50d2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1704174257
 MonoBehaviour:
   m_ObjectHideFlags: 0

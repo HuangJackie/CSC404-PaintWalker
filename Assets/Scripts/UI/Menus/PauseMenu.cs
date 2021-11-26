@@ -29,10 +29,18 @@ public class PauseMenu : SecondaryMenu
 
     protected override void Update()
     {
-        base.Update();
+        if (menuRenderer.activeSelf)
+        {
+            base.UpdateBase();  // Run Update() in Menu parent class
+            if (controllerUtil.GetCancelButtonPressed())
+            {
+                Close();
+            }
+        }
+
         if (controllerUtil.GetMenuButtonPressed())
         {
-            if (Time.timeScale == 1.0f)  // If in-game
+            if (!controllerUtil.GetIsMenuOpen())  // If in-game
             {
                 LoadSelf();
             }
@@ -69,7 +77,7 @@ public class PauseMenu : SecondaryMenu
 
     public void LoadSelf()
     {
-        Time.timeScale = 0f;
+        controllerUtil.OpenMenu();
         background.enabled = true;
         SetBackgroundColor(levelManager.GetCurrentlySelectedPaint());
         menuRenderer.SetActive(true);
@@ -84,8 +92,8 @@ public class PauseMenu : SecondaryMenu
     /* // Close down the pause menu */
     public new void Close()
     {
+        controllerUtil.CloseMenu();
         background.enabled = false;
-        Time.timeScale = 1.0f;
         menuRenderer.SetActive(false);
     }
 

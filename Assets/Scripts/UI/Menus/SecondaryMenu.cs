@@ -27,10 +27,18 @@ public class SecondaryMenu : Menu
         if (menuRenderer.activeSelf)
         {
             base.Update();
-            if (ControllerUtil.GetCancelButtonPressed())
+            if (controllerUtil.GetCancelButtonPressed())
             {
                 Close();
             }
+        }
+    }
+
+    protected void UpdateBase()
+    {
+        if (menuRenderer.activeSelf)
+        {
+            base.Update();
         }
     }
 
