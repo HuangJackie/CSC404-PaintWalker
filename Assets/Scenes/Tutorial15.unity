@@ -1074,24 +1074,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 117177748}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &129917121 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5038890970192653245, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
-  m_PrefabInstance: {fileID: 1391597863}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &129917123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129917121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9458ca32989486e46abec311a1306f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottlePaint: {fileID: 2100000, guid: 012cf5822cbb8584886246026e542851, type: 2}
 --- !u!1 &130756563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5642586374398135844, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
