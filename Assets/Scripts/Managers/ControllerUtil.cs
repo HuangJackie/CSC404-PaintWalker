@@ -287,17 +287,6 @@ namespace DefaultNamespace
             return _isMenuOpen;
         }
 
-        public bool GetSwitchGreenPressed()
-        {
-            if (_isMenuOpen)
-            {
-                return false;
-            }
-
-            return Input.GetButtonDown("SwitchGreen") &&
-                   FinishedButtonPressDelay();
-        }
-
         public bool GetSwitchYellowPressed()
         {
             if (_isMenuOpen)
@@ -305,7 +294,9 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetButtonDown("SwitchYellow");
+            return (Input.GetButtonDown("SwitchYellow") ||
+                    Input.GetKeyDown(KeyCode.Alpha1))   &&
+                   FinishedButtonPressDelay();
         }
 
         public bool GetSwitchRedPressed()
@@ -315,7 +306,20 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetButtonDown("SwitchRed") &&
+            return (Input.GetButtonDown("SwitchRed")  ||
+                    Input.GetKeyDown(KeyCode.Alpha2)) &&
+                   FinishedButtonPressDelay();
+        }
+
+        public bool GetSwitchGreenPressed()
+        {
+            if (_isMenuOpen)
+            {
+                return false;
+            }
+
+            return (Input.GetButtonDown("SwitchGreen") ||
+                    Input.GetKeyDown(KeyCode.Alpha3))  &&
                    FinishedButtonPressDelay();
         }
 
@@ -326,7 +330,9 @@ namespace DefaultNamespace
                 return false;
             }
 
-            return Input.GetButtonDown("SwitchBlue");
+            return (Input.GetButtonDown("SwitchBlue") ||
+                    Input.GetKeyDown(KeyCode.Alpha4)) &&
+                   FinishedButtonPressDelay();
         }
     }
 }
