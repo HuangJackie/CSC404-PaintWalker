@@ -189,7 +189,7 @@ public class LevelManager : MonoBehaviour
         Vector3 checkpointPos = checkpointInfo["checkpointPos"];
         if (checkpointPos == Vector3.zero)
         {
-            RestartFunction.Restart();
+            SceneLoader.RestartLevel();
         }
         else
         {

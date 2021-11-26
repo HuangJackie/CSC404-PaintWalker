@@ -1,162 +1,128 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DefaultNamespace;
+using static GameConstants;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : SecondaryMenu
 {
-    public static bool gameIsPaused = false;
-    private bool controlUIActive = false;
+    private LevelManager levelManager;
+    private OptionsMenu optionsMenu;
+    private ControlsMenu controlsMenu;
 
-    public GameObject pauseMenuUI;
-    public GameObject controlMenuUI;
+    private Image background;
 
-    private ControllerUtil _controllerUtil;
-    private Button[] _menuOptions;
-    private int _selectedMenuOption;
-    private const int TotalNumberOfMenuOptions = 5;
-
-    public GameObject resume;
-    public GameObject menu;
-    public GameObject control;
-    public GameObject loadCheckpoint;
-    public GameObject restart;
-
-    private LevelManager _levelManager;
-
-    private void Start()
+    private void Awake()
     {
-        _levelManager = FindObjectOfType<LevelManager>();
-        _controllerUtil = FindObjectOfType<ControllerUtil>();
-        _menuOptions = new Button[TotalNumberOfMenuOptions];
-
-        _menuOptions[0] = resume.GetComponentInChildren<Button>();
-        _menuOptions[1] = control.GetComponentInChildren<Button>();
-        _menuOptions[2] = menu.GetComponentInChildren<Button>();
-        _menuOptions[3] = loadCheckpoint.GetComponentInChildren<Button>();
-        _menuOptions[4] = restart.GetComponentInChildren<Button>();
-        _selectedMenuOption = 0;
+        background = GetComponent<Image>();
+        background.enabled = false;
     }
 
-
-    // Update is called once per frame
-
-    void Update()
+    protected override void Start()
     {
-        if (_controllerUtil.GetMenuButtonPressed())
+        base.Start();
+        levelManager = FindObjectOfType<LevelManager>();
+        optionsMenu = FindObjectOfType<OptionsMenu>();
+        controlsMenu = FindObjectOfType<ControlsMenu>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (controllerUtil.GetMenuButtonPressed())
         {
-            if (gameIsPaused)
+            if (Time.timeScale == 1.0f)  // If in-game
             {
-                Resume();
+                LoadSelf();
             }
-            else
+            else if (menuRenderer.activeSelf)  // If in the pause menu
             {
-                _menuOptions[_selectedMenuOption].OnPointerEnter(null);
-                Pause();
+                Close();
             }
-        }
-
-        if (controlUIActive && (_controllerUtil.GetConfirmButtonPressed() || Input.GetKeyDown(KeyCode.RightShift)))
-        {
-            HideControl();
-        }
-
-        if (gameIsPaused)
-        {
-            if (_controllerUtil.GetConfirmButtonPressed())
+            else  // If in one of the pause menu's submenus
             {
-                _menuOptions[_selectedMenuOption].onClick.Invoke();
-                _selectedMenuOption = 0;
-                if (_selectedMenuOption == 0)
-                {
-                    _controllerUtil.CloseMenu();
-                }
-            }
-
-            if (_controllerUtil.GetGameMenuSelectAxis(out int select))
-            {
-                _menuOptions[_selectedMenuOption].OnPointerExit(null);
-                if (select > 0)
-                {
-                    IncrementMenuOption();
-                }
-                else
-                {
-                    DecrementMenuOption();
-                }
-
-                _menuOptions[_selectedMenuOption].OnPointerEnter(null);
+                CloseAllSubmenus();
+                Close();
             }
         }
     }
 
-    private void DecrementMenuOption()
+    public void SetBackgroundColor(Paints paintColor)
     {
-        _selectedMenuOption--;
-        if (_selectedMenuOption == -1)
+        switch (paintColor)
         {
-            _selectedMenuOption = TotalNumberOfMenuOptions - 1;
+            case Paints.Yellow:
+                background.color = Yellow;
+                break;
+            case Paints.Red:
+                background.color = Red;
+                break;
+            case Paints.Green:
+                background.color = Green;
+                break;
+            case Paints.Blue:
+                background.color = Blue;
+                break;
         }
     }
 
-    private void IncrementMenuOption()
+    public void LoadSelf()
     {
-        _selectedMenuOption++;
-        if (_selectedMenuOption == TotalNumberOfMenuOptions)
-        {
-            _selectedMenuOption = 0;
-        }
+        Time.timeScale = 0f;
+        background.enabled = true;
+        SetBackgroundColor(levelManager.GetCurrentlySelectedPaint());
+        menuRenderer.SetActive(true);
     }
 
-    public void Resume()
+    // Overwrite SecondaryMenu.LoadSelf(GameObject) to use LoadSelf()
+    public new void LoadSelf(GameObject returningMenu)
     {
-        pauseMenuUI.SetActive(false);
-        controlMenuUI.SetActive(false);
-        //Time.timeScale = 1f;
-        gameIsPaused = false;
+        LoadSelf();
     }
 
-    void Pause()
+    /* // Close down the pause menu */
+    public new void Close()
     {
-        pauseMenuUI.SetActive(true);
-        // Time.timeScale = 0f;
-        gameIsPaused = true;
+        background.enabled = false;
+        Time.timeScale = 1.0f;
+        menuRenderer.SetActive(false);
     }
 
-    public void ShowControl()
+    public void CloseAllSubmenus()
     {
-        pauseMenuUI.SetActive(false);
-        controlMenuUI.SetActive(true);
-        controlUIActive = true;
+        optionsMenu.Close();
+        controlsMenu.Close();
     }
 
-    void HideControl()
-    {
-        pauseMenuUI.SetActive(true);
-        controlMenuUI.SetActive(false);
-        controlUIActive = false;
-    }
+    // Menu Button functionality
+    // ----------------------------
 
-    public void LoadMenu()
+    public void LoadMainMenu()
     {
-        // Time.timeScale = 1f;
+        Close();
         SceneLoader.LoadMainMenu();
-        Resume();
+    }
+
+    public void LoadOptionsMenu()
+    {
+        optionsMenu.LoadSelf(menuRenderer.gameObject);
+    }
+
+    public void LoadControlsMenu()
+    {
+        controlsMenu.LoadSelf(menuRenderer.gameObject);
     }
 
     public void LoadCheckpoint()
     {
-        _levelManager.RestartAtLastCheckpoint();
-        Resume();
+        Close();
+        levelManager.RestartAtLastCheckpoint();
     }
 
-    public void Restart()
+    public void RestartLevel()
     {
-        RestartFunction.Restart();
-        Resume();
+        Close();
+        SceneLoader.RestartLevel();
     }
 }
