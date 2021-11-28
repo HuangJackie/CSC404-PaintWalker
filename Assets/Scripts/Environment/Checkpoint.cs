@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class checkpoint : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
     RaycastHit hitInfo;
     LayerMask mask;
     private bool active;
     private CameraRotation cameraPanningRevertTarget;
-
 
     private void Start()
     {

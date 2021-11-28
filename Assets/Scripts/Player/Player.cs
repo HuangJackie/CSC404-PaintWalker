@@ -114,7 +114,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Painting") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 && !animator.IsInTransition(0))
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Painting")    &&
+            this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 &&
+            !animator.IsInTransition(0))
         {
             animation_update("idle", true);
             animation_update("walk", false);
@@ -122,7 +124,9 @@ public class Player : MonoBehaviour
             animator.SetBool("Painting", false);
         }
 
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Pushing") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 && !animator.IsInTransition(0))
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Pushing")     &&
+            this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.75 &&
+            !animator.IsInTransition(0))
         {
             animator.SetBool("Pushing", false);
         }
@@ -235,7 +239,8 @@ public class Player : MonoBehaviour
         if (_targetLocation != transform.position)
         {
             animation_update("walk", true);
-            // Slide back if block below is moving for yellow. Commenting out for now to prevent the snapback 
+            // Slide back if block below is moving for yellow.
+            // Commenting out for now to prevent the snapback 
             // since it messes up red.
             // if (InvalidMove())
             // {
@@ -265,7 +270,8 @@ public class Player : MonoBehaviour
             LevelManager.redoCommandHandler.TransitionToNewGameState();
             _isNotTrackingMovement = true;
 
-            // To reset the selected object to the block under the player. If removing the redo code above,
+            // To reset the selected object to the block under the player.
+            // If removing the redo code above,
             // leave this line here.
             _paintingSystem.ResetSelectedObject();
         }
@@ -289,7 +295,8 @@ public class Player : MonoBehaviour
 
         Vector3 horDistMoved = newPosition - transform.position;
         cameraWorldAxis.position = cameraWorldAxis.position + horDistMoved;
-        cameraPanningRevertTarget._gameplayPos = cameraPanningRevertTarget._gameplayPos + horDistMoved;
+        cameraPanningRevertTarget._gameplayPos =
+            cameraPanningRevertTarget._gameplayPos + horDistMoved;
 
         transform.position = newPosition;
 
