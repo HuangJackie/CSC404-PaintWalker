@@ -12982,6 +12982,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704174258}
     m_Modifications:
+    - target: {fileID: 5584879744338488402, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5896979215231548185, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
       propertyPath: m_Height
       value: 0.033
@@ -13061,6 +13065,10 @@ PrefabInstance:
     - target: {fileID: 5896979215231548263, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
       propertyPath: cameraPanningRevertTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427762205291946246, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5896979215231548263, guid: 3ab195d779bc53946b518b2a91618dce, type: 3}
@@ -24195,6 +24203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetMode: 0
   _isPushing: 0
+  isPlayerMoving: 0
   LevelManager: {fileID: 1704174257}
   isoCamera: {fileID: 67328661}
   cameraWorldAxis: {fileID: 1134361251}
