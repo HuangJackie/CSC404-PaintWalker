@@ -33,16 +33,6 @@ public class PaintBrush : MonoBehaviour
         lightSettings.color = color;
     }
 
-    public void SetColor(Color32 color)
-    {
-        if (!PaintSwitchManager.IsSameColor(currentColor, color))
-        {
-            SwitchColor(color);
-        }
-        particleSystemCore.Play();
-        lightSettings.enabled = true;
-    }
-
     // Change lighting to the provided `color` and toggle
     // lighting visibility based on paintQuantity == 0.
     public void SetColor(Color32 color, int paintQuantity)

@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class PaintOrb : Interactable, TooltipObject
 {
+    [Header("Manager")]
     public LevelManager manager;
-    public string color;
+
+    [Header("Paint Information")]
+    public Paints paint;
     public int paintReplenished;
 
     private ParticleSystem.MainModule particleSettings;
     private Light lightSettings;
     private Renderer[] meshRenderers;
     private UpdateUI _updateUI;
-    
 
     private new void Start()
     {
@@ -24,22 +28,22 @@ public class PaintOrb : Interactable, TooltipObject
         _updateUI = FindObjectOfType<UpdateUI>();
 
         Color newColor;
-        switch (color)
+        switch (paint)
         {
-            case "Yellow":
-                newColor = GameConstants.yellow;
+            case Paints.Yellow:
+                newColor = GameConstants.Yellow;
                 break;
-            case "Blue":
-                newColor = GameConstants.blue;
+            case Paints.Red:
+                newColor = GameConstants.Red;
                 break;
-            case "Green":
-                newColor = GameConstants.green;
+            case Paints.Green:
+                newColor = GameConstants.Green;
                 break;
-            case "Red":
-                newColor = GameConstants.red;
+            case Paints.Blue:
+                newColor = GameConstants.Blue;
                 break;
             default:
-                newColor = GameConstants.yellow;
+                newColor = GameConstants.Yellow;
                 break;
         }
 
@@ -59,7 +63,7 @@ public class PaintOrb : Interactable, TooltipObject
     {
         if (other.tag == "Player")
         {
-            manager.IncreasePaint(color, paintReplenished);
+            manager.IncreasePaint(paint, paintReplenished);
             gameObject.SetActive(false);
         }
     }
@@ -84,7 +88,8 @@ public class PaintOrb : Interactable, TooltipObject
 
     public void OnDisplayTooltip()
     {
-        _updateUI.SetInfoText("Replenishes: " + paintReplenished + " " + color);
+        _updateUI.SetInfoText("Replenishes: " + paintReplenished +
+                              " " + Enum.GetName(typeof(Paints), paint));
         HighlightForHoverover();
 
     }

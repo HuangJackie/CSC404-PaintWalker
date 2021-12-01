@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static GameConstants;
 
 namespace DefaultNamespace
 {
@@ -10,8 +11,8 @@ namespace DefaultNamespace
             Vector3 playerPosition,
             Vector3 creaturePosition,
             LevelManager manager,
-            string paintColour1,
-            string paintColour2,
+            Paints activationPaintType1,
+            Paints activationPaintType2,
             int paintQuantity1,
             int paintQuantity2,
             Material material,
@@ -21,13 +22,13 @@ namespace DefaultNamespace
                                                  && isMouseOver
                                                  && Vector3.Distance(playerPosition,
                                                      creaturePosition) < 3
-                                                 && manager.GetPaintQuantity(paintColour1) >= paintQuantity1
-                                                 && manager.GetPaintQuantity(paintColour2) >= paintQuantity2;
+                                                 && manager.GetPaintQuantity(activationPaintType1) >= paintQuantity1
+                                                 && manager.GetPaintQuantity(activationPaintType2) >= paintQuantity2;
             
             if (shouldActivateSpecialCreature)
             {
-                manager.DecreasePaint(paintColour1, paintQuantity1);
-                manager.DecreasePaint(paintColour2, paintQuantity2);
+                manager.DecreasePaint(activationPaintType1, paintQuantity1);
+                manager.DecreasePaint(activationPaintType2, paintQuantity2);
                 material.color = color;
                 Debug.Log("Activate");
 

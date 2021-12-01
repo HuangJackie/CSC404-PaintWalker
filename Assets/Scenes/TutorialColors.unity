@@ -472,16 +472,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &4801332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -670,8 +678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abac952cda5744a09998a09e365141ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPressDelayInSeconds: 0.2
   isoCamera: {fileID: 1510057400}
+  buttonPressDelayInSeconds: 0.2
+  menuDpadPressDelayInSeconds: 0.2
 --- !u!4 &15028090
 Transform:
   m_ObjectHideFlags: 0
@@ -684,7 +693,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &37390021
 GameObject:
@@ -2372,16 +2381,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &201327805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3026,6 +3043,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -3692,16 +3713,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &286805008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4066,7 +4095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &334770944
 PrefabInstance:
@@ -4247,6 +4276,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -5338,16 +5371,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &422903898
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7084,16 +7125,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &543283549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7444,16 +7493,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &545177672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7854,16 +7911,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &555537654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9484,16 +9549,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &655586539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9628,6 +9701,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
+--- !u!1001 &667842992
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 200630547710343635, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344742905440723066, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
 --- !u!1001 &669274736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11398,16 +11568,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &794144691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11744,16 +11922,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &797483291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12038,16 +12224,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &806833698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12452,16 +12646,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &809614054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13666,16 +13868,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &916092561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14477,16 +14687,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &979600301
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14887,16 +15105,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1003437767
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15038,7 +15264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010844995
 GameObject:
@@ -15308,16 +15534,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1010845001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15663,16 +15897,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1013214868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16403,16 +16645,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1059922881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17038,16 +17288,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1082745350
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18595,16 +18853,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1268549381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19027,7 +19293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1316044099
 PrefabInstance:
@@ -20382,16 +20648,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1405436481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20615,7 +20889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 58.2, y: 47.3, z: 40}
 --- !u!4 &1434442619 stripped
 Transform:
@@ -21236,16 +21510,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1474275372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22570,16 +22852,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1532458169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25128,16 +25418,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1662772264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25676,16 +25974,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1703287553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25809,14 +26115,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12cc9dfd0fb97b4abe8bf4fece62b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devMode: 0
-  freezePlayer: 0
   player: {fileID: 4180352918053585829}
   playerBehavior: {fileID: 4180352918053585828}
-  init_yellow: 1
-  init_red: 1
-  init_green: 1
-  init_blue: 1
+  initialPaintSelected: 0
+  initialYellowPaint: 1
+  initialRedPaint: 1
+  initialGreenPaint: 1
+  initialBluePaint: 1
+  devMode: 0
+  freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
   m_ObjectHideFlags: 0
@@ -25834,7 +26141,7 @@ Transform:
   - {fileID: 461722546}
   - {fileID: 1500792125}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1704174259
 AudioSource:
@@ -26173,7 +26480,7 @@ Transform:
   - {fileID: 712128808}
   - {fileID: 1573442289}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717890753
 GameObject:
@@ -27067,16 +27374,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1755507109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27591,16 +27906,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 0
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1804386763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28063,16 +28386,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1819351256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28367,7 +28698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4622593199206464742, guid: cc53aeb5d23971a449c22e178fea39c0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4622593199206464742, guid: cc53aeb5d23971a449c22e178fea39c0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -28484,7 +28815,7 @@ Transform:
   m_Children:
   - {fileID: 1510057399}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1860377208
 PrefabInstance:
@@ -28956,16 +29287,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1870730010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29314,16 +29653,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1901073001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29677,16 +30024,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &1914750987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30222,6 +30577,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: tp_creature2
       value: 
       objectReference: {fileID: 595529318}
@@ -30549,6 +30912,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
+      propertyPath: paintType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998693518866426739, guid: 7272f0a4a0d81914c8896595249fc4fd, type: 3}
       propertyPath: tp_creature2
       value: 
       objectReference: {fileID: 1041012927}
@@ -30583,8 +30954,8 @@ MonoBehaviour:
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
   _allColours: []
-  paintColour1: Blue
-  paintColour2: Yellow
+  paintType1: 3
+  paintType2: 0
   paintQuantity1: 2
   paintQuantity2: 2
   isPainted: 0
@@ -31074,7 +31445,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2084791515 stripped
 Transform:
@@ -31661,16 +32032,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &2117214805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31982,6 +32361,10 @@ PrefabInstance:
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: color
       value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
+      propertyPath: paint
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8579858294870208396, guid: bc64c6b551d8b9849af8f99b9a7018c2, type: 3}
       propertyPath: manager
@@ -32372,16 +32755,24 @@ MonoBehaviour:
   isPaintedByBrush: 0
   _paintedColour: {r: 0, g: 0, b: 0, a: 0}
   isPaintable: 1
+  player_enter_from_north: 0
+  isWalkedOverVertially: 0
+  isWalkedOverHorizontally: 0
   _isSliding: 0
+  _destinationDrop: {x: 0, y: 0, z: 0}
+  destinationNeutral: {x: 0, y: 0, z: 0}
+  _destinationRaise: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
   GreenSounds: {fileID: 0}
+  NoPaintSound: {fileID: 0}
   blue_model: {fileID: 0}
   yellow_model: {fileID: 0}
   green_model: {fileID: 0}
   red_model: {fileID: 0}
   base_model: {fileID: 0}
+  _cur_model: {fileID: 0}
 --- !u!65 &2143929146
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32619,6 +33010,10 @@ PrefabInstance:
     - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
+      propertyPath: paintType1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3351200289359014143, guid: da28b15a7183e854e960514fda5be2d4, type: 3}
       propertyPath: frozen_model

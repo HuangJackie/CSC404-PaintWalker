@@ -5,6 +5,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static GameConstants;
 
 public class ColorWheelQuadrant : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,7 +13,7 @@ public class ColorWheelQuadrant : MonoBehaviour, IPointerEnterHandler, IPointerE
     private Image _quadrant;
     private ControllerUtil _controllerUtil;
     public Color highlightColor;
-    public string paintType;
+    public Paints paint;
     public string location;
 
     private Color DEFAULT_COLOR = new Color32(180, 180, 180, 200);
@@ -98,7 +99,7 @@ public class ColorWheelQuadrant : MonoBehaviour, IPointerEnterHandler, IPointerE
     private void SwitchPaintColour()
     {
         _quadrant.color = highlightColor;
-        _levelManager.ChangePaint(paintType);
+        _levelManager.ChangePaint(paint);
     }
 
     private void UnSwitchPaintColour()

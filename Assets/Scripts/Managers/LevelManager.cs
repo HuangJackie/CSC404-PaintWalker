@@ -3,33 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
-using Microsoft.CSharp;
-using UnityEngine.SceneManagement;
+using static GameConstants;
 
 public class LevelManager : MonoBehaviour
 {
-    // Level toggles
-    public bool devMode;
-    public bool freezePlayer;
-
     // Player info
+    [Header("Player")]
     public GameObject player;
     public Player playerBehavior;
     private PaintBrush playerPaintBrush;
     private PaintBottle playerPaintBottle;
 
+    // Player initialization for this Level set in inspector
+    [Header("Player Initialization")]
+    [SerializeField] private Paints initialPaintSelected = Paints.Yellow;
+    [SerializeField] private int initialYellowPaint = 0;
+    [SerializeField] private int initialRedPaint = 0;
+    [SerializeField] private int initialGreenPaint = 0;
+    [SerializeField] private int initialBluePaint = 0;
+
+    // Level toggles
+    [Header("Dev Options")]
+    public bool devMode;
+    public bool freezePlayer;
+
     // Player paint info
-    private String currentSelectedColour;
+    private Paints currentSelectedPaint;
     private Color currentSelectedColourClass;
-    private Dictionary<String, int> paintQuantity;
+    private Dictionary<Paints, int> paintQuantity;
 
     private SoundManager _colourChangeSoundManager = new SoundManager();
-
-    public int init_yellow;
-    public int init_red;
-    public int init_green;
-    public int init_blue;
-    private bool _isColourSwitched;
 
     // UI info
     private UpdateUI _updateUI;
@@ -59,31 +62,31 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ManageCoroutines());
         freezePlayer = false;
 
-        paintQuantity = new Dictionary<String, int>();
-        paintQuantity.Add("Blue", init_blue);     // Freezes Platform
-        paintQuantity.Add("Green", init_green);   // Growing Platform
-        paintQuantity.Add("Red", init_red);       // Drops Platform
-        paintQuantity.Add("Yellow", init_yellow); // Raises Platform
+        // Initialize player paint quantity
+        paintQuantity = new Dictionary<Paints, int>();
+        paintQuantity.Add(Paints.Yellow, initialYellowPaint); // Raises Platform
+        paintQuantity.Add(Paints.Red, initialRedPaint);       // Drops Platform
+        paintQuantity.Add(Paints.Green, initialGreenPaint);   // Growing Platform
+        paintQuantity.Add(Paints.Blue, initialBluePaint);     // Freezes Platform
 
+        // If dev mode, give super powers!
         if (devMode)
         {
-            paintQuantity["Blue"] = 100;
-            paintQuantity["Green"] = 100;
-            paintQuantity["Red"] = 100;
-            paintQuantity["Yellow"] = 100;
+            paintQuantity[Paints.Yellow] = 100;
+            paintQuantity[Paints.Red] = 100;
+            paintQuantity[Paints.Green] = 100;
+            paintQuantity[Paints.Blue] = 100;
         }
-        
-        currentSelectedColour = "Yellow";
-        currentSelectedColourClass = GameConstants.yellow;
 
-        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
-        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
+        // Initialize UI
+        _updateUI = FindObjectOfType<UpdateUI>();
+        _updateUI.InitPaintInfoText(paintQuantity[Paints.Yellow], paintQuantity[Paints.Red],
+                                    paintQuantity[Paints.Blue], paintQuantity[Paints.Green]);
 
-        _updateUI = FindObjectOfType<UpdateUI>();  // Auto-sets yellow to 3/10
-        _updateUI.SetPaint(paintQuantity["Yellow"]);
-        _updateUI.InitPaintInfoText(paintQuantity["Yellow"], paintQuantity["Red"],
-                                    paintQuantity["Blue"], paintQuantity["Green"]);
+        // Update Player and UI based on initialPaintSelected
+        ChangePaint(initialPaintSelected, false);
 
+        // Audio handling
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
     }
 
@@ -112,47 +115,44 @@ public class LevelManager : MonoBehaviour
         actionQueue.Enqueue(action);
     }
 
-    public void ChangePaint(string paintType)
+    public void ChangePaint(Paints paint)
     {
-        _colourChangeSoundManager.PlayRandom();
-        switch (paintType)
+        ChangePaint(paint, true);
+    }
+
+    public void ChangePaint(Paints paint, bool playEffects)
+    {
+        if (playEffects)
         {
-            case "Red":
-                currentSelectedColour = "Red";
-                currentSelectedColourClass = GameConstants.red;
-
-                _updateUI.ChangePaint(GameConstants.RED_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
-                playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
+            _colourChangeSoundManager.PlayRandom();
+        }
+        
+        switch (paint)
+        {
+            case Paints.Yellow:
+                currentSelectedPaint = Paints.Yellow;
+                currentSelectedColourClass = GameConstants.Yellow;
                 break;
 
-            case "Green":
-                currentSelectedColour = "Green";
-                currentSelectedColourClass = GameConstants.green;
-
-                _updateUI.ChangePaint(GameConstants.GREEN_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
-                playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
+            case Paints.Red:
+                currentSelectedPaint = Paints.Red;
+                currentSelectedColourClass = GameConstants.Red;
                 break;
 
-            case "Yellow":
-                currentSelectedColour = "Yellow";
-                currentSelectedColourClass = GameConstants.yellow;
-
-                _updateUI.ChangePaint(GameConstants.YELLOW_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
-                playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
+            case Paints.Green:
+                currentSelectedPaint = Paints.Green;
+                currentSelectedColourClass = GameConstants.Green;
                 break;
 
-            case "Blue":
-                currentSelectedColour = "Blue";
-                currentSelectedColourClass = GameConstants.blue;
-
-                _updateUI.ChangePaint(GameConstants.BLUE_PAINT, paintQuantity[currentSelectedColour]);
-                playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
-                playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedColour]);
+            case Paints.Blue:
+                currentSelectedPaint = Paints.Blue;
+                currentSelectedColourClass = GameConstants.Blue;
                 break;
         }
+
+         _updateUI.ChangePaint(currentSelectedPaint, paintQuantity[currentSelectedPaint]);
+        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
+        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint], playEffects);
     }
 
     IEnumerator CheckPaintQuantity()
@@ -189,7 +189,7 @@ public class LevelManager : MonoBehaviour
         Vector3 checkpointPos = checkpointInfo["checkpointPos"];
         if (checkpointPos == Vector3.zero)
         {
-            RestartFunction.Restart();
+            SceneLoader.RestartLevel();
         }
         else
         {
@@ -212,15 +212,7 @@ public class LevelManager : MonoBehaviour
                 SetIsPanning(false);
             }
 
-            //remove new blocks that got added after the checkpoint
-            //int storedBlockNumber = ObjectStorage.blockStates.Count;
-            //int currentBlockNumber = ObjectStorage.blockStorage.Count;
-            //if (currentBlockNumber > storedBlockNumber)
-            //{
-            //    ObjectStorage.blockStorage = ObjectStorage.blockStorage[0: storedBlockNumber];
-            //}
-
-            //reset block attributes
+            // Reset block attributes
             for (int i = 0; i < ObjectStorage.blockStorage.Count; i++)
             {
                 GameObject block = ObjectStorage.blockStorage[i];
@@ -233,15 +225,18 @@ public class LevelManager : MonoBehaviour
                     Ground groundScript = block.GetComponent<Ground>();
                     groundScript.UpdateModel(ObjectStorage.blockStates[i][7]);
                     block.transform.position = ObjectStorage.blockStates[i][0];
+
                     groundScript.isPaintedByBrush = ObjectStorage.blockStates[i][1];
                     groundScript.isPaintedByFeet = ObjectStorage.blockStates[i][2];
                     groundScript.originalColour = ObjectStorage.blockStates[i][3];
                     groundScript.paintedColour = ObjectStorage.blockStates[i][4];
                     groundScript._paintedColour = ObjectStorage.blockStates[i][9];
+
                     block.GetComponentInChildren<Renderer>().material.color = ObjectStorage.blockStates[i][5];
                     groundScript.destinationNeutral = ObjectStorage.blockStates[i][8];
                     groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
                     groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
+
                     groundScript.isWalkedOverHorizontally = ObjectStorage.blockStates[i][10];
                     groundScript.isWalkedOverVertially = ObjectStorage.blockStates[i][11];
                     block.SetActive(ObjectStorage.blockStates[i][6]);
@@ -279,13 +274,13 @@ public class LevelManager : MonoBehaviour
             }
 
             //reset paint amount
-            paintQuantity["Blue"] = ObjectStorage.paintStates[0];
-            paintQuantity["Green"] = ObjectStorage.paintStates[1];
-            paintQuantity["Red"] = ObjectStorage.paintStates[2];
-            paintQuantity["Yellow"] = ObjectStorage.paintStates[3];
+            paintQuantity[Paints.Blue] = ObjectStorage.paintStates[0];
+            paintQuantity[Paints.Green] = ObjectStorage.paintStates[1];
+            paintQuantity[Paints.Red] = ObjectStorage.paintStates[2];
+            paintQuantity[Paints.Yellow] = ObjectStorage.paintStates[3];
             _updateUI.SetPaint(GetPaintQuantity(GetCurrentlySelectedPaint()));
-            _updateUI.InitPaintInfoText(paintQuantity["Yellow"], paintQuantity["Red"],
-                                        paintQuantity["Blue"], paintQuantity["Green"]);
+            _updateUI.InitPaintInfoText(paintQuantity[Paints.Yellow], paintQuantity[Paints.Red],
+                                        paintQuantity[Paints.Blue], paintQuantity[Paints.Green]);
 
             //reset foot step FX and Sparkle FX
             for (int i = ObjectStorage.footPrintStates.Count; i < ObjectStorage.footStepStorage.Count; i++)
@@ -316,45 +311,45 @@ public class LevelManager : MonoBehaviour
         return _isPanning;
     }
 
-    public void IncreasePaint(String paintColour, int quantity)
+    public void IncreasePaint(Paints paintType, int quantity)
     {
         int amount = quantity;
-        paintQuantity[paintColour] += amount;
+        paintQuantity[paintType] += amount;
 
-        if (currentSelectedColour == paintColour)
+        if (currentSelectedPaint == paintType)
         {
-            _updateUI.SetPaint(paintQuantity[paintColour]);
+            _updateUI.SetPaint(paintQuantity[paintType]);
         }
-        _updateUI.UpdatePaintInfoText(paintColour, paintQuantity[paintColour]);
+        _updateUI.UpdatePaintInfoText(paintType, paintQuantity[paintType]);
 
-        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[paintColour]);
-        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[paintColour]);
+        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[paintType]);
+        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[paintType]);
 
         MoveRedo lastCommand = redoCommandHandler.LatestCommand() as MoveRedo;
         if (lastCommand)
         {
-            lastCommand.RecordPaintSpent(paintColour, -quantity);
+            lastCommand.RecordPaintSpent(paintType, -quantity);
         }
     }
 
-    public void DecreasePaint(String paintColour, int quantity)
+    public void DecreasePaint(Paints paintType, int quantity)
     {
         int amount = quantity;
-        paintQuantity[paintColour] -= amount;
+        paintQuantity[paintType] -= amount;
 
-        if (currentSelectedColour == paintColour)
+        if (currentSelectedPaint == paintType)
         {
-            _updateUI.SetPaint(paintQuantity[paintColour]);
+            _updateUI.SetPaint(paintQuantity[paintType]);
         }
-        _updateUI.UpdatePaintInfoText(paintColour, paintQuantity[paintColour]);
+        _updateUI.UpdatePaintInfoText(paintType, paintQuantity[paintType]);
 
-        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[paintColour]);
-        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[paintColour]);
+        playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[paintType]);
+        playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[paintType]);
 
         MoveRedo lastCommand = redoCommandHandler.LatestCommand() as MoveRedo;
         if (lastCommand)
         {
-            lastCommand.RecordPaintSpent(paintColour, quantity);
+            lastCommand.RecordPaintSpent(paintType, quantity);
         }
 
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
@@ -363,10 +358,10 @@ public class LevelManager : MonoBehaviour
 
     public void AddPaintInfoToStorage()
     {
-        ObjectStorage.paintStates.Add(paintQuantity["Blue"]);
-        ObjectStorage.paintStates.Add(paintQuantity["Green"]);
-        ObjectStorage.paintStates.Add(paintQuantity["Red"]);
-        ObjectStorage.paintStates.Add(paintQuantity["Yellow"]);
+        ObjectStorage.paintStates.Add(paintQuantity[Paints.Blue]);
+        ObjectStorage.paintStates.Add(paintQuantity[Paints.Green]);
+        ObjectStorage.paintStates.Add(paintQuantity[Paints.Red]);
+        ObjectStorage.paintStates.Add(paintQuantity[Paints.Yellow]);
     }
 
     private void ClearUIInfoText()
@@ -376,8 +371,8 @@ public class LevelManager : MonoBehaviour
 
     public void DecreaseCurrentSelectedPaint(int amount)
     {
-        paintQuantity[currentSelectedColour] -= amount;
-        _updateUI.SetPaint(paintQuantity[currentSelectedColour]);
+        paintQuantity[currentSelectedPaint] -= amount;
+        _updateUI.SetPaint(paintQuantity[currentSelectedPaint]);
         StopCoroutine("CheckPaintQuantity"); // Stop existing coroutine.
         StartCoroutine("CheckPaintQuantity");
     }
@@ -400,40 +395,39 @@ public class LevelManager : MonoBehaviour
         _updateUI.SetInfoText("No Paint Left", true);
     }
 
-    public string GetCurrentlySelectedPaint()
-    {
-        return currentSelectedColour;
-    }
-
     public Color GetCurrentlySelectedPaintClass()
     {
         return currentSelectedColourClass;
     }
 
-    public void SetCurrentlySelectedPaint(string color)
+    public Paints GetCurrentlySelectedPaint()
     {
-        currentSelectedColour = color;
+        return currentSelectedPaint;
+    }
+
+    public void SetCurrentlySelectedPaint(Paints paintType)
+    {
+        currentSelectedPaint = paintType;
     }
 
     public bool HasEnoughPaint()
     {
-        return paintQuantity[currentSelectedColour] > 0;
+        return paintQuantity[currentSelectedPaint] > 0;
     }
 
     public int GetPaintQuantity()
     {
-        string color = GetCurrentlySelectedPaint();
-        return paintQuantity[color];
+        Paints paintType = GetCurrentlySelectedPaint();
+        return paintQuantity[paintType];
     }
 
-    public int GetPaintQuantity(string colour)
+    public int GetPaintQuantity(Paints paintType)
     {
-        return paintQuantity[colour];
+        return paintQuantity[paintType];
     }
 
     public bool IsExitActive()
     {
-        //return _isExitActive;
         return true;
     }
 

@@ -6,8 +6,8 @@ using DefaultNamespace;
 public class SecondaryMenu : Menu
 {
     // returningMenu - Panel to activate when exiting this SecondaryMenu
-    private GameObject returningMenu;
-    private GameObject menuRenderer;
+    protected GameObject returningMenu;
+    protected GameObject menuRenderer;
 
     protected override void Start()
     {   
@@ -27,10 +27,18 @@ public class SecondaryMenu : Menu
         if (menuRenderer.activeSelf)
         {
             base.Update();
-            if (ControllerUtil.GetCancelButtonPressed())
+            if (controllerUtil.GetCancelButtonPressed())
             {
-                Exit();
+                Close();
             }
+        }
+    }
+
+    protected void UpdateBase()
+    {
+        if (menuRenderer.activeSelf)
+        {
+            base.Update();
         }
     }
 
@@ -43,7 +51,7 @@ public class SecondaryMenu : Menu
     }
 
     // Exit this SecondaryMenu, returning to returningMenu
-    public void Exit()
+    public void Close()
     {
         menuRenderer.SetActive(false);
         if (returningMenu != null)

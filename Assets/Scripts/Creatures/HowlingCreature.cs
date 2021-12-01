@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using static GameConstants;
 
 public class HowlingCreature : SpecialCreature
 {
@@ -16,7 +17,6 @@ public class HowlingCreature : SpecialCreature
     private ControllerUtil _controllerUtil;
     public float radius = 1.5f;
     private AudioSource m_MyAudioSource;
-
 
     new void Start()
     {
@@ -51,12 +51,12 @@ public class HowlingCreature : SpecialCreature
             player.transform.position,
             transform.position,
             manager,
-            paintColour1,
-            paintColour2,
+            paintType1,
+            paintType2,
             paintQuantity1,
             paintQuantity2,
             Material,
-            GameConstants.green))
+            GameConstants.Green))
         {
             player.GetComponent<Player>().animation_update("paint", true);
             m_MyAudioSource.Play();
@@ -86,6 +86,6 @@ public class HowlingCreature : SpecialCreature
     void TriggerButtton()
     {
         isTriggered = true;
-        gameObject.GetComponentInChildren<Renderer>().material.color = GameConstants.red;
+        gameObject.GetComponentInChildren<Renderer>().material.color = GameConstants.Red;
     }
 }
