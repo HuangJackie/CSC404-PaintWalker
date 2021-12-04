@@ -21917,7 +21917,7 @@ GameObject:
   - component: {fileID: 1603753445}
   - component: {fileID: 1603753447}
   - component: {fileID: 1603753446}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BluePaintTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21950,7 +21950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2febc73d3a3a5a4eba70df939fe03b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorial: {fileID: 11400000, guid: 060c718c690928e4f84a7620124b34ea, type: 2}
+  tutorial: {fileID: 11400000, guid: 945a5d0a61ae8b1488e2bb509d33b845, type: 2}
 --- !u!65 &1603753447
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 153963303}
   - component: {fileID: 153963305}
   - component: {fileID: 153963304}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UlalaTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

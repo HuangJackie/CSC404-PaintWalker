@@ -310,7 +310,7 @@ public class PaintingSystem : MonoBehaviour
     {
         Vector3 positionAbovePlayer = currentPosition + Vector3.up * YPositionAbovePlayer;
         return Physics.Raycast(positionAbovePlayer + shift, Vector3.down, out hitInfo, Mathf.Infinity,
-            ~LayerMask.GetMask("Player", "PaintCan"));
+            ~LayerMask.GetMask("Player", "PaintCan", "Ignore Raycast"));
     }
 
     private void HighlightSelectedInteractable()

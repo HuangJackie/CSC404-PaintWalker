@@ -16,7 +16,7 @@ public class TutorialTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (cutsceneManager && !cutsceneManager.ShowingCutscenes()) return;
+        if (cutsceneManager && cutsceneManager.ShowingCutscenes()) return;
         if (other.tag == "Player")
         {
             tutorialPrompts.DisplayPrompt(tutorial);

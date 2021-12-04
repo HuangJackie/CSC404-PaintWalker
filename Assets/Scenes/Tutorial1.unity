@@ -3163,7 +3163,7 @@ GameObject:
   - component: {fileID: 557000181}
   - component: {fileID: 557000183}
   - component: {fileID: 557000182}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: YellowPaintTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4310,7 +4310,7 @@ GameObject:
   - component: {fileID: 680672056}
   - component: {fileID: 680672058}
   - component: {fileID: 680672057}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WalkingTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9003,7 +9003,7 @@ GameObject:
   - component: {fileID: 1318232364}
   - component: {fileID: 1318232366}
   - component: {fileID: 1318232365}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PaintingTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10005,7 +10005,7 @@ GameObject:
   - component: {fileID: 1447798257}
   - component: {fileID: 1447798259}
   - component: {fileID: 1447798258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ExitPortalTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12499,7 +12499,7 @@ GameObject:
   - component: {fileID: 1634928044}
   - component: {fileID: 1634928046}
   - component: {fileID: 1634928045}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RedPaintTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15103,7 +15103,7 @@ GameObject:
   - component: {fileID: 2025097680}
   - component: {fileID: 2025097682}
   - component: {fileID: 2025097681}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PaintOrbsTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

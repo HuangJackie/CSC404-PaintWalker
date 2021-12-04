@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 115288031}
   - component: {fileID: 115288033}
   - component: {fileID: 115288032}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CheckpointsTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9441,7 +9441,7 @@ GameObject:
   - component: {fileID: 1227846867}
   - component: {fileID: 1227846869}
   - component: {fileID: 1227846868}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RepaintingTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15859,7 +15859,7 @@ GameObject:
   - component: {fileID: 1494536127}
   - component: {fileID: 1494536129}
   - component: {fileID: 1494536128}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PanningTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18977,7 +18977,7 @@ GameObject:
   - component: {fileID: 1895517410}
   - component: {fileID: 1895517411}
   - component: {fileID: 1895517412}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GreenPaintTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
