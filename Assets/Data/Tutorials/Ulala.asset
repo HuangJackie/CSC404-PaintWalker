@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e22f5d4e1d16437499bf48d7e2e7246a, type: 3}
-  m_Name: Panning
+  m_Name: Ulala
   m_EditorClassIdentifier: 
-  about: Panning
+  about: Ulala
   sentences:
-  - To pan around the screen, hold + drag Mouse3 or press the View/Select Button
-    to enter panning mode and use the right analog stick.
-  images: []
+  - Ulala can howl to tear down walls if I can paint it while carrying the right
+    paints.
+  images:
+  - {fileID: 21300000, guid: 69e651725e700bc4b91601e9088c4f42, type: 3}

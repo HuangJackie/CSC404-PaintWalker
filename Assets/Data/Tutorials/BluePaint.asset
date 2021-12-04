@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f5d4e1d16437499bf48d7e2e7246a, type: 3}
   m_Name: BluePaint
   m_EditorClassIdentifier: 
-  about: Green Paint
+  about: Blue Paint
   sentences:
   - I can use Blue Paint to turn blocks into ice cubes, making them adhere to gravity
   images:
