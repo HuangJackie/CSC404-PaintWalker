@@ -12,7 +12,10 @@ namespace DefaultNamespace
         private float _lastTimeButtonPressed;    // Generic button press
         private float _lastTimeMovementPressed;  // Player movement
         private float _lastTimeMenuDpadPressed;  // Menu navigation
+
+        // Toggles for disabling/altering certain controls
         private bool _isMenuOpen;
+        private bool _isTutorialPromptOpen;
 
         // Delay configuration
         [Header("Button Delay Config")]
@@ -24,7 +27,9 @@ namespace DefaultNamespace
             _lastTimeButtonPressed = Time.time;
             _lastTimeMovementPressed = _lastTimeButtonPressed;
             _lastTimeMenuDpadPressed = _lastTimeButtonPressed;
+
             _isMenuOpen = false;
+            _isTutorialPromptOpen = false;
         }
 
         /*
@@ -185,7 +190,7 @@ namespace DefaultNamespace
 
         public bool IsPaintButtonPressed()
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || _isTutorialPromptOpen)
             {
                 return false;
             }
@@ -196,7 +201,7 @@ namespace DefaultNamespace
 
         public bool GetPaintButtonDown()
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || _isTutorialPromptOpen)
             {
                 return false;
             }
@@ -205,16 +210,11 @@ namespace DefaultNamespace
             return Input.GetButtonDown("Paint");
         }
 
-        // public bool GetInteractButtonDown()
-        // {
-        //     if (GetColourWheelPressed() || _isMenuOpen)
-        //     {
-        //         return false;
-        //     }
-        //
-        //     return Input.GetButtonDown("Interact");
-        // }
-
+        public bool GetTutorialPromptContButton()
+        {
+            return _isTutorialPromptOpen && !_isMenuOpen &&
+                   (Input.GetButton("Paint") || Input.GetMouseButtonDown(0));
+        }
 
         public bool GetRotationChangePressed()
         {
@@ -282,9 +282,24 @@ namespace DefaultNamespace
             _isMenuOpen = false;
         }
 
-        public bool GetIsMenuOpen()
+        public void OpenTutorialPrompt()
+        {
+            _isTutorialPromptOpen = true;
+        }
+
+        public void CloseTutorialPrompt()
+        {
+            _isTutorialPromptOpen = false;
+        }
+
+        public bool GetMenuOpen()
         {
             return _isMenuOpen;
+        }
+
+        public bool GetTutorialPromptOpen()
+        {
+            return _isTutorialPromptOpen;
         }
 
         public bool GetSwitchYellowPressed()
