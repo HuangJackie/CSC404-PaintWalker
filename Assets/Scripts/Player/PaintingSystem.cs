@@ -294,9 +294,9 @@ public class PaintingSystem : MonoBehaviour
             return;
         }
 
-
-        if (RaycastForTopMostObject(_player.transform.position, Vector3.zero, out RaycastHit hitInfo)
-            && (hitInfo.collider.gameObject.TryGetComponent(out Ground _)))
+        if (RaycastForTopMostObject(_player.transform.position,Vector3.zero,
+                                    out RaycastHit hitInfo) &&
+            (hitInfo.collider.gameObject.TryGetComponent(out Ground _)))
         {
             _groundBlockBelowPlayer = hitInfo.collider;
         }

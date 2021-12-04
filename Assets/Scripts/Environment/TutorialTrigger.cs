@@ -16,7 +16,8 @@ public class TutorialTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!cutsceneManager.ShowingCutscenes() && other.tag == "Player")
+        if (cutsceneManager && !cutsceneManager.ShowingCutscenes()) return;
+        if (other.tag == "Player")
         {
             tutorialPrompts.DisplayPrompt(tutorial);
             gameObject.SetActive(false);  // Disable this trigger
