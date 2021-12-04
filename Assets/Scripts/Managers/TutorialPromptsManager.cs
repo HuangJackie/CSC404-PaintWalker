@@ -82,6 +82,7 @@ public class TutorialPromptsManager : MonoBehaviour
         if (currTutorialPageDisplaying >= currTutorial.sentences.Length)
         {
             DisableRendering();
+            return;
         }
 
         // Display next page based onf if there is
@@ -142,6 +143,7 @@ public class TutorialPromptsManager : MonoBehaviour
 
     private void ClearCurrPrompt()
     {
+        if (currPromptCanvas == null) return;
         currPromptCanvas.enabled = false;
 
         Image promptImage = currPromptCanvas.GetComponentInChildren<Image>();

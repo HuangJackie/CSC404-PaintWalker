@@ -18,7 +18,6 @@ public class CutSceneManager : MonoBehaviour
     }
     void Start()
     {
-        print("here");
         instance = gameObject;
         _levelManager = FindObjectOfType<LevelManager>();
         _cutSceneDontDestroyManager = FindObjectOfType<CutSceneDontDeleteManager>();
@@ -62,9 +61,12 @@ public class CutSceneManager : MonoBehaviour
     void OnEnable()
     {
         _levelLoadComplete = true;
-        print("scene enabled");
     }
 
+    public bool ShowingCutscenes()
+    {
+        return _cutSceneStorage != null && _cutSceneStorage.Count > 0;
+    }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
