@@ -149,7 +149,10 @@ public class Ground : Interactable, Paintable
 
         RaycastHit PlayerhitInfo;
         LayerMask mask = LayerMask.GetMask("Player");
-        if (Physics.Raycast(this.transform.position, Vector3.up, out PlayerhitInfo, 1, mask))
+        Vector3 spherePosition = transform.position + new Vector3(0, 1,0);
+        float radius = 0.05f;
+        Vector3 castDirection = Vector3.up;
+        if (Physics.SphereCast(spherePosition, radius, castDirection, out PlayerhitInfo, 0.5f, mask))
         {
             if ((player_enter_from_north && !isWalkedOverVertially) ||
                 (!player_enter_from_north && !isWalkedOverHorizontally))
@@ -406,7 +409,7 @@ public class Ground : Interactable, Paintable
 
     private void OnCollisionEnter(Collision other)
     {
-        if ((!isPaintedByBrush || !isPaintedByFeet) && other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             if (other.transform.position.z - this.transform.position.z != 0)
             {

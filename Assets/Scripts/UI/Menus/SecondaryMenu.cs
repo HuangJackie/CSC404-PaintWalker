@@ -8,11 +8,20 @@ public class SecondaryMenu : Menu
     // returningMenu - Panel to activate when exiting this SecondaryMenu
     protected GameObject returningMenu;
     protected GameObject menuRenderer;
+    public Animator transitionAnimation;
 
     protected override void Start()
     {   
         // First child should be the renderer for this SecondaryMenu
         menuRenderer = transform.GetChild(0).gameObject;
+        if (FindObjectOfType<LevelSelectMenu>())
+        {
+            transitionAnimation = FindObjectOfType<LevelSelectMenu>().GetComponent<Animator>();
+        } else if (FindObjectOfType<PauseMenu>())
+        {
+            transitionAnimation = FindObjectOfType<PauseMenu>().GetComponent<Animator>();
+        }
+        
         menuRenderer.SetActive(false);
         returningMenu = null;
 

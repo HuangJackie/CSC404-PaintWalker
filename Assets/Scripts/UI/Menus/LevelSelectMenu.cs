@@ -8,33 +8,46 @@ using static GameConstants;
 // ones are added and old ones are removed.
 public class LevelSelectMenu : SecondaryMenu
 {
-    public static void LoadTutorialColors()
+    private Levels levelToLoad;
+   
+    public void LoadTutorialColors()
     {
-        SceneLoader.LoadLevel(Levels.TutorialColors);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.TutorialColors;
     }
 
-    public static void LoadAlpha()
+    public void LoadAlpha()
     {
-        SceneLoader.LoadLevel(Levels.AlphaScenev2);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.AlphaScenev2;
     }
     
-    public static void LoadTut1()
+    public void LoadTut1()
     {
-        SceneLoader.LoadLevel(Levels.Tutorial1);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Tutorial1;
     }
 
-    public static void LoadTut15()
+    public void LoadTut15()
     {
-        SceneLoader.LoadLevel(Levels.Tutorial15);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Tutorial15;
     }
     
-    public static void LoadTut2()
+    public void LoadTut2()
     {
-        SceneLoader.LoadLevel(Levels.Tutorial2);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Tutorial2;
     }
 
-    public static void LoadLevel1()
+    public void LoadLevel1()
     {
-        SceneLoader.LoadLevel(Levels.Level1);
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Level1;
+    }
+
+    public void OnFadeComplete()
+    {
+        SceneLoader.LoadLevel(levelToLoad);
     }
 }
