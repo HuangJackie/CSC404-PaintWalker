@@ -18,6 +18,7 @@ TagManager:
   - MenuButton
   - ISOCamera
   - UI
+  - CutScenes
   layers:
   - Default
   - TransparentFX

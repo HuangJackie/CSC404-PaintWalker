@@ -40,7 +40,7 @@ public class Checkpoint : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
-        
+
     }
 
     //private void OnCollisionEnter(Collision other)
