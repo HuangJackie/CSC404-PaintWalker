@@ -23,18 +23,12 @@ public class Interactable : MonoBehaviour
     }
 
     public void ReinitializeMaterialColours()
-    {
-        if (TryGetComponent(out TutorialToolTips _))
-        {
-            _isTextureDark = true;
-        }
-        
+    {   
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         _allMaterials = new List<Material>();
         _allColours = new List<Color>();
         foreach (var renderer in renderers)
         {
-
             Material rendererMaterial = renderer.material;
             if (rendererMaterial.HasProperty("_Color"))
             {

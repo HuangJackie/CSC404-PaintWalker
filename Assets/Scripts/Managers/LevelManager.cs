@@ -154,7 +154,7 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-         _updateUI.ChangePaint(currentSelectedPaint, paintQuantity[currentSelectedPaint]);
+        _updateUI.ChangePaint(currentSelectedPaint, paintQuantity[currentSelectedPaint]);
         playerPaintBrush.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint]);
         playerPaintBottle.SetColor(currentSelectedColourClass, paintQuantity[currentSelectedPaint], playEffects);
     }

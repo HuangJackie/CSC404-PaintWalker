@@ -14,20 +14,16 @@ public class PaintingSystem : MonoBehaviour
 
     private Collider _groundBlockBelowPlayer;
     private Collider _currentlySelectedToPaint;
-    private bool _isInteractingWithTutorialSign;
-
-    private bool _canInteractWithSelected;
-
     private GameObject _emptySpaceBlock;
-    // private Vector3 _emptySpaceLocation; // To figure out where to place the block.
+
+    private const int YPositionAbovePlayer = 5;
+    private bool _canInteractWithSelected;
 
     /**
      * The currently selected coordinates relative to the player.
      */
     private Vector2 _selectedCoordinatesRelToPlayer;
 
-    private const int YPositionAbovePlayer = 5;
-    
     private PanningArrowUI panningArrowUI;
 
     private void Start()
@@ -47,7 +43,6 @@ public class PaintingSystem : MonoBehaviour
         SetCurrentlySelectedObject(_groundBlockBelowPlayer, Vector2.zero);
         _selectedCoordinatesRelToPlayer = Vector2.zero;
 
-        _isInteractingWithTutorialSign = false;
         _canInteractWithSelected = true;
 
         panningArrowUI = FindObjectOfType<PanningArrowUI>();
@@ -91,31 +86,11 @@ public class PaintingSystem : MonoBehaviour
                 teleportCreature.Interact();
                 ResetSelectedObject();
             }
-
-            // Tutorial Sign Interaction
-            if (_currentlySelectedToPaint.TryGetComponent(out TutorialToolTips tutorialSign))
-            {
-                if (!tutorialSign.IsToolTipOpen())
-                {
-                    tutorialSign.OpenToolTip();
-                    _isInteractingWithTutorialSign = true;
-                }
-                else
-                {
-                    tutorialSign.CloseToolTip();
-                    _isInteractingWithTutorialSign = false;
-                }
-            }
         }
     }
 
     private void ListenForMoveSelectInteractableCommand()
     {
-        if (_isInteractingWithTutorialSign)
-        {
-            return;
-        }
-
         bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out float xSelect);
         bool zAxisActive = _controllerUtil.GetZAxisPaintSelectAxis(out float zSelect);
 
@@ -189,7 +164,8 @@ public class PaintingSystem : MonoBehaviour
                 break;
         }
     }
-    private void BestEffortUpdateCurrentlySelectedBlock(Vector3 shift, int numShiftsToRecord = 1)
+    private void BestEffortUpdateCurrentlySelectedBlock(Vector3 shift,
+                                                        int numShiftsToRecord = 1)
     {
         if (Math.Abs(shift.x - _selectedCoordinatesRelToPlayer.x) < 0.1
             && Math.Abs(shift.z - _selectedCoordinatesRelToPlayer.y) < 0.1)
@@ -202,11 +178,12 @@ public class PaintingSystem : MonoBehaviour
         _canInteractWithSelected = true;
         Vector3 playerPosition = _player.transform.position;
         bool hitTopMostObject = RaycastForTopMostObject(
-            new Vector3(playerPosition.x,
-                0,
-                playerPosition.z),
+            new Vector3(playerPosition.x, 0,
+                        playerPosition.z),
             shift * numShiftsToRecord,
-            out RaycastHit hitInfo);
+            out RaycastHit hitInfo
+        );
+        
         if (!hitTopMostObject || !IsSelectableBlock(hitInfo))
         {
             HighlightUnpaintableObject(hitTopMostObject, hitInfo);
@@ -250,19 +227,18 @@ public class PaintingSystem : MonoBehaviour
 
     private bool IsSelectableBlock(RaycastHit hitInfo)
     {
-        TutorialToolTips tutorialSign = null;
-        if (!hitInfo.collider.TryGetComponent(out Paintable collidedPaintable) &&
-            !hitInfo.collider.TryGetComponent(out tutorialSign))
+        if (!hitInfo.collider.TryGetComponent(out Paintable collidedPaintable))
         {
             return false;
         }
 
-        return (collidedPaintable != null && collidedPaintable.IsPaintable()) || tutorialSign != null;
+        return collidedPaintable != null &&
+               collidedPaintable.IsPaintable();
     }
 
     private void ListenForPaintingCommand()
     {
-        if (_controllerUtil.IsPaintButtonPressed() && !_isInteractingWithTutorialSign)
+        if (_controllerUtil.GetPaintButtonDown())
         {
             Paintable paintable = GetCurrentlySelectedComponent<Paintable>();
             if (paintable == null)
@@ -276,7 +252,7 @@ public class PaintingSystem : MonoBehaviour
         }
     }
 
-    ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 // END: Code that Checks for Controller Input
 ////////////////////////////////////////////////////////
 
@@ -309,9 +285,9 @@ public class PaintingSystem : MonoBehaviour
             return;
         }
 
-
-        if (RaycastForTopMostObject(_player.transform.position, Vector3.zero, out RaycastHit hitInfo)
-            && (hitInfo.collider.gameObject.TryGetComponent(out Ground _)))
+        if (RaycastForTopMostObject(_player.transform.position,Vector3.zero,
+                                    out RaycastHit hitInfo) &&
+            (hitInfo.collider.gameObject.TryGetComponent(out Ground _)))
         {
             _groundBlockBelowPlayer = hitInfo.collider;
         }
@@ -321,11 +297,13 @@ public class PaintingSystem : MonoBehaviour
         }
     }
 
-    private bool RaycastForTopMostObject(Vector3 currentPosition, Vector3 shift, out RaycastHit hitInfo)
+    private bool RaycastForTopMostObject(Vector3 currentPosition, Vector3 shift,
+                                         out RaycastHit hitInfo)
     {
         Vector3 positionAbovePlayer = currentPosition + Vector3.up * YPositionAbovePlayer;
-        return Physics.Raycast(positionAbovePlayer + shift, Vector3.down, out hitInfo, Mathf.Infinity,
-            ~LayerMask.GetMask("Player", "PaintCan"));
+        return Physics.Raycast(positionAbovePlayer + shift, Vector3.down,
+                               out hitInfo, Mathf.Infinity,
+                               ~LayerMask.GetMask("Player", "PaintCan", "Ignore Raycast"));
     }
 
     private void HighlightSelectedInteractable()
@@ -361,8 +339,8 @@ public class PaintingSystem : MonoBehaviour
         Vector3 playerPosition = _player.transform.position;
         _emptySpaceBlock.transform.position =
             new Vector3(playerPosition.x + _selectedCoordinatesRelToPlayer.x,
-                Mathf.Floor(playerPosition.y - 0.5f) + 0.5f,
-                playerPosition.z + _selectedCoordinatesRelToPlayer.y);
+                        Mathf.Floor(playerPosition.y - 0.5f) + 0.5f,
+                        playerPosition.z + _selectedCoordinatesRelToPlayer.y);
         _emptySpaceBlock.SetActive(true);
     }
 

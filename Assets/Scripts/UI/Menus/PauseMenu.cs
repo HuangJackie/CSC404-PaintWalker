@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DefaultNamespace;
 using static GameConstants;
 
 public class PauseMenu : SecondaryMenu
@@ -42,7 +41,7 @@ public class PauseMenu : SecondaryMenu
 
         if (controllerUtil.GetMenuButtonPressed())
         {
-            if (!controllerUtil.GetIsMenuOpen())  // If in-game
+            if (!controllerUtil.GetMenuOpen())  // If in-game
             {
                 LoadSelf();
             }
