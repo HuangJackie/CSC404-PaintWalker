@@ -24,15 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 8034decd93e04a94389fcd9201af7d71
   - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: c43b056f328c2e94aa0ec68d1a9dc3d0
+  - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: 3fd225d5ac63fff43936efc66bc28557
-  - enabled: 0
-    path: Assets/Scenes/DesignDoc.unity
-    guid: 35fd2c32131c4c34c99a535c24361336
-  - enabled: 0
-    path: Assets/Scenes/TutorialColors.unity
-    guid: 7bae98521b13fd5418bf8f49bfce31c8
-  - enabled: 0
-    path: Assets/Scenes/AlphaScenev2.unity
-    guid: d97a9cd16afd7eb4d96d4e1a76eed5bf
   m_configObjects: {}

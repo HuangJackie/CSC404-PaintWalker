@@ -24,6 +24,9 @@ public class SceneLoader : MonoBehaviour
         } else if (scene.name == "Tutorial2")
         {
             LoadLevel(Levels.Level1);
+        }  else if (scene.name == "Level1")
+        {
+            LoadLevel(Levels.Level2);
         } else
         {
             LoadMainMenu();
