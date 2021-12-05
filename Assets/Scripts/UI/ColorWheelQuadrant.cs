@@ -43,7 +43,8 @@ public class ColorWheelQuadrant : MonoBehaviour, IPointerEnterHandler, IPointerE
             float xSelect = _controllerUtil.GetColourWheelSelectXAxis();
 
             UnSwitchPaintColour();
-            if (IsWithinRange(xSelect, DeltaToUndoSelect) && IsWithinRange(ySelect, DeltaToUndoSelect))
+            if (IsWithinRange(xSelect, DeltaToUndoSelect) &&
+                IsWithinRange(ySelect, DeltaToUndoSelect))
             {
                 return;
             }
