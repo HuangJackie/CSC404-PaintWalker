@@ -13,7 +13,7 @@ namespace DefaultNamespace
         private float _lastTimeMovementPressed;  // Player movement
         private float _lastTimeMenuDpadPressed;  // Menu navigation
 
-        // Toggles for disabling/altering certain controls
+        // Toggles for disabling/altering certain controls when the pause menu/cutscene/auto panning is happening
         private bool _isMenuOpen;
         private bool _isTutorialPromptOpen;
 
@@ -359,6 +359,11 @@ namespace DefaultNamespace
 
         public void SetTogglePanVSPaintSelect(bool togglePanVSPaintSelect)
         {
+            if (_isMenuOpen)
+            {
+                return;
+            }
+            
             _togglePanVSPaintSelect = togglePanVSPaintSelect;
         }
 

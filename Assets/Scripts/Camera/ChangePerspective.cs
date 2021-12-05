@@ -52,11 +52,11 @@ public class ChangePerspective : MonoBehaviour
         _cutSceneManager = FindObjectOfType<CutSceneManager>();
         _levelManager = FindObjectOfType<LevelManager>();
         _restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
-        print("started again");
     }
 
     public IEnumerator MoveToPositionAndBack(Vector3 newPosition, Vector3 originalPosition)
     {
+        _controllerUtil.OpenMenu();
         _levelManager.freezePlayer = true;
         while (Vector3.Distance(transform.position, newPosition) > 0.1)
         {
@@ -79,6 +79,7 @@ public class ChangePerspective : MonoBehaviour
 
         transform.position = originalPosition;
         _levelManager.freezePlayer = false;
+        _controllerUtil.CloseMenu();
     }
 
     void Update()
