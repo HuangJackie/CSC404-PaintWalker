@@ -48,6 +48,8 @@ MonoBehaviour:
   rotationSpeed: 2
   isIntervteredControl: 0
   direction: 0
+  PanningSpeed: 10
+  ExitObject: {fileID: 0}
 --- !u!1 &3517091834837948254
 GameObject:
   m_ObjectHideFlags: 0

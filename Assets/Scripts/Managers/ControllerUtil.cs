@@ -19,12 +19,15 @@ namespace DefaultNamespace
         public float buttonPressDelayInSeconds = 0.2f;
         public float menuDpadPressDelayInSeconds = 0.2f;
 
+        private bool _togglePanVSPaintSelect; // True when panning
+
         private void Start()
         {
             _lastTimeButtonPressed = Time.time;
             _lastTimeMovementPressed = _lastTimeButtonPressed;
             _lastTimeMenuDpadPressed = _lastTimeButtonPressed;
             _isMenuOpen = false;
+            _togglePanVSPaintSelect = false;
         }
 
         /*
@@ -80,7 +83,7 @@ namespace DefaultNamespace
 
         public float GetHorizontalPanningAxis()
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || !_togglePanVSPaintSelect)
             {
                 return 0;
             }
@@ -90,7 +93,7 @@ namespace DefaultNamespace
 
         public float GetVerticalPanningAxis()
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || !_togglePanVSPaintSelect)
             {
                 return 0;
             }
@@ -134,7 +137,7 @@ namespace DefaultNamespace
 
         public bool GetXAxisPaintSelectAxis(out float axis)
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || _togglePanVSPaintSelect)
             {
                 axis = 0;
                 return false;
@@ -147,7 +150,7 @@ namespace DefaultNamespace
 
         public bool GetZAxisPaintSelectAxis(out float axis)
         {
-            if (GetColourWheelPressed() || _isMenuOpen)
+            if (GetColourWheelPressed() || _isMenuOpen || _togglePanVSPaintSelect)
             {
                 axis = 0;
                 return false;
@@ -333,6 +336,21 @@ namespace DefaultNamespace
             return (Input.GetButtonDown("SwitchBlue") ||
                     Input.GetKeyDown(KeyCode.Alpha4)) &&
                    FinishedButtonPressDelay();
+        }
+        
+        public bool GetTogglePanVSPaintSelect()
+        {
+            return (Input.GetButtonDown("TogglePanVSPaintSelect"));
+        }
+
+        public void SetTogglePanVSPaintSelect(bool togglePanVSPaintSelect)
+        {
+            _togglePanVSPaintSelect = togglePanVSPaintSelect;
+        }
+
+        public bool isPanningModeOn()
+        {
+            return _togglePanVSPaintSelect;
         }
     }
 }
