@@ -247,7 +247,7 @@ public class PaintingSystem : MonoBehaviour
 
     private void ListenForPaintingCommand()
     {
-        if (_controllerUtil.IsPaintButtonPressed() && !_isInteractingWithTutorialSign)
+        if (_controllerUtil.GetPaintButtonDown() && !_isInteractingWithTutorialSign)
         {
             Paintable paintable = GetCurrentlySelectedComponent<Paintable>();
             if (paintable == null)

@@ -10038,7 +10038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2febc73d3a3a5a4eba70df939fe03b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorial: {fileID: 11400000, guid: 6dc7b4bfef13f78489e76479bdb6fb97, type: 2}
+  tutorial: {fileID: 11400000, guid: 5bd5f39ee655e864badd04cc90d830d2, type: 2}
 --- !u!65 &1447798259
 BoxCollider:
   m_ObjectHideFlags: 0

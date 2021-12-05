@@ -195,8 +195,7 @@ namespace DefaultNamespace
                 return false;
             }
 
-            // return Input.GetAxisRaw("Paint") > 0;
-            return Input.GetButton("Paint");
+            return Input.GetButton("Paint") && FinishedButtonPressDelay();
         }
 
         public bool GetPaintButtonDown()
@@ -206,14 +205,14 @@ namespace DefaultNamespace
                 return false;
             }
 
-            // return Input.GetAxisRaw("Paint") > 0;
-            return Input.GetButtonDown("Paint");
+            return Input.GetButtonDown("Paint") && FinishedButtonPressDelay();
         }
 
         public bool GetTutorialPromptContButton()
         {
             return _isTutorialPromptOpen && !_isMenuOpen &&
-                   (Input.GetButton("Paint") || Input.GetMouseButtonDown(0));
+                   (Input.GetButton("Paint") || Input.GetMouseButtonDown(0)) &&
+                   FinishedButtonPressDelay();
         }
 
         public bool GetRotationChangePressed()
