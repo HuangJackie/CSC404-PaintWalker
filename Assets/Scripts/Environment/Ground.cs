@@ -29,6 +29,7 @@ public class Ground : Interactable, Paintable
     private MoveRedo latestState;
     private LevelManager _levelManager;
     private UpdateUI _updateUI;
+    private ControllerUtil controllerUtil;
     private Player _player;
     private float _playerYPosition;
     private float _moveableObjYPosition;
@@ -74,11 +75,14 @@ public class Ground : Interactable, Paintable
     {
         _levelManager = FindObjectOfType<LevelManager>();
         objectStorage = FindObjectOfType<ObjectStorage>();
+        controllerUtil = FindObjectOfType<ControllerUtil>();
         objectStorage.AddBlock(this.gameObject);
+
         Material = GetComponentInChildren<Renderer>().material;
         originalColour = Material.color;
         _paintedColour = originalColour;
         paintedColour = Material.color;
+
         player_enter_from_north = false;
         player = GameObject.FindWithTag("Player");
         _player = player.GetComponent<Player>();
@@ -87,10 +91,10 @@ public class Ground : Interactable, Paintable
         _cur_model = base_model;
 
         _isMouseOver = false;
-
         _isIceBlockEffectEnabled = false;
         _isSliding = false;
         _outOfPaintAudioAlreadyPlayed = false;
+
         _destinationDrop = transform.position + new Vector3(0, -1, 0);
         destinationNeutral = transform.position;
         _destinationRaise = transform.position - new Vector3(0, -1, 0);
@@ -125,8 +129,6 @@ public class Ground : Interactable, Paintable
 
     void Update()
     {
-        
-
         if (_levelManager.freezePlayer)
         {
             return;
@@ -134,12 +136,15 @@ public class Ground : Interactable, Paintable
 
         if (_levelManager.GetCurrentlySelectedPaintClass().ToString() != _paintedColour.ToString() || !isPaintedByBrush)
         {
-            _isMouseClicked = Input.GetButtonDown("Fire1");
+            _isMouseClicked = !controllerUtil.GetTutorialPromptOpen() &&
+                              Input.GetButtonDown("Fire1");
             bool clickedUI = EventSystem.current.IsPointerOverGameObject();
 
-            Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            Vector3 horizontalPlayerPosition = new Vector3(player.transform.position.x, 0,
+                                                           player.transform.position.z);
             Vector3 horizontalBlockPosition =
                 new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+
             if (_isMouseOver && _isMouseClicked && !clickedUI &&
                 Vector3.Distance(horizontalPlayerPosition, horizontalBlockPosition) < 3)
             {
@@ -159,7 +164,9 @@ public class Ground : Interactable, Paintable
             {
                 GameObject footstepFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 footstepFX.transform.parent = gameObject.transform;
-                footstepFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.03f, gameObject.transform.position.z);
+                footstepFX.transform.position = new Vector3(gameObject.transform.position.x,
+                                                            gameObject.transform.position.y + 1.03f,
+                                                            gameObject.transform.position.z);
                 if (player_enter_from_north)
                 {
                     footstepFX.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -172,7 +179,8 @@ public class Ground : Interactable, Paintable
                 }
                 footstepFX.transform.localScale = footstepFX.transform.localScale * 0.1f;
                 Destroy(footstepFX.GetComponent<MeshCollider>());
-                Material footstep = Resources.Load("Materials/FootSteps", typeof(Material)) as Material;
+                Material footstep = Resources.Load("Materials/FootSteps",
+                                                   typeof(Material)) as Material;
                 footstepFX.GetComponent<Renderer>().material = footstep;
                 objectStorage.AddFootPrint(footstepFX);
             }
@@ -182,20 +190,21 @@ public class Ground : Interactable, Paintable
     private bool ReinitializeIceBlockMovement(bool isPushed)
     {
         bool canMove = false;
+
         // Check if there is a block below.
         _destinationMove = transform.position;
         Vector3 pos = _destinationMove + new Vector3(0, 0.5f, 0);
+
         if (!Physics.Raycast(pos, Vector3.down, 0.7f))
         {
             _destinationMove += Vector3.down;
-            canMove = true; // _isMovingBlock = true;
+            canMove = true;
         }
         // Check if there is a block in front.
         else if (isPushed && !Physics.Raycast(pos, _directionToSlideTo, 0.7f))
         {
             _destinationMove += _directionToSlideTo;
             canMove = true;
-            // _isMovingBlock = true;
         }
 
         if (pos.y < -5)
@@ -227,7 +236,8 @@ public class Ground : Interactable, Paintable
             tintColour(intialColor.b, GameConstants.SELECTION_B, amountToTint));
         
         bool stillMoving = true;
-        while (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out hit, 1, mask))
+        while (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0),
+                               Vector3.up, out hit, 1, mask))
         {
             yield return null;
             if (intialColor != Material.color && initialTintedColor != Material.color)
@@ -309,10 +319,10 @@ public class Ground : Interactable, Paintable
             if (reverting)
             {
                 _isBlockMoving = true;
-                //print("neutrual destination. Moving block to revert");
                 transform.position = Vector3.MoveTowards(
                     transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
+
                 if (movableObjectOnTop)
                 {
                     MoveObjectWithBlock(transform.position, movableObjectOnTop);
@@ -322,11 +332,6 @@ public class Ground : Interactable, Paintable
                 {
                     _isBlockMoving = false;
                     transform.position = destination;
-                    //if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
-                    //{
-                    //_player.GameState.UpdatePlayerY(player.transform.position.y);
-                    //}
-                    //print("reached neutral dest");
                     yield break;
                 }
             }
@@ -345,6 +350,7 @@ public class Ground : Interactable, Paintable
                 transform.position = Vector3.Lerp(
                     transform.position, destination, speed * 1.6f * Time.deltaTime
                 );
+
                 if (Vector3.Distance(transform.position, destination) <= 0.01f)
                 {
                     _isBlockMoving = false;
@@ -352,11 +358,6 @@ public class Ground : Interactable, Paintable
                     _destinationDrop = transform.position + new Vector3(0, -1, 0);
                     destinationNeutral = transform.position;
                     _destinationRaise = transform.position - new Vector3(0, -1, 0);
-                    //print("reached effect dest");
-                    if (movableObjectOnTop && movableObjectOnTop.CompareTag("Player"))
-                    {
-                        //_player.GameState.UpdatePlayerY(player.transform.position.y);
-                    }
 
                     yield break;
                 }
@@ -382,10 +383,6 @@ public class Ground : Interactable, Paintable
 
     private void MoveObjectWithBlock(Vector3 curBlockPosition, GameObject otherObject)
     {
-        //if (otherObject.GetComponent<Player>())
-        //{
-        //    _player.UpdateTargetLocation(curBlockPosition + new Vector3(0, _playerYPosition + 0.01f, 0));
-        //}
         if (otherObject.gameObject.layer == LayerMask.NameToLayer("IceCube"))
         {
             otherObject.transform.position = curBlockPosition + new Vector3(0, 1, 0);
@@ -434,7 +431,6 @@ public class Ground : Interactable, Paintable
         Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
         Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
         return _isIceBlockEffectEnabled &&
-               //_isOnSameLevelAsPlayer &&
                dir != Vector3.negativeInfinity &&
                !Physics.Raycast(pos, directionToPush, 0.7f);
     }
@@ -444,7 +440,8 @@ public class Ground : Interactable, Paintable
         Vector3 dir = ReturnDirection(other.gameObject, gameObject);
         RaycastHit RayHit;
         bool _isOnSameLevelAsPlayer = false;
-        if (Physics.Raycast(other.gameObject.transform.position, other.gameObject.transform.forward, out RayHit) &&
+        if (Physics.Raycast(other.gameObject.transform.position,
+                            other.gameObject.transform.forward, out RayHit) &&
             RayHit.collider.gameObject == this.gameObject)
         {
             _isOnSameLevelAsPlayer = true;
@@ -460,12 +457,15 @@ public class Ground : Interactable, Paintable
             _player.animation_update("push", true);
             _player.animation_update("walk", false);
             _player.animation_update("paint", false);
+
             _isSliding = true;
             _player._isPushing = true;
             _player._pushTimer = 0.35f;
+
             _pushIceBlockSoundManager.PlayRandom();
             Vector3 directionToPush = GetDirectionToMoveIceBlock(dir);
             Vector3 pos = transform.position + new Vector3(0, 0.5f, 0);
+
             if (!Physics.Raycast(pos, directionToPush, 0.7f))
             {
                 _destinationMove = transform.position + directionToPush;
@@ -477,7 +477,6 @@ public class Ground : Interactable, Paintable
                 }
 
                 StartCoroutine(MoveIceBlockToDestination(true));
-                // _isMovingBlock = true;
             }
         }
     }
@@ -520,15 +519,18 @@ public class Ground : Interactable, Paintable
             return false;
         }
 
-        // TODO: (Refractor) the method that calls this to remove this duplicate check since it's present here already.
-        if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour && isPaintedByBrush))
+        // TODO: (Refractor) the method that calls this to remove this
+        // duplicate check since it's present here already.
+        if (paintWithBrush && (_levelManager.GetCurrentlySelectedPaintClass() == _paintedColour &&
+                               isPaintedByBrush))
         {
             return false;
         }
 
         if (!_levelManager.HasEnoughPaint())
         {
-            if (!(isPaintedByBrush || isPaintedByFeet) && !_outOfPaintAudioAlreadyPlayed && _player.isPlayerMoving)
+            if (!(isPaintedByBrush || isPaintedByFeet) &&
+                !_outOfPaintAudioAlreadyPlayed && _player.isPlayerMoving)
             {
                 _outOfPaintSoundManager.PlayAudio();
                 _outOfPaintAudioAlreadyPlayed = true;
@@ -714,9 +716,12 @@ public class Ground : Interactable, Paintable
     {
         GameObject sparklesFX = GameObject.CreatePrimitive(PrimitiveType.Plane);
         sparklesFX.transform.parent = gameObject.transform;
-        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.02f, gameObject.transform.position.z);
+        sparklesFX.transform.position = new Vector3(gameObject.transform.position.x,
+                                                    gameObject.transform.position.y + 1.02f,
+                                                    gameObject.transform.position.z);
         sparklesFX.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 4) * 90, 0);
         sparklesFX.transform.localScale = sparklesFX.transform.localScale * 0.1f;
+
         Destroy(sparklesFX.GetComponent<MeshCollider>());
         Material sparkles = Resources.Load("Materials/Sparkles", typeof(Material)) as Material;
         sparklesFX.GetComponent<Renderer>().material = sparkles;
@@ -741,8 +746,10 @@ public class Ground : Interactable, Paintable
         LayerMask mask = LayerMask.GetMask("Default");
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, Color.red, 120f);
         bool noBlockAbove =
-            !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), Vector3.up, out var hit, 1, mask);
-        return noBlockAbove || (hit.collider.gameObject.TryGetComponent(out Ground ground) && ground.IsIceBlock());
+            !Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0),
+                             Vector3.up, out var hit, 1, mask);
+        return noBlockAbove || (hit.collider.gameObject.TryGetComponent(out Ground ground) &&
+                                ground.IsIceBlock());
     }
 
     // move platform code (ice)
@@ -809,37 +816,39 @@ public class Ground : Interactable, Paintable
 
     private bool CanDown(Vector3 currentTransformPosition)
     {
-        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.back * 1, Color.green, 120f);
+        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0),
+                      Vector3.back * 1, Color.green, 120f);
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.back, 1);
     }
 
     private bool CanUp(Vector3 currentTransformPosition)
     {
-        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.forward * 1, Color.green, 120f);
+        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0),
+                      Vector3.forward * 1, Color.green, 120f);
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.forward, 1);
     }
 
     private bool CanLeft(Vector3 currentTransformPosition)
     {
-        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.left * 1, Color.green, 120f);
+        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0),
+                      Vector3.left * 1, Color.green, 120f);
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.left, 1);
     }
 
     private bool CanRight(Vector3 currentTransformPosition)
     {
-        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.right * 1, Color.green, 120f);
+        Debug.DrawRay(currentTransformPosition + new Vector3(0, 1f, 0),
+                      Vector3.right * 1, Color.green, 120f);
         return !Physics.Raycast(currentTransformPosition + new Vector3(0, 1f, 0), Vector3.right, 1);
     }
 
     private new void OnMouseEnter()
     {
-        if (!IsPaintable())
+        if (!IsPaintable() || controllerUtil.GetTutorialPromptOpen())
         {
             return;
         }
 
-        // originalColour = Material.color;
-        // Material.color = new Color(0.98f, 1f, 0.45f);
         HighlightForHoverover();
         _isMouseOver = true;
     }
@@ -851,7 +860,6 @@ public class Ground : Interactable, Paintable
             return;
         }
 
-        // Material.color = _paintedColour;
         UndoHighlight();
         _isMouseOver = false;
     }

@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DefaultNamespace;
 
 public class CutSceneManager : MonoBehaviour
 {
     private List<GameObject> _cutSceneStorage;
     private LevelManager _levelManager;
     private CutSceneDontDeleteManager _cutSceneDontDestroyManager;
-    private bool _levelLoadComplete;
-    private static GameObject instance; 
-    // Start is called before the first frame update
+    private ControllerUtil _controllerUtil;
 
-    private void Awake()
-    {
-        
-    }
+    private static GameObject instance;
+    private bool _levelLoadComplete;
+
     void Start()
     {
-        print("here");
         instance = gameObject;
         _levelManager = FindObjectOfType<LevelManager>();
         _cutSceneDontDestroyManager = FindObjectOfType<CutSceneDontDeleteManager>();
+        _controllerUtil = FindObjectOfType<ControllerUtil>();
+
         if (!_cutSceneDontDestroyManager.cutScenesSeen)
         {
             _cutSceneStorage = new List<GameObject>();
             int children = transform.childCount;
+
             for (int i = children - 1; i > -1; --i)
             {
                 if (transform.GetChild(i).gameObject.activeSelf)
@@ -34,25 +34,29 @@ public class CutSceneManager : MonoBehaviour
                 }
             }
             _cutSceneDontDestroyManager.cutScenesSeen = true;
-        } else
+        }
+        else
         {
             Destroy(this.gameObject);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_cutSceneStorage.Count > 0)
         {
             _levelManager.freezePlayer = true;
-            if (Input.GetMouseButtonDown(0) && _levelLoadComplete)
+            if ((Input.GetMouseButtonDown(0)               ||
+                 _controllerUtil.GetConfirmButtonPressed() ||
+                 _controllerUtil.GetCancelButtonPressed()) &&
+                _levelLoadComplete)
             {
                 GameObject curCutScene = _cutSceneStorage[0];
                 _cutSceneStorage.RemoveAt(0);
                 curCutScene.SetActive(false);
             }
-        } else
+        }
+        else
         {
             _levelManager.freezePlayer = false;
             this.gameObject.SetActive(false);
@@ -62,9 +66,12 @@ public class CutSceneManager : MonoBehaviour
     void OnEnable()
     {
         _levelLoadComplete = true;
-        print("scene enabled");
     }
 
+    public bool ShowingCutscenes()
+    {
+        return _cutSceneStorage != null && _cutSceneStorage.Count > 0;
+    }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
