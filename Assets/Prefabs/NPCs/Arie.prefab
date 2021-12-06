@@ -34,7 +34,7 @@ GameObject:
   - component: {fileID: 3171513538546529947}
   m_Layer: 0
   m_Name: Arie
-  m_TagString: Untagged
+  m_TagString: RammingCreature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,10 +48,10 @@ Transform:
   m_GameObject: {fileID: 1857353175857911906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 60, y: 60, z: 60}
+  m_LocalScale: {x: 700, y: 700, z: 700}
   m_Children:
   - {fileID: 2183152502503646203}
-  - {fileID: 5652689887904355570}
+  - {fileID: 4379239270044435067}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,12 +78,12 @@ MonoBehaviour:
   originalColour: {r: 0, g: 0, b: 0, a: 0}
   paintedColour: {r: 0, g: 0, b: 0, a: 0}
   _allColours: []
-  paintColour1: Blue
-  paintColour2: Yellow
+  paintType1: 0
+  paintType2: 0
   paintQuantity1: 2
   paintQuantity2: 2
   isPainted: 0
-  frozen_model: {fileID: 4988215065515331144}
+  frozen_model: {fileID: 4003135217983346881}
   coloured_model: {fileID: 1515405262877129025}
   speed: 3
   target: {fileID: 0}
@@ -127,6 +127,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1252724531035273023, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -212,7 +224,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
   m_PrefabInstance: {fileID: 1857353174634021904}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5330250941424087833
+--- !u!1001 &4272956810724238736
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -221,6 +233,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
@@ -265,17 +289,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 85eea62884534e345ac530598f61508a, type: 3}
       propertyPath: m_Name
-      value: Arie_Uncolored
+      value: Arie_model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85eea62884534e345ac530598f61508a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85eea62884534e345ac530598f61508a, type: 3}
---- !u!1 &4988215065515331144 stripped
+--- !u!1 &4003135217983346881 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 85eea62884534e345ac530598f61508a, type: 3}
-  m_PrefabInstance: {fileID: 5330250941424087833}
+  m_PrefabInstance: {fileID: 4272956810724238736}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5652689887904355570 stripped
+--- !u!4 &4379239270044435067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85eea62884534e345ac530598f61508a, type: 3}
-  m_PrefabInstance: {fileID: 5330250941424087833}
+  m_PrefabInstance: {fileID: 4272956810724238736}
   m_PrefabAsset: {fileID: 0}
