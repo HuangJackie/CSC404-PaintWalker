@@ -35,9 +35,6 @@ public class TpCreature : SpecialCreature
         {
             tp_creature2 = GameObject.FindWithTag("TpCreature2");
         }
-
-        _material2 = tp_creature2.GetComponentInChildren<Renderer>().material;
-        _originalColour2 = _material2.color;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _isRecentlyPainted = false;
     }
@@ -52,6 +49,12 @@ public class TpCreature : SpecialCreature
     {
         base.OnMouseDown();
         Interact();
+    }
+
+    private void color_creature()
+    {
+        frozen_model.SetActive(false);
+        coloured_model.SetActive(true);
     }
 
     public override bool Paint(bool paintWithBrush)
@@ -70,15 +73,18 @@ public class TpCreature : SpecialCreature
                 _tpCreatureColor))
         {
             player.GetComponent<Player>().animation_update("paint", true);
-            originalColour = Material.color;
-            paintedColour = Material.color;
+            // originalColour = Material.color;
+            // paintedColour = Material.color;
             isPainted = true;
             _isRecentlyPainted = true;
             // color other creature:
-            _material2.color = _tpCreatureColor;
-            _originalColour2 = _material2.color;
+            // _material2.color = _tpCreatureColor;
+            // _originalColour2 = _material2.color;
             for (int i = 0; i < tp_creaturesx.Length; i++)
             {
+                // frozen_model.SetActive(false);
+                // coloured_model.SetActive(true);
+                tp_creaturesx[i].color_creature();
                 tp_creaturesx[i].isPainted = true;
 
                 if (tp_creaturesx[i].TryGetComponent(out Interactable interactable))

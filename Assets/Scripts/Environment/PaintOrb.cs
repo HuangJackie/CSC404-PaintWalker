@@ -7,6 +7,7 @@ using static GameConstants;
 
 public class PaintOrb : Interactable, TooltipObject
 {
+    public AudioSource pickupPaint;
     [Header("Manager")]
     public LevelManager manager;
 
@@ -18,7 +19,7 @@ public class PaintOrb : Interactable, TooltipObject
     private Light lightSettings;
     private Renderer[] meshRenderers;
     private UpdateUI _updateUI;
-
+    
     private new void Start()
     {
         base.Start();
@@ -63,8 +64,10 @@ public class PaintOrb : Interactable, TooltipObject
     {
         if (other.tag == "Player")
         {
+            pickupPaint.Play();
             manager.IncreasePaint(paint, paintReplenished);
             gameObject.SetActive(false);
+            
         }
     }
 
