@@ -195,7 +195,7 @@ public class Ground : Interactable, Paintable
         _destinationMove = transform.position;
         Vector3 pos = _destinationMove + new Vector3(0, 0.5f, 0);
 
-        if (!Physics.Raycast(pos, Vector3.down, 0.7f))
+        if (!Physics.Raycast(pos, Vector3.down, 0.6f))
         {
             _destinationMove += Vector3.down;
             canMove = true;
