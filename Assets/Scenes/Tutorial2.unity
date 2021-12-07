@@ -21697,7 +21697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.483
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22386,7 +22386,7 @@ MonoBehaviour:
   initialRedPaint: 0
   initialGreenPaint: 0
   initialBluePaint: 10
-  devMode: 0
+  devMode: 1
   freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
