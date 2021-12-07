@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using DefaultNamespace;
+using UI;
 using UnityEngine;
 using static GameConstants;
 
@@ -23,6 +24,8 @@ public class PaintingSystem : MonoBehaviour
      */
     private Vector2 _selectedCoordinatesRelToPlayer;
 
+    private PanningArrowUI panningArrowUI;
+
     private void Start()
     {
         _levelManager = FindObjectOfType<LevelManager>();
@@ -41,6 +44,8 @@ public class PaintingSystem : MonoBehaviour
         _selectedCoordinatesRelToPlayer = Vector2.zero;
 
         _canInteractWithSelected = true;
+
+        panningArrowUI = FindObjectOfType<PanningArrowUI>();
     }
 
 ////////////////////////////////////////////////////////
@@ -51,6 +56,16 @@ public class PaintingSystem : MonoBehaviour
         ListenForPaintingCommand();
         ListenForMoveSelectInteractableCommand();
         ListenForInteractingCommand();
+        ListenForTogglePanVSPaintSelect();
+    }
+
+    private void ListenForTogglePanVSPaintSelect()
+    {
+        if (_controllerUtil.GetTogglePanVSPaintSelect())
+        {
+            panningArrowUI.EnablePanningArrows(!_controllerUtil.isPanningModeOn());
+            _controllerUtil.SetTogglePanVSPaintSelect(!_controllerUtil.isPanningModeOn());
+        }
     }
 
     private void ListenForInteractingCommand()

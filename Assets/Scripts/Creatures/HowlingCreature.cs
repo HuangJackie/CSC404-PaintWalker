@@ -18,31 +18,47 @@ public class HowlingCreature : SpecialCreature
     public float radius = 1.5f;
     private AudioSource m_MyAudioSource;
 
+    // For automatic panning
+    private ChangePerspective changePerspective;
+
     new void Start()
     {
         base.Start();
         m_MyAudioSource = GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
         _controllerUtil = FindObjectOfType<ControllerUtil>();
+        changePerspective = FindObjectOfType<ChangePerspective>();
     }
 
     void Update()
     {
         if (isTriggered)
         {
-            wall.operate = true;
+            if (wall)
+            {
+                StartCoroutine(changePerspective.MoveToPositionAndBack(wall.transform.position,
+                    changePerspective.transform.position));
+                wall.operate = true;
+            }
+
             if (wall2)
             {
+                StartCoroutine(changePerspective.MoveToPositionAndBack(wall2.transform.position,
+                    changePerspective.transform.position));
                 wall2.operate = true;
             }
+
             if (wall3)
             {
+                StartCoroutine(changePerspective.MoveToPositionAndBack(wall3.transform.position,
+                    changePerspective.transform.position));
                 wall3.operate = true;
             }
+
             isTriggered = false;
         }
     }
-    
+
     public override bool Paint(bool paintWithBrush)
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
@@ -72,6 +88,7 @@ public class HowlingCreature : SpecialCreature
                 hitCollider.SendMessage("TriggerButtton",
                     SendMessageOptions.DontRequireReceiver);
             }
+
             ReinitializeMaterialColours();
 
             return true;
