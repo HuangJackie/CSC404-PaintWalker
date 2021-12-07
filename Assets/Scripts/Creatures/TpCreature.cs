@@ -62,7 +62,7 @@ public class TpCreature : SpecialCreature
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
-                IsMouseOver || _controllerUtil.GetPaintButtonDown(),
+                true,
                 player.transform.position,
                 transform.position,
                 _levelManager,
