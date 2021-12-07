@@ -8,12 +8,14 @@ public class Exit : MonoBehaviour
     private UpdateUI _updateUI;
     public LevelManager manager;
     private AudioSource _winAudioSource;
+    private GameObject _player;
     
     // Start is called before the first frame update
     void Start()
     {
         _updateUI = FindObjectOfType<UpdateUI>();
         _winAudioSource = this.GetComponent<AudioSource>();
+        _player = GameObject.FindWithTag("Player");
     }
     
     private void OnTriggerEnter(Collider collision)
@@ -28,6 +30,7 @@ public class Exit : MonoBehaviour
             }
             else
             {
+                _player.SetActive(false);
                 _updateUI.SetInfoText("You Win!", true);
                 _winAudioSource.Play();
             }
