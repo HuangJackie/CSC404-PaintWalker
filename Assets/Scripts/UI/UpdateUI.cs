@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using UI;
 using UnityEngine;
 using static GameConstants;
 
@@ -28,6 +29,7 @@ public class UpdateUI : MonoBehaviour
 
     // Crosshair components
     private CrosshairUI crosshairUI;
+    private PanningArrowUI panningArrowUI;
     private bool _isCrosshairActive;
 
     private void Awake()
@@ -46,8 +48,9 @@ public class UpdateUI : MonoBehaviour
         blueDotText = FindObjectOfType<BlueDotText>();
         greenDotText = FindObjectOfType<GreenDotText>();
 
-        // Init corsshair
+        // Init crosshair
         crosshairUI = FindObjectOfType<CrosshairUI>();
+        panningArrowUI = FindObjectOfType<PanningArrowUI>();
         _isCrosshairActive = false;
 
         // Init corsshair
@@ -174,9 +177,10 @@ public class UpdateUI : MonoBehaviour
         infoText.SetPaintText("");
     }
 
-    public void EnableCrosshairUI(bool isEnabled)
+    public void EnablePanningUI(bool isEnabled)
     {
         _isCrosshairActive = isEnabled;
         crosshairUI.EnableCrossHair(isEnabled);
+        panningArrowUI.EnablePanningArrows(isEnabled);
     }
 }

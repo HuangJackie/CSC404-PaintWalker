@@ -9,7 +9,8 @@ public class PauseMenu : SecondaryMenu
     private LevelManager levelManager;
     private OptionsMenu optionsMenu;
     private ControlsMenu controlsMenu;
-
+    private RestartDontDeleteManager restartDontDeleteManager;
+    
     private Image background;
 
     private void Awake()
@@ -24,6 +25,7 @@ public class PauseMenu : SecondaryMenu
         levelManager = FindObjectOfType<LevelManager>();
         optionsMenu = FindObjectOfType<OptionsMenu>();
         controlsMenu = FindObjectOfType<ControlsMenu>();
+        restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
     }
 
     protected override void Update()
@@ -107,6 +109,8 @@ public class PauseMenu : SecondaryMenu
 
     public void LoadMainMenu()
     {
+        restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
+        restartDontDeleteManager.isRestarting = false;
         Close();
         base.transitionAnimation.SetTrigger("FadeOut");
     }
@@ -128,12 +132,16 @@ public class PauseMenu : SecondaryMenu
 
     public void LoadCheckpoint()
     {
+        restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
+        restartDontDeleteManager.isRestarting = true;
         Close();
         levelManager.RestartAtLastCheckpoint();
     }
 
     public void RestartLevel()
     {
+        restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
+        restartDontDeleteManager.isRestarting = true;
         Close();
         SceneLoader.RestartLevel();
     }

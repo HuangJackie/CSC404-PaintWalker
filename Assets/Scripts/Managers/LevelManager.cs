@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     // Restart/Load checkpoint capabilities
     public static Dictionary<string, dynamic> checkpointInfo;
     public static List<Vector3> pastCheckPoints;
+    private RestartDontDeleteManager _restartDontDestroyManager;
 
     // Redo capabilities
     public RedoCommandHandler redoCommandHandler = new RedoCommandHandler();
@@ -88,6 +89,9 @@ public class LevelManager : MonoBehaviour
 
         // Audio handling
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
+        
+        // Keep track whether a level was restarted vs started for the first time.
+        _restartDontDestroyManager = FindObjectOfType<RestartDontDeleteManager>();
     }
 
     void Update()
@@ -302,7 +306,7 @@ public class LevelManager : MonoBehaviour
 
     public void SetIsPanning(bool isPanning)
     {
-        _updateUI.EnableCrosshairUI(isPanning);
+        _updateUI.EnablePanningUI(isPanning);
         _isPanning = isPanning;
     }
 

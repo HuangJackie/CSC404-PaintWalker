@@ -46,6 +46,7 @@ public class CutSceneManager : MonoBehaviour
         if (_cutSceneStorage.Count > 0)
         {
             _levelManager.freezePlayer = true;
+            _controllerUtil.OpenMenu();
             if ((Input.GetMouseButtonDown(0)               ||
                  _controllerUtil.GetConfirmButtonPressed() ||
                  _controllerUtil.GetCancelButtonPressed()) &&
@@ -54,6 +55,7 @@ public class CutSceneManager : MonoBehaviour
                 GameObject curCutScene = _cutSceneStorage[0];
                 _cutSceneStorage.RemoveAt(0);
                 curCutScene.SetActive(false);
+                _controllerUtil.CloseMenu();
             }
         }
         else
