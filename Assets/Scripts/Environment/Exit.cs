@@ -8,12 +8,14 @@ public class Exit : MonoBehaviour
     private UpdateUI _updateUI;
     public LevelManager manager;
     private AudioSource _winAudioSource;
+    private CutSceneManager _cutSceneManager;
     
     // Start is called before the first frame update
     void Start()
     {
         _updateUI = FindObjectOfType<UpdateUI>();
         _winAudioSource = this.GetComponent<AudioSource>();
+        _cutSceneManager = FindObjectOfType<CutSceneManager>();
     }
     
     private void OnTriggerEnter(Collider collision)
@@ -22,22 +24,30 @@ public class Exit : MonoBehaviour
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision)
         {
-            if (scene.name == "TutorialColors")
+            if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
                 _updateUI.SetInfoText("Tutorial Complete!", true);
             }
-            else
+            else if (scene.name == "Level1")
             {
                 _updateUI.SetInfoText("You Win!", true);
                 _winAudioSource.Play();
             }
-            StartCoroutine(ReturnToMenu());
+            StartCoroutine(ReturnToMenu(scene));
         }
     }
 
-    private IEnumerator ReturnToMenu()
+    private IEnumerator ReturnToMenu(Scene scene)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
+        if (scene.name == "Level1")
+        {
+            _cutSceneManager.TriggerEndCutScene();
+        }
+        while (_cutSceneManager.gameObject.activeSelf)
+        {
+            yield return null;
+        }
         SceneLoader.LoadNextLevel();
     }
 }
