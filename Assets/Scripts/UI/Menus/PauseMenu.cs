@@ -111,9 +111,14 @@ public class PauseMenu : SecondaryMenu
         base.transitionAnimation.SetTrigger("FadeOut");
     }
 
+    public void FadeOut()
+    {
+        base.transitionAnimation.SetTrigger("FadeOut");
+    }
+
     public void OnFadeComplete()
     {
-        SceneLoader.LoadMainMenu();
+        SceneLoader.LoadNextLevel();
     }
 
     public void LoadOptionsMenu()

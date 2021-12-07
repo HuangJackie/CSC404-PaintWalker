@@ -9,6 +9,7 @@ public class Exit : MonoBehaviour
     public LevelManager manager;
     private AudioSource _winAudioSource;
     private CutSceneManager _cutSceneManager;
+    private PauseMenu _pauseMenu;
     
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class Exit : MonoBehaviour
         _updateUI = FindObjectOfType<UpdateUI>();
         _winAudioSource = this.GetComponent<AudioSource>();
         _cutSceneManager = FindObjectOfType<CutSceneManager>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
     }
     
     private void OnTriggerEnter(Collider collision)
@@ -48,6 +50,6 @@ public class Exit : MonoBehaviour
         {
             yield return null;
         }
-        SceneLoader.LoadNextLevel();
+        _pauseMenu.FadeOut();
     }
 }
