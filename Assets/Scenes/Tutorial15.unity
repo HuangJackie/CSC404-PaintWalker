@@ -906,6 +906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255424936e3fd964bbdcc86a5494959d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music: {fileID: 930988925}
+  tutorial: {fileID: 8300000, guid: a3d255e25896aef4281da7338af8d37a, type: 3}
 --- !u!4 &152687860
 Transform:
   m_ObjectHideFlags: 0
@@ -1943,6 +1945,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundMusicManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7285803934213302034, guid: 89a4836227dfe044d88d22415c8fd118, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a4836227dfe044d88d22415c8fd118, type: 3}
 --- !u!1001 &518788777
@@ -2177,7 +2183,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: adf8effc5be44ab499fc123e23d8a59c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 13759462fd9c9bc4cb35b4f3615c1f91, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3887,6 +3893,68 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951452788856766230, guid: e295a5af8142d514d81c65933ef8c4f8, type: 3}
   m_PrefabInstance: {fileID: 470012952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &930988924
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593701, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951200743169593702, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+      propertyPath: m_Name
+      value: TutorialMusicManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+--- !u!82 &930988925 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 951200743169593703, guid: d23edd5f07d151c47b0771a2d560b9b0, type: 3}
+  m_PrefabInstance: {fileID: 930988924}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &937743055 stripped
 Transform:
@@ -9836,6 +9904,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8126854354276167366, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126854354276167366, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c3c9aa6aa43e8e642a0b3e34eebb0b6a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
 --- !u!1001 &1252252816
@@ -15626,7 +15702,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4710d5b56f4e81f4b9cd2d139031f06f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.523
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15722,7 +15798,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2acba077f2ac68043bec68d951c63d89, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.636
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15818,7 +15894,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 92bf30e71dc94304cab51fc8439ce294, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.62
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15914,7 +15990,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b8fa5ebd7ac633d49ad87391db80c6c8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.636
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -16010,7 +16086,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bc86af2c782b5c845a0db468cc81a2b7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.529
   m_Pitch: 1
   Loop: 0
   Mute: 0
