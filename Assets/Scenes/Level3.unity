@@ -10423,7 +10423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 27.5
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
@@ -10435,7 +10435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 33.5
+      value: 39.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
@@ -11276,7 +11276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 27.5
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
@@ -11288,7 +11288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 37.5
+      value: 43.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
@@ -29160,7 +29160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 27.5
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146126604739880, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
@@ -29172,7 +29172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.x
-      value: 32.5
+      value: 38.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778146127353854047, guid: 8b993907570dffc45b4f2b598179e695, type: 3}
       propertyPath: teleportPosition.y
