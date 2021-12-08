@@ -20610,6 +20610,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: _winAudioSource
+      value: 
+      objectReference: {fileID: 7534185692338466608}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -20656,3 +20660,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+--- !u!82 &7534185692338466608 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7534185693667262190, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+  m_PrefabInstance: {fileID: 7534185692338466607}
+  m_PrefabAsset: {fileID: 0}
