@@ -22509,7 +22509,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 686958417, guid: d62cf10a96f66f44db2d31e3e2ce9f6e, type: 3}
       propertyPath: m_Text
-      value: 'I saw it back then, a monster enveloped in darkness. '
+      value: 'Wherever it walked, emptiness followed. I wonder where it came from? '
       objectReference: {fileID: 0}
     - target: {fileID: 1135554679, guid: d62cf10a96f66f44db2d31e3e2ce9f6e, type: 3}
       propertyPath: m_IsActive
