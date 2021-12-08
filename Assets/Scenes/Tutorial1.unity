@@ -18006,6 +18006,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutScenePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6088917385678701899, guid: d62cf10a96f66f44db2d31e3e2ce9f6e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6193381998768930293, guid: d62cf10a96f66f44db2d31e3e2ce9f6e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

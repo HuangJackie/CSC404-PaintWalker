@@ -19,7 +19,7 @@ public class CutSceneManager : MonoBehaviour
     private static GameObject instance;
     private bool _levelLoadComplete;
 
-    void Start()
+    void Awake()
     {
         instance = gameObject;
         _levelManager = FindObjectOfType<LevelManager>();
@@ -47,7 +47,7 @@ public class CutSceneManager : MonoBehaviour
             }
             _cutSceneDontDestroyManager.cutScenesSeen = true;
         }
-        else if (_cutSceneDontDestroyManager.endCutScenesSeen)
+        else if (_cutSceneDontDestroyManager.cutScenesSeen || _cutSceneDontDestroyManager.endCutScenesSeen)
         {
             Destroy(this.gameObject);
         }
