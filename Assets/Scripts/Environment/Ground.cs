@@ -39,13 +39,14 @@ public class Ground : Interactable, Paintable
     private bool _isMouseClicked;
     private bool _isMouseOver;
 
-    private bool _isIceBlockEffectEnabled;
+    public bool _isIceBlockEffectEnabled;
     public bool _isSliding;
+    public bool stillMoving;
     private Vector3 _directionToSlideTo;
     public Vector3 _destinationDrop;
     public Vector3 destinationNeutral;
     public Vector3 _destinationRaise;
-    private Vector3 _destinationMove;
+    public Vector3 _destinationMove;
     private bool _isBlockMoving;
 
     public GameObject YellowSounds;
@@ -235,7 +236,7 @@ public class Ground : Interactable, Paintable
             tintColour(intialColor.g, GameConstants.SELECTION_G, amountToTint),
             tintColour(intialColor.b, GameConstants.SELECTION_B, amountToTint));
         
-        bool stillMoving = true;
+        stillMoving = true;
         while (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0),
                                Vector3.up, out hit, 1, mask))
         {
@@ -356,8 +357,10 @@ public class Ground : Interactable, Paintable
                     _isBlockMoving = false;
                     transform.position = destination;
                     _destinationDrop = transform.position + new Vector3(0, -1, 0);
+                    print(_destinationDrop);
                     destinationNeutral = transform.position;
                     _destinationRaise = transform.position - new Vector3(0, -1, 0);
+                    print(_destinationRaise);
 
                     yield break;
                 }

@@ -240,9 +240,14 @@ public class LevelManager : MonoBehaviour
                     groundScript.destinationNeutral = ObjectStorage.blockStates[i][8];
                     groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
                     groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
+                    print(groundScript._destinationDrop);
+                    print(groundScript._destinationRaise);
 
                     groundScript.isWalkedOverHorizontally = ObjectStorage.blockStates[i][10];
                     groundScript.isWalkedOverVertially = ObjectStorage.blockStates[i][11];
+                    block.layer = ObjectStorage.blockStates[i][12];
+                    groundScript._isIceBlockEffectEnabled = ObjectStorage.blockStates[i][13];
+                    groundScript.stillMoving = ObjectStorage.blockStates[i][14];
                     block.SetActive(ObjectStorage.blockStates[i][6]);
                     groundScript.ReinitializeMaterialColours();
                 }

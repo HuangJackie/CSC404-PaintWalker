@@ -49,6 +49,9 @@ public class ObjectStorage : MonoBehaviour
             blockInfo.Add(groundScript._paintedColour);
             blockInfo.Add(groundScript.isWalkedOverHorizontally);
             blockInfo.Add(groundScript.isWalkedOverVertially);
+            blockInfo.Add(block.layer);
+            blockInfo.Add(groundScript._isIceBlockEffectEnabled);
+            blockInfo.Add(groundScript.stillMoving);
             blockStates.Add(blockInfo);
         }
     }
