@@ -17,24 +17,25 @@ public class TpCreature : SpecialCreature
     private ControllerUtil _controllerUtil;
     private Player _playerx;
     public GameObject tp_creature2;
+    private TpCreature tp_creature2_Object;
     public TpCreature[] tp_creaturesx;
     private Color _tpCreatureColor = Color.blue;
     
     // To not interact right after painting.
     private bool _isRecentlyPainted;
-    
+
+    // Coordinates to TP the player
+    public Vector3 teleportPosition;
     new void Start()
     {
         base.Start();
         _levelManager = FindObjectOfType<LevelManager>();
         _playerx = FindObjectOfType<Player>();
         player = GameObject.FindWithTag("Player");
-        tp_creature2 = GameObject.FindWithTag("TpCreature");
-        tp_creaturesx = FindObjectsOfType<TpCreature>();
-        if (gameObject.CompareTag("TpCreature"))
-        {
-            tp_creature2 = GameObject.FindWithTag("TpCreature2");
-        }
+        tp_creature2_Object = tp_creature2.GetComponent<TpCreature>();
+        tp_creaturesx = new TpCreature[2];
+        tp_creaturesx[0] = this;
+        tp_creaturesx[1] = tp_creature2_Object;
         _controllerUtil = FindObjectOfType<ControllerUtil>();
         _isRecentlyPainted = false;
     }
@@ -61,7 +62,7 @@ public class TpCreature : SpecialCreature
     {
         if (SpecialCreatureUtil.ActivateSpecialCreature(
                 isPainted,
-                IsMouseOver || _controllerUtil.GetPaintButtonDown(),
+                true,
                 player.transform.position,
                 transform.position,
                 _levelManager,
@@ -104,9 +105,8 @@ public class TpCreature : SpecialCreature
         {
             if (Vector3.Distance(player.transform.position, transform.position) < 3)
             {
-                Vector3 tpCreaturePosition = tp_creature2.transform.position;
-                Vector3 newPlayerPosition = new Vector3(tpCreaturePosition.x + 1, tpCreaturePosition.y,
-                    tpCreaturePosition.z);
+                // Vector3 tpCreaturePosition = tp_creature2_Object.teleportPosition;
+                Vector3 newPlayerPosition = tp_creature2_Object.teleportPosition;
                 float tpCreatureYDiff = tp_creature2.transform.position.y - this.transform.position.y;
                 Vector3 newCameraPosition = new Vector3(newPlayerPosition.x, newPlayerPosition.y - tpCreatureYDiff, newPlayerPosition.z);
                 MoveRedo GameState = ScriptableObject.CreateInstance("MoveRedo") as MoveRedo;

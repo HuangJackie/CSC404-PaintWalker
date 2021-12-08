@@ -60,6 +60,22 @@ public class LevelSelectMenu : SecondaryMenu
         menuMusicOut.TransitionTo(2f);
 
     }
+    
+    public void LoadLevel2()
+    {
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Level2;
+        menuMusicOut.TransitionTo(2f);
+
+    }
+    
+    public void LoadLevel3()
+    {
+        base.transitionAnimation.SetTrigger("FadeOut");
+        levelToLoad = Levels.Level3;
+        menuMusicOut.TransitionTo(2f);
+
+    }
 
     public void OnFadeComplete()
     {

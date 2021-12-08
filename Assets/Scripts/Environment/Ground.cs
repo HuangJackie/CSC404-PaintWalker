@@ -119,6 +119,16 @@ public class Ground : Interactable, Paintable
         base.Start();
     }
 
+    /**
+     * This is used after a sliding block comes to rest.
+     */
+    void UpdateRaiseDropDestinations()
+    {
+        var position = transform.position;
+        _destinationDrop = position + new Vector3(0, -1, 0);
+        _destinationRaise = position - new Vector3(0, -1, 0);
+    }
+
     void FixedUpdate()
     {
         if (!_player.isPlayerMoving)
@@ -267,6 +277,7 @@ public class Ground : Interactable, Paintable
             if (distance < 0.01f)
             {
                 transform.position = _destinationMove;
+                UpdateRaiseDropDestinations();
             }
 
             stillMoving = ReinitializeIceBlockMovement(isPushed);

@@ -56,6 +56,8 @@ public class GameConstants : MonoBehaviour
         TutorialColors,
 
         Level1,
+        Level2,
+        Level3,
         Tutorial2,
         Tutorial15,
         Tutorial1
