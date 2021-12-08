@@ -13,6 +13,8 @@ public class CutSceneManager : MonoBehaviour
     private CutSceneDontDeleteManager _cutSceneDontDestroyManager;
     private ControllerUtil _controllerUtil;
     private bool endSceneActive;
+    private PauseMenu _pauseMenu;
+    private bool fadingIn;
 
     private static GameObject instance;
     private bool _levelLoadComplete;
@@ -26,6 +28,7 @@ public class CutSceneManager : MonoBehaviour
         _cutSceneStorage = new List<GameObject>();
         _endSceneStorage = new List<GameObject>();
         _currScenes = new List<GameObject>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
 
         if (!_cutSceneDontDestroyManager.cutScenesSeen)
         {
@@ -63,7 +66,7 @@ public class CutSceneManager : MonoBehaviour
             _currScenes = _endSceneStorage;
         }
         
-        if (_currScenes != null) {
+        if (_currScenes != null && !fadingIn) {
             if (_currScenes.Count > 0)
             {
                 _levelManager.freezePlayer = true;
@@ -78,10 +81,23 @@ public class CutSceneManager : MonoBehaviour
                     _controllerUtil.CloseMenu();
                 }
             }
-            else
+            else if (!fadingIn)
+            {
+                _pauseMenu.FadeIn();
+                fadingIn = true;
+                
+            }
+        }
+
+        if (fadingIn)
+        {
+            if (_pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LevelFadeTransition") &&
+            _pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 &&
+            !_pauseMenu.GetComponent<Animator>().IsInTransition(0))
             {
                 _levelManager.freezePlayer = false;
                 this.gameObject.SetActive(false);
+                fadingIn = false;
             }
         }
     }
