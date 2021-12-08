@@ -3,7 +3,12 @@ guid: c4841f579e75bef43baa305f684cfcb4
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Crystal_Base
+    second: {fileID: 2100000, guid: 42d9093ab83f28e42846508888948275, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
