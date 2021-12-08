@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44364426, g: 0.492971, b: 0.5725337, a: 1}
+  m_IndirectSpecularColor: {r: 0.3273415, g: 0.2819711, b: 0.41690004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: d781cc270779a0a47b082ef37809677b, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 1ab3225f038ad444796dc800cabb2d87, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -31289,12 +31289,12 @@ Transform:
   - {fileID: 790937080}
   - {fileID: 2086851575}
   - {fileID: 690484873}
-  - {fileID: 1303994523}
   - {fileID: 551430825}
-  - {fileID: 561344138}
   - {fileID: 819840721}
+  - {fileID: 561344138}
   - {fileID: 507955800}
   - {fileID: 1974220311}
+  - {fileID: 1303994523}
   - {fileID: 491159523}
   - {fileID: 1293845675}
   - {fileID: 377625916}
