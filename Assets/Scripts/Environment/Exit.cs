@@ -36,6 +36,7 @@ public class Exit : MonoBehaviour
             bgmfade.TransitionTo(3f);
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
+                _player.SetActive(false);
                 _updateUI.SetInfoText("Tutorial Complete!", true);
             }
             else if (scene.name == "Level3")
