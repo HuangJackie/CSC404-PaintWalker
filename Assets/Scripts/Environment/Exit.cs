@@ -34,7 +34,7 @@ public class Exit : MonoBehaviour
             {
                 _updateUI.SetInfoText("Tutorial Complete!", true);
             }
-            else if (scene.name == "Level1")
+            else if (scene.name == "Level3")
             {
                 _player.SetActive(false);
                 _updateUI.SetInfoText("You Win!", true);
@@ -49,7 +49,7 @@ public class Exit : MonoBehaviour
         restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
         restartDontDeleteManager.isRestarting = false;
         yield return new WaitForSeconds(1);
-        if (scene.name == "Level1")
+        if (scene.name == "Level3")
         {
             _cutSceneManager.TriggerEndCutScene();
         }
