@@ -16,6 +16,7 @@ public class RammingCreature : SpecialCreature
     // For painting
     public GameObject player;
     private ControllerUtil _controllerUtil;
+    public GameObject color_idle;
     
     new void Start()
     {
@@ -37,7 +38,7 @@ public class RammingCreature : SpecialCreature
                 is_moving = false;
                 _levelManager.freezePlayer = false;
                 coloured_model.SetActive(false);
-                frozen_model.SetActive(true);
+                color_idle.SetActive(true);
             }
         }
     }
