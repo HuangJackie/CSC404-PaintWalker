@@ -5986,7 +5986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 170581153}
   tutorial: {fileID: 8300000, guid: a3d255e25896aef4281da7338af8d37a, type: 3}
-  cutsceneMusic: {fileID: 1940213784}
+  cutsceneMusic: {fileID: 0}
   cutsceneTutorial: {fileID: 8300000, guid: 7cf58dfaf9285bb4eb7be0e07c583a7d, type: 3}
 --- !u!4 &712687200
 Transform:
