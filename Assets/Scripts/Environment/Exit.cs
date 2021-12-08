@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Exit : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Exit : MonoBehaviour
     private PauseMenu _pauseMenu;
     private RestartDontDeleteManager restartDontDeleteManager;
     private GameObject _player;
+    public AudioMixerSnapshot bgmfade;
+    public AudioMixer bgm;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,7 @@ public class Exit : MonoBehaviour
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision)
         {
+            bgmfade.TransitionTo(3f);
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
                 _updateUI.SetInfoText("Tutorial Complete!", true);
@@ -41,7 +45,9 @@ public class Exit : MonoBehaviour
                 _winAudioSource.Play();
             }
             StartCoroutine(ReturnToMenu(scene));
+            
         }
+
     }
 
     private IEnumerator ReturnToMenu(Scene scene)

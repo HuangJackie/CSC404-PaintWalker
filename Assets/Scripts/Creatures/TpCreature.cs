@@ -10,6 +10,7 @@ public class TpCreature : SpecialCreature
     private LevelManager _levelManager;
     private Material _material2;
     private Color _originalColour2;
+    public AudioSource tpSfx;
 
     // For painting
     public CameraRotation cameraPanningRevertTarget;
@@ -50,6 +51,7 @@ public class TpCreature : SpecialCreature
     {
         base.OnMouseDown();
         Interact();
+        tpSfx.Play();
     }
 
     private void color_creature()
