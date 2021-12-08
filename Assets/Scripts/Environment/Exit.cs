@@ -33,7 +33,6 @@ public class Exit : MonoBehaviour
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision)
         {
-            print("there");
             bgmfade.TransitionTo(3f);
             _player.SetActive(false);
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
@@ -41,7 +40,7 @@ public class Exit : MonoBehaviour
                 _player.SetActive(false);
                 _updateUI.SetInfoText("Tutorial Complete!", true);
             }
-            else if (scene.name == "Level3")
+            else if (scene.name == "Level3" || scene.name == "Level2" || scene.name == "Level1")
             {
                 _player.SetActive(false);
                 _updateUI.SetInfoText("You Win!", true);
