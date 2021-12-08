@@ -16,7 +16,7 @@ public class MoveWall : MonoBehaviour
     {
         if (operate == true)
         {
-            Vector3 pos = transform.position - new Vector3(0, 0.006f, 0);
+            Vector3 pos = transform.position - new Vector3(0, 0.003f, 0);
             if (pos.y <= end_y)
             {
                 operate = false;
