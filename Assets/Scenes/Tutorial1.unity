@@ -18304,6 +18304,10 @@ PrefabInstance:
       propertyPath: bgmfade
       value: 
       objectReference: {fileID: -5187962629250352553, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: _winAudioSource
+      value: 
+      objectReference: {fileID: 7534185692338466609}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -18353,5 +18357,10 @@ PrefabInstance:
 --- !u!1 &7534185692338466608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7534185693667262096, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+  m_PrefabInstance: {fileID: 7534185692338466607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7534185692338466609 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7534185693667262190, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
   m_PrefabInstance: {fileID: 7534185692338466607}
   m_PrefabAsset: {fileID: 0}
