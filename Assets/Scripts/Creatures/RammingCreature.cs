@@ -36,13 +36,16 @@ public class RammingCreature : SpecialCreature
             {
                 is_moving = false;
                 _levelManager.freezePlayer = false;
+                coloured_model.SetActive(false);
+                frozen_model.SetActive(true);
             }
         }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<Ground>())
+        Ground collidedGround = collision.gameObject.GetComponent<Ground>();
+        if (collidedGround && collidedGround.IsPaintable())
         {
             collision.gameObject.SetActive(false);
         }

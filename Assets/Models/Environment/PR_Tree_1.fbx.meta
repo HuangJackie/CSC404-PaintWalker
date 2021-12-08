@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c4841f579e75bef43baa305f684cfcb4
+guid: 9a6e6f1d48fface4fa014b42ba558eac
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Crystal_Base
-    second: {fileID: 2100000, guid: 42d9093ab83f28e42846508888948275, type: 2}
+      name: M_Trees
+    second: {fileID: 2100000, guid: df28751000c6204429ce8512b48d845c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

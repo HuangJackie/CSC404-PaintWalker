@@ -53,7 +53,7 @@ public class UpdateUI : MonoBehaviour
         panningArrowUI = FindObjectOfType<PanningArrowUI>();
         _isCrosshairActive = false;
 
-        // Init corsshair
+        // Init infoText
         infoText = FindObjectOfType<PaintNeededText>();
         infoTextBG.SetActive(false);
     }

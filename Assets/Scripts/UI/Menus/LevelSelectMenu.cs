@@ -15,7 +15,7 @@ public class LevelSelectMenu : SecondaryMenu
    
     public void LoadTutorialColors()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.TutorialColors;
         menuMusicOut.TransitionTo(2f);
 
@@ -23,7 +23,7 @@ public class LevelSelectMenu : SecondaryMenu
 
     public void LoadAlpha()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.AlphaScenev2;
         menuMusicOut.TransitionTo(2f);
 
@@ -31,7 +31,7 @@ public class LevelSelectMenu : SecondaryMenu
     
     public void LoadTut1()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.Tutorial1;
         menuMusicOut.TransitionTo(2f);
 
@@ -39,7 +39,7 @@ public class LevelSelectMenu : SecondaryMenu
 
     public void LoadTut15()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.Tutorial15;
         menuMusicOut.TransitionTo(2f);
 
@@ -47,7 +47,7 @@ public class LevelSelectMenu : SecondaryMenu
     
     public void LoadTut2()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.Tutorial2;
         menuMusicOut.TransitionTo(2f);
 
@@ -55,7 +55,7 @@ public class LevelSelectMenu : SecondaryMenu
 
     public void LoadLevel1()
     {
-        base.transitionAnimation.SetTrigger("FadeOut");
+        PlayTransitionAnimation();
         levelToLoad = Levels.Level1;
         menuMusicOut.TransitionTo(2f);
 
@@ -75,6 +75,11 @@ public class LevelSelectMenu : SecondaryMenu
         levelToLoad = Levels.Level3;
         menuMusicOut.TransitionTo(2f);
 
+    }
+
+    private void PlayTransitionAnimation()
+    {
+        base.transitionAnimation.SetTrigger("FadeOut");
     }
 
     public void OnFadeComplete()
