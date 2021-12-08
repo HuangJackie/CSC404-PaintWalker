@@ -88,6 +88,7 @@ public class RammingCreature : SpecialCreature
             coloured_model.SetActive(true);
             isPainted = true;
             is_moving = true;
+            player.GetComponent<Player>().animation_update("paint", false);
             return true;
         }
         return false;

@@ -82,7 +82,7 @@ public class HowlingCreature : SpecialCreature
             coloured_model.SetActive(true);
             isPainted = true;
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
-
+            player.GetComponent<Player>().animation_update("paint", false);
             foreach (Collider hitCollider in hitColliders)
             {
                 hitCollider.SendMessage("TriggerButtton",
