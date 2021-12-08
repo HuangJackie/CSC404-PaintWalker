@@ -77,12 +77,6 @@ public class LevelSelectMenu : SecondaryMenu
 
     }
 
-    public void LoadLevel2()
-    {
-        PlayTransitionAnimation();
-        levelToLoad = Levels.Level2;
-    }
-
     private void PlayTransitionAnimation()
     {
         base.transitionAnimation.SetTrigger("FadeOut");
