@@ -83,6 +83,8 @@ public class ObjectStorage : MonoBehaviour
             specialCreatureInfo.Add(specialCreature.originalColour);
             specialCreatureInfo.Add(specialCreature.paintedColour);
             specialCreatureInfo.Add(specialCreature.gameObject.activeSelf);
+            specialCreatureInfo.Add(specialCreature.frozen_model.activeSelf);
+            specialCreatureInfo.Add(specialCreature.coloured_model.activeSelf);
             specialCreatureStates.Add(specialCreatureInfo);
         }
     }

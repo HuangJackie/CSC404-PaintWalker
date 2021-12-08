@@ -272,6 +272,8 @@ public class LevelManager : MonoBehaviour
                 specialCreature.GetComponentInChildren<Renderer>()
                                .material.color =ObjectStorage.specialCreatureStates[i][3];
                 specialCreature.gameObject.SetActive(ObjectStorage.specialCreatureStates[i][4]);
+                specialCreature.frozen_model.SetActive(ObjectStorage.specialCreatureStates[i][5]);
+                specialCreature.coloured_model.SetActive(ObjectStorage.specialCreatureStates[i][6]);
             }
 
             //reset wall attributes
