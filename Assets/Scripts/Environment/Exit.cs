@@ -8,13 +8,14 @@ public class Exit : MonoBehaviour
 {
     private UpdateUI _updateUI;
     public LevelManager manager;
-    private AudioSource _winAudioSource;
+    public AudioSource _winAudioSource;
     private CutSceneManager _cutSceneManager;
     private PauseMenu _pauseMenu;
     private RestartDontDeleteManager restartDontDeleteManager;
     private GameObject _player;
     public AudioMixerSnapshot bgmfade;
     public AudioMixer bgm;
+   
     
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,8 @@ public class Exit : MonoBehaviour
         {
             bgmfade.TransitionTo(3f);
             _player.SetActive(false);
+            _winAudioSource.Play();
+
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
                 _player.SetActive(false);
@@ -44,7 +47,7 @@ public class Exit : MonoBehaviour
             {
                 _player.SetActive(false);
                 _updateUI.SetInfoText("You Win!", true);
-                _winAudioSource.Play();
+               
             }
             StartCoroutine(ReturnToMenu(scene));
             
