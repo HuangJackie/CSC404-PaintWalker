@@ -617,6 +617,7 @@ public class Ground : Interactable, Paintable
                     StartCoroutine(GreenExtend(NewState));
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
+                    _cur_model.SetActive(false);
                     green_model.SetActive(true);
                     _cur_model = green_model;
                 }
@@ -636,6 +637,7 @@ public class Ground : Interactable, Paintable
                 {
                     _player.animation_update("paint", true);
                     base_model.SetActive(false);
+                    _cur_model.SetActive(false);
                     yellow_model.SetActive(true);
                     _cur_model = yellow_model;
 
@@ -674,6 +676,7 @@ public class Ground : Interactable, Paintable
 
                     isPaintedByBrush = true;
                     base_model.SetActive(false);
+                    _cur_model.SetActive(false);
                     blue_model.SetActive(true);
                     _cur_model = blue_model;
                 }
