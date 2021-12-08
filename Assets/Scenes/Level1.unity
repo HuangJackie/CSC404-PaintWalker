@@ -7717,7 +7717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3411308687921492535, guid: ebb84e02cb091ac42b0d0bad22bb9f8b, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3411308687921492535, guid: ebb84e02cb091ac42b0d0bad22bb9f8b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12792,6 +12792,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5642586372918918726, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5642586373078014383, guid: 55e2a3b72dd065345a90a21a0f077920, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -16204,6 +16208,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.295
       objectReference: {fileID: 0}
+    - target: {fileID: 7285803934213302035, guid: 89a4836227dfe044d88d22415c8fd118, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2728726120691306749, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a4836227dfe044d88d22415c8fd118, type: 3}
 --- !u!82 &7285803935768311735 stripped
@@ -16222,6 +16230,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 24100000, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: bgmfade
+      value: 
+      objectReference: {fileID: -5187962629250352553, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
     - target: {fileID: 7534185693667262191, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -16407,12 +16423,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126854354276167366, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 8126854354276167366, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: c3c9aa6aa43e8e642a0b3e34eebb0b6a, type: 3}
+      objectReference: {fileID: 8300000, guid: 88953f8781fd7ae4a8077d07553b0ce4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb6f1369cd38c9e4295675243e2e8cbd, type: 3}
 --- !u!1001 &8414714446058261755
