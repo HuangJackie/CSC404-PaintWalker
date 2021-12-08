@@ -75,6 +75,7 @@ public class CutSceneManager : MonoBehaviour
                     GameObject curCutScene = _currScenes[0];
                     _currScenes.RemoveAt(0);
                     curCutScene.SetActive(false);
+                    _controllerUtil.CloseMenu();
                 }
             }
             else

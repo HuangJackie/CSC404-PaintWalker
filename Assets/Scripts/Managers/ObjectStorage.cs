@@ -49,6 +49,9 @@ public class ObjectStorage : MonoBehaviour
             blockInfo.Add(groundScript._paintedColour);
             blockInfo.Add(groundScript.isWalkedOverHorizontally);
             blockInfo.Add(groundScript.isWalkedOverVertially);
+            blockInfo.Add(block.layer);
+            blockInfo.Add(groundScript._isIceBlockEffectEnabled);
+            blockInfo.Add(groundScript.stillMoving);
             blockStates.Add(blockInfo);
         }
     }
@@ -80,6 +83,8 @@ public class ObjectStorage : MonoBehaviour
             specialCreatureInfo.Add(specialCreature.originalColour);
             specialCreatureInfo.Add(specialCreature.paintedColour);
             specialCreatureInfo.Add(specialCreature.gameObject.activeSelf);
+            specialCreatureInfo.Add(specialCreature.frozen_model.activeSelf);
+            specialCreatureInfo.Add(specialCreature.coloured_model.activeSelf);
             specialCreatureStates.Add(specialCreatureInfo);
         }
     }
@@ -102,8 +107,13 @@ public class ObjectStorage : MonoBehaviour
         foreach (GameObject footStep in footStepStorage)
         {
             List<dynamic> footStepInfo = new List<dynamic>();
-            footStepInfo.Add(footStep.gameObject.activeSelf);
-            footPrintStates.Add(footStepInfo);
+            
+            // footStep.gameObject can be null after loading an existing checkpoint and hitting another one.
+            if (footStep.gameObject != null)
+            {
+                footStepInfo.Add(footStep.gameObject.activeSelf);
+                footPrintStates.Add(footStepInfo);
+            }
         }
         print("update done");
     }
@@ -114,8 +124,12 @@ public class ObjectStorage : MonoBehaviour
         foreach (GameObject sparkle in sparkleStorage)
         {
             List<dynamic> sparkleInfo = new List<dynamic>();
-            sparkleInfo.Add(sparkle.gameObject.activeSelf);
-            sparkleStates.Add(sparkleInfo);
+            // sparkle.gameObject can be null after loading an existing checkpoint and hitting another one.
+            if (sparkle.gameObject != null)
+            {
+                sparkleInfo.Add(sparkle.gameObject.activeSelf);
+                sparkleStates.Add(sparkleInfo);
+            }
         }
         print(sparkleStates.Count);
         print("sparkle update done");

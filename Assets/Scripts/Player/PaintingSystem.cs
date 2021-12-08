@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using DefaultNamespace;
+using UI;
 using UnityEngine;
 using static GameConstants;
 
@@ -23,6 +23,8 @@ public class PaintingSystem : MonoBehaviour
      */
     private Vector2 _selectedCoordinatesRelToPlayer;
 
+    private PanningArrowUI panningArrowUI;
+
     private void Start()
     {
         _levelManager = FindObjectOfType<LevelManager>();
@@ -41,6 +43,8 @@ public class PaintingSystem : MonoBehaviour
         _selectedCoordinatesRelToPlayer = Vector2.zero;
 
         _canInteractWithSelected = true;
+
+        panningArrowUI = FindObjectOfType<PanningArrowUI>();
     }
 
 ////////////////////////////////////////////////////////
@@ -48,32 +52,19 @@ public class PaintingSystem : MonoBehaviour
 ////////////////////////////////////////////////////////
     private void Update()
     {
-        ListenForPaintingCommand();
+        ListenForPaintingOrInteractingCommand();
         ListenForMoveSelectInteractableCommand();
-        ListenForInteractingCommand();
+        ListenForTogglePanVSPaintSelect();
     }
 
-    private void ListenForInteractingCommand()
+    private void ListenForTogglePanVSPaintSelect()
     {
-        if (_currentlySelectedToPaint == null)
+        if (_controllerUtil.GetTogglePanVSPaintSelect())
         {
-            return;
-        }
-
-        // TODO Change to painting button
-        if (_controllerUtil.GetPaintButtonDown())
-        {
-            // Teleport Creature Interaction
-            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature)
-                && !teleportCreature.IsRecentlyPainted()
-                && teleportCreature.isPainted)
-            {
-                teleportCreature.Interact();
-                ResetSelectedObject();
-            }
+            panningArrowUI.EnablePanningArrows(!_controllerUtil.isPanningModeOn());
+            _controllerUtil.SetTogglePanVSPaintSelect(!_controllerUtil.isPanningModeOn());
         }
     }
-
     private void ListenForMoveSelectInteractableCommand()
     {
         bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out float xSelect);
@@ -221,7 +212,7 @@ public class PaintingSystem : MonoBehaviour
                collidedPaintable.IsPaintable();
     }
 
-    private void ListenForPaintingCommand()
+    private void ListenForPaintingOrInteractingCommand()
     {
         if (_controllerUtil.GetPaintButtonDown())
         {
@@ -234,6 +225,20 @@ public class PaintingSystem : MonoBehaviour
             paintable.Paint(true);
             // Re-highlight new model.
             SetCurrentlySelectedObject(_currentlySelectedToPaint, Vector2.zero);
+            
+            if (_currentlySelectedToPaint == null)
+            {
+                return;
+            }
+
+            // Teleport Creature Interaction
+            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature)
+                && !teleportCreature.IsRecentlyPainted()
+                && teleportCreature.isPainted)
+            {
+                teleportCreature.Interact();
+                ResetSelectedObject();
+            }
         }
     }
 

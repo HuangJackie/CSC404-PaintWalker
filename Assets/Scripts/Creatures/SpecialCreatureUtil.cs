@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         public static bool ActivateSpecialCreature(
             bool isPainted,
-            bool isMouseOver,
+            bool isMouseOver, // Depreciated
             Vector3 playerPosition,
             Vector3 creaturePosition,
             LevelManager manager,
@@ -19,7 +19,7 @@ namespace DefaultNamespace
             Color color)
         {
             bool shouldActivateSpecialCreature = !isPainted
-                                                 && isMouseOver
+                                                 // && isMouseOver
                                                  && Vector3.Distance(playerPosition,
                                                      creaturePosition) < 3
                                                  && manager.GetPaintQuantity(activationPaintType1) >= paintQuantity1

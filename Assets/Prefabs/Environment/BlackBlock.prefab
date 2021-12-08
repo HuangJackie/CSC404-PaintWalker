@@ -710,10 +710,13 @@ MonoBehaviour:
   player_enter_from_north: 0
   isWalkedOverVertially: 0
   isWalkedOverHorizontally: 0
+  _isIceBlockEffectEnabled: 0
   _isSliding: 0
+  stillMoving: 0
   _destinationDrop: {x: 0, y: 0, z: 0}
   destinationNeutral: {x: 0, y: 0, z: 0}
   _destinationRaise: {x: 0, y: 0, z: 0}
+  _destinationMove: {x: 0, y: 0, z: 0}
   YellowSounds: {fileID: 0}
   RedSounds: {fileID: 0}
   BlueSounds: {fileID: 0}
@@ -723,7 +726,7 @@ MonoBehaviour:
   yellow_model: {fileID: 776752199622561532}
   green_model: {fileID: 2805221944162327693}
   red_model: {fileID: 4468230238402920472}
-  base_model: {fileID: 5801726467167029966}
+  base_model: {fileID: 126135893406984858}
   _cur_model: {fileID: 0}
 --- !u!54 &2817214779077755376
 Rigidbody:

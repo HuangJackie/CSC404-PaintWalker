@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     // Restart/Load checkpoint capabilities
     public static Dictionary<string, dynamic> checkpointInfo;
     public static List<Vector3> pastCheckPoints;
+    private RestartDontDeleteManager _restartDontDestroyManager;
 
     // Redo capabilities
     public RedoCommandHandler redoCommandHandler = new RedoCommandHandler();
@@ -88,6 +89,9 @@ public class LevelManager : MonoBehaviour
 
         // Audio handling
         _colourChangeSoundManager.SetAudioSources(GetComponents<AudioSource>());
+        
+        // Keep track whether a level was restarted vs started for the first time.
+        _restartDontDestroyManager = FindObjectOfType<RestartDontDeleteManager>();
     }
 
     void Update()
@@ -236,9 +240,14 @@ public class LevelManager : MonoBehaviour
                     groundScript.destinationNeutral = ObjectStorage.blockStates[i][8];
                     groundScript._destinationDrop = ObjectStorage.blockStates[i][8] + new Vector3(0, -1, 0);
                     groundScript._destinationRaise = ObjectStorage.blockStates[i][8] - new Vector3(0, -1, 0);
+                    print(groundScript._destinationDrop);
+                    print(groundScript._destinationRaise);
 
                     groundScript.isWalkedOverHorizontally = ObjectStorage.blockStates[i][10];
                     groundScript.isWalkedOverVertially = ObjectStorage.blockStates[i][11];
+                    block.layer = ObjectStorage.blockStates[i][12];
+                    groundScript._isIceBlockEffectEnabled = ObjectStorage.blockStates[i][13];
+                    groundScript.stillMoving = ObjectStorage.blockStates[i][14];
                     block.SetActive(ObjectStorage.blockStates[i][6]);
                     groundScript.ReinitializeMaterialColours();
                 }
@@ -263,6 +272,8 @@ public class LevelManager : MonoBehaviour
                 specialCreature.GetComponentInChildren<Renderer>()
                                .material.color =ObjectStorage.specialCreatureStates[i][3];
                 specialCreature.gameObject.SetActive(ObjectStorage.specialCreatureStates[i][4]);
+                specialCreature.frozen_model.SetActive(ObjectStorage.specialCreatureStates[i][5]);
+                specialCreature.coloured_model.SetActive(ObjectStorage.specialCreatureStates[i][6]);
             }
 
             //reset wall attributes
@@ -302,7 +313,7 @@ public class LevelManager : MonoBehaviour
 
     public void SetIsPanning(bool isPanning)
     {
-        _updateUI.EnableCrosshairUI(isPanning);
+        _updateUI.EnablePanningUI(isPanning);
         _isPanning = isPanning;
     }
 
