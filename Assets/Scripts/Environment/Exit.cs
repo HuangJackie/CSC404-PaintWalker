@@ -34,6 +34,7 @@ public class Exit : MonoBehaviour
         if (playerCollision)
         {
             bgmfade.TransitionTo(3f);
+            _player.SetActive(false);
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
                 _updateUI.SetInfoText("Tutorial Complete!", true);
