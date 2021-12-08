@@ -387,7 +387,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1360627942}
         m_TargetAssemblyTypeName: LevelSelectMenu, Assembly-CSharp
-        m_MethodName: LoadLevel1
+        m_MethodName: LoadLevel3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
