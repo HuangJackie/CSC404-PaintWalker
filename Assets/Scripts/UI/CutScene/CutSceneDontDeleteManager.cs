@@ -6,6 +6,7 @@ public class CutSceneDontDeleteManager : MonoBehaviour
 {
     private static GameObject instance;
     public bool cutScenesSeen;
+    public bool endCutScenesSeen;
     // Start is called before the first frame update
     void Awake()
     {

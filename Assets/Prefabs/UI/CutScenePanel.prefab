@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 686958416}
   - component: {fileID: 686958418}
   - component: {fileID: 686958417}
+  - component: {fileID: 7452137323328695165}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: A constellation was missing from the sky.
+--- !u!114 &7452137323328695165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686958415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3.49, y: -2.94}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1135554679
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +252,7 @@ GameObject:
   - component: {fileID: 1184498633}
   - component: {fileID: 1184498635}
   - component: {fileID: 1184498634}
+  - component: {fileID: 2050891761470441093}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -304,6 +321,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: After running around, Nox finds a crack in the sky.
+--- !u!114 &2050891761470441093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184498632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3.49, y: -2.94}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1208221169
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +347,7 @@ GameObject:
   - component: {fileID: 1208221170}
   - component: {fileID: 1208221172}
   - component: {fileID: 1208221171}
+  - component: {fileID: 8568094888726538701}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -383,6 +416,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: One day Nox awoke from its slumber and noticed something peculiar.
+--- !u!114 &8568094888726538701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208221169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3.49, y: -2.94}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1307577651
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +515,7 @@ GameObject:
   - component: {fileID: 1925472863}
   - component: {fileID: 1925472865}
   - component: {fileID: 1925472864}
+  - component: {fileID: 4181532921491647796}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -527,15 +576,30 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 35
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Nox jumps through and finds itself in another world, but it would appear
-    as if this world was having its own troubles\u2026"
+  m_Text: "Jumping through, Nox finds another world that appears as if it is having
+    its own troubles\u2026"
+--- !u!114 &4181532921491647796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925472862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3.49, y: -2.94}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2028822067
 GameObject:
   m_ObjectHideFlags: 0

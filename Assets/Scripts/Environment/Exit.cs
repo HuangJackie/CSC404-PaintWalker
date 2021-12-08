@@ -8,6 +8,8 @@ public class Exit : MonoBehaviour
     private UpdateUI _updateUI;
     public LevelManager manager;
     private AudioSource _winAudioSource;
+    private CutSceneManager _cutSceneManager;
+    private PauseMenu _pauseMenu;
     private RestartDontDeleteManager restartDontDeleteManager;
     private GameObject _player;
     
@@ -17,6 +19,8 @@ public class Exit : MonoBehaviour
         _updateUI = FindObjectOfType<UpdateUI>();
         restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
         _winAudioSource = this.GetComponent<AudioSource>();
+        _cutSceneManager = FindObjectOfType<CutSceneManager>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
         _player = GameObject.FindWithTag("Player");
     }
     
@@ -26,25 +30,33 @@ public class Exit : MonoBehaviour
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision)
         {
-            if (scene.name == "TutorialColors")
+            if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
             {
                 _updateUI.SetInfoText("Tutorial Complete!", true);
             }
-            else
+            else if (scene.name == "Level3")
             {
                 _player.SetActive(false);
                 _updateUI.SetInfoText("You Win!", true);
                 _winAudioSource.Play();
             }
-            StartCoroutine(ReturnToMenu());
+            StartCoroutine(ReturnToMenu(scene));
         }
     }
 
-    private IEnumerator ReturnToMenu()
+    private IEnumerator ReturnToMenu(Scene scene)
     {
         restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
         restartDontDeleteManager.isRestarting = false;
-        yield return new WaitForSeconds(3);
-        SceneLoader.LoadNextLevel();
+        yield return new WaitForSeconds(1);
+        if (scene.name == "Level3")
+        {
+            _cutSceneManager.TriggerEndCutScene();
+        }
+        while (_cutSceneManager.gameObject.activeSelf)
+        {
+            yield return null;
+        }
+        _pauseMenu.FadeOut();
     }
 }
