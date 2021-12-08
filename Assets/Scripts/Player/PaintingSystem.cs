@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using DefaultNamespace;
 using UI;
 using UnityEngine;
@@ -53,9 +52,8 @@ public class PaintingSystem : MonoBehaviour
 ////////////////////////////////////////////////////////
     private void Update()
     {
-        ListenForPaintingCommand();
+        ListenForPaintingOrInteractingCommand();
         ListenForMoveSelectInteractableCommand();
-        ListenForInteractingCommand();
         ListenForTogglePanVSPaintSelect();
     }
 
@@ -67,28 +65,6 @@ public class PaintingSystem : MonoBehaviour
             _controllerUtil.SetTogglePanVSPaintSelect(!_controllerUtil.isPanningModeOn());
         }
     }
-
-    private void ListenForInteractingCommand()
-    {
-        if (_currentlySelectedToPaint == null)
-        {
-            return;
-        }
-
-        // TODO Change to painting button
-        if (_controllerUtil.GetPaintButtonDown())
-        {
-            // Teleport Creature Interaction
-            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature)
-                && !teleportCreature.IsRecentlyPainted()
-                && teleportCreature.isPainted)
-            {
-                teleportCreature.Interact();
-                ResetSelectedObject();
-            }
-        }
-    }
-
     private void ListenForMoveSelectInteractableCommand()
     {
         bool xAxisActive = _controllerUtil.GetXAxisPaintSelectAxis(out float xSelect);
@@ -236,7 +212,7 @@ public class PaintingSystem : MonoBehaviour
                collidedPaintable.IsPaintable();
     }
 
-    private void ListenForPaintingCommand()
+    private void ListenForPaintingOrInteractingCommand()
     {
         if (_controllerUtil.GetPaintButtonDown())
         {
@@ -249,6 +225,20 @@ public class PaintingSystem : MonoBehaviour
             paintable.Paint(true);
             // Re-highlight new model.
             SetCurrentlySelectedObject(_currentlySelectedToPaint, Vector2.zero);
+            
+            if (_currentlySelectedToPaint == null)
+            {
+                return;
+            }
+
+            // Teleport Creature Interaction
+            if (_currentlySelectedToPaint.TryGetComponent(out TpCreature teleportCreature)
+                && !teleportCreature.IsRecentlyPainted()
+                && teleportCreature.isPainted)
+            {
+                teleportCreature.Interact();
+                ResetSelectedObject();
+            }
         }
     }
 
