@@ -582,6 +582,7 @@ public class Ground : Interactable, Paintable
                 {
                     _player.animation_update("paint", true);
                     base_model.SetActive(false);
+                    _cur_model.SetActive(false);
                     red_model.SetActive(true);
                     _cur_model = red_model;
 
