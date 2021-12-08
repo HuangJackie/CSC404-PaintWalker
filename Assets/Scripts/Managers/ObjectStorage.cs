@@ -149,4 +149,15 @@ public class ObjectStorage : MonoBehaviour
     {
         sparkleStorage.Add(sparkle);
     }
+
+    public static void WipeStorage()
+    {
+        blockStorage = new List<GameObject>();
+        paintOrbStorage = new List<GameObject>();
+        specialCreatureStorage = new List<SpecialCreature>();
+        wallStorage = new List<GameObject>();
+        paintStates = new List<dynamic>();
+        footStepStorage = new List<GameObject>();
+        sparkleStorage = new List<GameObject>();
+    }
 }

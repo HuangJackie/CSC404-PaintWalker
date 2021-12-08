@@ -33,6 +33,7 @@ public class Exit : MonoBehaviour
         bool playerCollision = collision.gameObject.GetComponent<Collider>().CompareTag("Player");
         if (playerCollision)
         {
+            print("there");
             bgmfade.TransitionTo(3f);
             _player.SetActive(false);
             if (scene.name == "TutorialColors" || scene.name == "Tutorial1" || scene.name == "Tutorial2" || scene.name == "Tutorial15")
