@@ -60,7 +60,8 @@ public class Exit : MonoBehaviour
         {
             _cutSceneManager.TriggerEndCutScene();
         }
-        while (_cutSceneManager.gameObject.activeSelf)
+        while (_cutSceneManager != null &&
+               _cutSceneManager.gameObject.activeSelf)
         {
             yield return null;
         }
