@@ -19,7 +19,7 @@ public class CutSceneManager : MonoBehaviour
     private static GameObject instance;
     private bool _levelLoadComplete;
 
-    void Awake()
+    void Start()
     {
         instance = gameObject;
         _levelManager = FindObjectOfType<LevelManager>();
@@ -30,7 +30,6 @@ public class CutSceneManager : MonoBehaviour
         _currScenes = new List<GameObject>();
         _pauseMenu = FindObjectOfType<PauseMenu>();
 
-        if (!_cutSceneDontDestroyManager.cutScenesSeen)
         {
             int children = transform.childCount;
 
@@ -46,10 +45,6 @@ public class CutSceneManager : MonoBehaviour
                 }
             }
             _cutSceneDontDestroyManager.cutScenesSeen = true;
-        }
-        else if (_cutSceneDontDestroyManager.cutScenesSeen || _cutSceneDontDestroyManager.endCutScenesSeen)
-        {
-            Destroy(this.gameObject);
         }
     }
 
