@@ -7939,6 +7939,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7380571856341268297, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c113464deba5314095ac16edeaf4568, type: 3}
 --- !u!1001 &350402591
@@ -22474,7 +22478,7 @@ MonoBehaviour:
   initialRedPaint: 0
   initialGreenPaint: 0
   initialBluePaint: 10
-  devMode: 1
+  devMode: 0
   freezePlayer: 0
 --- !u!4 &1704174258
 Transform:

@@ -18546,7 +18546,7 @@ MonoBehaviour:
   initialRedPaint: 10
   initialGreenPaint: 0
   initialBluePaint: 0
-  devMode: 1
+  devMode: 0
   freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
@@ -19082,20 +19082,20 @@ Transform:
   - {fileID: 552061059}
   - {fileID: 531962652}
   - {fileID: 2017277403}
+  - {fileID: 1233545953}
   - {fileID: 91981763}
   - {fileID: 201562813}
   - {fileID: 666299790}
-  - {fileID: 1233545953}
   - {fileID: 1605793246}
   - {fileID: 1512884339}
   - {fileID: 2056091825}
   - {fileID: 1329553890}
   - {fileID: 1477719620}
-  - {fileID: 595488272}
   - {fileID: 847851904}
-  - {fileID: 2070708831}
+  - {fileID: 595488272}
   - {fileID: 1888223294}
   - {fileID: 1570498405}
+  - {fileID: 2070708831}
   - {fileID: 417528999}
   - {fileID: 1346701936}
   - {fileID: 1696449606}
@@ -21240,6 +21240,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 24100000, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: bgmfade
+      value: 
+      objectReference: {fileID: -5187962629250352553, guid: 16b67757be3c38b45a6741b28b50cbaf, type: 2}
+    - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1704174257}
     - target: {fileID: 7534185693667262189, guid: cc0b4280a7f22e448b6034961b0b1e72, type: 3}
       propertyPath: _winAudioSource
       value: 

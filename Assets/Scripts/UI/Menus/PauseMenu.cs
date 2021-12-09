@@ -112,7 +112,7 @@ public class PauseMenu : SecondaryMenu
         restartDontDeleteManager = FindObjectOfType<RestartDontDeleteManager>();
         restartDontDeleteManager.isRestarting = false;
         Close();
-        base.transitionAnimation.SetTrigger("FadeOut");
+        SceneLoader.LoadMainMenu();
     }
 
     public void FadeOut()

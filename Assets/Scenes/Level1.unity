@@ -16379,7 +16379,7 @@ MonoBehaviour:
   initialRedPaint: 40
   initialGreenPaint: 0
   initialBluePaint: 0
-  devMode: 1
+  devMode: 0
   freezePlayer: 0
 --- !u!4 &1704174258
 Transform:
